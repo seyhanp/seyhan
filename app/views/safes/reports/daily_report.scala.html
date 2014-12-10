@@ -1,0 +1,23 @@
+@(_form: Form[safe.reports.DailyReport.Parameter])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.report_form(safe.reports.routes.DailyReport.generate(),enums.Right.KASA_GUNLUK_RAPOR) {
+
+	@tools.dropdowns.safe(_form, hasAddNewButton=false)
+	@tools.components.date_range(_form)
+
+	@if(global.Profiles.chosen().gnel_hasExchangeSupport) {
+		@select(_form("excCode"),
+			options(Options.currencies),
+			'class -> "input-small",
+			'_label -> Messages("currency"),
+			'_default -> Messages("choose")
+		)
+	}
+
+	@tools.components.trans_point_select(_form)
+	@tools.components.private_code_select(_form)
+
+}

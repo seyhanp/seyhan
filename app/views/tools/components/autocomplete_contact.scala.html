@@ -1,0 +1,44 @@
+@(form: Form[_], name: String = "contact", direction: String = "", hasExtraData: Boolean = false, hasSummaryButton: Boolean = false, isContinuouslyAdded: Boolean = false)
+
+@***********************************************************************
+* Generate autocomplete contact input according twitter bootsrap rules *
+***********************************************************************@
+
+<input type="hidden" id="direction" value="@direction"/>
+<input type="hidden" id="@(name + "_id")" name="@(name + ".id")" value="@form(name + ".id").value" class="autocomplete_contact_id"/>
+
+@if(hasExtraData) {
+	<input type="hidden" id="@(name + "_data")" name="@(name + ".data")" value="@form(name + ".data").value" />
+}
+
+<div class="control-group @if(form(name + ".name").hasErrors) {error}">
+	<label id="@(name + "_label")" class="control-label" for="@(name + "_name")"
+		style="cursor:pointer; color:green; font-weight: bold" title="@Messages("click.for.the.others")">@Messages("contact.name") <b class='caret'></b>
+	</label>
+	<div class="controls inline">
+		<input type="text" id="@(name + "_name")" name="@(name + ".name")" value="@form(name + ".name").value"
+			class="typeahead input-xlarge autocomplete_contact_name" autocomplete="off" placeholder="@Messages("search")" style="margin-top:2px"/>
+		@if(hasSummaryButton) {
+			<a id="@(name + "_inv")" class="btn btn-mini contact-inv" onclick="investigation('@(name + "_id")')" style="margin-left:-5px">
+				<i class="icon-search" style="margin-top:1px"></i>
+			</a>}
+		<span style="color: red; font-size: 18px; font-weight: bold">@if(form(name).constraints.map(c => c._1).contains("constraint.required")) {*}</span>
+		@if(form(name + ".name").hasErrors) {
+			<span class="errors label label-warning">
+				@for(error <- form(name + ".name").errors) {
+					@utils.TemplateHelper.convertMessage(error)
+				}
+			</span>
+		}
+	</div>
+</div>
+
+<script type="text/javascript">
+	var isContinuouslyAddedForContact = @isContinuouslyAdded;
+	var contactLabels = {
+		'code': '@Messages("contact.code")',
+		'name': '@Messages("contact.name")'
+	}
+</script>
+
+<script type="text/javascript" src="@routes.Assets.at("javascripts/autocomplete/contact.js")"></script>

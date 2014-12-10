@@ -1,0 +1,42 @@
+@(right: enums.Right, id: String, specialIf: Boolean = null, hasGoBackButton: Boolean = true, forLeft: Html = null)
+
+<div style="height:29px; margin-top:10px">
+
+	@if(right.transType != null && id != null && ! id.isEmpty) {
+		<a class="btn pull-left" onclick="showPrintForm(@id, '@right')">
+			<i class="icon-list" style="margin-top:1px"></i>
+			@Messages("print")
+		</a>
+	}
+	@if(forLeft != null) {
+		@forLeft
+	}
+
+	<div class="controls">
+		@if(utils.AuthManager.hasSavePrivilege(right, id)) {
+			@if(specialIf == null || specialIf) {
+				<input id="submitSaveBtn" type="submit" value="@Messages("save")" class="btn btn-primary">
+			}
+		}
+		@if(hasGoBackButton) {
+			<a onclick="goBack();" class="btn">@Messages("back")</a>
+		}
+	</div>
+
+	<script type="text/javascript">
+		var userid = @utils.CacheUtils.getUser().id;
+		var username = '@utils.CacheUtils.getUser().username';
+		var recordid = '@id';
+		var insertByText = $('#insertBy').val();
+		var editingLimit = '@utils.CacheUtils.getUserGroup().editingLimit';
+
+		if (userid > 1 && editingLimit != 'Free' && recordid.length > 0 && username != insertByText) {
+			$('#elseResLabel').show();
+			$('#submitSaveBtn').hide();
+			$('#submitRemoveBtn').hide();
+		}
+
+		$('#successPanel').delay(2000).fadeOut();
+	</script>
+	
+</div>

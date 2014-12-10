@@ -1,0 +1,337 @@
+@(
+	currentPage: meta.PageExtend[_],
+	right: enums.Right,
+	label: String,
+	title: String = null,
+
+	link: String,
+	investigation_link: String = null,
+	hasMultiplier: Boolean = false,
+
+	toRightof_addNew: Html = null,
+	toBottomof_page: Html = null,
+
+	insteadof_addNewButton: Html = null,
+
+	filterForm: Form[_] = null,	
+	searchForm: Html = null,
+	
+	hasAddNew: Boolean = true,
+	hasActionsColumn: Boolean = true,
+
+	is_admin_page: Boolean = false
+)
+
+@buildTitle(header: meta.GridHeader) = {
+	@if(header.isSortable) {
+		<a href="javascript:sortColumn('@header.fieldName')" style="color:red">
+			@header.title
+			<i id='@(header.fieldName.replaceAll("\\.", "\\_"))Icon' class="sortDirection" style="margin:1px 3px"></i>
+		</a>
+	} else {
+		@header.title
+	}
+}
+
+@main(ScriptBlock) {
+
+	@if(flash.containsKey("success")) {
+		<div id="successPanel">
+			<div class="alert alert-success">
+				<a class="close" data-dismiss="alert" onclick="$('#successPanel').html('')">x</a>
+				<strong>@Messages("info"): </strong> @flash.get("success")
+			</div>
+		</div>
+	}
+
+	@if(flash.containsKey("error")) {
+		<div id="errorPanel">
+			<div class="alert alert-error">
+				<a class="close" data-dismiss="alert" onclick="$('#errorPanel').html('')">x</a>
+				<strong>@Messages("error"): </strong> @flash.get("error")
+			</div>
+		</div>
+	}
+
+	<div id="actions">
+		<div class="pull-left">
+			<h4>@if(title != null) {@title} else {@Messages(right.key) @Messages("listof")}</h4>
+		</div>
+		
+		@if(hasAddNew && utils.AuthManager.hasPrivilege(right, enums.RightLevel.Insert)) {
+			<div class="pull-right">
+				@if(insteadof_addNewButton != null) {
+					@insteadof_addNewButton
+				} else {
+					<a class="btn btn-success" id="add" href="@(link + "/new")" style="margin-top:7px;">
+						@Messages("add.new", label)
+					</a>
+				}
+				@if(toRightof_addNew != null) { @toRightof_addNew }
+			</div>
+		}
+	</div>
+
+	<p class="clearfix"></p>
+
+	<div class="clearfix pull-left">
+		@if(filterForm != null) {
+			@tools.templates.base_filter_form(filterForm, link)
+		}
+	</div>
+	
+	<p class="clearfix">
+		@if(searchForm != null) {
+			@searchForm
+		}
+	</p>
+
+
+	@if(currentPage.getTotalRowCount == 0) {
+
+		<div class="well pagination-centered" style="margin-top:10px">
+			<p style="margin-top:15px">
+				@if(is_admin_page) {
+					@Html(Messages("any.not.found", label))
+				} else {
+					@Html(Messages("any.not.found.ws", utils.CacheUtils.getUser().username, utils.CacheUtils.getWorkspaceName(), label))
+				}
+			</p>
+			<p>
+				<a class="btn btn-info" href="javascript: history.go(-1)">@Messages("turn_back.page")</a>
+				<a class="btn btn-info" href="javascript: location.reload()">@Messages("refresh")</a>
+			</p>
+		</div>
+
+	} else {
+
+		<table style="width:100%;table-layout:fixed">
+			<thead>
+				<tr>
+					@if(investigation_link != null) {<th style="width:4%"></th>}
+					@for(header <- currentPage.getHeaders()) {
+						@if(header.width != null) {
+							<th style="width: @header.width">@buildTitle(header)</th>
+						} else {
+							<th>@buildTitle(header)</th>}
+					}
+					@if(hasActionsColumn) {<th style="width:4%"></th>}
+				</tr>
+			</thead>
+			<tbody>
+				@for(data <- currentPage.getData()) {
+					<tr @if(hasActionsColumn) {class="clickableRow" data-ref="@link/@data.get(-1)"}>
+						@if(investigation_link != null) {
+							<td style="text-align: center">
+								<a class="btn btn-mini" onclick="investigation(@data.get(-1))" title="@Messages("inspect")">
+									<i class="icon-search" style="margin-top:1px"></i>
+								</a>
+							</td>
+						}
+						@for(i <- 0 to currentPage.getHeaders().size-1) {
+							@defining(currentPage.getHeaders().get(i)) {header =>
+								@if(header.isBool) {
+									<td style="text-align: center;overflow:hidden;white-space:nowrap"><span class="label label-@if(data.get(i).equals("true")) {info} else {warning}">@Messages(data.get(i))</span></td>
+								} else {
+									<td style="text-align:@header.align; color:@header.color;overflow:hidden;white-space:nowrap">@data.get(i)</td>
+								}
+							}
+						}
+						@if(hasActionsColumn) {
+							<td style="text-align: center">
+								@if(hasMultiplier && utils.AuthManager.hasPrivilege(right, enums.RightLevel.Insert)) {
+									<a class="btn btn-mini" onclick="createClone(@data.get(-1));" title="@Messages("clone")"><i class="icon-retweet" style="margin-top:1px"></i></a>}
+							</td>
+						}
+					</tr>
+				}
+			</tbody>
+		</table>
+
+		@if(currentPage.isMultiPage) {
+			<div id="pagination" class="pagination">
+				<ul style="float: right">
+					@if(currentPage.hasPrev) {
+						<li class="prev">
+							<a href="#" onclick="resetPage(false)">&lArr; @Messages("first")</a>
+						</li>
+						<li class="prev">
+							<a href="#" onclick="changePage(false)">&larr; @Messages("previous")</a>
+						</li>
+					} else {
+						<li class="prev disabled">
+							<a>&lArr; @Messages("first")</a>
+						</li>
+						<li class="prev disabled">
+							<a>&larr; @Messages("previous")</a>
+						</li>
+					}
+					@if(currentPage.indexOf != null) {
+		                <li class="current">
+		                    <a>@currentPage.indexOf</a>
+		                </li>
+		            }
+					@if(currentPage.hasNext) {
+						<li class="next">
+							<a href="#" onclick="changePage(true)">@Messages("next") &rarr;</a>
+						</li>
+						<li class="next">
+							<a href="#" onclick="resetPage(true)"> @Messages("last") &rArr;</a>
+						</li>
+					} else {
+						<li class="next disabled">
+							<a>@Messages("next") &rarr;</a>
+						</li>
+						<li class="next disabled">
+							<a>@Messages("last") &rArr;</a>
+						</li>
+					}
+				</ul>
+			</div>
+		 }
+	}
+
+	@if(toBottomof_page != null) { @toBottomof_page }
+
+	@********************************************************
+		Multiplier Section
+	
+	*********************************************************@
+	<div id="mul_modal-form" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+	
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true" tabindex="-1">×</button>
+			<div id="mul_title"><h4>@Messages("multiplier.form.title", label)</h4></div>
+		</div>
+	
+		<div class="modal-body">
+			<div id="mul_body"></div>
+		</div>
+	
+		<div class="modal-footer">
+			<button class="btn btn-primary" onclick="saveClone()">@Messages("save")</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true">@Messages("close")</button>
+		</div>
+	
+	</div>
+
+}
+
+@ScriptBlock = {
+	<script type="text/javascript">
+
+		function resetPage(isNext) {
+			if (! isNext) {
+				$('.pageIndex').val(1);
+			} else {
+				$('.pageIndex').val(@(currentPage.getTotalPageCount() - 2));
+			}
+			changePage(isNext);
+		}
+	
+		function changePage(isNext) {
+			var page = 0;
+			
+			if( $('#searchForm').is(':visible') ) {
+				page = parseInt($('#searchForm .pageIndex').val());
+			} else {
+				page = parseInt($('#baseFilterForm .pageIndex').val());
+			}
+
+			if (isNaN(page)) page = 0;
+
+			if (isNext) {
+				$('.pageIndex').val(page + 1);
+			} else {
+				$('.pageIndex').val(page - 1);
+			}
+
+			if( $('#searchForm').is(':visible') ) {
+				$('#searchForm').submit();
+			} else {
+				$('#baseFilterForm').submit();
+			}
+		}
+
+		$('input, select').change(function () {
+			$('.pageIndex').val('0');
+		});
+
+		$('#successPanel').delay(2000).fadeOut();
+
+		function investigation(id) {
+			$.getJSON('@investigation_link/'+id,
+				function(data) {
+					$("#inv_title").html('<h4>'+data.title+'</h4>');
+					$("#inv_body").html(data.body);
+	
+					$('#inv_modal\\-form').modal('show');
+				}
+			);
+		}
+
+		function createClone(id) {
+			$.ajax({
+				type: 'GET',
+				cache: false,
+				url : '@link/createClone/'+id,
+				success: function(data, status, xhr) {
+					$("#mul_body").html(data);
+					$('#mul_modal\\-form').modal('show');
+					updateFormRegulators('#mul_modal\\-form');
+				},
+			    error: function(xhr, options, error) {
+					$("#mul_body").html(xhr.responseText);
+			    }
+			});
+		}
+
+		function saveClone() {
+			$.ajax({
+				type: 'POST',
+				cache: false,
+				data : $("#multiplierForm").serialize(),
+				url : '@link/saveClone',
+				success: function(data, status, xhr) {
+					$('#mul_modal\\-form').modal('hide');
+				    window.location.reload(); 
+				},
+			    error: function(xhr, options, error) {
+					$("#mul_body").html(xhr.responseText);
+					updateFormRegulators("#mul_body");
+			    }
+			});
+		}
+
+		var sortField = null;
+		var sortDirection = null;
+
+		$(document).ready(function() {
+			sortField = $.cookie("sorting.@(right).field");
+			sortDirection = $.cookie("sorting.@(right).direction");
+
+			sortField = sortField.replace('\.', '\_');
+			if (sortDirection != null) {
+				if (sortDirection == "asc") {
+					$("#" + sortField + "Icon").addClass("icon-arrow-down");
+					return;
+				}
+			}
+			$("#" + sortField + "Icon").addClass("icon-arrow-up");
+		});
+
+		function sortColumn(fieldName) {
+			$.cookie("sorting.@(right).field", fieldName, { expires: 365, path: '/' });
+			if (sortField != fieldName.replace('\.', '\_')) {
+				$.cookie("sorting.@(right).direction", "asc", { expires: 365, path: '/' });
+			} else {
+				$.cookie("sorting.@(right).direction", (sortDirection != null && sortDirection == "asc" ? "desc" : "asc"), { expires: 365, path: '/' });
+			}
+			if( $('#searchForm').is(':visible') ) {
+				$('#searchForm').submit();
+			} else {
+				$('#baseFilterForm').submit();
+			}
+		}
+	</script>
+}

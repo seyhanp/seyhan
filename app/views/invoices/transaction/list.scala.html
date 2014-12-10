@@ -1,0 +1,13 @@
+@(currentPage: meta.PageExtend[InvoiceTrans], rightBind: meta.RightBind, _form: Form[models.search.OrderTransSearchParam])
+
+@tools.templates.trans_list(
+	currentPage = currentPage,
+
+	filterForm = _form,
+	searchForm = (if(global.Profiles.chosen().fatr_isSearchFormShowed) search_form(_form, rightBind) else null),
+
+	link = "/invoices/trans/",
+	rightBind = rightBind,
+	
+	hasMultiplier = (! rightBind.value.isReturn)
+)

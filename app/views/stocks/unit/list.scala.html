@@ -1,0 +1,7 @@
+@(currentPage: meta.PageExtend[StockUnit])
+
+@tools.templates.ajax_list(
+	currentPage = currentPage,
+	label = Messages("unit"),
+	right = enums.Right.STOK_BIRIM_TANITIMI
+)

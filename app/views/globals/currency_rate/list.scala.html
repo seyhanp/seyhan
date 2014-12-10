@@ -1,0 +1,23 @@
+@(currentPage: meta.PageExtend[GlobalCurrencyRate], _form: Form[models.search.CurrencyRateSearchParam])
+
+@pullTCMBRatesActions() = {
+	<div class='btn-group'>
+		<button class='btn btn-primary dropdown-toggle' data-toggle='dropdown' style="margin-top:7px;">
+			@Messages("pull") <span class='caret'></span>
+		</button>
+		<ul class='dropdown-menu'>
+			<li><a href=@global.routes.CurrencyRates.pullTCMBExcange()>@Messages("pull.TCMB.exchange")</a></li>
+			<li><a href=@global.routes.CurrencyRates.pullTCMBEffective()>@Messages("pull.TCMB.effective")</a></li>
+		</ul>
+	</div>
+}
+
+@tools.templates.basic_list(
+	currentPage = currentPage,
+	searchForm = search_form(_form),
+	right = enums.Right.GNEL_DOVIZ_KURLARI,
+	label = Messages("exchange_rate"),
+	link  = global.routes.CurrencyRates.list().url,
+
+	toRightof_addNew = pullTCMBRatesActions()
+)

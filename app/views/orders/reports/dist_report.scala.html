@@ -1,0 +1,60 @@
+@(_form: Form[order.reports.DistReport.Parameter])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.report_form(order.reports.routes.DistReport.generate(),enums.Right.SPRS_DAGILIM_RAPORU) {
+
+	@tools.components.autocomplete_stock(_form)
+
+	@select(_form("transType"),
+		options(Options.transSources(enums.Module.order)),
+		'class -> "input-medium",
+		'_label -> Messages("trans.type"),
+		'_default -> Messages("choose")
+	)
+
+	@inputText(_form("providerCode"),
+		'_label -> Messages("provider_code"),
+		'class -> "input-medium",
+		'maxlength -> "30"
+	)
+
+	@for(aef <- models.AdminExtraFields.listAll(enums.Module.stock.name())) {
+		@tools.dropdowns.stock_extra_field(_form, aef.id, aef.idno, aef.name, aef.isRequired, hasAddNewButton=false)
+	}
+
+	@tools.components.autocomplete_contact(_form)
+	@tools.dropdowns.order_trans_source(_form, hasAddNewButton=false)
+
+	@inputText(_form("transNo"),
+		'_label -> Messages("trans.no"),
+		'class -> "input-small"
+	)
+
+	@tools.components.date_range(_form)
+	@tools.dropdowns.stock_depot(_form, hasAddNewButton=false)
+	@tools.dropdowns.sale_seller(_form, hasAddNewButton=false)
+
+	@inputText(_form("deliveryDate"),
+		'_label -> Messages("date.delivery"),
+		'class -> "input-small date"
+	)
+
+	@tools.components.stock_category_select(_form)
+	@tools.components.trans_point_select(_form)
+	@tools.components.private_code_select(_form)
+
+	@select(_form("reportType"),
+		options(order.reports.DistReport.Parameter.reportTypes),
+		'class -> "input-medium",
+		'_label -> Messages("report.type")
+	)
+
+	@select(_form("showType"),
+		options(order.reports.DistReport.Parameter.showTypes),
+		'class -> "input-small",
+		'_label -> Messages("report.show")
+	)
+
+}

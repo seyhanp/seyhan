@@ -1,0 +1,81 @@
+@(_form: Form[StockPriceList])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.trans_form() {
+
+	@tools.imports.forms_header(
+		_form("id").value,
+		enums.Right.STOK_FIYAT_LISTESI,
+		null, false
+	)
+
+	@helper.form(action = stock.routes.PriceLists.save, 'class-> "form-horizontal zell", 'id-> "mainFieldsForm") {
+
+		@tools.imports.base_hidden_fields(_form)
+
+		<fieldset>
+
+			@inputText(_form("name"),
+				'_label -> Messages("name"),
+				'class -> "input-xlarge",
+				'maxlength -> "30"
+			)
+
+			@tools.components.date_range(_form)
+			@tools.components.stock_category_select(_form)
+
+			@select(_form("isSellPrice"),
+				options(Options.priceChoice),
+				'class -> "input-small",
+				'_label -> Messages("stock.price")
+			)
+
+			@select(_form("effectType"),
+				options(enums.EffectType.options),
+				'_label -> Messages("effect_type"),
+				'class -> "input-small"
+			)
+			
+			@inputText(_form("effect"),
+				'_label -> Messages("effect"),
+				'class -> "input-small currency",
+				'maxlength -> "7"
+			)
+			
+			@select(_form("effectDirection"),
+				options(enums.EffectDirection.options),
+				'_label -> Messages("effect_dir"),
+				'class -> "input-small"
+			)
+
+			@select(_form("isActive"),
+				options(Options.yesno),
+				'class -> "input-small",
+				'_label -> Messages("is_active")
+			)
+
+			@for(aef <- models.AdminExtraFields.listAll(enums.Module.stock.name())) {
+				@tools.dropdowns.stock_extra_field(_form, aef.id, aef.idno, aef.name, aef.isRequired, hasAddNewButton=false)
+			}
+
+			@inputText(_form("providerCode"),
+				'_label -> Messages("provider_code"),
+				'class -> "input-medium",
+				'maxlength -> "30"
+			)
+
+			@inputText(_form("description"),
+				'_label -> Messages("description"),
+				'class -> "input-xlarge",
+				'maxlength -> "50"
+			)
+
+		</fieldset>
+
+		@tools.templates.form_footer_bar(enums.Right.STOK_FIYAT_LISTESI, _form("id").value)
+
+	}
+
+}

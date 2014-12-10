@@ -1,0 +1,8 @@
+@(currentPage: meta.PageExtend[ContactExtraFields], parent: AdminExtraFields)
+
+@tools.templates.ajax_list(
+	currentPage = currentPage,
+	label = parent.name,
+	right = enums.Right.CARI_EKSTRA_ALANLAR,
+	title = Messages("list_of", parent.name)
+)

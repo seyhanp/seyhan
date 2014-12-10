@@ -1,0 +1,14 @@
+@(currentPage: meta.PageExtend[AdminUser], _form: Form[models.search.NameOnlySearchParam])
+
+@tools.templates.basic_list(
+	currentPage = currentPage,
+	filterForm = _form,
+	
+	hasMultiplier = true,
+
+	label = Messages("user"),
+	right = enums.Right.KULLANICI_TANITIMI,
+	link = admin.routes.Users.list().url,
+	
+	is_admin_page = true
+)

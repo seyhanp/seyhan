@@ -1,0 +1,38 @@
+@(_form: Form[contact.reports.BalanceReport.Parameter])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.report_form(contact.reports.routes.BalanceReport.generate(),enums.Right.CARI_DURUM_RAPORU) {
+
+	@tools.components.autocomplete_contact(_form)
+
+	@inputText(_form("date"),
+		'_label -> Messages("date"),
+		'class -> "input-small date"
+	)
+
+	@tools.dropdowns.contact_category(_form, hasAddNewButton=false)
+	@tools.dropdowns.sale_seller(_form, hasAddNewButton=false)
+
+	@for(aef <- models.AdminExtraFields.listAll(enums.Module.contact.name())) {
+		@tools.dropdowns.contact_extra_field(_form, aef.id, aef.idno, aef.name, aef.isRequired, hasAddNewButton=false)
+	}
+
+	@if(global.Profiles.chosen().gnel_hasExchangeSupport) {
+		@select(_form("excCode"),
+			options(Options.currencies),
+			'class -> "input-small",
+			'_label -> Messages("currency"),
+			'_default -> Messages("choose")
+		)
+	}
+
+	@select(_form("having"),
+		options(contact.reports.BalanceReport.Parameter.options),
+		'class -> "input-medium",
+		'_label -> Messages("balance.type"),
+		'_default -> Messages("choose")
+	)
+
+}

@@ -1,0 +1,7 @@
+@(currentPage: meta.PageExtend[models.GlobalCurrency])
+
+@tools.templates.ajax_list(
+	currentPage = currentPage,
+	label = Messages("currency"),
+	right = enums.Right.GNEL_DOVIZ_BIRIMLERI
+)

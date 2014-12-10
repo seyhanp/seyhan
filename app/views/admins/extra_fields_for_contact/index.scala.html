@@ -1,0 +1,20 @@
+@(currentPage: meta.PageExtend[AdminExtraFields])
+
+@Controller = {
+	<script type="text/javascript">
+		var controller = jsRoutes.controllers.admin.ExtraFieldsForContacts;
+	</script>
+}
+
+@tools.templates.ajax_index(Controller) {
+
+	@tools.templates.ajax_form(
+		right = enums.Right.EKSTRA_CARI_ALANLARI,
+		saveAction = admin.routes.ExtraFieldsForContacts.save
+	)
+
+	<div id=list>
+		@list(currentPage)
+	</div>
+
+}

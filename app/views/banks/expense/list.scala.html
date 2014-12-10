@@ -1,0 +1,7 @@
+@(currentPage: meta.PageExtend[BankExpense])
+
+@tools.templates.ajax_list(
+	currentPage = currentPage,
+	label = Messages("bank.expense"),
+	right = enums.Right.BANK_MASRAF_TANITIMI
+)

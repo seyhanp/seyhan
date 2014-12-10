@@ -1,0 +1,8 @@
+@(form: Form[_], baseTag: String = "transPoint")
+
+@tools.components.dropdown_tree_select(
+	form = form,
+	baseTag = baseTag,
+	label = Messages("trans.point"),
+	refUrl = "/as/get_trans_point_tree"
+)

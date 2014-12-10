@@ -1,0 +1,33 @@
+@(_form: Form[models.search.ChqbllSelectionModel])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+<input type="hidden" id="selRight" name="selRight" value='@_form("selRight").value' />
+<input type="hidden" id="selSort" name="selSort" value='@_form("selSort").value' />
+<input type="hidden" id="step" name="step" value='@_form("step").value' />
+<input type="hidden" id="alreadySelected" name="alreadySelected" value='@_form("alreadySelected").value' />
+
+@tools.components.autocomplete_contact(_form, "refContact")
+
+@inputText(_form("selPortfolioNo"),
+	'_label -> Messages("portfolio.no"),
+	'class -> "input-small number",
+	'maxlength -> "9"
+)
+
+@inputText(_form("selSerialNo"),
+	'_label -> Messages("serial.no"),
+	'class -> "input-medium",
+	'maxlength -> "25"
+)
+
+@tools.components.date_range(_form)
+
+<div style="padding-top:8px">
+	<div class="controls inline">
+		<a class="btn" onclick="selection_search();">
+			<i class="icon-search"></i> @Messages("search")
+		</a>
+	</div>
+</div>

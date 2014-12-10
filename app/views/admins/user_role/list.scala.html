@@ -1,0 +1,10 @@
+@(currentPage: meta.PageExtend[AdminUserRole])
+
+@tools.templates.basic_list(
+	currentPage = currentPage,
+	label = Messages("role"),
+	right = enums.Right.KULLANICI_ROLLERI,
+	link = admin.routes.UserRoles.list().url,
+	
+	is_admin_page = true
+)

@@ -1,0 +1,68 @@
+@(_form: Form[StockCosting])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@main() {
+
+	@tools.imports.forms_header(
+		_form("id").value,
+		enums.Right.STOK_MALIYET_HESAPLAMALARI,
+		stock.routes.Costings.remove(if(_form("id").value != null && ! _form("id").value.isEmpty()) _form("id").value.toInt else -1)
+	)
+
+	@helper.form(action = stock.routes.Costings.save, 'class-> "form-horizontal zell", 'id-> "mainFieldsForm") {
+
+		@tools.imports.base_hidden_fields(_form)
+
+		<fieldset>
+
+			@inputText(_form("name"),
+				'_label -> Messages("name"),
+				'class -> "input-xlarge",
+				'maxlength -> "30"
+			)
+
+			@inputText(_form("calcDate"),
+				'_label -> Messages("date"),
+				'class -> "input-small date"
+			)
+
+			@select(_form("costingType"),
+				options(enums.CostingType.options),
+				'_label -> Messages("costing_type")
+			)
+
+			@tools.components.trans_point_select(_form)
+			@tools.components.stock_category_select(_form)
+			@tools.dropdowns.stock_depot(_form, hasAddNewButton=false)
+
+			@for(aef <- models.AdminExtraFields.listAll(enums.Module.stock.name())) {
+				@tools.dropdowns.stock_extra_field(_form, aef.id, aef.idno, aef.name, aef.isRequired, hasAddNewButton=false)
+			}
+		
+			@inputText(_form("providerCode"),
+				'_label -> Messages("provider_code"),
+				'class -> "input-large",
+				'maxlength -> "30"
+			)
+
+			@select(_form("isActive"),
+				options(Options.yesno),
+				'class -> "input-small",
+				'_label -> Messages("is_active")
+			)
+
+			@inputText(_form("execDate"),
+				'_label -> Messages("date.execution"),
+				'class -> "input-medium",
+				'readonly -> "readonly"
+			)
+
+		</fieldset>
+
+		@tools.templates.form_footer_bar(enums.Right.STOK_MALIYET_HESAPLAMALARI, _form("id").value)
+
+	}
+
+}

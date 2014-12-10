@@ -1,0 +1,7 @@
+@(currentPage: meta.PageExtend[StockTransSource])
+
+@tools.templates.ajax_list(
+	currentPage = currentPage,
+	label = Messages("stock.trans.source"),
+	right = enums.Right.STOK_FIS_KAYNAKLARI
+)

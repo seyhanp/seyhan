@@ -1,0 +1,61 @@
+@(_form: Form[contact.reports.TransReport.Parameter])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.report_form(contact.reports.routes.TransReport.generate(),enums.Right.CARI_HAREKET_RAPORU) {
+
+	@tools.components.autocomplete_contact(_form)
+
+	@select(_form("transType"),
+		options(Options.transSources(enums.Module.contact)),
+		'class -> "input-medium",
+		'_label -> Messages("trans.type"),
+		'_default -> Messages("choose")
+	)
+
+	@inputText(_form("transNo"),
+		'_label -> Messages("trans.no"),
+		'class -> "input-small"
+	)
+
+	@tools.components.date_range(_form)
+
+	@tools.dropdowns.contact_trans_source(_form, hasAddNewButton=false)
+	@tools.dropdowns.contact_category(_form, hasAddNewButton=false)
+	@tools.dropdowns.sale_seller(_form, hasAddNewButton=false)
+
+	@for(aef <- models.AdminExtraFields.listAll(enums.Module.contact.name())) {
+		@tools.dropdowns.contact_extra_field(_form, aef.id, aef.idno, aef.name, aef.isRequired, hasAddNewButton=false)
+	}
+
+	@inputText(_form("maturity"),
+		'_label -> Messages("maturity"),
+		'class -> "input-small date"
+	)
+
+	@if(global.Profiles.chosen().gnel_hasExchangeSupport) {
+		@select(_form("excCode"),
+			options(Options.currencies),
+			'class -> "input-small",
+			'_label -> Messages("currency"),
+			'_default -> Messages("choose")
+		)
+	}
+
+	@tools.components.trans_point_select(_form)
+	@tools.components.private_code_select(_form)
+
+	@select(_form("reportType"),
+		options(contact.reports.TransReport.Parameter.reportTypes),
+		'class -> "input-medium",
+		'_label -> Messages("report.type")
+	)
+
+	@select(_form("showType"),
+		options(contact.reports.TransReport.Parameter.showTypes),
+		'class -> "input-small",
+		'_label -> Messages("report.show")
+	)
+
+}

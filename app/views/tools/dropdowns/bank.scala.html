@@ -1,0 +1,14 @@
+@(form: Form[_], hasBlankOption: Boolean = true, hasAddNewButton:Boolean = true)
+
+@standart(form, Bank.options, enums.Right.BANK_HESAP_TANITIMI, "bank", Messages("bank.account"), hasBlankOption, hasAddNewButton=hasAddNewButton) {
+
+	<script type="text/javascript">
+		function setSimpleControllerFor_bank() {
+			simple_combo_type = 1;
+			has_simple_blank_option = @hasBlankOption;
+			simple_selector = "#bank_id";
+			simple_controller = jsRoutes.controllers.bank.Banks;
+		}
+	</script>
+
+}

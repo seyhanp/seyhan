@@ -1,0 +1,43 @@
+@(_form: Form[models.search.ChqbllTransSearchParam], sort: enums.ChqbllSort, rightBind: meta.RightBind)
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.search_form(_form, 
+		if(enums.ChqbllSort.Cheque.equals(sort)) {chqbll.routes.TransForCheque.list(rightBind)} else {chqbll.routes.TransForBill.list(rightBind)}, 
+		rightBind.value.name) {
+
+	<input type="hidden" name="rightBind" id="rightBind" value='@rightBind' />
+	<input type="hidden" id="sort" name="sort" value='@sort' />
+
+	@select(_form("toStep"),
+		options(enums.ChqbllStep.options(rightBind.value)),
+		'class -> "input-medium-plus",
+		'_label -> Messages("to.where"),
+		'_default -> Messages("choose")
+	)
+
+	@tools.components.autocomplete_contact(_form)
+	@tools.dropdowns.bank(_form, hasAddNewButton=false)
+	@tools.dropdowns.safe(_form, hasAddNewButton=false)
+
+	@tools.dropdowns.chqbll_payroll_source(_form, sort, rightBind, hasAddNewButton=false)
+
+	@inputText(_form("receiptNo"),
+		'_label -> Messages("receipt_no"),
+		'class -> "input-small number",
+		'maxlength -> "9"
+	)
+
+	@inputText(_form("transNo"),
+		'_label -> Messages("trans.no"),
+		'class -> "input-medium",
+		'maxlength -> "20"
+	)
+
+	@tools.components.date_range(_form)
+
+	@tools.components.trans_point_select(_form)
+	@tools.components.private_code_select(_form)
+
+}

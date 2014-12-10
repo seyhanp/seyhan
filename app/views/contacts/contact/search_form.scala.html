@@ -1,0 +1,29 @@
+@(_form: Form[models.search.ContactSearchParam])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.search_form(_form, contact.routes.Contacts.list(), "contact") {
+
+	@inputText(_form("code"),
+		'_label -> Messages("code"),
+		'class -> "input-large",
+		'maxlength -> "30"
+	)
+
+	@inputText(_form("name"),
+		'_label -> Messages("name"),
+		'class -> "input-large",
+		'maxlength -> "100"
+	)
+
+	@tools.dropdowns.contact_category(_form, hasAddNewButton=false)
+
+	@select(_form("status"),
+		options(enums.ContactStatus.options),
+		'class -> "input-medium",
+		'_label -> Messages("status"),
+		'_default -> Messages("choose")
+	)
+
+}

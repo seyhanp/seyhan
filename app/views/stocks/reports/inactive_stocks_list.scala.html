@@ -1,0 +1,34 @@
+@(_form: Form[stock.reports.InactiveStocksList.Parameter])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.report_form(stock.reports.routes.InactiveStocksList.generate(),enums.Right.STOK_HAREKETSIZ_STOKLAR_LISTESI) {
+
+	@tools.components.date_range(_form)
+
+	@inputText(_form("providerCode"),
+		'_label -> Messages("provider_code"),
+		'class -> "input-medium",
+		'maxlength -> "30"
+	)
+
+	@for(aef <- models.AdminExtraFields.listAll(enums.Module.stock.name())) {
+		@tools.dropdowns.stock_extra_field(_form, aef.id, aef.idno, aef.name, aef.isRequired, hasAddNewButton=false)
+	}
+
+	@tools.components.stock_category_select(_form)
+
+	@select(_form("price"),
+		options(Options.stockPrices),
+		'class -> "input-medium",
+		'_label -> Messages("price")
+	)
+
+	@select(_form("orderBy"),
+		options(stock.reports.InactiveStocksList.Parameter.options),
+		'class -> "input-medium",
+		'_label -> Messages("orderby")
+	)
+
+}

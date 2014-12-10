@@ -1,0 +1,8 @@
+@(form: Form[_], baseTag: String = "privateCode")
+
+@tools.components.dropdown_tree_select(
+	form = form,
+	baseTag = baseTag,
+	label = Messages("private_code"),
+	refUrl = "/as/get_private_code_tree"
+)

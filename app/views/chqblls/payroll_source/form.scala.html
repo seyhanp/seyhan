@@ -1,0 +1,26 @@
+@(_form: Form[ChqbllPayrollSource], sort: enums.ChqbllSort)
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.imports.base_hidden_fields(_form)
+
+<input type="hidden" id="sort" name="sort" value='@sort' />
+
+@inputText(_form("name"),
+	'_label -> Messages("name"),
+	'class -> "input-xlarge",
+	'maxlength -> "30"
+)
+
+@select(_form("suitableRight"),
+	options(Options.transSources(if(enums.ChqbllSort.Cheque.equals(sort)) enums.Module.cheque else enums.Module.bill)),
+	'_label -> Messages("trans.usefor"),
+	'_default -> Messages("choose")
+)
+
+@select(_form("isActive"),
+	options(Options.yesno),
+	'class -> "input-small",
+	'_label -> Messages("is_active")
+)

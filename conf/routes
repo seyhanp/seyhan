@@ -1,0 +1,736 @@
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# Home page
+GET     /                                               controllers.Application.index()
+
+# Basic directions
+GET     /change_workspace/:name                         controllers.Application.changeWorkspace(name:String)
+GET     /change_lang/:lang                              controllers.Application.changeLanguage(lang:String)
+GET     /change_profile/:profile                        controllers.Application.changeProfile(profile:String)
+
+# Authentication
+GET     /login                                          controllers.Application.login()
+POST    /login                                          controllers.Application.authenticate()
+GET     /logout                                         controllers.Application.logout()
+GET     /forbidden                                      controllers.Application.getForbiddenResult()
+
+# ------------------------------------------------------------------------------------------------------------------------
+# Contact
+# ------------------------------------------------------------------------------------------------------------------------
+GET     /contacts/contact                               controllers.contact.Contacts.list()
+POST    /contacts/contact                               controllers.contact.Contacts.save()
+GET     /contacts/contact/new                           controllers.contact.Contacts.create()
+GET     /contacts/contact/:id                           controllers.contact.Contacts.edit(id:Integer)
+POST    /contacts/contact/:id/delete                    controllers.contact.Contacts.remove(id:Integer)
+POST    /contacts/contact/saveClone                     controllers.contact.Contacts.saveClone()
+GET     /contacts/contact/createClone/:id               controllers.contact.Contacts.createClone(id:Integer)
+GET     /contacts/investigation/:id                     controllers.contact.Contacts.investigation(id:Integer)
+
+# Contact Transactions
+GET     /contacts/trans                                 controllers.contact.Transes.list(rightBind:meta.RightBind)
+POST    /contacts/trans                                 controllers.contact.Transes.save(rightBind:meta.RightBind)
+GET     /contacts/trans/new                             controllers.contact.Transes.create(rightBind:meta.RightBind)
+GET     /contacts/trans/:id                             controllers.contact.Transes.edit(id:Integer, rightBind:meta.RightBind)
+POST    /contacts/trans/:id/delete                      controllers.contact.Transes.remove(id:Integer, rightBind:meta.RightBind)
+POST    /contacts/trans/saveClone                       controllers.contact.Transes.saveClone()
+GET     /contacts/trans/createClone/:id                 controllers.contact.Transes.createClone(id:Integer)
+
+# Trans Sources
+GET     /contacts/trans_source                          controllers.contact.TransSources.index()
+GET     /contacts/trans_sources                         controllers.contact.TransSources.list()
+POST    /contacts/trans_source                          controllers.contact.TransSources.save()
+GET     /contacts/trans_source/new                      controllers.contact.TransSources.create()
+GET     /contacts/trans_source/:id                      controllers.contact.TransSources.edit(id:Integer)
+POST    /contacts/trans_source/:id/delete               controllers.contact.TransSources.remove(id:Integer)
+GET     /contacts/trans_source/get/options              controllers.contact.TransSources.options(right:String)
+
+# Contact Category
+GET     /contacts/category                              controllers.contact.Categories.index()
+GET     /contacts/categories                            controllers.contact.Categories.list()
+POST    /contacts/category                              controllers.contact.Categories.save()
+GET     /contacts/category/new                          controllers.contact.Categories.create()
+GET     /contacts/category/:id                          controllers.contact.Categories.edit(id:Integer)
+POST    /contacts/category/:id/delete                   controllers.contact.Categories.remove(id:Integer)
+GET     /contacts/category/get/options                  controllers.contact.Categories.options()
+
+# Extra Fields
+GET     /contacts/extra_fields                          controllers.contact.ExtraFields.index(id:Integer)
+GET     /contacts/extra_fieldss                         controllers.contact.ExtraFields.list(id:Integer)
+POST    /contacts/extra_fields                          controllers.contact.ExtraFields.save()
+GET     /contacts/extra_fields/new                      controllers.contact.ExtraFields.create(id:Integer)
+GET     /contacts/extra_fields/:id                      controllers.contact.ExtraFields.edit(id:Integer)
+POST    /contacts/extra_fields/:id/delete               controllers.contact.ExtraFields.remove(id:Integer)
+GET     /contacts/extra_fields/get/options              controllers.contact.ExtraFields.options(id:Integer)
+
+# Contact List
+GET     /contacts/report/contact_list                   controllers.contact.reports.ContactList.index()
+POST    /contacts/report/contact_list                   controllers.contact.reports.ContactList.generate()
+
+# Inactive Contacts List
+GET     /contacts/report/inactive_contacts_list         controllers.contact.reports.InactiveContactsList.index()
+POST    /contacts/report/inactive_contacts_list         controllers.contact.reports.InactiveContactsList.generate()
+
+# Balance Report
+GET     /contacts/report/balance_report                 controllers.contact.reports.BalanceReport.index()
+POST    /contacts/report/balance_report                 controllers.contact.reports.BalanceReport.generate()
+
+# Aging Report
+GET     /contacts/report/aging_report                   controllers.contact.reports.AgingReport.index()
+POST    /contacts/report/aging_report                   controllers.contact.reports.AgingReport.generate()
+
+# Transaction List
+GET     /contacts/report/contact_trans_list             controllers.contact.reports.TransactionList.index()
+POST    /contacts/report/contact_trans_list             controllers.contact.reports.TransactionList.generate()
+
+# Transaction Report
+GET     /contacts/report/trans_report                   controllers.contact.reports.TransReport.index()
+POST    /contacts/report/trans_report                   controllers.contact.reports.TransReport.generate()
+
+# Last Transaction Report
+GET     /contacts/report/last_trans_report              controllers.contact.reports.LastTransReport.index()
+POST    /contacts/report/last_trans_report              controllers.contact.reports.LastTransReport.generate()
+
+# ------------------------------------------------------------------------------------------------------------------------
+# Cheque / Bill
+# ------------------------------------------------------------------------------------------------------------------------
+# Cheque Payrolls
+GET     /cheques/payrolls                               controllers.chqbll.PayrollsForCheque.list(rightBind:meta.RightBind)
+POST    /cheques/payrolls                               controllers.chqbll.PayrollsForCheque.save(rightBind:meta.RightBind)
+GET     /cheques/payrolls/new                           controllers.chqbll.PayrollsForCheque.create(rightBind:meta.RightBind)
+GET     /cheques/payrolls/:id                           controllers.chqbll.PayrollsForCheque.edit(id:Integer, rightBind:meta.RightBind)
+POST    /cheques/payrolls/:id/delete                    controllers.chqbll.PayrollsForCheque.remove(id:Integer, rightBind:meta.RightBind)
+
+# Bill Payrolls
+GET     /bills/payrolls                                 controllers.chqbll.PayrollsForBill.list(rightBind:meta.RightBind)
+POST    /bills/payrolls                                 controllers.chqbll.PayrollsForBill.save(rightBind:meta.RightBind)
+GET     /bills/payrolls/new                             controllers.chqbll.PayrollsForBill.create(rightBind:meta.RightBind)
+GET     /bills/payrolls/:id                             controllers.chqbll.PayrollsForBill.edit(id:Integer, rightBind:meta.RightBind)
+POST    /bills/payrolls/:id/delete                      controllers.chqbll.PayrollsForBill.remove(id:Integer, rightBind:meta.RightBind)
+
+# Cheque Trans
+GET     /cheques/trans                                  controllers.chqbll.TransForCheque.list(rightBind:meta.RightBind)
+POST    /cheques/trans                                  controllers.chqbll.TransForCheque.save(rightBind:meta.RightBind)
+GET     /cheques/trans/new                              controllers.chqbll.TransForCheque.create(rightBind:meta.RightBind)
+GET     /cheques/trans/:id                              controllers.chqbll.TransForCheque.edit(id:Integer, rightBind:meta.RightBind)
+POST    /cheques/trans/:id/delete                       controllers.chqbll.TransForCheque.remove(id:Integer, rightBind:meta.RightBind)
+
+# Bill Trans
+GET     /bills/trans                                    controllers.chqbll.TransForBill.list(rightBind:meta.RightBind)
+POST    /bills/trans                                    controllers.chqbll.TransForBill.save(rightBind:meta.RightBind)
+GET     /bills/trans/new                                controllers.chqbll.TransForBill.create(rightBind:meta.RightBind)
+GET     /bills/trans/:id                                controllers.chqbll.TransForBill.edit(id:Integer, rightBind:meta.RightBind)
+POST    /bills/trans/:id/delete                         controllers.chqbll.TransForBill.remove(id:Integer, rightBind:meta.RightBind)
+
+# Cheque Partials
+GET     /cheques/partials                               controllers.chqbll.PartialsForCheque.list(rightBind:meta.RightBind)
+POST    /cheques/partials                               controllers.chqbll.PartialsForCheque.save(rightBind:meta.RightBind)
+GET     /cheques/partials/:id                           controllers.chqbll.PartialsForCheque.edit(id:Integer, rightBind:meta.RightBind)
+POST    /cheques/partials/:id/delete                    controllers.chqbll.PartialsForCheque.remove(id:Integer, rightBind:meta.RightBind)
+
+# Bill Partials
+GET     /bills/partials                                 controllers.chqbll.PartialsForBill.list(rightBind:meta.RightBind)
+POST    /bills/partials                                 controllers.chqbll.PartialsForBill.save(rightBind:meta.RightBind)
+GET     /bills/partials/:id                             controllers.chqbll.PartialsForBill.edit(id:Integer, rightBind:meta.RightBind)
+POST    /bills/partials/:id/delete                      controllers.chqbll.PartialsForBill.remove(id:Integer, rightBind:meta.RightBind)
+
+# Cheque Payroll Sources
+GET     /cheques/payroll_source                         controllers.chqbll.PayrollSourcesForCheque.index()
+GET     /cheques/payroll_sources                        controllers.chqbll.PayrollSourcesForCheque.list()
+POST    /cheques/payroll_source                         controllers.chqbll.PayrollSourcesForCheque.save()
+GET     /cheques/payroll_source/new                     controllers.chqbll.PayrollSourcesForCheque.create()
+GET     /cheques/payroll_source/:id                     controllers.chqbll.PayrollSourcesForCheque.edit(id:Integer)
+POST    /cheques/payroll_source/:id/delete              controllers.chqbll.PayrollSourcesForCheque.remove(id:Integer)
+GET     /cheques/payroll_source/get/options             controllers.chqbll.PayrollSourcesForCheque.options(right:String)
+
+# Bill Payroll Sources
+GET     /bills/payroll_source                           controllers.chqbll.PayrollSourcesForBill.index()
+GET     /bills/payroll_sources                          controllers.chqbll.PayrollSourcesForBill.list()
+POST    /bills/payroll_source                           controllers.chqbll.PayrollSourcesForBill.save()
+GET     /bills/payroll_source/new                       controllers.chqbll.PayrollSourcesForBill.create()
+GET     /bills/payroll_source/:id                       controllers.chqbll.PayrollSourcesForBill.edit(id:Integer)
+POST    /bills/payroll_source/:id/delete                controllers.chqbll.PayrollSourcesForBill.remove(id:Integer)
+GET     /bills/payroll_source/get/options               controllers.chqbll.PayrollSourcesForBill.options(right:String)
+
+# Cheque Types
+GET     /cheques/type                                   controllers.chqbll.TypesForCheque.index()
+GET     /cheques/types                                  controllers.chqbll.TypesForCheque.list()
+POST    /cheques/type                                   controllers.chqbll.TypesForCheque.save()
+GET     /cheques/type/new                               controllers.chqbll.TypesForCheque.create()
+GET     /cheques/type/:id                               controllers.chqbll.TypesForCheque.edit(id:Integer)
+POST    /cheques/type/:id/delete                        controllers.chqbll.TypesForCheque.remove(id:Integer)
+GET     /cheques/type/get/options                       controllers.chqbll.TypesForCheque.options()
+
+# Bill Types
+GET     /bills/type                                     controllers.chqbll.TypesForBill.index()
+GET     /bills/types                                    controllers.chqbll.TypesForBill.list()
+POST    /bills/type                                     controllers.chqbll.TypesForBill.save()
+GET     /bills/type/new                                 controllers.chqbll.TypesForBill.create()
+GET     /bills/type/:id                                 controllers.chqbll.TypesForBill.edit(id:Integer)
+POST    /bills/type/:id/delete                          controllers.chqbll.TypesForBill.remove(id:Integer)
+GET     /bills/type/get/options                         controllers.chqbll.TypesForBill.options()
+
+# Payroll List
+GET     /cheques/report/payroll_list                    controllers.chqbll.reports.PayrollList.index(sort = "Cheque")
+POST    /cheques/report/payroll_list                    controllers.chqbll.reports.PayrollList.generate(sort = "Cheque")
+GET     /bills/report/payroll_list                      controllers.chqbll.reports.PayrollList.index(sort = "Bill")
+POST    /bills/report/payroll_list                      controllers.chqbll.reports.PayrollList.generate(sort = "Bill")
+
+# Trans List
+GET     /cheques/report/trans_list                      controllers.chqbll.reports.TransList.index(sort = "Cheque")
+POST    /cheques/report/trans_list                      controllers.chqbll.reports.TransList.generate(sort = "Cheque")
+GET     /bills/report/trans_list                        controllers.chqbll.reports.TransList.index(sort = "Bill")
+POST    /bills/report/trans_list                        controllers.chqbll.reports.TransList.generate(sort = "Bill")
+
+# Cheque/Bill List
+GET     /cheques/report/cheque_list                     controllers.chqbll.reports.ChqbllList.index(sort = "Cheque")
+POST    /cheques/report/cheque_list                     controllers.chqbll.reports.ChqbllList.generate(sort = "Cheque")
+GET     /bills/report/bill_list                         controllers.chqbll.reports.ChqbllList.index(sort = "Bill")
+POST    /bills/report/bill_list                         controllers.chqbll.reports.ChqbllList.generate(sort = "Bill")
+
+# Cheque/Bill Partly List
+GET     /cheques/report/partly_cheque_list              controllers.chqbll.reports.PartlyList.index(sort = "Cheque")
+POST    /cheques/report/partly_cheque_list              controllers.chqbll.reports.PartlyList.generate(sort = "Cheque")
+GET     /bills/report/partly_bill_list                  controllers.chqbll.reports.PartlyList.index(sort = "Bill")
+POST    /bills/report/partly_bill_list                  controllers.chqbll.reports.PartlyList.generate(sort = "Bill")
+
+# Ajax Service
+GET     /as/chqbll/selection/form                       controllers.chqbll.AjaxService.create(sort ?= "Cheque", right ?= "", fromStep ?= "InPortfolio", alreadySelected ?="")
+GET     /as/chqbll/investigation/:id                    controllers.chqbll.AjaxService.investigation(id:Integer)
+GET     /as/chqbll/sequential/get_form                  controllers.chqbll.AjaxService.sequentialForm(right:String)
+POST    /as/chqbll/sequential/validation                controllers.chqbll.AjaxService.sequentialValidation(sort:String, isCustomer:Boolean)
+POST    /as/chqbll/selection/search                     controllers.chqbll.AjaxService.search()
+GET     /as/chqbll/trans_steps                          controllers.chqbll.AjaxService.transSteps(p ?= "", q ?= "")
+
+# ------------------------------------------------------------------------------------------------------------------------
+# Stock
+# ------------------------------------------------------------------------------------------------------------------------
+GET     /stocks/stock                                   controllers.stock.Stocks.list()
+POST    /stocks/stock                                   controllers.stock.Stocks.save()
+GET     /stocks/stock/new                               controllers.stock.Stocks.create()
+GET     /stocks/stock/:id                               controllers.stock.Stocks.edit(id:Integer)
+POST    /stocks/stock/:id/delete                        controllers.stock.Stocks.remove(id:Integer)
+POST    /stocks/stock/saveClone                         controllers.stock.Stocks.saveClone()
+GET     /stocks/stock/createClone/:id                   controllers.stock.Stocks.createClone(id:Integer)
+GET     /stocks/investigation/:id                       controllers.stock.Stocks.investigation(id:Integer)
+
+# Stock Transactions
+GET     /stocks/trans                                   controllers.stock.Transes.list(rightBind:meta.RightBind)
+POST    /stocks/trans                                   controllers.stock.Transes.save(rightBind:meta.RightBind)
+GET     /stocks/trans/new                               controllers.stock.Transes.create(rightBind:meta.RightBind)
+GET     /stocks/trans/:id                               controllers.stock.Transes.edit(id:Integer, rightBind:meta.RightBind)
+POST    /stocks/trans/:id/delete                        controllers.stock.Transes.remove(id:Integer, rightBind:meta.RightBind)
+POST    /stocks/trans/saveClone                         controllers.stock.Transes.saveClone()
+GET     /stocks/trans/createClone/:id                   controllers.stock.Transes.createClone(id:Integer)
+
+# Categories
+GET     /stocks/category                                controllers.stock.Categories.index()
+POST    /stocks/category                                controllers.stock.Categories.save()
+GET     /stocks/category/:id                            controllers.stock.Categories.edit(id:Integer)
+GET     /stocks/category/:id/:target/:op/paste          controllers.stock.Categories.paste(id:Integer, target:Integer, op:Int)
+GET     /stocks/category/:id/new                        controllers.stock.Categories.create(id:Integer)
+POST    /stocks/category/:id/delete                     controllers.stock.Categories.remove(id:Integer)
+
+# Depots
+GET     /stocks/depot                                   controllers.stock.Depots.index()
+GET     /stocks/depots                                  controllers.stock.Depots.list()
+POST    /stocks/depot                                   controllers.stock.Depots.save()
+GET     /stocks/depot/new                               controllers.stock.Depots.create()
+GET     /stocks/depot/:id                               controllers.stock.Depots.edit(id:Integer)
+POST    /stocks/depot/:id/delete                        controllers.stock.Depots.remove(id:Integer)
+GET     /stocks/depot/get/options                       controllers.stock.Depots.options(hasBlankOption:Boolean)
+
+# Unit
+GET     /stocks/unit                                    controllers.stock.Units.index()
+GET     /stocks/units                                   controllers.stock.Units.list()
+POST    /stocks/unit                                    controllers.stock.Units.save()
+GET     /stocks/unit/new                                controllers.stock.Units.create()
+GET     /stocks/unit/:id                                controllers.stock.Units.edit(id:Integer)
+POST    /stocks/unit/:id/delete                         controllers.stock.Units.remove(id:Integer)
+GET     /stocks/unit/get/options                        controllers.stock.Units.options(no:String)
+
+# Trans Sources
+GET     /stocks/trans_source                            controllers.stock.TransSources.index()
+GET     /stocks/trans_sources                           controllers.stock.TransSources.list()
+POST    /stocks/trans_source                            controllers.stock.TransSources.save()
+GET     /stocks/trans_source/new                        controllers.stock.TransSources.create()
+GET     /stocks/trans_source/:id                        controllers.stock.TransSources.edit(id:Integer)
+POST    /stocks/trans_source/:id/delete                 controllers.stock.TransSources.remove(id:Integer)
+GET     /stocks/trans_source/get/options                controllers.stock.TransSources.options(right:String)
+
+# Extra Fields
+GET     /stocks/extra_fields                            controllers.stock.ExtraFields.index(id:Integer)
+GET     /stocks/extra_fieldss                           controllers.stock.ExtraFields.list(id:Integer)
+POST    /stocks/extra_fields                            controllers.stock.ExtraFields.save()
+GET     /stocks/extra_fields/new                        controllers.stock.ExtraFields.create(id:Integer)
+GET     /stocks/extra_fields/:id                        controllers.stock.ExtraFields.edit(id:Integer)
+POST    /stocks/extra_fields/:id/delete                 controllers.stock.ExtraFields.remove(id:Integer)
+GET     /stocks/extra_fields/get/options                controllers.stock.ExtraFields.options(id:Integer)
+
+# Price Lists
+GET     /stocks/price_list                             controllers.stock.PriceLists.list()
+POST    /stocks/price_list                             controllers.stock.PriceLists.save()
+GET     /stocks/price_list/new                         controllers.stock.PriceLists.create()
+GET     /stocks/price_list/:id                         controllers.stock.PriceLists.edit(id:Integer)
+POST    /stocks/price_list/:id/delete                  controllers.stock.PriceLists.remove(id:Integer)
+
+# Price Updates
+GET     /stocks/price_update                            controllers.stock.PriceUpdates.list()
+POST    /stocks/price_update                            controllers.stock.PriceUpdates.save()
+GET     /stocks/price_update/new                        controllers.stock.PriceUpdates.create()
+GET     /stocks/price_update/:id                        controllers.stock.PriceUpdates.edit(id:Integer)
+POST    /stocks/price_update/undo/last                  controllers.stock.PriceUpdates.undoLast()
+
+# Costing
+GET     /stocks/costing                                 controllers.stock.Costings.list()
+POST    /stocks/costing                                 controllers.stock.Costings.save()
+GET     /stocks/costing/new                             controllers.stock.Costings.create()
+GET     /stocks/costing/:id                             controllers.stock.Costings.edit(id:Integer)
+POST    /stocks/costing/:id/delete                      controllers.stock.Costings.remove(id:Integer)
+
+# Cost Factor
+GET     /stocks/cost_factor                             controllers.stock.CostFactors.index()
+GET     /stocks/cost_factors                            controllers.stock.CostFactors.list()
+POST    /stocks/cost_factor                             controllers.stock.CostFactors.save()
+GET     /stocks/cost_factor/new                         controllers.stock.CostFactors.create()
+GET     /stocks/cost_factor/:id                         controllers.stock.CostFactors.edit(id:Integer)
+POST    /stocks/cost_factor/:id/delete                  controllers.stock.CostFactors.remove(id:Integer)
+
+# Stock List
+GET     /stocks/report/stock_list                       controllers.stock.reports.StockList.index()
+POST    /stocks/report/stock_list                       controllers.stock.reports.StockList.generate()
+
+# Inactive Stocks List
+GET     /stocks/report/inactive_stocks_list             controllers.stock.reports.InactiveStocksList.index()
+POST    /stocks/report/inactive_stocks_list             controllers.stock.reports.InactiveStocksList.generate()
+
+# Status Report
+GET     /stocks/report/status_report                    controllers.stock.reports.StockStatusReport.index()
+POST    /stocks/report/status_report                    controllers.stock.reports.StockStatusReport.generate()
+
+# Top N Report
+GET     /stocks/report/topn_report                      controllers.stock.reports.TopNReport.index()
+POST    /stocks/report/topn_report                      controllers.stock.reports.TopNReport.generate()
+
+# Receipt List
+GET     /stocks/report/receipt_list                     controllers.stock.reports.ReceiptList.index()
+POST    /stocks/report/receipt_list                     controllers.stock.reports.ReceiptList.generate()
+
+# Trans Report
+GET     /stocks/report/trans_report                     controllers.stock.reports.TransReport.index()
+POST    /stocks/report/trans_report                     controllers.stock.reports.TransReport.generate()
+
+# Last Transaction Report
+GET     /stocks/report/last_trans_report                controllers.stock.reports.LastTransReport.index()
+POST    /stocks/report/last_trans_report                controllers.stock.reports.LastTransReport.generate()
+
+# Cumulative Report
+GET     /stocks/report/cumulative_report                controllers.stock.reports.CumulativeReport.index()
+POST    /stocks/report/cumulative_report                controllers.stock.reports.CumulativeReport.generate()
+
+# Inventory Report
+GET     /stocks/report/inventory_report                 controllers.stock.reports.InventoryReport.index()
+POST    /stocks/report/inventory_report                 controllers.stock.reports.InventoryReport.generate()
+
+# Profit & Loss Report
+GET     /stocks/report/profit_loss_report               controllers.stock.reports.ProfitLossReport.index()
+POST    /stocks/report/profit_loss_report               controllers.stock.reports.ProfitLossReport.generate()
+
+# Waiting Stocks Report
+GET     /stocks/report/waiting_stocks_report            controllers.stock.reports.WaitingStocksReport.index()
+POST    /stocks/report/waiting_stocks_report            controllers.stock.reports.WaitingStocksReport.generate()
+
+# ------------------------------------------------------------------------------------------------------------------------
+# Order
+# ------------------------------------------------------------------------------------------------------------------------
+# Order Transactions
+GET     /orders/trans                                   controllers.order.Transes.list(rightBind:meta.RightBind)
+POST    /orders/trans                                   controllers.order.Transes.save(rightBind:meta.RightBind)
+GET     /orders/trans/new                               controllers.order.Transes.create(rightBind:meta.RightBind)
+GET     /orders/trans/:id                               controllers.order.Transes.edit(id:Integer, rightBind:meta.RightBind)
+POST    /orders/trans/:id/delete                        controllers.order.Transes.remove(id:Integer, rightBind:meta.RightBind)
+POST    /orders/trans/saveClone                         controllers.order.Transes.saveClone()
+GET     /orders/trans/createClone/:id                   controllers.order.Transes.createClone(id:Integer)
+
+# Trans Sources
+GET     /orders/trans_source                            controllers.order.TransSources.index()
+GET     /orders/trans_sources                           controllers.order.TransSources.list()
+POST    /orders/trans_source                            controllers.order.TransSources.save()
+GET     /orders/trans_source/new                        controllers.order.TransSources.create()
+GET     /orders/trans_source/:id                        controllers.order.TransSources.edit(id:Integer)
+POST    /orders/trans_source/:id/delete                 controllers.order.TransSources.remove(id:Integer)
+GET     /orders/trans_source/get/options                controllers.order.TransSources.options(right:String)
+
+# Trans Approvals
+GET     /orders/trans_approvals                         controllers.order.TransApprovals.index()
+POST    /orders/trans_approvals                         controllers.order.TransApprovals.submit()
+
+# Receipt List
+GET     /orders/report/receipt_list                     controllers.order.reports.ReceiptList.index()
+POST    /orders/report/receipt_list                     controllers.order.reports.ReceiptList.generate()
+
+# Distribution Report
+GET     /orders/report/dist_report                      controllers.order.reports.DistReport.index()
+POST    /orders/report/dist_report                      controllers.order.reports.DistReport.generate()
+
+# ------------------------------------------------------------------------------------------------------------------------
+# Waybill
+# ------------------------------------------------------------------------------------------------------------------------
+# Waybill Transactions
+GET     /waybills/trans                                 controllers.waybill.Transes.list(rightBind:meta.RightBind)
+POST    /waybills/trans                                 controllers.waybill.Transes.save(rightBind:meta.RightBind)
+GET     /waybills/trans/new                             controllers.waybill.Transes.create(rightBind:meta.RightBind)
+GET     /waybills/trans/:id                             controllers.waybill.Transes.edit(id:Integer, rightBind:meta.RightBind)
+POST    /waybills/trans/:id/delete                      controllers.waybill.Transes.remove(id:Integer, rightBind:meta.RightBind)
+POST    /waybills/trans/saveClone                       controllers.waybill.Transes.saveClone()
+GET     /waybills/trans/createClone/:id                 controllers.waybill.Transes.createClone(id:Integer)
+
+# Waybill Sources
+GET     /waybills/trans_source                          controllers.waybill.TransSources.index()
+GET     /waybills/trans_sources                         controllers.waybill.TransSources.list()
+POST    /waybills/trans_source                          controllers.waybill.TransSources.save()
+GET     /waybills/trans_source/new                      controllers.waybill.TransSources.create()
+GET     /waybills/trans_source/:id                      controllers.waybill.TransSources.edit(id:Integer)
+POST    /waybills/trans_source/:id/delete               controllers.waybill.TransSources.remove(id:Integer)
+GET     /waybills/trans_source/get/options              controllers.waybill.TransSources.options(right:String)
+
+# Waybill Approvals
+GET     /waybills/trans_approvals                       controllers.waybill.TransApprovals.index()
+POST    /waybills/trans_approvals                       controllers.waybill.TransApprovals.submit()
+
+# Receipt List
+GET     /waybills/report/receipt_list                   controllers.waybill.reports.ReceiptList.index()
+POST    /waybills/report/receipt_list                   controllers.waybill.reports.ReceiptList.generate()
+
+# Distribution Report
+GET     /waybills/report/dist_report                    controllers.waybill.reports.DistReport.index()
+POST    /waybills/report/dist_report                    controllers.waybill.reports.DistReport.generate()
+
+# ------------------------------------------------------------------------------------------------------------------------
+# Invoice
+# ------------------------------------------------------------------------------------------------------------------------
+# Invoice Transactions
+GET     /invoices/trans                                 controllers.invoice.Transes.list(rightBind:meta.RightBind)
+POST    /invoices/trans                                 controllers.invoice.Transes.save(rightBind:meta.RightBind)
+GET     /invoices/trans/new                             controllers.invoice.Transes.create(rightBind:meta.RightBind)
+GET     /invoices/trans/:id                             controllers.invoice.Transes.edit(id:Integer, rightBind:meta.RightBind)
+POST    /invoices/trans/:id/delete                      controllers.invoice.Transes.remove(id:Integer, rightBind:meta.RightBind)
+POST    /invoices/trans/saveClone                       controllers.invoice.Transes.saveClone()
+GET     /invoices/trans/createClone/:id                 controllers.invoice.Transes.createClone(id:Integer)
+
+# Invoice Sources
+GET     /invoices/trans_source                          controllers.invoice.TransSources.index()
+GET     /invoices/trans_sources                         controllers.invoice.TransSources.list()
+POST    /invoices/trans_source                          controllers.invoice.TransSources.save()
+GET     /invoices/trans_source/new                      controllers.invoice.TransSources.create()
+GET     /invoices/trans_source/:id                      controllers.invoice.TransSources.edit(id:Integer)
+POST    /invoices/trans_source/:id/delete               controllers.invoice.TransSources.remove(id:Integer)
+GET     /invoices/trans_source/get/options              controllers.invoice.TransSources.options(right:String)
+
+# Trans Approvals
+GET     /invoices/trans_approvals                       controllers.invoice.TransApprovals.index()
+POST    /invoices/trans_approvals                       controllers.invoice.TransApprovals.submit()
+
+# Invoice List
+GET     /invoices/report/invoice_list                   controllers.invoice.reports.InvoiceList.index()
+POST    /invoices/report/invoice_list                   controllers.invoice.reports.InvoiceList.generate()
+
+# ------------------------------------------------------------------------------------------------------------------------
+# Safe
+# ------------------------------------------------------------------------------------------------------------------------
+GET     /safes/safe                                     controllers.safe.Safes.index()
+GET     /safes/safes                                    controllers.safe.Safes.list()
+POST    /safes/safe                                     controllers.safe.Safes.save()
+GET     /safes/safe/new                                 controllers.safe.Safes.create()
+GET     /safes/safe/:id                                 controllers.safe.Safes.edit(id:Integer)
+POST    /safes/safe/:id/delete                          controllers.safe.Safes.remove(id:Integer)
+GET     /safes/investigation/:id                        controllers.safe.Safes.investigation(id:Integer)
+GET     /safes/safe/get/options                         controllers.safe.Safes.options(hasBlankOption:Boolean)
+
+# Expenses
+GET     /safes/expense                                  controllers.safe.Expenses.index()
+GET     /safes/expenses                                 controllers.safe.Expenses.list()
+POST    /safes/expense                                  controllers.safe.Expenses.save()
+GET     /safes/expense/new                              controllers.safe.Expenses.create()
+GET     /safes/expense/:id                              controllers.safe.Expenses.edit(id:Integer)
+POST    /safes/expense/:id/delete                       controllers.safe.Expenses.remove(id:Integer)
+GET     /safes/trans_source/get/options                 controllers.safe.TransSources.options(right:String)
+
+# Safe Transactions
+GET     /safes/trans                                    controllers.safe.Transes.list(rightBind:meta.RightBind)
+POST    /safes/trans                                    controllers.safe.Transes.save(rightBind:meta.RightBind)
+GET     /safes/trans/new                                controllers.safe.Transes.create(rightBind:meta.RightBind)
+GET     /safes/trans/:id                                controllers.safe.Transes.edit(id:Integer, rightBind:meta.RightBind)
+POST    /safes/trans/:id/delete                         controllers.safe.Transes.remove(id:Integer, rightBind:meta.RightBind)
+POST    /safes/trans/saveClone                          controllers.safe.Transes.saveClone()
+GET     /safes/trans/createClone/:id                    controllers.safe.Transes.createClone(id:Integer)
+
+# Trans Sources
+GET     /safes/trans_source                             controllers.safe.TransSources.index()
+GET     /safes/trans_sources                            controllers.safe.TransSources.list()
+POST    /safes/trans_source                             controllers.safe.TransSources.save()
+GET     /safes/trans_source/new                         controllers.safe.TransSources.create()
+GET     /safes/trans_source/:id                         controllers.safe.TransSources.edit(id:Integer)
+POST    /safes/trans_source/:id/delete                  controllers.safe.TransSources.remove(id:Integer)
+GET     /safes/expense/get/options                      controllers.safe.Expenses.options()
+
+# Daily Report
+GET     /safes/report/daily_report                      controllers.safe.reports.DailyReport.index()
+POST    /safes/report/daily_report                      controllers.safe.reports.DailyReport.generate()
+
+# Cashbook List
+GET     /safes/report/cashbook_list                     controllers.safe.reports.CashbookList.index()
+POST    /safes/report/cashbook_list                     controllers.safe.reports.CashbookList.generate()
+
+# Transaction List
+GET     /safes/report/safe_trans_list                   controllers.safe.reports.TransactionList.index()
+POST    /safes/report/safe_trans_list                   controllers.safe.reports.TransactionList.generate()
+
+# Balance Report
+GET     /safes/report/balance_report                    controllers.safe.reports.BalanceReport.index()
+POST    /safes/report/balance_report                    controllers.safe.reports.BalanceReport.generate()
+
+# Trans Report
+GET     /safes/report/trans_report                      controllers.safe.reports.TransReport.index()
+POST    /safes/report/trans_report                      controllers.safe.reports.TransReport.generate()
+
+# ------------------------------------------------------------------------------------------------------------------------
+# Bank
+# ------------------------------------------------------------------------------------------------------------------------
+GET     /banks/bank                                     controllers.bank.Banks.index()
+GET     /banks/banks                                    controllers.bank.Banks.list()
+POST    /banks/bank                                     controllers.bank.Banks.save()
+GET     /banks/bank/new                                 controllers.bank.Banks.create()
+GET     /banks/bank/:id                                 controllers.bank.Banks.edit(id:Integer)
+POST    /banks/bank/:id/delete                          controllers.bank.Banks.remove(id:Integer)
+GET     /banks/investigation/:id                        controllers.bank.Banks.investigation(id:Integer)
+GET     /banks/bank/get/options                         controllers.bank.Banks.options(hasBlankOption:Boolean)
+
+# Expenses
+GET     /banks/expense                                  controllers.bank.Expenses.index()
+GET     /banks/expenses                                 controllers.bank.Expenses.list()
+POST    /banks/expense                                  controllers.bank.Expenses.save()
+GET     /banks/expense/new                              controllers.bank.Expenses.create()
+GET     /banks/expense/:id                              controllers.bank.Expenses.edit(id:Integer)
+POST    /banks/expense/:id/delete                       controllers.bank.Expenses.remove(id:Integer)
+GET     /banks/expense/get/options                      controllers.bank.Expenses.options()
+
+# Bank Transactions
+GET     /banks/trans                                    controllers.bank.Transes.list(rightBind:meta.RightBind)
+POST    /banks/trans                                    controllers.bank.Transes.save(rightBind:meta.RightBind)
+GET     /banks/trans/new                                controllers.bank.Transes.create(rightBind:meta.RightBind)
+GET     /banks/trans/:id                                controllers.bank.Transes.edit(id:Integer, rightBind:meta.RightBind)
+POST    /banks/trans/:id/delete                         controllers.bank.Transes.remove(id:Integer, rightBind:meta.RightBind)
+POST    /banks/trans/saveClone                          controllers.bank.Transes.saveClone()
+GET     /banks/trans/createClone/:id                    controllers.bank.Transes.createClone(id:Integer)
+
+# Trans Sources
+GET     /banks/trans_source                             controllers.bank.TransSources.index()
+GET     /banks/trans_sources                            controllers.bank.TransSources.list()
+POST    /banks/trans_source                             controllers.bank.TransSources.save()
+GET     /banks/trans_source/new                         controllers.bank.TransSources.create()
+GET     /banks/trans_source/:id                         controllers.bank.TransSources.edit(id:Integer)
+POST    /banks/trans_source/:id/delete                  controllers.bank.TransSources.remove(id:Integer)
+GET     /banks/trans_source/get/options                 controllers.bank.TransSources.options(right:String)
+
+# Daily Report
+GET     /banks/report/daily_report                      controllers.bank.reports.DailyReport.index()
+POST    /banks/report/daily_report                      controllers.bank.reports.DailyReport.generate()
+
+# Transaction List
+GET     /banks/report/bank_trans_list                   controllers.bank.reports.TransactionList.index()
+POST    /banks/report/bank_trans_list                   controllers.bank.reports.TransactionList.generate()
+
+# Balance Report
+GET     /banks/report/balance_report                    controllers.bank.reports.BalanceReport.index()
+POST    /banks/report/balance_report                    controllers.bank.reports.BalanceReport.generate()
+
+# Trans Report
+GET     /banks/report/trans_report                      controllers.bank.reports.TransReport.index()
+POST    /banks/report/trans_report                      controllers.bank.reports.TransReport.generate()
+
+# ------------------------------------------------------------------------------------------------------------------------
+# Sale
+# ------------------------------------------------------------------------------------------------------------------------
+
+# Campaigns
+GET     /sales/campaign                                 controllers.sale.Campaigns.list()
+POST    /sales/campaign                                 controllers.sale.Campaigns.save()
+GET     /sales/campaign/new                             controllers.sale.Campaigns.create()
+GET     /sales/campaign/:id                             controllers.sale.Campaigns.edit(id:Integer)
+POST    /sales/campaign/:id/delete                      controllers.sale.Campaigns.remove(id:Integer)
+
+# Sellers
+GET     /sales/seller                                   controllers.sale.Sellers.index()
+GET     /sales/sellers                                  controllers.sale.Sellers.list()
+POST    /sales/seller                                   controllers.sale.Sellers.save()
+GET     /sales/seller/new                               controllers.sale.Sellers.create()
+GET     /sales/seller/:id                               controllers.sale.Sellers.edit(id:Integer)
+POST    /sales/seller/:id/delete                        controllers.sale.Sellers.remove(id:Integer)
+GET     /sales/seller/get/options                       controllers.sale.Sellers.options()
+
+# Selling Report
+GET     /sales/report/selling_report                    controllers.sale.reports.SellingReport.index()
+POST    /sales/report/selling_report                    controllers.sale.reports.SellingReport.generate()
+
+# ------------------------------------------------------------------------------------------------------------------------
+# Global
+# ------------------------------------------------------------------------------------------------------------------------
+# Private Codes
+GET     /globals/private_code                           controllers.global.PrivateCodes.index()
+POST    /globals/private_code                           controllers.global.PrivateCodes.save()
+GET     /globals/private_code/:id                       controllers.global.PrivateCodes.edit(id:Integer)
+GET     /globals/private_code/:id/:target/:op/paste     controllers.global.PrivateCodes.paste(id:Integer, target:Integer, op:Int)
+GET     /globals/private_code/:id/new                   controllers.global.PrivateCodes.create(id:Integer)
+POST    /globals/private_code/:id/delete                controllers.global.PrivateCodes.remove(id:Integer)
+
+# Trans Points
+GET     /globals/trans_point                            controllers.global.TransPoints.index()
+POST    /globals/trans_point                            controllers.global.TransPoints.save()
+GET     /globals/trans_point/:id                        controllers.global.TransPoints.edit(id:Integer)
+GET     /globals/trans_point/:id/:target/:op/paste      controllers.global.TransPoints.paste(id:Integer, target:Integer, op:Int)
+GET     /globals/trans_point/:id/new                    controllers.global.TransPoints.create(id:Integer)
+POST    /globals/trans_point/:id/delete                 controllers.global.TransPoints.remove(id:Integer)
+
+# Currency
+GET     /globals/currency                               controllers.global.Currencies.index()
+GET     /globals/currencies                             controllers.global.Currencies.list()
+POST    /globals/currency                               controllers.global.Currencies.save()
+GET     /globals/currency/new                           controllers.global.Currencies.create()
+GET     /globals/currency/:id                           controllers.global.Currencies.edit(id:Integer)
+POST    /globals/currency/:id/delete                    controllers.global.Currencies.remove(id:Integer)
+
+# Currency Rate
+GET     /globals/currency_rate                          controllers.global.CurrencyRates.list()
+POST    /globals/currency_rate                          controllers.global.CurrencyRates.save()
+GET     /globals/currency_rate/new                      controllers.global.CurrencyRates.create()
+GET     /globals/currency_rate/:id                      controllers.global.CurrencyRates.edit(id:Integer)
+POST    /globals/currency_rate/:id/delete               controllers.global.CurrencyRates.remove(id:Integer)
+GET     /globals/currency_rate/pull/tcmb_exc            controllers.global.CurrencyRates.pullTCMBExcange()
+GET     /globals/currency_rate/pull/tcmb_eff            controllers.global.CurrencyRates.pullTCMBEffective()
+
+# Profile
+GET     /globals/profile                                controllers.global.Profiles.list()
+POST    /globals/profile                                controllers.global.Profiles.save()
+GET     /globals/profile/new                            controllers.global.Profiles.create()
+GET     /globals/profile/:id                            controllers.global.Profiles.edit(id:Integer)
+POST    /globals/profile/:id/delete                     controllers.global.Profiles.remove(id:Integer)
+POST    /globals/profile/saveClone                      controllers.global.Profiles.saveClone()
+GET     /globals/profile/createClone/:id                controllers.global.Profiles.createClone(id:Integer)
+
+POST    /globals/print                                  controllers.admin.Documents.printDocument()
+GET     /globals/print/show/:id/:right                  controllers.admin.Documents.showPrintForm(id:Integer, right:String)
+
+# ------------------------------------------------------------------------------------------------------------------------
+# Admin
+# ------------------------------------------------------------------------------------------------------------------------
+GET     /admins/user                                    controllers.admin.Users.list()
+POST    /admins/user                                    controllers.admin.Users.save()
+GET     /admins/user/new                                controllers.admin.Users.create()
+GET     /admins/user/:id                                controllers.admin.Users.edit(id:Integer)
+POST    /admins/user/:id/delete                         controllers.admin.Users.remove(id:Integer)
+POST    /admins/user/saveClone                          controllers.admin.Users.saveClone()
+GET     /admins/user/createClone/:id                    controllers.admin.Users.createClone(id:Integer)
+
+POST    /admins/user_restricted                         controllers.admin.Users.saveRestricted()
+GET     /admins/user_restricted                         controllers.admin.Users.editRestricted()
+
+# User Group
+GET     /admins/user_group                              controllers.admin.UserGroups.list()
+POST    /admins/user_group                              controllers.admin.UserGroups.save()
+GET     /admins/user_group/new                          controllers.admin.UserGroups.create()
+GET     /admins/user_group/:id                          controllers.admin.UserGroups.edit(id:Integer)
+POST    /admins/user_group/:id/delete                   controllers.admin.UserGroups.remove(id:Integer)
+
+# User Role
+GET     /admins/user_role                               controllers.admin.UserRoles.list()
+POST    /admins/user_role                               controllers.admin.UserRoles.save()
+GET     /admins/user_role/new                           controllers.admin.UserRoles.create()
+GET     /admins/user_role/:id                           controllers.admin.UserRoles.edit(id:Integer)
+POST    /admins/user_role/:id/delete                    controllers.admin.UserRoles.remove(id:Integer)
+
+# Workspace
+GET     /workspace/list                                 controllers.Application.workspaces()
+GET     /admins/workspace                               controllers.admin.Workspaces.list()
+POST    /admins/workspace                               controllers.admin.Workspaces.save()
+GET     /admins/workspace/new                           controllers.admin.Workspaces.create()
+GET     /admins/workspace/:id                           controllers.admin.Workspaces.edit(id:Integer)
+POST    /admins/workspace/:id/delete                    controllers.admin.Workspaces.remove(id:Integer)
+
+# Data Transfer
+GET     /admins/data_transer/ws2ws/form                 controllers.admin.Ws2WsDataTransfers.show()
+POST    /admins/data_transer/ws2ws/transfer             controllers.admin.Ws2WsDataTransfers.transfer()
+
+# Setting
+POST    /admins/setting                                 controllers.admin.Settings.save()
+GET     /admins/setting                                 controllers.admin.Settings.edit()
+
+# User Audit
+GET     /admins/user_audit                              controllers.admin.UserAudits.list()
+
+# Document
+GET     /admins/document                                controllers.admin.Documents.list()
+POST    /admins/document                                controllers.admin.Documents.save()
+GET     /admins/document/new/:module                    controllers.admin.Documents.create(module: String)
+GET     /admins/document/new/:module/:param             controllers.admin.Documents.screate(module: String, param: String)
+GET     /admins/document/:id                            controllers.admin.Documents.edit(id:Integer)
+POST    /admins/document/:id/delete                     controllers.admin.Documents.remove(id:Integer)
+POST    /admins/document/saveClone                      controllers.admin.Documents.saveClone()
+GET     /admins/document/createClone/:id                controllers.admin.Documents.createClone(id:Integer)
+
+POST    /admins/document/ei/import                      controllers.admin.Documents.imbort()
+GET     /admins/document/ei/export                      controllers.admin.Documents.export()
+
+# Document Target
+GET     /admins/document_target                         controllers.admin.DocumentTargets.index()
+GET     /admins/document_targets                        controllers.admin.DocumentTargets.list()
+POST    /admins/document_target                         controllers.admin.DocumentTargets.save()
+GET     /admins/document_target/new                     controllers.admin.DocumentTargets.create()
+GET     /admins/document_target/:id                     controllers.admin.DocumentTargets.edit(id:Integer)
+POST    /admins/document_target/:id/delete              controllers.admin.DocumentTargets.remove(id:Integer)
+
+# Extra Fields For Contact
+GET     /admins/extra_fields/contact                    controllers.admin.ExtraFieldsForContacts.index()
+GET     /admins/extra_fields/contacts                   controllers.admin.ExtraFieldsForContacts.list()
+POST    /admins/extra_fields/contact                    controllers.admin.ExtraFieldsForContacts.save()
+GET     /admins/extra_fields/contact/:id                controllers.admin.ExtraFieldsForContacts.edit(id:Integer)
+
+# Extra Fields For Stock
+GET     /admins/extra_fields/stock                      controllers.admin.ExtraFieldsForStocks.index()
+GET     /admins/extra_fields/stocks                     controllers.admin.ExtraFieldsForStocks.list()
+POST    /admins/extra_fields/stock                      controllers.admin.ExtraFieldsForStocks.save()
+GET     /admins/extra_fields/stock/:id                  controllers.admin.ExtraFieldsForStocks.edit(id:Integer)
+
+# ------------------------------------------------------------------------------------------------------------------------
+# Autocomplete routing
+# ------------------------------------------------------------------------------------------------------------------------
+POST    /as/autocomplete/contact                        controllers.AjaxServices.autocompleteContact(q ?= "", d ?= "", choice ?= "")
+POST    /as/autocomplete/stock                          controllers.AjaxServices.autocompleteStock(q ?= "", d ?= "", c:Integer)
+
+GET     /as/get/last_contact_code                       controllers.AjaxServices.getLastContactCode(q ?= "")
+GET     /as/get/last_stock_code                         controllers.AjaxServices.getLastStockCode(q ?= "")
+
+GET     /as/get/exchange_rates                          controllers.AjaxServices.getExchangeRates()
+GET     /as/get/simple_data                             controllers.AjaxServices.getSimpleData()
+GET     /as/get/last_trans_no                           controllers.AjaxServices.findLastTransNo(rightBind:meta.RightBind)
+
+GET     /as/find_stock/:barcode/:contactId              controllers.AjaxServices.findStockByBarcode(barcode, contactId:Integer)
+GET     /as/find_cost_factor/:id                        controllers.AjaxServices.findCostFactorById(id)
+
+GET     /as/get_private_code_tree                       controllers.AjaxServices.getPrivateCodeTree()
+GET     /as/get_trans_point_tree                        controllers.AjaxServices.getTransPointTree()
+GET     /as/get_stock_category_tree                     controllers.AjaxServices.getStockCategoryTree()
+
+GET     /as/pservice/check_user                         controllers.AjaxServices.checkUserForPService(username ?= "", password ?= "")
+
+# ------------------------------------------------------------------------------------------------------------------------
+# Javascript routing
+# ------------------------------------------------------------------------------------------------------------------------
+GET     /assets/javascripts/routes                      controllers.JSRouter.jsRoutes()
+
+# ------------------------------------------------------------------------------------------------------------------------
+# Map static resources from the /public folder to the /assets URL path
+# ------------------------------------------------------------------------------------------------------------------------
+GET     /assets/*file                                   controllers.Assets.at(path="/public", file)

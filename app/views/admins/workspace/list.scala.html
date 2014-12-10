@@ -1,0 +1,11 @@
+@(currentPage: meta.PageExtend[AdminWorkspace])
+
+@tools.templates.basic_list(
+	currentPage = currentPage,
+
+	label = Messages("workspace"),
+	right = enums.Right.CALISMA_ALANI,
+	link = admin.routes.Workspaces.list().url,
+	
+	is_admin_page = true
+)

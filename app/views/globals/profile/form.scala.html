@@ -1,0 +1,251 @@
+@(_form: Form[models.temporal.ProfileData])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.basic_form() {
+
+	@tools.imports.forms_header(
+		_form("id").value,
+		enums.Right.GNEL_PROFIL_TANITIMI,
+		global.routes.Profiles.remove(if(_form("id").value != null && ! _form("id").value.isEmpty()) _form("id").value.toInt else -1)
+	)
+
+	@helper.form(action = global.routes.Profiles.save, 'class-> "form-horizontal zell", 'id-> "mainFieldsForm") {
+
+		@tools.imports.base_hidden_fields(_form)
+
+		<fieldset>
+
+			@inputText(_form("name"),
+				'_label -> Messages("name"),
+				'class -> "input-medium",
+				'maxlength -> "20"
+			)
+
+			@inputText(_form("description"),
+				'_label -> Messages("description"),
+				'class -> "input-xlarge",
+				'maxlength -> "30"
+			)
+
+			@select(_form("isActive"),
+				options(Options.yesno),
+				'class -> "input-small",
+				'_label -> Messages("is_active")
+			)
+
+		</fieldset>
+
+		<table class="property_table">
+			<tbody>
+				<tr>
+					<td colspan="3" class="row_title"><h4>@Messages("stock")</h4></td>
+				</tr>
+				<tr>
+					<td>@select(_form("stok_depot.id"), options(StockDepot.options), '_label -> Messages("depot"))</td>
+					<td>@Messages("helpers.stock.depot")</td>
+				</tr>
+				<tr>
+					<td>@select(_form("stok_unit"), options(StockUnit.options), '_label -> Messages("unit"))</td>
+					<td>@Messages("helpers.stock.unit")</td>
+				</tr>
+				<tr>
+					<td>@inputText(_form("stok_taxRate"), '_label -> Messages("vat"), 'class -> "rate", 'maxlength -> "5")</td>
+					<td>@Messages("helpers.stock.taxRate")</td>
+				</tr>
+				<tr>
+					<td>@select(_form("stok_roundingDigits"), options("0"->"0", "1"->"1", "2"->"2"), '_label -> Messages("rounding_digits"), '_default -> Messages("choose"))</td>
+					<td>@Messages("helpers.stock.roundingDigits")</td>
+				</tr>
+				<tr>
+					<td>@select(_form("stok_isTaxInclude"), options(Options.taxStatus), '_label -> Messages("tax_status"))</td>
+					<td>@Messages("helpers.stock.isTaxInclude")</td>
+				</tr>
+				<tr>
+					<td>@select(_form("stok_isRowCombining"), options(Options.yesno), '_label -> Messages("row_combining"))</td>
+					<td>@Messages("helpers.general.show.row_combining")</td>
+				</tr>
+				<tr>
+					<td>@select(_form("stok_isSearchFormShowed"), options(Options.yesno), '_label -> Messages("search_panel"))</td>
+					<td>@Messages("helpers.general.show.search_panel")</td>
+				</tr>
+				<tr>
+					<td>@select(_form("stok_hasLimitControls"), options(Options.yesno), '_label -> Messages("has.stock.limit.control.active"))</td>
+					<td>@Messages("helpers.stock.checkLimits")</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="control-group ">
+							<label class="control-label">@Messages("visibility.of.fields")</label>
+							@for((key, value) <- meta.SpecialFields.stock){
+								<div class="controls">
+									<input class="case" type="checkbox" name='stok_specialFields["@key"]'
+										@if(_form(("stok_specialFields[" + key + "]")).value.toString.equals("true")) { checked }><span style="margin-left: 5px">@Messages("vof." + key)</span>
+									</input>
+								</div>
+							}
+						</div>
+					</td>
+					<td>@Messages("helpers.general.vof")</td>
+				</tr>
+
+				<tr>
+					<td colspan="3" class="row_title"><h4>@Messages("order")</h4></td>
+				</tr>
+				<tr>
+					<td>@select(_form("sprs_hasPrices"), options(Options.yesno), '_label -> Messages("has_prices"))</td>
+					<td>@Messages("helpers.order.hasPrices")</td>
+				</tr>
+				<tr>
+					<td>@select(_form("sprs_approvalType"), options(enums.TransApprovalType.options()), '_label -> Messages("approval_type"))</td>
+					<td>@Messages("helpers.order.approval.contact")</td>
+				</tr>
+				<tr>
+					<td>@select(_form("sprs_isSearchFormShowed"), options(Options.yesno), '_label -> Messages("search_panel"))</td>
+					<td>@Messages("helpers.general.show.search_panel")</td>
+				</tr>
+
+				<tr>
+					<td colspan="3" class="row_title"><h4>@Messages("waybill")</h4></td>
+				</tr>
+				<tr>
+					<td>@select(_form("irsl_hasPrices"), options(Options.yesno), '_label -> Messages("has_prices"))</td>
+					<td>@Messages("helpers.waybill.hasPrices")</td>
+				</tr>
+				<tr>
+					<td>@select(_form("irsl_approvalType"), options(enums.TransApprovalType.options()), '_label -> Messages("approval_type"))</td>
+					<td>@Messages("helpers.waybill.approval.contact")</td>
+				</tr>
+				<tr>
+					<td>@select(_form("irsl_isSearchFormShowed"), options(Options.yesno), '_label -> Messages("search_panel"))</td>
+					<td>@Messages("helpers.general.show.search_panel")</td>
+				</tr>
+
+				<tr>
+					<td colspan="3" class="row_title"><h4>@Messages("invoice")</h4></td>
+				</tr>
+				<tr>
+					<td>@select(_form("fatr_isCash"), options(Options.yesno), '_label -> Messages("is_cash"))</td>
+					<td>@Messages("helpers.invoice.isCash")</td>
+				</tr>
+				<tr>
+					<td>@select(_form("fatr_withholding"), options(Options.withholdingRates), '_label -> Messages("withholding.rate"))</td>
+					<td>@Messages("helpers.invoice.withholding")</td>
+				</tr>
+				<tr>
+					<td>@select(_form("fatr_isSearchFormShowed"), options(Options.yesno), '_label -> Messages("search_panel"))</td>
+					<td>@Messages("helpers.general.show.search_panel")</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="control-group ">
+							<label class="control-label">@Messages("visibility.of.fields")</label>
+							@for((key, value) <- meta.SpecialFields.invoice){
+								<div class="controls">
+									<input class="case" type="checkbox" name='fatr_specialFields["@key"]' 
+										@if(_form(("fatr_specialFields[" + key + "]")).value.toString.equals("true")) { checked }><span style="margin-left: 5px">@Messages("vof." + key)</span>
+									</input>
+								</div>
+							}
+						</div>
+					</td>
+					<td>@Messages("helpers.general.vof")</td>
+				</tr>
+						
+				<tr>
+					<td colspan="3" class="row_title"><h4>@Messages("contact")</h4></td>
+				</tr>
+				<tr>
+					<td>@select(_form("cari_hasCategoryControls"), options(Options.yesno), '_label -> Messages("has.contact.category.control.active"))</td>
+					<td>@Messages("helpers.contact.checkLimits")</td>
+				</tr>
+				<tr>
+					<td>@select(_form("cari_isSearchFormShowed"), options(Options.yesno), '_label -> Messages("search_panel"))</td>
+					<td>@Messages("helpers.general.show.search_panel")</td>
+				</tr>
+						
+				<tr>
+					<td colspan="3" class="row_title"><h4>@Messages("chqbll")</h4></td>
+				</tr>
+				<tr>
+					<td>@select(_form("cksn_hasSuretyFields"), options(Options.yesno), '_label -> Messages("has.chqbll.surety.fields"))</td>
+					<td>@Messages("helpers.chqbll.suretyFields")</td>
+				</tr>
+				<tr>
+					<td>@select(_form("cksn_isSearchFormShowed"), options(Options.yesno), '_label -> Messages("search_panel"))</td>
+					<td>@Messages("helpers.general.show.search_panel")</td>
+				</tr>
+
+				<tr>
+					<td colspan="3" class="row_title"><h4>@Messages("safe")</h4></td>
+				</tr>
+				<tr>
+					<td>@tools.dropdowns.safe(_form, false, hasAddNewButton=false)</td>
+					<td>Hareket formlarında bulunan Kasa alanı için ön tanımlı olarak bu değer gelir.</td>
+				</tr>
+				<tr>
+					<td>@select(_form("kasa_isSearchFormShowed"), options(Options.yesno), '_label -> (Messages("safe") + " " + Messages("search_panel")))</td>
+					<td>@Messages("helpers.general.show.search_panel")</td>
+				</tr>
+
+				<tr>
+					<td colspan="3" class="row_title"><h4>@Messages("bank")</h4></td>
+				</tr>
+				<tr>
+					<td>@select(_form("bank_isSearchFormShowed"), options(Options.yesno), '_label -> (Messages("bank") + " " + Messages("search_panel")))</td>
+					<td>@Messages("helpers.general.show.search_panel")</td>
+				</tr>
+
+				<tr>
+					<td colspan="3" class="row_title"><h4>@Messages("general")</h4></td>
+				</tr>
+				<tr>
+					<td>@select(_form("gnel_receiptNoRnwType"), options(Options.receiptNoRnwType()), '_label -> Messages("rcpno.rnw.type"))</td>
+					<td>@Messages("helpers.general.receiptNoRnwType")</td>
+				</tr>
+				<tr>
+					<td>@select(_form("gnel_docNoIncType"), options(Options.docNoIncType()), '_label -> Messages("docno.inc.type"))</td>
+					<td>@Messages("helpers.general.docNoIncType")</td>
+				</tr>
+				<tr>
+					<td>@select(_form("gnel_pageRowNumber"), options("23"->"23", "24"->"24", "25"->"25", "26"->"26", "27"->"27", "28"->"28", "29"->"29", "30"->"30", "31"->"31", "32"->"32", "50"->"50", "100"->"100"), '_label -> Messages("page_row_number"))</td>
+					<td>@Messages("helpers.general.rowNumber")</td>
+				</tr>
+				<tr>
+					<td>@select(_form("gnel_listingType"), options(enums.TransListingType.options()), '_label -> Messages("listing_type"))</td>
+					<td>@Messages("helpers.general.trans.listingType")</td>
+				</tr>
+				<tr>
+					<td>@select(_form("gnel_continuouslyRecording"), options(Options.yesno), '_label -> Messages("continuously_recording"))</td>
+					<td>@Messages("has.continuously.recording")</td>
+				</tr>
+				<tr>
+					<td>@select(_form("gnel_pennyDigitNumber"), options("0"->"0", "1"->"1", "2"->"2", "3"->"3", "4"->"4", "5"->"5", "6"->"6"), '_label -> Messages("penny_digit_number"))</td>
+					<td>@Messages("helpers.general.pennyDigitNumber")</td>
+				</tr>
+				<tr>
+					<td>@select(_form("gnel_hasExchangeSupport"), options(Options.yesno), '_label -> Messages("exchange_support"))</td>
+					<td>@Messages("has.exchange.support")</td>
+				</tr>
+				<tr>
+					<td>@select(_form("gnel_excCode"), options(Options.currencies), '_label -> Messages("currency"), '_default -> Messages("choose"))</td>
+					<td>@Messages("helpers.general.excCode")</td>
+				</tr>
+				<tr>
+					<td>@select(_form("gnel_printAttitude"), options(enums.PrintAttitude.options()), '_label -> Messages("print_attitude"))</td>
+					<td>@Messages("print.attitude.info")</td>
+				</tr>
+				<tr>
+					<td>@select(_form("gnel_reportUnit"), options(enums.ReportUnit.values().toSeq.map(_.toString)), '_label -> Messages("report_unit"))</td>
+					<td>@Messages("helpers.general.reportUnit")</td>
+				</tr>
+
+			</tbody>
+		</table>
+
+		@tools.templates.form_footer_bar(enums.Right.GNEL_PROFIL_TANITIMI, _form("id").value)
+
+	}
+
+}

@@ -1,0 +1,13 @@
+@(form: Form[_], direction: String)
+
+@standart(form, ContactTransSource.crossOptions(direction), enums.Right.CARI_ISLEM_KAYNAKLARI, "refContactTransSource", Messages("trans.source")) {
+
+	<script type="text/javascript">
+		function setSimpleControllerFor_refContactTransSource() {
+			simple_combo_type = 2;
+			simple_selector = "#refContactTransSource_id";
+			simple_controller = jsRoutes.controllers.contact.TransSources;
+		}
+	</script>
+
+}

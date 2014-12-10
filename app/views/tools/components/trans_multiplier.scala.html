@@ -1,0 +1,52 @@
+@(_form: Form[models.temporal.TransMultiplier], right: enums.Right)
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+<form method="POST" action ="/@(right.module.name)s/trans/saveClone" class="form-horizontal" id="multiplierForm">
+
+	<input type="hidden" name="id" id="id" value='@_form("id").value' />
+	<input type="hidden" name="right" id="right" value='@right' />
+
+ 	@right.module match {
+        case enums.Module.safe => {
+        	@tools.dropdowns.safe(_form, false, hasAddNewButton=false)
+		}
+        case enums.Module.bank => {
+			@tools.dropdowns.bank(_form, false, hasAddNewButton=false)
+        }
+        case _ => {
+	        @if(! right.equals(enums.Right.STOK_TRANSFER_FISI)) {
+	        	@tools.components.autocomplete_contact(_form, direction=right.transType.toString())
+	        }
+		}
+    }
+
+	@inputText(_form("transNo"),
+		'_label -> Messages("trans.no"),
+		'class -> "input-medium",
+		'maxlength -> "20"
+	)
+
+	@inputText(_form("transDate"),
+		'_label -> Messages("date"),
+		'class -> "input-small date"
+	)
+
+	@if(enums.Module.stock.equals(right.module) || enums.Module.invoice.equals(right.module) || enums.Module.order.equals(right.module) || enums.Module.waybill.equals(right.module)) {
+		@tools.dropdowns.stock_depot(_form, false, hasAddNewButton=false)
+
+		@if(right.equals(enums.Right.STOK_TRANSFER_FISI)) {
+			@tools.dropdowns.stock_ref_depot(_form, hasAddNewButton=false)
+		} else {
+			@tools.dropdowns.sale_seller(_form, hasAddNewButton=false)
+		}
+	}
+
+	@inputText(_form("description"),
+		'_label -> Messages("description"),
+		'class -> "input-xlarge",
+		'maxlength -> "100"
+	)
+
+</form>

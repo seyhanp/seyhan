@@ -1,0 +1,18 @@
+@(form: Form[_], rightBind: meta.RightBind = null, hasAddNewButton:Boolean = true)
+
+@standart(form, 
+			BankTransSource.options(if(rightBind != null) rightBind.value else null), 
+			enums.Right.BANK_ISLEM_KAYNAKLARI, 
+			"transSource", 
+			Messages("trans.source"),
+			hasAddNewButton=hasAddNewButton) {
+
+	<script type="text/javascript">
+		function setSimpleControllerFor_transSource() {
+			simple_combo_type = 2;
+			simple_selector = "#transSource_id";
+			simple_controller = jsRoutes.controllers.bank.TransSources;
+		}
+	</script>
+
+}

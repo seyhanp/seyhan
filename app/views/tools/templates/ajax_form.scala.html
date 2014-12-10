@@ -1,0 +1,46 @@
+@(
+  right: enums.Right,
+  saveAction: play.api.mvc.Call,
+  title: String = null
+)
+
+<div id="modal-form" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true" tabindex="-1">×</button>
+		<div id="modal-title">
+			<h4>@if(title != null) {@title} else {@Messages(right.key)}</h4>
+		</div>
+	</div>
+
+	<div id="elseResLabel" class="alert alert-error" style="display: none;">
+		<strong>@Messages("alert"): </strong> @Messages("you.can.edit.only.yours")
+	</div>
+
+	<div class="modal-body">
+		@helper.form(action = saveAction, 'class-> "form-horizontal", 'id -> "itemForm") {
+			@if(global.Profiles.chosen().gnel_continuouslyRecording) {
+				<div id="sub_successPanel" style="display: none">
+					<div class="alert alert-success">
+						<a class="close" data-dismiss="alert" onclick="$('#sub_successPanel').html('')">x</a>
+						<strong>@Messages("info"): </strong> @Messages("saved", Messages(right.key))
+					</div>
+				</div>
+			}
+			<div id="form_fields"></div>
+		}
+	</div>
+
+	<div class="modal-footer">
+		<button id="submitSaveBtn" class="btn btn-primary" onclick="save()">@Messages("save")</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true" onclick="if(conRecording) list();">@Messages("close")</button>
+	</div>
+
+	<script type="text/javascript">	
+		var userid = @utils.CacheUtils.getUser().id;
+		var username = '@utils.CacheUtils.getUser().username';
+		var editingLimit = '@utils.CacheUtils.getUserGroup().editingLimit';
+		var conRecording = @global.Profiles.chosen().gnel_continuouslyRecording;
+	</script>
+	
+</div>

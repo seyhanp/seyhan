@@ -1,0 +1,91 @@
+@(_form: Form[BankTrans], rightBind:meta.RightBind)
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@isNotOpeningTrans = @{
+	! rightBind.value.equals(enums.Right.BANK_ACILIS_ISLEMI)
+}
+
+@tools.templates.trans_form() {
+
+	@tools.imports.forms_header(
+		_form("id").value,
+		rightBind.value,
+		bank.routes.Transes.remove(if(_form("id").value != null && ! _form("id").value.isEmpty()) _form("id").value.toInt else -1, rightBind)
+	)
+
+	@helper.form(action = bank.routes.Transes.save(rightBind), 'class-> "form-horizontal zell", 'id-> "mainFieldsForm") {
+
+		@tools.imports.base_hidden_fields(_form, rightBind.value)
+
+		<fieldset>
+			@inputText(_form("receiptNo"),
+				'_label -> Messages("receipt_no"),
+				'class -> "input-small number",
+				'maxlength -> "9",
+				'readonly -> "readonly"
+			)
+
+			@tools.dropdowns.bank(_form, false)
+
+			@inputText(_form("transDate"),
+				'_label -> Messages("date"),
+				'class -> "input-small date"
+			)
+
+			@inputText(_form("amount"),
+				'_label -> Messages("amount"),
+				'class -> "input-small currency",
+				'maxlength -> "10"
+			)
+
+			@tools.components.exchange_rate(_form)
+
+			@if(! isNotOpeningTrans) {
+				@select(_form("transType"),
+					options(enums.TransType.contactOptions),
+					'class -> "input-medium",
+					'_label -> Messages("dir")
+				)
+			}
+
+			@if(isNotOpeningTrans) {
+				@tools.components.docno_input(_form, rightBind)
+				@tools.dropdowns.bank_trans_source(_form, rightBind)
+				@tools.components.trans_point_select(_form)
+				@tools.components.private_code_select(_form)
+	
+				<div class="row-fluid">
+					<div class="span5">
+						@tools.dropdowns.bank_expense(_form)
+					</div>
+					<div class="span4">
+						@inputText(_form("expenseAmount"),
+							'_label -> Messages("expense.amount"),
+							'class -> "input-small currency",
+							'maxlength -> "10"
+						)
+					</div>
+				</div>
+			}
+
+			@inputText(_form("description"),
+				'_label -> Messages("description"),
+				'class -> "input-xxlarge",
+				'maxlength -> "100"
+			)
+
+			@if(isNotOpeningTrans) {
+				@tools.components.ref_account_block(_form, rightBind.value.reverseTransType.toString())
+			} else {
+				@tools.components.exchange_block(rightBind.value.reverseTransType.toString())
+			}
+
+		</fieldset>
+
+		@tools.templates.form_footer_bar(rightBind.value, _form("id").value)
+
+	}
+
+}

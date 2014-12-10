@@ -1,0 +1,29 @@
+@(_form: Form[contact.reports.LastTransReport.Parameter])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.report_form(contact.reports.routes.LastTransReport.generate(),enums.Right.CARI_SON_ISLEM_RAPORU) {
+
+	@tools.components.autocomplete_contact(_form)
+
+	@select(_form("transType"),
+		options(enums.TransType.contactOptions),
+		'class -> "input-medium",
+		'_label -> Messages("dir"),
+		'_default -> Messages("choose")
+	)
+
+	@tools.components.date_range(_form)
+
+	@tools.dropdowns.contact_trans_source(_form, hasAddNewButton=false)
+	@tools.dropdowns.contact_category(_form, hasAddNewButton=false)
+	@tools.dropdowns.sale_seller(_form, hasAddNewButton=false)
+
+	@for(aef <- models.AdminExtraFields.listAll(enums.Module.contact.name())) {
+		@tools.dropdowns.contact_extra_field(_form, aef.id, aef.idno, aef.name, aef.isRequired, hasAddNewButton=false)
+	}
+
+	@tools.components.trans_point_select(_form)
+
+}

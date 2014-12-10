@@ -1,0 +1,183 @@
+@(_form: Form[models.search.OrderTransSearchParam], details: List[models.temporal.ReceiptListModel])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.basic_form(ScriptBlock) {
+	@helper.form(action = invoice.routes.TransApprovals.submit, 'class-> "form-horizontal zell", 'id -> "invoiceApprovalForm") {
+
+		<input type="hidden" id="formAction" name="formAction" />
+
+		<div id="criteriaSection">
+
+			<h4>@Messages("enum.FATR_KAPAMA_ISLEMI")</h4>
+			<div class="zell">
+				<div class="row-fluid">
+					<div class="span6">
+						@select(_form("transType"),
+							options(Options.transSources(enums.Module.invoice, false)),
+							'class -> "input-medium",
+							'_label -> Messages("trans.type")
+						)
+					
+						@select(_form("status"),
+							options(enums.TransStatus.optionsWithoutCancelled),
+							'class -> "input-medium",
+							'_label -> Messages("status")
+						)
+					
+						@tools.components.autocomplete_contact(_form, name="refContact")
+						@tools.dropdowns.sale_seller(_form, hasAddNewButton=false)
+						@tools.components.date_range(_form)
+					</div>
+			
+					<div class="span6">
+						@inputText(_form("receiptNo"),
+							'_label -> Messages("receipt_no"),
+							'class -> "input-small number",
+							'maxlength -> "9"
+						)
+
+						@inputText(_form("transNo"),
+							'_label -> Messages("trans.no"),
+							'class -> "input-medium",
+							'maxlength -> "20"
+						)
+
+						@tools.components.trans_point_select(_form)
+					
+						@tools.components.private_code_select(_form)
+					
+						@select(_form("rowNumber"),
+							options("25"->"25", "50"->"50", "100"->"100"),
+							'class -> "input-small",
+							'_label -> Messages("page_row_number")
+						)
+					</div>
+					<div class="span12">
+						<p>
+							<div class="pagination-centered" style="padding-top:8px">
+								<a id="appsubSearch" value="search" class="btn">
+									<i class="icon-search"></i> @Messages("search")
+								</a>
+							</div>
+						</p>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		@if(flash.containsKey("success")) {
+			<div id="successPanel">
+				<div class="alert alert-success">
+					<a class="close" data-dismiss="alert" onclick="$('#successPanel').html('')">x</a>
+					<strong>@Messages("info"): </strong> @flash.get("success")
+				</div>
+			</div>
+		}
+		
+		@if(flash.containsKey("error")) {
+			<div id="errorPanel">
+				<div class="alert alert-error">
+					<a class="close" data-dismiss="alert" onclick="$('#errorPanel').html('')">x</a>
+					<strong>@Messages("error"): </strong> @flash.get("error")
+				</div>
+			</div>
+		}
+
+		<div class="row-fluid">
+			<h4 class="pull-left">@Messages("results")</h4>
+	
+			<p class="pull-right" style="margin-top: 10px">
+				<button type="submit" class="btn btn-small btn-success mact" disabled="disabled">@Messages("invoice.close")</button>
+			</p>
+		</div>
+
+		<table style="width:100%">
+			<thead>
+				<tr>
+					<th style="width: 5%"><input type="checkbox" id="selectall" checked="false"/></th>
+					<th style="width: 8%">@Messages("receipt_no")</th>
+					<th style="width:10%">@Messages("trans.no")</th>
+					<th style="width:25%">@Messages("contact")</th>
+					<th style="width: 8%">@Messages("date")</th>
+					<th style="width:10%">@Messages("amount")</th>
+					@if(global.Profiles.chosen().gnel_hasExchangeSupport) {
+						<th style="width: 5%">@Messages("currency")</th>
+					}
+					<th style="width:25%">@Messages("description")</th>
+				</tr>
+			</thead>
+			<tbody>
+				@for((detail, index) <- details.zipWithIndex) {
+					@if(detail.id != null) {
+						<tr>
+							<input type="hidden" id="details[@index]_id" name="details[@index].id" value="@detail.id" />
+							<input type="hidden" id="details[@index]_right" name="details[@index].right" value="@detail.right" />
+							<input type="hidden" id="details[@index]_status" name="details[@index].status" value="@detail.status" />
+							<input type="hidden" id="details[@index]_contactId" name="details[@index].contactId" value="@detail.contactId" />
+		
+							@if(! detail.status.name.equals("Completed")) {
+								<td style="text-align: center;"><input class="case" type="checkbox" id="details[@index]_isSelected" name="details[@index].isSelected" /></td>
+							} else {<td/>}
+							<td style="text-align: right;">@detail.receiptNo</td>
+							<td>@detail.transNo</td>
+							@if(! detail.status.name.equals("Completed")) {
+								<td><a class="contactRowChooser" href="#" data-index="@index">@detail.contactName</a></td>
+							} else {<td>@detail.contactName</td>}
+							<td style="text-align: center">@detail.date</td>
+							<td style="text-align: right;">@detail.amount</td>
+							@if(global.Profiles.chosen().gnel_hasExchangeSupport) {
+								<td style="text-align: center">@detail.excCode</td>
+							}
+							<td>@detail.description</td>
+						</tr>
+					}
+				}
+			</tbody>
+		</table>
+	
+	}
+
+}
+
+@ScriptBlock = {
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/crud/select_all.js")"></script>
+	
+	<script type="text/javascript">
+	
+		function getSelectedRowCount() {
+			return $('.case:checked').length;
+		}
+
+		$('.contactRowChooser').click(function(e) {
+			var rowNo = $(this).data("index");
+			var checkbox = $('#details\\['+rowNo+'\\]\\_isSelected');
+			checkbox.prop("checked", !checkbox.prop("checked"));
+			$(document).trigger('selectAllEvent', getSelectedRowCount());
+		});
+	
+		$(document).on('selectAllEvent', function(event, selectedCount) {
+			if (selectedCount > 0) {
+				$('.mact').removeAttr('disabled');
+			} else {
+				$('.mact').attr('disabled', 'disabled');
+			}
+		});
+
+		$('#appsubSearch').click(function(e) {
+			$('#formAction').val("search");
+			$('#invoiceApprovalForm').submit();
+		});
+
+		$('#appsubCancelled').click(function(e) {
+			$('#errorPanel').html('');
+			if (getSelectedRowCount() > 0) {
+				$('#formAction').val("cancelled");
+				$('#invoiceApprovalForm').submit();
+			}
+		});
+		
+	</script>
+}

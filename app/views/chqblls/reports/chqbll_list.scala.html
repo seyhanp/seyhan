@@ -1,0 +1,60 @@
+@(_form: Form[chqbll.reports.ChqbllList.Parameter], sort: enums.ChqbllSort)
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.report_form(chqbll.reports.routes.ChqbllList.generate(sort.name), 
+							if(enums.ChqbllSort.Cheque.equals(sort)) enums.Right.CEK_LISTESI else enums.Right.SENET_LISTESI) {
+
+	<input type="hidden" id="sort" name="sort" value='@sort' />
+
+	@select(_form("isCustomer"),
+		options(chqbll.reports.ChqbllList.Parameter.belonging),
+		'class -> "input-small",
+		'_label -> Messages("owner")
+	)
+
+	@tools.components.date_range(_form)
+
+	@select(_form("lastStep"),
+		options(enums.ChqbllStep.options()),
+		'class -> "input-medium-plus",
+		'_label -> Messages("last_status"),
+		'_default -> Messages("choose")
+	)
+
+	@tools.components.autocomplete_contact(_form)
+	@tools.dropdowns.bank(_form, hasAddNewButton=false)
+
+	@select(_form("cbtype.id"),
+		options(models.ChqbllType.options(sort)),
+		'class -> "input-medium-plus",
+		'_label -> Messages("type"),
+		'_default -> Messages("choose")
+	)
+
+	@tools.dropdowns.chqbll_payroll_source(_form, sort, hasAddNewButton=false)
+
+	@tools.components.trans_point_select(_form)
+	@tools.components.private_code_select(_form)
+
+	@select(_form("orderby"),
+		options(chqbll.reports.ChqbllList.Parameter.options),
+		'class -> "input-medium",
+		'_label -> Messages("orderby")
+	)
+
+	@select(_form("orderdir"),
+		options(chqbll.reports.ChqbllList.Parameter.orderdirOptions),
+		'class -> "input-small",
+		'_label -> Messages("dir")
+	)
+
+	@select(_form("reportType"),
+		options(chqbll.reports.ChqbllList.Parameter.reportTypes),
+		'class -> "input-medium",
+		'_label -> Messages("report.type"),
+		'_default -> Messages("choose")
+	)
+
+}

@@ -1,0 +1,19 @@
+@(_form: Form[StockExtraFields])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.imports.base_hidden_fields(_form)
+<input type="hidden" id="extraFields_id" name="extraFields.id" value='@_form("extraFields.id").value'></input>
+
+@inputText(_form("name"),
+	'_label -> Messages("name"),
+	'class -> "input-xlarge",
+	'maxlength -> "30"
+)
+
+@select(_form("isActive"),
+	options(Options.yesno),
+	'class -> "input-small",
+	'_label -> Messages("is_active")
+)

@@ -1,0 +1,50 @@
+@(_form: Form[models.search.ChqbllPartialSearchParam], sort: enums.ChqbllSort, rightBind: meta.RightBind)
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.search_form(_form, 
+		if(enums.ChqbllSort.Cheque.equals(sort)) {chqbll.routes.PartialsForCheque.list(rightBind)} else {chqbll.routes.PartialsForBill.list(rightBind)}, 
+		rightBind.value.name) {
+
+	<input type="hidden" name="rightBind" id="rightBind" value='@rightBind' />
+	<input type="hidden" id="sort" name="sort" value='@sort' />
+
+	@tools.components.autocomplete_contact(_form)
+
+	@select(_form("step"),
+		options(enums.ChqbllStep.partialOptions(rightBind.value)),
+		'class -> "input-medium-plus",
+		'_label -> Messages("from.where"),
+		'_default -> Messages("choose")
+	)
+
+	@select(_form("cbtype.id"),
+		options(models.ChqbllType.options(sort)),
+		'class -> "input-medium-plus",
+		'_label -> Messages("type"),
+		'_default -> Messages("choose")
+	)
+
+	@tools.components.date_range(_form)
+
+	@inputText(_form("portfolioNo"),
+		'_label -> Messages("portfolio.no"),
+		'class -> "input-small number",
+		'maxlength -> "9",
+		'style -> "text-align: right"
+	)
+
+	@inputText(_form("serialNo"),
+		'_label -> Messages("serial.no"),
+		'class -> "input-small"
+	)
+
+	@select(_form("balanceOpts"),
+		options(models.search.ChqbllPartialSearchParam.balanceOptions()),
+		'class -> "input-medium-plus",
+		'_label -> Messages("balance.type"),
+		'_default -> Messages("choose")
+	)
+
+}

@@ -1,0 +1,140 @@
+@(_form: Form[models.temporal.Ws2WsTransferModel])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.basic_form(ScriptBlock) {
+
+	<style>
+		.trans_module {
+			margin-bottom:25px;
+		}
+	
+		input["text"] {
+		    height: 20px;
+		}	
+	</style>
+
+	<legend>@Messages("dialogs.data_transfer.ws2ws.title")</legend>
+
+	@if(flash.containsKey("success")) {
+		<div id="successPanel">
+			<div class="alert alert-success">
+				<a class="close" data-dismiss="alert" onclick="$('#successPanel').html('')">x</a>
+				<strong>@Messages("info"): </strong> @flash.get("success")
+			</div>
+		</div>
+	}
+	
+	@if(flash.containsKey("error")) {
+		<div id="errorPanel">
+			<div class="alert alert-error">
+				<a class="close" data-dismiss="alert" onclick="$('#errorPanel').html('')">x</a>
+				<strong>@Messages("error"): </strong> @flash.get("error")
+			</div>
+		</div>
+	}
+
+	@helper.form(action = admin.routes.Ws2WsDataTransfers.transfer, 'class-> "form-horizontal zell", 'id-> "mainFieldsForm") {
+		<fieldset>
+		
+            <h5>@Messages("general.info")</h5>
+
+			@select(_form("sourceWS.id"),
+				options(AdminWorkspace.options),
+				'_label -> Messages("workspace.for", Messages("source"))
+			)
+			@select(_form("targetWS.id"),
+				options(AdminWorkspace.options),
+				'_label -> Messages("workspace.for", Messages("target"))
+			)
+			@inputText(_form("transDate"),
+				'_label -> Messages("date"),
+				'class -> "input-small date"
+			)
+			@inputText(_form("description"),
+				'_label -> Messages("description"),
+				'class -> "input-xlarge",
+				'maxlength -> "100"
+			)
+
+			<hr/>
+
+			<div class="row-fluid">
+				<div class="span6">
+					<div class="trans_module">
+			            <h5>@Messages("stock")</h5>
+						@tools.components.checkbox_input(_form, "stockInfo", Messages("info.table.of", Messages("stock")))
+						@tools.components.checkbox_input(_form, "stockTrans", Messages("trans.table.of", Messages("stock")))
+		
+						@select(_form("costing.id"),
+							options(StockCosting.options),
+							'class -> "input-xlarge",
+							'_label -> Messages("costing"),
+							'_default -> Messages("buy_price")
+						)
+					</div>
+		
+					<div class="trans_module">
+			            <h5>@Messages("contact")</h5>
+						@tools.components.checkbox_input(_form, "contactInfo", Messages("info.table.of", Messages("contact")))
+						@tools.components.checkbox_input(_form, "contactTrans", Messages("trans.table.of", Messages("contact")))
+					</div>
+		
+					<div class="trans_module">
+			            <h5>@Messages("safe")</h5>
+						@tools.components.checkbox_input(_form, "safeInfo", Messages("info.table.of", Messages("safe")))
+						@tools.components.checkbox_input(_form, "safeTrans", Messages("trans.table.of", Messages("safe")))
+					</div>
+		
+					<div class="trans_module">
+			            <h5>@Messages("bank")</h5>
+						@tools.components.checkbox_input(_form, "bankInfo", Messages("info.table.of", Messages("bank")))
+						@tools.components.checkbox_input(_form, "bankTrans", Messages("trans.table.of", Messages("bank")))
+					</div>
+				</div>
+
+				<div class="span6">
+					<div class="trans_module">
+			            <h5>@Messages("chqbll")</h5>
+						@tools.components.checkbox_input(_form, "chqbllInfo", Messages("info.table.of", Messages("chqbll")))
+						@tools.components.checkbox_input(_form, "chqbllTrans", Messages("trans.table.of", Messages("chqbll")))
+					</div>
+
+					<div class="trans_module">
+			            <h5>@Messages("order")</h5>
+						@tools.components.checkbox_input(_form, "orderInfo", Messages("info.table.of", Messages("order")))
+						@tools.components.checkbox_input(_form, "orderTrans", Messages("trans.table.unclosed", Messages("orders")))
+					</div>
+
+					<div class="trans_module">
+			            <h5>@Messages("waybill")</h5>
+						@tools.components.checkbox_input(_form, "waybillInfo", Messages("info.table.of", Messages("waybill")))
+						@tools.components.checkbox_input(_form, "waybillTrans", Messages("trans.table.unclosed", Messages("waybills")))
+					</div>
+
+					<div class="trans_module">
+			            <h5>@Messages("other")</h5>
+						@tools.components.checkbox_input(_form, "invoiceInfo", Messages("info.table.of", Messages("invoice")))
+						@tools.components.checkbox_input(_form, "saleInfo", Messages("info.table.of", Messages("sale")))
+						@tools.components.checkbox_input(_form, "globalInfo", Messages("info.table.of", Messages("global")))
+					</div>
+				</div>
+			</div>
+
+		</fieldset>
+
+		<div style="height:29px" class="form-title">
+			<div class="pull-right">
+				<input id="submitSaveBtn" type="submit" value="@Messages("transfer")" class="btn btn-primary" style="margin-top:2px"/>
+			</div>
+		</div>
+	}
+
+}
+
+@ScriptBlock = {
+	<script type="text/javascript">
+		$('#successPanel').delay(2000).fadeOut();
+	</script>
+}

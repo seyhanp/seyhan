@@ -1,0 +1,21 @@
+@(currentPage: meta.PageExtend[WaybillTransSource])
+
+@Controller = {
+	<script type="text/javascript">
+		var controller = jsRoutes.controllers.waybill.TransSources;
+	</script>
+}
+
+@tools.templates.ajax_index(Controller) {
+
+	@tools.templates.ajax_form(
+		right = enums.Right.IRSL_IRSALIYE_KAYNAKLARI,
+		saveAction = waybill.routes.TransSources.save
+	)
+
+	<div id=list>
+		@list(currentPage)
+	</div>
+
+}
+	

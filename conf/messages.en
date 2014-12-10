@@ -1,0 +1,1136 @@
+# English messages
+
+# --- Globals messages
+saved={0} successfuly saved.
+deleted={0} deleted.
+pulled={0} successfuly pulled.
+rolled_back={0} rolled back successfully.
+imported={0} has successfuly imported.
+exported={0} has successfuly exported (file name : {1}).
+printed.success=The document has successfuly printed.
+printed.fail=The document hasn't printed!
+error.in.import=En error trapped during importing : {0}
+not.unique={0} already use.
+id.is.null=Invalid id!
+not.found={0} not found!
+is.not.null={0} cannot be empty or undefined!
+ref.accounts.same=Reflection accounts are same!
+depots.same=Transfer depots cannot be same the each other!
+workspaces.same=Transfer workspaces cannot be same the each other!
+delete.violation={0} has a relation another record, cannot be delete!
+edit.striction.for_controller=Because of this record was approved, cannot be edit!
+edit.striction.for_view=Because of this record was approved, cannot be edit! If you want to edit it, you need to delete related receipt and then press F5 :
+edit.striction.for_chqbll=Some of {0}s, are placed in this payroll, has movement. This payroll cannot be edit! 
+already.exist={0} already exist!
+not.authorized.or.disconnect=You do not have permission for the operation you want to do, or lost connection to the server!
+you.can.edit.only.yours=You can edit only records you added.
+multiplier.form.title=Copying for {0}
+trans_list.timing.restriction.alert=If specific date range doesn't given in the detailed searching form, data in list are belong to time of {0}!
+factor.table.desc=You can add extra expenses and discounts that affecting the receipt to below table.
+printing.ok=Printing successful.
+printing.problem=There was a problem when printing!
+
+panels.have.some.errors=Some errors occured on following panels!
+turn_back.page=Turn back the previous page!
+
+table.min.row.alert=You must enter at least one row of data to the table!
+table.zero.value.alert=Row: {0} -> {1} cannot be zero!
+is.not.null.for.table=Row: {0} -> {1} cannot be empty or undefined!
+too.small.for.table=Satır: {0} -> Data is too small for {1}. Min {2} can be acceptable.
+too.long.for.table=Row: {0} -> Data is too long for {1}. Max {2} characters can be acceptable.
+too.high.for.table=Row: {0} -> Data is too high for {1}. Max {2} characters can be acceptable.
+less.than.minimum.table=Row: {0} -> Will be less than the minimum value! Acceptable minimum value : {1}
+greater.than.maximum.table=Row: {0} -> Will be greater than the maximum value! Acceptable maximum value : {1}
+cannot.be.zero.table=Row: {0} -> Stock quantity cannot be zero!
+date.less.for.table=Row: {0} -> Date must be today or later.
+date.less.from.due.for.table=Row: {0} -> Date has to be after than Maturity Date.
+duedate.close.for.table=Row: {0} -> Maturity Date has to be after than Payroll Date.
+contacts.are.same.table=Row: {0} -> Receipt and Its Detail contact can not be the same!
+limit.alert=Max level in {0}s is {1}.
+record.limit.alert=Max record count in {0} can be {1}. 
+prices.min.alert=You have to choose at least one price!
+must.be.unique=Each {0} must be unique!
+triple.cannot.be.zero.table=Row: {0} -> Width, Row and Column values can not be zero!
+
+editing_limit=Editing Limit
+editing_timeout=Timeout
+editing_difdate=Dif. Days
+editing_difdate.alert=You can only edit records of today's!
+editing_difdate.description=can only edit records of today's if this right isn't given! 
+editing_timeout.alert=Due to editing timeout ({0} days), you cannot edit this record!
+editing_timeout.description=days ago records are frozen for this user (0 is unlimited)!
+
+# --- Questions
+will.delete={0} will remove, are you sure?
+will.delete.empty=will remove, are you sure?
+are_you_sure=Are you sure?
+has.stock.limit.control.active=Limit Controls?
+has.contact.category.control.active=Category Controls?
+has.chqbll.surety.fields=Surety Fields?
+has.exchange.support=Has exchange support?
+has.continuously.recording=Is continuously recording mode on?
+will.costing.executed=Will costing executed after saving?
+print.attitude.info=How will be pressed transaction documents!
+
+# --- Special messages
+category.sibling.alert=As a category, sub-category of their own cannot be copied!  
+click.for.the.others=Click for the Other Search Options.
+waiting_stocks.costing.constraint=You have to be executed ​​in FIFO or LIFO Costing for this report!
+
+# --- Actions
+actions=Actions
+action=Action
+edit=Edit
+add=Add
+show=Show
+remove=Delete
+clone=Clone
+report=Report
+clean=Clean
+refresh=Yenile
+save=Save
+create=Create
+ok=OK
+cancel=Cancel
+previous=Prev
+next=Next
+all=All
+choose=-- Choose --
+report_unit=Report Unit
+orderby=Ordering
+search=search...
+criterias=Criterias
+results=Search Result
+logout=Logout
+transfer.selection=Transfer Selections
+approval.properties=Approval Properties
+
+search_panel=Search Panel?
+show.search_panel=show the detailed search panel
+hide.search_panel=hide the detailed search panel
+
+# --- Messages
+definition.of={0} Definition
+add.new=Add new {0}
+add.new.be.a=Add new {0} as a {1}
+any.not.found=Could not find any <strong>{0}</strong>!
+any.not.found.ws=Could not find any <strong>{2}</strong> on <strong>{1}</strong> workspace for <strong>{0}</strong> user!
+any.not.found.firstly.do=Any {0} didn't found, you have to introduce one!
+any.not.found.workspace=You can use any firm do not have permission, your system admin must give permission to you!
+firstly.select=you have to select a {0}!
+any.design.found.firstly.do=  Any Document Desing found, you can define under Admin>>Documents menu as super user!
+any.design.target.found.firstly.do=  Any Document Target found, you can define under Admin>>Document Targets menu as super user!
+old.password.is.wrong=Old password is wrong!
+passwords.arent.equal=Passwords aren't equal!
+invalid.user.or.password=Invalid username or password!
+logged.out=Logged out!
+login=Login
+logout=Logout
+please.login=Please login.
+please.wait=Please wait...
+language=Lang
+languages=Langs
+welcome=Welcome, {0}
+welcome.message=Welcome to Seyhan.
+cannot.delete={0} cannot delete!
+wrong.parameters=Wrong parameters!
+unexpected.problem.occured=Unexpected problem occured -> {0}
+unknown.report.unit=Unknown report unit!
+example=Example
+manual.entry={0} - Manual entry
+copy.whole.node=Copy selected element and its children
+copy.only.title=Copy only selected element title
+copy.only.children=Copy only selected element children
+has.been.approved={0} {1} have approved and {2} {3} have been created.
+has.been.cancelled=Totally {0} {1} are CANCELLED!
+has.been.closed=Totally {0} {1} are CLOSED!
+has.not.been.created=There is no receipt has been created!
+has.not.been.closed=There is no receipt has been closed!
+general.info=General Info
+insert_by=Insert By
+insert_at=Insert At
+update_by=Update By
+update_at=Update At
+
+# --- Infos
+info=Info
+defines=Simple Defines
+error=Error
+alert=Alert
+name=Name
+username=Username
+user.audit=User Actions
+user.info=User Info
+title=Title
+password=Password
+old_password=Old Password
+repeat_password=Pasword Again
+category=Category
+categories=Categories
+department=Department
+type=Type
+group=Group
+status=Status
+last_status=Son Durumu
+payment_period=Payment Period
+role=Role
+roles=Roles
+section=Section
+right=Right
+rights=Rights
+reports=Reports
+level=Level
+definition=Definition
+phone=Phone
+phoneX=Phone {0}
+mobile_phone=Mobile P.
+address=Address
+city=City
+branch=Branch
+connection=Connection
+extra=Extra
+amount=Amount
+amounts=AMOUNTS
+amount_net=Net Amount
+percent=Percent
+time=Time
+date=Date
+date.start=Start D.
+date.end=End D.
+date.range=Date Range
+date.execution=Execution Date
+date.real=Transfer Date
+date.delivery=Delivery Date
+date.maturity=Due Date
+date.avarage=Avg.Date
+description=Description
+description.no=Description {0}
+dir=Dir.
+private_code=Private Code
+working_dir=Working Dir.
+eq.zero=Equal to Zero
+lt.zero=Less than Zero
+gt.zero=Greater than Zero
+debt=Debt
+credit=Credit
+equal=Equals
+debt.sum=T. Debt
+debt.limit=Debt Limit
+credit.sum=T. Credit
+credit.limit=Credit Limit
+responsible=Responsible
+code=Code
+provider_code=Provider Code
+prefix=Prefix
+suffix=Suffix
+transfer=Transfer
+transaction=Transaction
+close=Close
+go=Go
+back=Back
+free=Free
+free.fortrans=-- Free --
+is_active=Active?
+is_admin=Admin?
+is_cash=Cash?
+has_returns=Returns?
+has_prices=Prices Using?
+has_restriction=Restriction?
+has_labels=Labels?
+has_paging=Paging?
+label_dir=Label Dir
+label_width=Label Width
+source=Source
+target=Target
+period=Period
+include=Included
+included=Included
+exclude=Excluded
+excluded=Excluded
+increase=Increase
+decrease=Decrease
+rcpno.rnw.type=Rcp.No Renewal
+docno.inc.type=Doc.No Incr.
+root_element=Root Element
+under_selected_element= {0} under the selected element
+other=Other
+tax=Tax
+vat=Tax%
+discount=Discount
+total_discount_rate=T.Disc.Rate
+expense=Expense
+maturity=Maturity of
+other_ops=Other Operations
+ordered=Ordered
+order_field=Order Field
+order_dir=Order Dir
+ascending=Ascending
+descending=Descending
+first=First
+last=Last
+value=Value
+true=True
+false=False
+inspect=Inspect
+print=Print
+consigner=Consigner
+recepient=Recepient
+postcode=Post Code
+country=Country
+note=Note
+note=Notes
+field=Field
+piece=Piece
+headsup=Heads Up: 
+payment=Payment
+collecting=Collecting
+change=Change
+select=Select
+selected=Selected
+detail=Detail
+details=Details
+export=Export
+import=Import
+file=File
+location=Konum
+local=Local
+remote=Remote
+path=Path
+extra_field=Extra Field
+extra_fields=Extra Fields
+priority=Priority
+
+withholding.rate=Withholding Rt.
+withholding.amount=Amount of Wh.
+withholding.before=Before Withholding
+withholding.after=After Withholding
+
+balance=Balance
+balance.type=Balance Type
+balance.open=Open
+balance.completed=Completed
+balance.cancelled=Cancelled
+
+printer_name=Printer Name
+page=Page
+print_view.type=Görünüm
+print_view.PORTRAIT=Portrait
+print_view.LANDSCAPE=Landscape
+print_target.type=Target
+print_target.FILE=To File
+print_target.DOT_MATRIX=To Dot Matrix Printer
+print_target.LASER=To Laser/InkJet Printer
+font_type=Font Type
+font.compessed=Compressed
+font.normal=Normal
+margin.left=Left Margin
+margin.right=Right Margin
+margin.top=Top Margin
+margin.top=Bottom Margin
+width=Width
+row=Row
+column=Column
+format=Format
+value=Value
+selectable_fields=Selectable Fields
+selected_fields=Selected Fields
+properties=Properties
+system=System
+constant=Constant
+infosof={0} Informations
+ReportTitle.band=REPORT TITLE
+PageTitle.band=PAGE TITLE
+Detail.band=DETAIL
+PageFooter.band=PAGE FOOTER
+ReportFooter.band=REPORT FOOTER
+tables=Tables
+tableof.tax1=Tax Distribution Table 1
+tableof.exchange1=Exchange Table 1
+tableof.currency1=Currency Dist. Table 1
+tableof.factor1=Factors Table 1
+with_writing=With Writing - {0}
+
+statusOf=Status : {0}
+typesOf=Types of {0}
+typeOf=Type of {0}
+receiptOf=Receipt of {0}
+receiptsOf=Receipts of {0}
+
+row_count=R.Count
+page_row_number=List Row Number
+penny_digit_number=Penny number
+undo.last_action=Undo the last action!
+transfer.from.yesterday=Transfer from yesterday...
+transfer.to.tomorrow=Transfer to tomorrowdd...
+info.table.of= Transfer the {0} info tables
+trans.table.of=Turnover the {0} transaction tables
+trans.table.unclosed=Turnover the unclosed {0}!
+company.name=Company
+listof=List
+list_of=List of {0}
+from.where=From Where
+to.where=To Where
+to.left=To Left
+to.center=Center
+to.right=To Right
+
+visibility.of.fields=Visibility of Fields
+vof.serialNo=Seri No
+vof.taxRate2=PCT
+vof.taxRate3=SCT
+
+audit.right=Trans :
+audit.name=Name : 
+audit.code=Code : 
+audit.date=Date :  
+audit.receipt_no=Receipt No : 
+audit.trans_no=Trans. No : 
+audit.amount=Amount : 
+
+workspace=Workspace 
+workspaces=Workspaces
+workspace.for={0} Workspace
+
+pull=Pull
+pull.TCMB.exchange=TC Merkez Bankası exchange rates
+pull.TCMB.effective=TC Merkez Bankası effective rates
+
+exchange=Exch.
+exchange_rate=Exchange Rate
+exchange_rates=Exchange Rates
+exchange_support=Exchange Support?
+exc_equivalent=Equivalent
+actual_exchange_rates=Actual Exchange Support
+buying=Buying
+selling=Selling
+diff_rate=Diff. Rate
+distance=Distance
+continuously_recording=Con.Recording?
+print_attitude=Doc. Printing
+
+total=Total
+discount_total=Discount Tot.
+subtotal=Subtotal
+tax_total=Tax Total
+rounding_discount=Rounding Dis.
+net_total=Net Total
+carrying_over=CARRYING OVER..: 
+
+general=General
+yes=Yes
+no=No
+nothing=No
+version=Version
+purposed=Purposed
+thanks=Thanks
+
+period.daily=Daily
+period.weekly=Weekly
+period.monthly=Monthly
+
+edit.cut=Cut
+edit.copy=Copy
+edit.paste=Paste
+edit.copied=has copied
+edit.kut=has cut
+
+make.waybill=İrsaliye Oluştur
+make.invoice=Fatura Oluştur
+related=Related {0}
+related.waybill=Related Waybill
+related.invoice=Related Invoice
+
+setting=Setting
+settings=Settings
+global=Global
+global.settings=Global Settings
+
+trans.source=Trans. Source
+trans.no=Doc.No
+trans.type=Doc.Type
+trans.usefor=Use for
+trans.point=Trans Point
+trans.month=Year/Month
+trans.year=Year
+receipt_no=Receipt No
+
+trans_status.Waiting=Waiting
+trans_status.Completed=Completed
+trans_status.Cancelled=Cancelled
+
+ref.account=Ref. Account
+ref.contact=Ref. Contact
+ref.safe=Ref. Safe
+ref.bank=Ref. Bank
+ref.no=Ref. Account
+ref.name=Ref. Name
+ref.amount=Ref. Amount
+ref.currency=Ref.Currency
+
+# --- Order
+order=Order
+orders=Orders
+
+# --- Waybill
+waybill=Waybill
+waybills=Waybills
+
+# --- Invoice
+invoice=Invoice
+invoices=Invoices
+invoice.trans.source=Invoice Source
+invoice.close=Close selected Invoices
+
+# --- Çek/Senet
+chqbll=Cheque/Bill
+cheque=Cheque
+cheques=Cheques
+bill=Bill
+bills=Bills
+payroll.source=Payroll Source
+portfolio.no=Port.No
+serial.no=Serial No
+owner=Owner
+payment_place=Payment Place
+correspondent_branch=Correspondent
+surety=Surety
+sequential.doc.entry=Sequential {0} entry
+sequential.doc.add=Add Sequential {0}
+cheque_payroll=Cheque Received-Given Payroll
+cheque_transaction=Cheque Transaction
+cheque_partial=Partial Cheque Pay/Col
+bill_payroll=Bill Received-Given Payroll
+bill_transaction=Bill Transaction
+bill_partial=Partial Bill Pay/Col
+
+# --- Stock
+stock=Stock
+stocks=Stocks
+stock.card=Stock Card
+stock.group=Group
+stock.trans.source=Receipt Source
+stock.provider=Provider
+stock.providers=Providers
+stock.code=Stock Code
+stock.name=Stock Name
+stock.barcode=Barcode
+stock.price_update=Price Update
+stock.price_list=Price List
+stock.price=Price
+stock.receipt.desc=Desc.Table
+brand=Brand
+depot=Depot
+ref.depot=Transfer Depot
+barcode=Barcode
+barcodes=Barcodes
+last_buy_price=Last Buy Price
+last_sell_price=Last Sell Price
+buy_price=Buy Price
+buy_prices=Buy Prices
+sell_price=Sell Price
+sell_prices=Sell Prices
+base_price=Base Price
+tax_status=Tax Status
+tax_rate=Tax
+tax_amount=Tax Amt.
+buy_tax=Buy Tax
+sell_tax=Sell Tax
+tax_both=Buy/Sell Tax
+basis=Basis
+price=Price
+prices=Prices
+currency=Currency
+currencies=Currencies
+rate=Rate
+e_according_to=According to {0}
+a_according_to=According to {0}
+rounding_digits=Rounding
+quantity=Quantity
+unit=Unit
+units=Units
+discount_amount=Dis Amt.
+total=Total
+totals=Totals
+total.input=Total Input
+total.output=Total Output
+input=Input
+output=Output
+remaining=Remain.
+paid=Paid
+value=Value
+total_input=Inp. Qnt.
+total_output=Out. Qnt.
+total_in_amount=Inp. Amt.
+total_out_amount=Out. Amt.
+total_ret_input=Ret.Inp.Qnt.
+total_ret_output=Ret.Out.Qnt.
+total_ret_in_amount=Ret.Inp.Amt.
+total_ret_out_amount=Ret.Out.Amt.
+
+row_combining=Row Combining
+
+short.io=I/O
+short.Input=IN
+short.Output=OUT
+
+stock.discount.abbr=Dis
+stock.discount=Dis {0}
+stock.discount_rate=Dis. Rate
+stock.discount_rate_total=Dis. Rates Total
+stock.unit=Unit {0}
+unit.ratio=Unit Ratio
+stock.unit_ratio=Unit {0} Ratio
+unit.no=Unit No
+
+max.limit=Max. Limit
+min.limit=Min. Limit
+both.limit=Min/Max Limit
+
+# --- Contact
+contact=Contact
+contacts=Contacts
+contact.account=Contact Account
+contact.code=Contact Code
+contact.name=Contact Name
+contact.tax.office=Tax Office
+contact.tax.no=Tax No
+contact.relevant=Relevant
+contact.website=Web Site
+
+# --- Safe
+safe=Safe
+safes=Safes
+safe.name=Safe Name
+safe.expense=Expense Type
+
+# --- Bank
+bank=Bank
+banks=Bank Accounts
+bank.account=Bank Account
+bank.name=Bank Name
+bank.expense=Expense
+expense.amount=Expense Amount
+account.no=Account No
+
+# --- Sale
+sale=Sale
+seller=Seller
+campaign=Campaign
+prim_rate=Prim Rate
+prim_amount=Prim Amt.
+
+# --- Global
+glob=Global
+document=Document
+documents=Documents
+design=Document Design
+designs=Document Designs
+design.for=Document Designing for the {0} module
+target=Target
+targets=Targets
+
+factor=Factor
+factors=Factors
+factor_type=Factor Type
+calc_type=Calculation
+effect_type=Eff.Type
+effect_dir=Effect Dir
+effect=Effect
+plus_factor_total=Plus Factor
+minus_factor_total=Minus Factor
+cost_factor=Cost Factor
+costing_type=Consting Type
+costing=Costing
+cost_price=Cost Prc
+cost_total=Cost Tot.
+sell_total=Sell Tot.
+buy_total=Buy Tot.
+start_costing=Start Costing!
+has_cost_effect=Has effect to costs?
+has_stock_effect=Stock Effects?
+has_carrying_over=C.Over Field
+profit_loss=Profit/Loss
+
+# --- User
+admin=Admin
+user=User
+user=Users
+profile=Profile
+profiles=Profiles
+
+# -----------------------
+# --- Enums
+# -----------------------
+
+module=Module
+
+enum.KULLANICI_TANITIMI=Users
+enum.KULLANICI_GURUPLARI=User Groups
+enum.KULLANICI_ROLLERI=User Roles
+enum.KULLANICI_HAREKETLERI=User Actions
+enum.GENEL_AYARLAR=Global Settings
+enum.CALISMA_ALANI=Workspaces
+enum.CALISMA_ALANI_TRANSFER=Data Transfer from WS to WS
+enum.BELGE_TASARIMI=Document Designs
+enum.BELGE_HEDEFLERI=Document Targets
+
+enum.EKSTRA_STOK_ALANLARI=Stock Fields
+enum.EKSTRA_CARI_ALANLARI=Contact Fields
+
+enum.STOK=Stock
+enum.STOK_TANITIMI=Stock Cards
+enum.STOK_KATEGORI_TANITIMI=Stock Categories
+enum.STOK_EKSTRA_ALANLAR=Extra Fields For Stock
+enum.STOK_DEPO_TANITIMI=Depots
+enum.STOK_FIS_KAYNAKLARI=Stock Receipt Sources
+enum.STOK_BIRIM_TANITIMI=Units
+enum.STOK_ACILIS_ISLEMI=Stok Opening Receipt
+enum.STOK_GIRIS_FISI=Stock Input Receipt
+enum.STOK_CIKIS_FISI=Stock Output Receipt
+enum.STOK_GIRIS_IADE_FISI=Stock Return Input Receipt
+enum.STOK_CIKIS_IADE_FISI=Stock Return Output Receipt
+enum.STOK_TRANSFER_FISI=Transfer Receipt
+enum.STOK_TRANSFER_YANSI=Reflected from Transfer
+enum.STOK_FIYAT_GUNCELLEME=Bulk Price Update
+enum.STOK_FIYAT_LISTESI=Price List
+enum.STOK_MALIYET_FAKTORLERI=Cost Factors
+enum.STOK_MALIYET_HESAPLAMALARI=Costing Calculations
+enum.STOK_LISTESI=Stock List
+enum.STOK_FIYAT_LISTESI=Price Listesi
+enum.STOK_HAREKETSIZ_STOKLAR_LISTESI=Inactive Stocks List
+enum.STOK_FIS_LISTESI=Stock Receipt List
+enum.STOK_HAREKET_RAPORU=Trans. Report
+enum.STOK_ICMAL_RAPORU=Cumulative Report
+enum.STOK_ENVANTER_RAPORU=Inventory Report
+enum.STOK_KAR_ZARAR_RAPORU=Profit & Loss Report
+enum.STOK_DURUM_RAPORU=Balance Report
+enum.STOK_BEKLEYEN_STOKLAR_RAPORU=Waiting Stocks Report
+enum.STOK_SON_ISLEM_RAPORU=Last Trans Report
+enum.STOK_TOPN_RAPORU=Top N Report
+
+enum.SPRS=Order
+enum.SPRS_FIS_KAYNAKLARI=Order Receipt Sources
+enum.SPRS_ALINAN_SIPARIS_FISI=Purchase Order
+enum.SPRS_VERILEN_SIPARIS_FISI=Sale Order
+enum.SPRS_ONAYLAMA_ADIMLARI=Order Approvals
+enum.SPRS_FIS_LISTESI=Order List
+enum.SPRS_DAGILIM_RAPORU=Distribution Report
+
+enum.IRSL=Waybill
+enum.IRSL_IRSALIYE_KAYNAKLARI=Waybill Sources
+enum.IRSL_ALIS_IRSALIYESI=Purchase Waybill
+enum.IRSL_SATIS_IRSALIYESI=Sale Waybill
+enum.IRSL_ONAYLAMA_ADIMLARI=Waybill Approvals
+enum.IRSL_FIS_LISTESI=Waybill List
+enum.IRSL_DAGILIM_RAPORU=Distribution Report
+
+enum.FATR=Invoice
+enum.FATR_FATURA_KAYNAKLARI=Invoice Sources
+enum.FATR_ALIS_FATURASI=Purchase Invoice
+enum.FATR_SATIS_FATURASI=Sale Invoice
+enum.FATR_ALIS_IADE_FATURASI=Return of Purchase Invoice 
+enum.FATR_SATIS_IADE_FATURASI=Return of Sale Invoice
+enum.FATR_KAPAMA_ISLEMI=Invoice Closing
+enum.FATR_FATURA_LISTESI=Invoice List
+enum.FATR_DAGILIM_RAPORU=Distribution Report
+
+enum.CARI=Contact
+enum.CARI_TANITIMI=Contact Accounts
+enum.CARI_ISLEM_KAYNAKLARI=Contact Trans. Sources
+enum.CARI_KATEGORI_TANITIMI=Contact Categories
+enum.CARI_EKSTRA_ALANLAR=Extra Fields For Contact
+enum.CARI_ACILIS_ISLEMI=Contact Opening Receipt
+enum.CARI_BORC_DEKONTU=Debt Receipt
+enum.CARI_ALACAK_DEKONTU=Credit Receipt
+enum.CARI_HESAP_LISTESI=Contact List
+enum.CARI_HAREKETSIZ_CARILER_LISTESI=Inactive Contact List
+enum.CARI_ISLEM_LISTESI=Contact Trans List
+enum.CARI_DURUM_RAPORU=Balance Report
+enum.CARI_YASLANDIRMA_RAPORU=Aging Report
+enum.CARI_HAREKET_RAPORU=Transaction Report
+enum.CARI_SON_ISLEM_RAPORU=Last Trans Report
+
+enum.CEK=Cheque
+enum.CEK_TURLERI=Cheque Types
+enum.CEK_BORDRO_KAYNAKLARI=Cheque Payroll Sources
+enum.CEK_MUSTERI_ACILIS_ISLEMI=Customer Cheques Opening P.
+enum.CEK_GIRIS_BORDROSU=Received Cheques Payroll
+enum.CEK_MUSTERI_HAREKETLERI=Customer Cheque Trans.
+enum.CEK_PARCALI_TAHSILAT=Customer Cheque Partly Coll.
+enum.CEK_FIRMA_ACILIS_ISLEMI=Firm Cheques Opening P.
+enum.CEK_CIKIS_BORDROSU=Given Cheques Payroll
+enum.CEK_FIRMA_HAREKETLERI=Firm Cheque Trans.
+enum.CEK_PARCALI_ODEME=Firm Cheque Partly Payment
+enum.CEK_LISTESI=Cheque List
+enum.CEK_DAGILIM_RAPORU=Cheque Distribution Report
+enum.CEK_PARCALI_LISTESI=Partly Cheques List
+enum.CEK_ISLEM_BORDRO_LISTESI=Payroll List
+enum.CEK_HAREKET_BORDRO_LISTESI=Trans. List
+
+enum.SENET=Bill
+enum.SENET_TURLERI=Bill Types
+enum.SENET_BORDRO_KAYNAKLARI=Bill Payroll Sources
+enum.SENET_MUSTERI_ACILIS_ISLEMI=Customer Bills Opening P.
+enum.SENET_GIRIS_BORDROSU=Received Bills Payroll
+enum.SENET_MUSTERI_HAREKETLERI=Customer Bill Trans.
+enum.SENET_PARCALI_TAHSILAT=Customer Bill Partly Coll.
+enum.SENET_FIRMA_ACILIS_ISLEMI=Firm Bills Opening P.
+enum.SENET_CIKIS_BORDROSU=Given Bills Payroll
+enum.SENET_FIRMA_HAREKETLERI=Firm Bill Trans.
+enum.SENET_PARCALI_ODEME=Firm Bill Partly Payment
+enum.SENET_LISTESI=Bill List
+enum.SENET_PARCALI_LISTESI=Partly Bills List
+enum.SENET_ISLEM_BORDRO_LISTESI=Payroll List
+enum.SENET_HAREKET_BORDRO_LISTESI=Trans. List
+
+enum.KASA=Safe
+enum.KASA_TANITIMI=Safes
+enum.KASA_ISLEM_KAYNAKLARI=Safe Trans. Sources
+enum.KASA_GIDER_TANITIMI=Expense Types
+enum.KASA_ACILIS_ISLEMI=Safe Opening Receipt
+enum.KASA_TAHSIL_FISI=Charge Receipt
+enum.KASA_TEDIYE_FISI=Disburse Receipt
+enum.KASA_MAHSUP_FISI=Offsetting Receipt
+enum.KASA_GUNLUK_RAPOR=Daily Status Report
+enum.KASA_KASA_DEFTERI=Daily Cashbook
+enum.KASA_ISLEM_LISTESI=Safe Trans List
+enum.KASA_DURUM_RAPORU=Balance Report
+enum.KASA_HAREKET_RAPORU=Transaction Report
+
+enum.BANK=Bank
+enum.BANK_HESAP_TANITIMI=Accounts
+enum.BANK_ISLEM_KAYNAKLARI=Bank Trans. Sources
+enum.BANK_MASRAF_TANITIMI=Expenses
+enum.KASA_ACILIS_ISLEMI=Bank Opening Receipt
+enum.BANK_HESABA_PARA_GIRISI=Deposit
+enum.BANK_HESAPTAN_PARA_CIKISI=Withdraw
+enum.BANK_ISLEM_LISTESI=Bank Trans List
+enum.BANK_GUNLUK_RAPOR=Daily Status Report
+enum.BANK_DURUM_RAPORU=Balance Report
+enum.BANK_HAREKET_RAPORU=Transaction Report
+
+enum.SATS=Sale
+enum.SATS_SATICI_TANITIMI=Sellers
+enum.SATS_KAMPANYA_TANITIMI=Campaigns
+enum.SATS_SATIS_RAPORU=Selling Report
+
+enum.GNEL=Global
+enum.GNEL_ISLEM_NOKTALARI=Trans Points
+enum.GNEL_OZEL_KODLAR=Private Codes
+enum.GNEL_DOVIZ_BIRIMLERI=Exchanges
+enum.GNEL_DOVIZ_KURLARI=Exchange Rates
+enum.GNEL_PROFIL_TANITIMI=Profiles
+
+enum.CARI_VIRMAN=Ref. From Contact
+enum.KASA_VIRMAN=Ref. From Safe
+enum.BANK_VIRMAN=Ref. From Bank
+
+enum.Login=Login
+enum.Logout=Logout
+enum.Enable=Enable
+enum.Disable=Disable
+enum.Read=Read
+enum.Insert=Add
+enum.Update=Update
+enum.Delete=Delete
+
+enum.Waiting=Waiting
+enum.Normal=Normal
+enum.In_Blacklist=In Blacklist
+
+enum.General=General
+enum.Client=Client
+enum.Vendor=Vendor
+enum.Distributor=Distributor
+enum.Dealer=Dealer
+enum.Partnership=Partnership
+
+enum.Input=Input
+enum.Output=Output
+enum.Debt=Debt
+enum.Credit=Credit
+
+enum.UserEditingLimit.Free=He/She can edit all users records. 
+enum.UserEditingLimit.Restricted=He/She can edit only own records.
+
+enum.module.contact=Contact
+enum.module.stock=Stock
+enum.module.order=Order
+enum.module.waybill=Waybill
+enum.module.invoice=Invoice
+enum.module.cheque=Cheque
+enum.module.bill=Bill
+enum.module.safe=Safe
+enum.module.bank=Bank
+enum.module.sale=Sale
+enum.module.global=Global
+enum.module.admin=Admin
+
+enum.EFT=EFT
+enum.Transfer=Transfer
+
+enum.no=No
+enum.Manual=Manual
+enum.Half_Automatic=Half Automatic
+enum.Full_Automatic=Full Automatic
+enum.Automatic=Automatic
+
+enum.costing_type.Simple=Simple Avarage
+enum.costing_type.Weighted=Weighted Avarage
+enum.costing_type.Moving=Moving Avarage
+enum.costing_type.FIFO=FIFO
+enum.costing_type.LIFO=LIFO
+
+enum.Free=Free
+enum.Daily=Daily
+enum.Monthly=Monthly
+
+chqbll.of={1} of {0}
+chqbll.ofs={0} {1}s
+
+enum.cqbl.Firm=Firm
+enum.cqbl.Customer=Customer
+enum.cqbl.Cheque=Cheque
+enum.cqbl.Bill=Bill
+enum.cqbl.step.InPortfolio=In Portfolio
+enum.cqbl.step.Endorsed=Endorsed
+enum.cqbl.step.Issued=Issued
+enum.cqbl.step.InCollection=In Collection
+enum.cqbl.step.Warrantee=Warrantee
+enum.cqbl.step.Collected=Collected
+enum.cqbl.step.Deposited=Deposited
+enum.cqbl.step.PaidByCash=Paid By Cash
+enum.cqbl.step.PaidByBank=Paid By Bank
+enum.cqbl.step.Returned=Returned
+enum.cqbl.step.Bounced=Bounced
+enum.cqbl.step.InPursue=In Pursue
+enum.cqbl.step.Closed=Closed
+enum.cqbl.step.PartCollection=Partly Collection
+enum.cqbl.step.PartPayment=Partly Payment
+
+exchange.rate.period.Manual=Manual
+exchange.rate.period.Once_A_Day=Once a day automaticaly
+exchange.rate.period.Hourly=Per hour automaticaly
+exchange.rate.period.Every_3_Hours=Every three hour automaticaly
+
+exchange.rate.source.TCMB_Exchange=TC Merkez Bankası Exchange rates
+exchange.rate.source.TCMB_Effective=TC Merkez Bankası Effective rates
+
+documents.column.title.type=Title Type
+documents.column.title.desc=Type Descriptions for Column Title of Detail Band:
+documents.column.type.0=The column title won't be added. 
+documents.column.type.1=For every page, the column title will be added before starting detail rows. 
+documents.column.type.2=For every page, the column title will be added between two dashed lines before starting detail rows and one dashed line will be added at the end of the detail rows.
+documents.column.type.3=For every page, the column title will be added between two empty lines before starting detail rows and one empty line will be added at the end of the detail rows.
+
+enum.NOTHING=NOTHING
+enum.PLAIN=PLAIN
+enum.DASHED=DASHED
+enum.UNLINED=UNLINED
+
+# --- Errors
+error.required=Required
+error.invalid=Invalid value
+error.invalid.java.util.Date=Invalid date value
+error.expected.date=Invalid date value
+error.number=Valid numeric value required
+error.real=Valid decimal value required
+error.min=Greater than or equal to {0}
+error.min.strict=Greater than {0}
+error.max={0} dan küçük ya da eşit olmalı
+error.max.strict=Less than or equal to {0}
+error.minLength=Minimum length is {0}
+error.maxLength=Maximum length is {0}
+error.email=Valid email address required
+error.dateRange=End Date cannot be before Start Date!
+error.dateRange.x={0} date cannot be before today!
+error.numberRange=May be at least {0} to {1}
+error.numberRangeByName={0}, May be at least {0} to {1}
+error.dateBefore={0} cannot be before Receipt Date!
+error.zero={0} must be greater than zero!
+error.exc_code={0} can only accepts {1} transactions!
+
+warning.balance.limit=Limit going out by this amount, max acceptable value {0}
+msg.empty.data=No data to display!
+
+exception.optimistic.lock=This form is updated by another user before you. You need to close/open the form!
+
+# --- Report Types
+report.type=Report Type	
+report.type.stock_based=Stock Based
+report.type.contact_based=Contact Based
+report.type.depot_based=Depot Based
+report.type.group_based=Group Based
+report.type.day_based=Day Based
+report.type.month_based=Year/Month Based
+report.type.year_based=Year Based
+report.type.maturity_based=Maturity Based
+report.type.deldate_based=Delivery Date Based
+report.type.category_based=Category Based
+report.type.private_code_based=Private Code Based
+report.type.trans_point_based=Trans Point Based
+report.type.trans_type_based=Trans Type Based
+report.type.trans_source_based=Trans Source Based
+report.type.receipt_type_based=Receipt Type Based
+report.type.category_based=Category Based
+report.type.seller_based=Seller Based
+report.type.city_based=City Based
+report.type.account_based=Account Based
+report.type.safe_based=Safe Based
+report.type.status_based=Status Based
+report.type.last_status_based=Last Status Based
+report.type.payment_place_based=Payment Place Based
+report.type.bank_based=Bank Based
+report.type.bank_account_based=Bank Account Based
+report.type.type_based=Type Based
+report.type.exc_based=Exchange Code Based
+report.type.x_based={0} Based
+
+report.show=Views Form
+report.show.summary=Summary
+report.show.detail=Detail
+
+# --- Abbr.	
+constraint.required=Required
+constraint.min=Minimum value: {0}
+constraint.max=Maximum value: {0}
+constraint.minLength=Minimum length: {0}
+constraint.maxLength=Maximum length: {0}
+
+# --- Application level
+app.licence.desc=2013 - Open Source ERP Project
+
+# --- Instant rights
+instant_rights.label=Instant Rights
+instant_rights.read=Reading
+instant_rights.insert=Adding
+instant_rights.update=Updating
+instant_rights.delete=Removing
+instant_rights.report=Report
+
+instant_rights.special.none=Deny all the rights.
+instant_rights.special.guest=Allow the Guest rights.
+instant_rights.special.admin=Allow all the rights.
+instant_rights.special.allow=Allow the {0} rights for the all modules.
+instant_rights.special.deny=Deny the {0} rights for the all modules.
+instant_rights.module.allow=Allow all the rights for the {0}.
+instant_rights.module.deny=Deny all the rights for the {0}. 
+
+for.reports=Use in reports
+reporter.company=Company
+reporter.page=Page
+reporter.continues=Continues...
+reporter.last_page=End of the Report.
+reporter.information=Info
+
+report.info.date=Date : {0}
+report.info.date_range=Date Range : {0} - {1}
+
+report_title.BalanceReport={0}_Status_Report
+report_title.StatusReport={0}_Status_Report
+report_title.DailyReport=Daily_{0}_Report
+report_title.TransactionList={0}_Trans_List
+report_title.TransReportXBased={0}_Trans_Report
+report_title.CumulativeReportXBased=Cumulative_{0}_Report
+report_title.DistReportXBased={0}_Distribution_Report
+report_title.List={0}_List
+report_title.InactiveList=Inert_{0}_List
+report_title.LastTransReport={0}_Last_Trans_Report
+report_title.ReceiptList={0}_Receipt_List
+report_title.InvoiceList={0}_Invoice_List
+report_title.TopNReport={0}_TopN_Report
+
+report_title.WaitingStocksReport=Inert_Stocks_Report
+report_title.TransReportStockBased=Stock_Based_Trans_Report
+report_title.DistReportStockBased=Stock_Based_Dist_Report
+report_title.InventoryReport=Stock_Inventory_Report
+report_title.ProfitLossReportXBased=Stock_ProfitLoss_Report
+report_title.CashbookList=Safe_Cashbook_List
+report_title.SellingReport=Selling_Report
+
+listing_type=Listing Type
+approval_type=Creation Type
+approval_type.contact=Receipts will be grouped Contact Based
+approval_type.receipt=Every receipt will be approved as one receipt
+
+helpers.stock.roundingDigits=If not selected will not be rounded. If 0 is selected will be rounded only penny part.
+helpers.stock.checkLimits=If this control is selected, (due to additional controls) may be some delay!
+helpers.stock.depot=For Depot field in form of stock table, this value is used as default.
+helpers.stock.unit=When defining a stock, for first unit field, this value is used as default.
+helpers.stock.taxRate=When defining a stock, for tax field, this value is used as default.
+helpers.stock.isTaxInclude=For Tax Status field in form of stock table, this value is used as default.
+helpers.contact.checkLimits= If this control is selected, (due to additional controls) may be some delay!
+helpers.order.approval.contact=How will consist of the form of order approval is determined from here.
+helpers.order.hasPrices=In order receipts, price fields is displayed or not according to this value.
+helpers.waybill.approval.contact=How will consist of the form of waybill approval is determined from here.
+helpers.waybill.hasPrices=In waybill receipts, price fields is displayed or not according to this value.
+helpers.invoice.isCash=Payment way of invoices is cash or not according to this value.
+helpers.invoice.withholding=In invoice receipts, they has withholding or not.
+helpers.chqbll.suretyFields=if you want to enter the Surety Info, this value must be YES. 
+helpers.general.exchange.source=Source of the exchange rates.
+helpers.general.rowNumber=Number of rows to be displayed in definition/transaction list forms.
+helpers.general.diffRate.buying=Difference Rate, can be negative, for exchange BUYING AMOUNT!
+helpers.general.diffRate.selling=Difference Rate, can be negative, for exchange SELLING AMOUNT!
+helpers.general.trans.listingType=Listing type of transaction forms.
+helpers.general.show.search_panel=if you want to make more detailed searching, this value must be YES.
+helpers.general.show.row_combining=If you want to save the stocks that have same code and price as single line in the receipts, this value must be YES.
+helpers.general.reportUnit=Selected report unit for Reports
+helpers.general.receiptNoRnwType=Determined "How to increase of Receipt No in receipts" according to this field.
+helpers.general.docNoIncType=Determined "How to increase of Document No in transaction forms" according to this field.
+helpers.general.pennyDigitNumber=For currency fields, this value is used as penny digit number.
+helpers.general.excCode=In transaction forms, this value is used as chosen exchange code.
+helpers.general.vof=These fields are closed for first usage. You need to select what you want to use from them.
+
+dialogs.workspace.selection.tableTitle=Table of workspace choice
+dialogs.workspace.selection.tableDesc=In following table you see the workspaces that you be able to use.
+dialogs.workspace.selection.tableList1=Background color of active workspace is different the others.
+dialogs.workspace.selection.tableList2=You can click the Select button of workspace which you want to work.
+dialogs.workspace.selection.tableList3=If you want to create a new workspace, you can use the workspaces section under the Admin menu after as super user login.
+
+dialogs.data_transfer.ws2ws.title=Data transfer between two workspaces
+
+dialogs.index.os.title=Operating system independent
+dialogs.index.os.desc=Works on all operating systems that Java 1.6+ be able to work; linux, unix, mac, windows...
+dialogs.index.db.title=Database independent
+dialogs.index.db.desc=Works on all popular databases; mysql, postgresql, mssql, h2...
+dialogs.index.browser.title=Browser independent
+dialogs.index.browser.desc=Works on all browsers; internet explorer, firefox, chrome...
+dialogs.index.source.title=Open source
+dialogs.index.source.desc=Seyhan Project is open sourced. You can use it cashless, besides you can reach project and its source codes.
+dialogs.index.multilanguage.title=Multi language support
+dialogs.index.multilanguage.desc=Seyhan has multi language support. Right now, It has Turkish and English support for now.
+dialogs.index.printer.title=Printer usage
+dialogs.index.printer.desc=You can save your reports and documents as pdf, excel and text file. Also, you can print them using dot matrix, laser... printers.
+dialogs.index.support.title=Support
+dialogs.index.support.desc1=Any problem or suggestion can be sent to 
+dialogs.index.support.desc2=
+dialogs.index.purposed.java=Backend development platform
+dialogs.index.purposed.eclipse=Integrated development platform for Java.
+dialogs.index.purposed.mint=Open source operating system
+dialogs.index.purposed.playfw=RestFUL WEB framework
+dialogs.index.purposed.scala=Template preparing language
+dialogs.index.purposed.bootstrap=Frontend WEB framework
+dialogs.index.purposed.h2=Database for demo project
+dialogs.index.purposed.mysql=Development database
+dialogs.index.purposed.jquery=Base Javascript framework
+dialogs.index.purposed.bitbucket=Source code repository and issue management system
+dialogs.index.purposed.flyway=Database migration system between versions
+dialogs.index.purposed.ant=The compiling system based on script
+
+formats.integer=###
+formats.currency=#,##0.00
+formats.exchange=###0.0000
+formats.rate=###.##
+formats.double=###.##
+formats.longdate=dd/MM/yyyy HH:mm:ss
+formats.date=dd/MM/yyyy
+formats.time=HH:mm:ss
+formats.balance=#,##0.00 DB;#,##0.00 CR
+
+LINE=Line
+STATIC_TEXT=Label
+SYS_DATE=System Date
+SYS_TIME=System Time
+SYS_DATE_FULL=Full System Time
+PAGE_NUMBER=Page No
+PAGE_COUNT=Page Count

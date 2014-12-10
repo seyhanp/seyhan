@@ -1,0 +1,18 @@
+@(_form: Form[GlobalPrivateCode])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+<input type="hidden" name="id" id="id" value='@_form("id").value' />
+<input type="hidden" name="version" id="version" value='@_form("version").value' />
+<input type="hidden" name="par1Id" value='@_form("par1Id").value' />
+<input type="hidden" name="par2Id" value='@_form("par2Id").value' />
+<input type="hidden" name="par3Id" value='@_form("par3Id").value' />
+<input type="hidden" name="par4Id" value='@_form("par4Id").value' />
+<input type="hidden" name="par5Id" value='@_form("par5Id").value' />
+
+@inputText(_form("name"),
+	'_label -> Messages("name"),
+	'class -> "input-large",
+	'maxlength -> "30"
+)

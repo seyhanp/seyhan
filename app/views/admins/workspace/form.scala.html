@@ -1,0 +1,52 @@
+@(_form: Form[AdminWorkspace])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.basic_form() {
+
+	@tools.imports.forms_header(
+		_form("id").value,
+		enums.Right.CALISMA_ALANI,
+		admin.routes.Workspaces.remove(if(_form("id").value != null && ! _form("id").value.isEmpty()) _form("id").value.toInt else -1),
+		! "1".equals(_form("id").value)
+	)
+
+	@helper.form(action = admin.routes.Workspaces.save, 'class-> "form-horizontal zell", 'id-> "mainFieldsForm") {
+
+		@tools.imports.base_hidden_fields(_form)
+
+		<fieldset>
+			@inputText(_form("name"),
+				'_label -> Messages("name"),
+				'class -> "input-xlarge",
+				'maxlength -> "30"
+			)
+
+			@tools.components.date_range(_form)
+
+			@select(_form("hasDateRestriction"),
+				options(Options.yesno),
+				'class -> "input-small",
+				'_label -> (Messages("date") + " " + Messages("has_restriction"))
+			)
+
+			@inputText(_form("description"),
+				'_label -> Messages("description"),
+				'class -> "input-xxlarge",
+				'maxlength -> "50"
+			)
+
+			@select(_form("isActive"),
+				options(Options.yesno),
+				'class -> "input-small",
+				'_label -> Messages("is_active")
+			)
+
+		</fieldset>
+
+		@tools.templates.form_footer_bar(enums.Right.CALISMA_ALANI, _form("id").value)
+
+	}
+
+}

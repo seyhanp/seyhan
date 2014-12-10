@@ -1,0 +1,21 @@
+@(currentPage: meta.PageExtend[StockDepot])
+
+@Controller = {
+	<script type="text/javascript">
+		var controller = jsRoutes.controllers.stock.Depots;
+	</script>
+}
+
+@tools.templates.ajax_index(Controller) {
+
+	@tools.templates.ajax_form(
+		right = enums.Right.STOK_DEPO_TANITIMI,
+		saveAction = stock.routes.Depots.save
+	)
+
+	<div id=list>
+		@list(currentPage)
+	</div>
+
+}
+	

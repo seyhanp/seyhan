@@ -1,0 +1,25 @@
+@(sort: enums.ChqbllSort)
+
+<div id="modal-selection" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true" tabindex="-1">×</button>
+		<div id="modal-title">
+			<h4>@Messages(sort.key)</h4>
+		</div>
+	</div>
+
+	<div class="modal-body">
+		@helper.form(action = chqbll.routes.AjaxService.search, 'class-> "form-horizontal", 'id -> "selectionForm") {
+			<div id="selection_form_fields"></div>
+			<div id="selection_search_result" style="margin-top:10px"></div>
+		}
+	</div>
+
+	<div class="modal-footer">
+		<button id="submitSaveBtn" class="btn btn-primary" data-dismiss="modal" aria-hidden="true" 
+			onclick="selection_transfer()">@Messages("transfer.selection")</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true" onclick="selection_clear()">@Messages("close")</button>
+	</div>
+	
+</div>

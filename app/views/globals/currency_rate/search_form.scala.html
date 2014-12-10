@@ -1,0 +1,13 @@
+@(_form: Form[models.search.CurrencyRateSearchParam])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.search_form(_form, global.routes.CurrencyRates.list(), "currency_rates") {
+
+	@inputText(_form("date"),
+		'_label -> Messages("date"),
+		'class -> "input-small date"
+	)
+
+}

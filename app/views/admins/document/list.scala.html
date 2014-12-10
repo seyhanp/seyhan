@@ -1,0 +1,41 @@
+@(currentPage: meta.PageExtend[AdminDocument])
+
+@addNewActions() = {
+	<div class='btn-group'>
+		<button class='btn btn-success dropdown-toggle' data-toggle='dropdown' style="margin-top:7px;">
+			@Messages("add.new", Messages("document")) <span class='caret'></span>
+		</button>
+		<ul class='dropdown-menu'>
+			<li><a href=@admin.routes.Documents.create(enums.Module.contact.name())>@Messages("receiptOf", Messages(enums.Module.contact.key))</a></li>
+			<li><a href=@admin.routes.Documents.create(enums.Module.safe.name())>@Messages("receiptOf", Messages(enums.Module.safe.key))</a></li>
+			<li><a href=@admin.routes.Documents.create(enums.Module.bank.name())>@Messages("receiptOf", Messages(enums.Module.bank.key))</a></li>
+			<li class='divider'></li>
+			<li><a href=@admin.routes.Documents.create(enums.Module.stock.name())>@Messages("receiptOf", Messages(enums.Module.stock.key))</a></li>
+			<li><a href=@admin.routes.Documents.create(enums.Module.order.name())>@Messages("receiptOf", Messages(enums.Module.order.key))</a></li>
+			<li><a href=@admin.routes.Documents.create(enums.Module.waybill.name())>@Messages("receiptOf", Messages(enums.Module.waybill.key))</a></li>
+			<li><a href=@admin.routes.Documents.create(enums.Module.invoice.name())>@Messages("receiptOf", Messages(enums.Module.invoice.key))</a></li>
+			<li class='divider'></li>
+			<li><a href=@admin.routes.Documents.screate(enums.Module.cheque.name(), "cheque_payroll")>@Messages("receiptOf", Messages("cheque_payroll"))</a></li>
+			<li><a href=@admin.routes.Documents.screate(enums.Module.cheque.name(), "cheque_transaction")>@Messages("receiptOf", Messages("cheque_transaction"))</a></li>
+			<li><a href=@admin.routes.Documents.screate(enums.Module.cheque.name(), "cheque_partial")>@Messages("receiptOf", Messages("cheque_partial"))</a></li>
+			<li class='divider'></li>
+			<li><a href=@admin.routes.Documents.screate(enums.Module.bill.name(), "bill_payroll")>@Messages("receiptOf", Messages("bill_payroll"))</a></li>
+			<li><a href=@admin.routes.Documents.screate(enums.Module.bill.name(), "bill_transaction")>@Messages("receiptOf", Messages("bill_transaction"))</a></li>
+			<li><a href=@admin.routes.Documents.screate(enums.Module.bill.name(), "bill_partial")>@Messages("receiptOf", Messages("bill_partial"))</a></li>
+		</ul>
+	</div>
+}
+
+@tools.templates.basic_list(
+	currentPage = currentPage,
+	right = enums.Right.BELGE_TASARIMI,
+	
+	title = Messages("designs"),
+	label = Messages("design"),
+	link = admin.routes.Documents.list().url,
+
+	insteadof_addNewButton = addNewActions(),
+	toBottomof_page = upload_form(currentPage.getTotalRowCount()),
+
+	hasMultiplier = true
+)

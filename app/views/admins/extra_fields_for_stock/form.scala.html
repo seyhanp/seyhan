@@ -1,0 +1,26 @@
+@(_form: Form[AdminExtraFields])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.imports.base_hidden_fields(_form)
+<input type="hidden" id="idno" name="idno" value='@_form("idno").value'></input>
+<input type="hidden" id="distinction" name="distinction" value='stock'></input>
+
+@inputText(_form("name"),
+	'_label -> Messages("name"),
+	'class -> "input-large",
+	'maxlength -> "12"
+)
+
+@select(_form("isRequired"),
+	options(Options.yesno),
+	'class -> "input-small",
+	'_label -> Messages("constraint.required")
+)
+
+@select(_form("isActive"),
+	options(Options.yesno),
+	'class -> "input-small",
+	'_label -> Messages("is_active")
+)

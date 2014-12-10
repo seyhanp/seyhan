@@ -1,0 +1,94 @@
+@label = @{Messages("trans.point")}
+@right = @{enums.Right.GNEL_ISLEM_NOKTALARI}
+
+@ScriptBlock = {
+	<script type="text/javascript">
+		var controller = jsRoutes.controllers.global.TransPoints;
+	</script>
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/crud/simple_category_man.js")"></script>
+}
+
+@tools.templates.tree_form(ScriptBlock) {
+
+	@tools.templates.ajax_form(
+		right = enums.Right.GNEL_ISLEM_NOKTALARI,
+		saveAction = global.routes.TransPoints.save
+	)
+	
+	<div class="span6">
+		<div class="form-title">
+			<span style="margin-left:5px">@Messages(right.key)</span>
+		</div>
+
+		<div id="ccp" class="alert alert-success">
+			<a type="button" class="close" onclick="clearCCPBlock()">&times;</a>
+	
+			<input type="hidden" id="ccp_selected_id" />
+			<input type="hidden" id="ccp_op" />
+	
+			<span id="ccp_msg"></span>
+		</div>
+	
+		<div id="tree" style="height:400px"></div>
+	</div>
+	
+	<div class="span1">
+		@if(utils.AuthManager.hasPrivilege(right, enums.RightLevel.Insert)) {
+			<p>
+				<div class='btn-group' style='width: 100%'>
+					<a class='btn btn-primary btn-small dropdown-toggle' data-toggle='dropdown' style='width: 100%' role='button'>
+						@Messages("add") <span class='caret'></span>
+					</a>
+					<ul class='dropdown-menu'>
+						<li><a href="#modal-form" onclick="create(false)" >@Messages("under_selected_element", Messages("add.new", label))</a></li>
+						<li class='divider'></li>
+						<li><a href="#modal-form" onclick="create(true)" >@Messages("add.new.be.a", Messages("root_element"),label)</a></li>
+					</ul>
+				</div>
+			</p>
+		}
+	
+		<p>
+			<a role="button" class="btn btn-info btn-small" style='width: 100%'
+				onclick="edit()" >@Messages(if(utils.AuthManager.hasPrivilege(right, enums.RightLevel.Update)) "edit" else "show")</a>
+		</p>
+	
+		@if(utils.AuthManager.hasPrivilege(right, enums.RightLevel.Delete)) {
+			<p><a role="button" class="btn btn-danger btn-small" style='width: 100%' onclick='remowe();'>@Messages("remove")</a></p>
+		}
+	
+		<p style="margin-bottom: 3cm;"></p>
+	
+		@if(utils.AuthManager.hasPrivilege(right, enums.RightLevel.Update)) {
+			<p>
+				<div class='btn-group' style='width: 100%'>
+					<a class='btn btn-small dropdown-toggle' data-toggle='dropdown' style='width: 100%' role='button'>
+						@Messages("edit.copy") <span class='caret'></span>
+					</a>
+					<ul class='dropdown-menu'>
+						<li><a onclick="kopy(1)" >@Messages("copy.whole.node")</a></li>
+						<li><a onclick="kopy(2)" >@Messages("copy.only.title")</a></li>
+						<li><a onclick="kopy(3)" >@Messages("copy.only.children")</a></li>
+					</ul>
+				</div>
+			</p>
+			<p><a role="button" class="btn btn-small" onclick="paste()" style='width: 100%'>@Messages("edit.paste")</a></p>
+			<p><a role="button" class="btn btn-small" onclick="cut()" style='width: 100%'>@Messages("edit.cut")</a></p>
+		}
+	
+	</div>
+	
+	<script type="text/javascript">
+		var methodName = "get_trans_point_tree";
+		var deleteQuestion = '@Messages("will.delete.empty")';
+		var catNotFound = '@Messages("not.found", label)';
+		var disconnectMsg = '@Messages("not.authorized.or.disconnect")';
+		var errorTitle = '@Messages("error")';
+		var editKut = '@Messages("edit.kut")';
+		var editCopied = '@Messages("edit.copied")';
+	
+		var hasUpdateRight = @(utils.AuthManager.hasPrivilege(right, enums.RightLevel.Update));
+		var hasInsertRight = @(utils.AuthManager.hasPrivilege(right, enums.RightLevel.Insert));
+	</script>
+
+}

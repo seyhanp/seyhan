@@ -1,0 +1,7 @@
+@(currentPage: meta.PageExtend[InvoiceTransSource])
+
+@tools.templates.ajax_list(
+	currentPage = currentPage,
+	label = Messages("invoice.trans.source"),
+	right = enums.Right.FATR_FATURA_KAYNAKLARI
+)

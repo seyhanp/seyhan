@@ -1,0 +1,13 @@
+@(form: Form[_], hasAddNewButton:Boolean = true)
+
+@standart(form, SafeExpense.options, enums.Right.KASA_GIDER_TANITIMI, "expense", Messages("safe.expense"), hasAddNewButton=hasAddNewButton) {
+
+	<script type="text/javascript">
+		function setSimpleControllerFor_expense() {
+			simple_combo_type = 0;
+			simple_selector = "#expense_id";
+			simple_controller = jsRoutes.controllers.safe.Expenses;
+		}
+	</script>
+
+}

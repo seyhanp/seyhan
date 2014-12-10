@@ -1,0 +1,14 @@
+@(form: Form[_], hasBlankOption: Boolean = true, hasAddNewButton:Boolean = true)
+
+@standart(form, StockDepot.options, enums.Right.STOK_DEPO_TANITIMI, "depot", Messages("depot"), hasBlankOption, hasAddNewButton=hasAddNewButton) {
+
+	<script type="text/javascript">
+		function setSimpleControllerFor_depot() {
+			simple_combo_type = 1;
+			has_simple_blank_option = @hasBlankOption;
+			simple_selector = "#depot_id";
+			simple_controller = jsRoutes.controllers.stock.Depots;
+		}
+	</script>
+
+}

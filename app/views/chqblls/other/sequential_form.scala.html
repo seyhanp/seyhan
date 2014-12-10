@@ -1,0 +1,111 @@
+@(_form: Form[models.ChqbllPayrollDetail], sort: enums.ChqbllSort, isCustomer: Boolean)
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@inputText(_form("portfolioNo"),
+	'_label -> Messages("piece"),
+	'class -> "input-small number",
+	'maxlength -> "2"
+)
+
+@inputText(_form("rowNo"),
+	'_label -> Messages("distance"),
+	'class -> "input-small number",
+	'maxlength -> "2"
+)
+
+@select(_form("dueYear"),
+	options("0"->Messages("period.daily"), "1"->Messages("period.monthly"), "2"->Messages("period.weekly")),
+	'class -> "input-small",
+	'_label -> Messages("period")
+)
+
+@inputText(_form("dueDate"),
+	'_label -> Messages("maturity"),
+	'class -> "input-small date"
+)
+
+@inputText(_form("amount"),
+	'_label -> Messages("amount"),
+	'class -> "input-small currency"
+)
+
+@if(global.Profiles.chosen().gnel_hasExchangeSupport) {
+	@select(_form("excCode"),
+		options(Options.currencies),
+		'class -> "input-small",
+		'_label -> Messages("currency")
+	)
+}
+
+@inputText(_form("serialNo"),
+	'_label -> Messages("serial.no"),
+	'class -> "input-medium"
+)
+
+@if(isCustomer) {
+	@inputText(_form("owner"),
+		'_label -> Messages("owner"),
+		'class -> "input-xlarge"
+	)
+}
+
+@inputText(_form("paymentPlace"),
+	'_label -> Messages("payment_place"),
+	'class -> "input-large"
+)
+
+@if(sort.equals(enums.ChqbllSort.Cheque)) {
+	@if(! isCustomer) {
+		@tools.dropdowns.bank(_form, hasAddNewButton=false)
+	} else {
+		@inputText(_form("bankName"),
+			'_label -> Messages("bank.name"),
+			'class -> "input-large"
+		)
+		@inputText(_form("bankBranch"),
+			'_label -> Messages("branch"),
+			'class -> "input-large"
+		)
+		@inputText(_form("bankAccountNo"),
+			'_label -> Messages("account.no"),
+			'class -> "input-large"
+		)
+		@inputText(_form("correspondentBranch"),
+			'_label -> Messages("correspondent_branch"),
+			'class -> "input-large"
+		)
+	}
+} else {
+	@if(isCustomer && global.Profiles.chosen().cksn_hasSuretyFields) {
+		@inputText(_form("surety"),
+			'_label -> Messages("surety"),
+			'class -> "input-large"
+		)
+		@inputText(_form("suretyAddress"),
+			'_label -> Messages("address"),
+			'class -> "input-xlarge"
+		)
+		@inputText(_form("suretyPhone1"),
+			'_label -> Messages("phoneX", "1"),
+			'class -> "input-large"
+		)
+		@inputText(_form("suretyPhone2"),
+			'_label -> Messages("phoneX", "2"),
+			'class -> "input-large"
+		)
+	}
+}
+
+@select(_form("cbtype.id"),
+	options(models.ChqbllType.options(sort)),
+	'class -> "input-medium-plus",
+	'_label -> Messages("type"),
+	'_default -> Messages("choose")
+)
+
+@inputText(_form("description"),
+	'_label -> Messages("description"),
+	'class -> "input-xlarge"
+)

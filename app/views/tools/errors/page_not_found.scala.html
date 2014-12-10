@@ -1,0 +1,24 @@
+@(uri : String)
+
+<html>
+	<head>
+		<title>Seyhan</title>
+		<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+		<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+	</head>
+	<body>
+		<div class="hero-unit center">
+			<h2><font color="red">Error 404</font></h2>
+				@uri
+			<h2>bulunamadı!</h2>
+			<br />
+			<p>
+				Erişmek istediğiniz sayfa bulunamadı, bu durumda webmaster ile iletişime geçebilir ya da tekrar deneyebilirsiniz.
+			</p>
+			<br />
+			<a class="btn btn-large btn-info" href="javascript: history.go(-1)">Bir önceki sayfaya git!</a>
+			<a href="/" class="btn btn-large btn-info"><iclass="icon-home icon-white"></i> Ana sayfaya dön!</a>
+		</div>
+	</body>
+</html>
+		

@@ -1,0 +1,14 @@
+@(form: Form[_], hasBlankOption: Boolean = true, hasAddNewButton:Boolean = true)
+
+@standart(form, Safe.options, enums.Right.KASA_TANITIMI, "safe", Messages("safe"), hasBlankOption, hasAddNewButton=hasAddNewButton) {
+
+	<script type="text/javascript">
+		function setSimpleControllerFor_safe() {
+			simple_combo_type = 1;
+			has_simple_blank_option = @hasBlankOption;
+			simple_selector = "#safe_id";
+			simple_controller = jsRoutes.controllers.safe.Safes;
+		}
+	</script>
+
+}

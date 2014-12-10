@@ -1,0 +1,13 @@
+@(form: Form[_], direction: String)
+
+@standart(form, BankTransSource.crossOptions(direction), enums.Right.BANK_ISLEM_KAYNAKLARI, "refBankTransSource", Messages("trans.source")) {
+
+	<script type="text/javascript">
+		function setSimpleControllerFor_refBankTransSource() {
+			simple_combo_type = 2;
+			simple_selector = "#refBankTransSource_id";
+			simple_controller = jsRoutes.controllers.bank.TransSources;
+		}
+	</script>
+
+}

@@ -1,0 +1,34 @@
+@(form: Form[_], rightBind:meta.RightBind, name: String = "transNo")
+
+@***********************************************************************
+* Generate document no input according twitter bootsrap rules *
+***********************************************************************@
+
+<div class="control-group inline @if(form(name).hasErrors) {error}">
+<label class="control-label" for="@name">@Messages("trans.no")</label>
+	<div class="controls inline">
+		<input type="text" id="@name" name="@name" class="input-medium" value="@form(name).value" maxlength="20"/>
+		@if(global.Profiles.chosen().gnel_docNoIncType.equals(enums.DocNoIncType.Half_Automatic)) {
+			<a id="increase_btn" class="btn btn-mini" href="#" style="margin-left:-5px">
+				<i class="icon-play-circle" style="margin-top:1px"></i>
+			</a>
+
+			<script type="text/javascript">
+				$('#increase_btn').click(function() {
+					$.get('@controllers.routes.AjaxServices.findLastTransNo(rightBind)',
+						function(data) {
+							$('#@name').val(data);
+						}
+					);
+				});
+			</script>
+		}
+		@if(form(name).hasErrors) {
+			<span class="errors label label-warning">
+				@for(error <- form(name).errors) {
+					@utils.TemplateHelper.convertMessage(error)
+				}
+			</span>
+		}
+	</div>
+</div>

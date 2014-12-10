@@ -1,0 +1,13 @@
+@(form: Form[_], hasAddNewButton:Boolean = true)
+
+@standart(form, ContactCategory.options, enums.Right.CARI_KATEGORI_TANITIMI, "category", Messages("category"), hasAddNewButton=hasAddNewButton) {
+
+	<script type="text/javascript">
+		function setSimpleControllerFor_category() {
+			simple_combo_type = 0;
+			simple_selector = "#category_id";
+			simple_controller = jsRoutes.controllers.contact.Categories;
+		}
+	</script>
+
+}

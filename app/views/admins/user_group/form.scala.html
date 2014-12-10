@@ -1,0 +1,103 @@
+@(_form: Form[AdminUserGroup])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@colWidth = {
+width:calc(100% - 5px)
+}
+
+@tools.templates.basic_form() {
+
+	@tools.imports.forms_header(
+		_form("id").value,
+		enums.Right.KULLANICI_GURUPLARI,
+		admin.routes.UserGroups.remove(if(_form("id").value != null && ! _form("id").value.isEmpty()) _form("id").value.toInt else -1)
+	)
+	
+	@helper.form(action = admin.routes.UserGroups.save, 'id -> "itemForm", 'class-> "form-horizontal zell", 'id-> "mainFieldsForm") {
+
+		@tools.imports.base_hidden_fields(_form)
+
+		<fieldset>
+			@inputText(_form("name"),
+				'_label -> Messages("name"),
+				'class -> "input-medium",
+				'maxlength -> "30"
+			)
+	
+			@inputText(_form("description"),
+				'_label -> Messages("description"),
+				'class -> "input-xlarge",
+				'maxlength -> "50"
+			)
+
+			@select(_form("editingLimit"),
+				options(enums.UserEditingLimit.options),
+				'class -> "input-xlarge",
+				'_label -> Messages("editing_limit")
+			)
+
+			@inputText(_form("editingTimeout"),
+				'_label -> Messages("editing_timeout"),
+				'class -> "input-small number",
+				'maxlength -> "3",
+				'_help -> Messages("editing_timeout.description")
+			)
+
+			@select(_form("hasEditDifDate"),
+				options(Options.yesno),
+				'class -> "input-small",
+				'_label -> Messages("editing_difdate"),
+				'_help -> Messages("editing_difdate.description")
+			)
+
+			<div class="control-group" style="margin-top:10px">
+				<label class="control-label" for="groupTable">@Messages("workspaces")</label>
+				<div id='groupTable' class="controls">
+				
+					@if(_form.hasErrors) {
+						@if(_form.errors.contains("roles")) {
+							 @for(error <- _form.errors.get("roles")) {
+								<span style="margin-left: 40px" class="label label-warning">@error.message().toString()</span><br/>
+							 }
+						}
+					}
+			
+					<table class='autoTable'>
+						<thead>
+							<tr>
+								<th style="width:130px">@Messages("workspace")</th>
+								<th style="width:350px">@Messages("description")</th>
+								<th style="width:180px">@Messages("role")</th>
+							</tr>
+						</thead>
+						<tbody>
+							@repeatWithIndex(_form("roles"), min=0, add=0) { (role, index) =>
+								<tr>
+									<td>
+										<input type="text" readonly value="@role("workspace.name").value" style="@colWidth;"/>
+										<input type="hidden" id="roles[@index]_id" name="roles[@index].id" value="@role("id").value" />
+										<input type="hidden" id="roles[@index]_workspace_id" name="roles[@index].workspace.id" value="@role("workspace.id").value" style="@colWidth;"/>
+									</td>
+									<td><input type="text" readonly value="@role("workspace.description").value" style="@colWidth;"/></td>
+									<td>
+										<select id="roles[@index]_userRole_id" name="roles[@index].userRole.id" style="width:100%">
+							                <option class="blank" value="">@Messages("choose")</option>
+								            @AdminUserRole.options.map { v =>
+								                <option value="@v._1" @if(role("userRole.id").value == Some(v._1)){selected}>@v._2</option>
+								            }
+								        </select>
+									</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+		</fieldset>
+
+		@tools.templates.form_footer_bar(enums.Right.KULLANICI_GURUPLARI, _form("id").value)
+
+	}
+
+}

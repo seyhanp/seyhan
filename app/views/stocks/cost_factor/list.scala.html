@@ -1,0 +1,7 @@
+@(currentPage: meta.PageExtend[StockCostFactor])
+
+@tools.templates.ajax_list(
+	currentPage = currentPage,
+	label = Messages("cost_factor"),
+	right = enums.Right.STOK_MALIYET_FAKTORLERI
+)

@@ -1,0 +1,43 @@
+@(_form: Form[bank.reports.TransactionList.Parameter])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.report_form(bank.reports.routes.TransactionList.generate(),enums.Right.BANK_ISLEM_LISTESI) {
+
+	@tools.dropdowns.bank(_form, hasAddNewButton=false)
+
+	@select(_form("transType"),
+		options(Options.transSources(enums.Module.bank)),
+		'class -> "input-medium",
+		'_label -> Messages("trans.type"),
+		'_default -> Messages("choose")
+	)
+
+	@inputText(_form("transNo"),
+		'_label -> Messages("trans.no"),
+		'class -> "input-small"
+	)
+
+	@tools.components.date_range(_form)
+	@tools.dropdowns.bank_trans_source(_form, hasAddNewButton=false)
+	@tools.dropdowns.bank_expense(_form, hasAddNewButton=false)
+	@tools.components.trans_point_select(_form)
+	@tools.components.private_code_select(_form)
+
+	@if(global.Profiles.chosen().gnel_hasExchangeSupport) {
+		@select(_form("excCode"),
+			options(Options.currencies),
+			'class -> "input-small",
+			'_label -> Messages("currency"),
+			'_default -> Messages("choose")
+		)
+	}
+
+	@select(_form("orderBy"),
+		options(bank.reports.TransactionList.Parameter.options),
+		'class -> "input-medium",
+		'_label -> Messages("orderby")
+	)
+
+}

@@ -1,0 +1,55 @@
+@(_form: Form[models.temporal.PrintData], right: enums.Right)
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+<fieldset>
+
+	<input type="hidden" id="right" name="right" value='@right' />
+	<input type="hidden" id="modelId" name="modelId" value='@_form("modelId").value' />
+
+	@select(_form("document.id"),
+		options(AdminDocument.options(right)),
+		'_label -> Messages("document")
+	)
+
+	@select(_form("target"),
+		options(AdminDocumentTarget.options()),
+		'_label -> Messages("target"),
+		'onchange -> "showInfo()",
+		'onkeyup -> "showInfo()"
+		
+	)
+
+    <dl class="dl-horizontal">
+    	<dt>@Messages("location")</dt><dd id="locationInfo"></dd>
+    	<dt>@Messages("print_target.type")</dt><dd id="targetTypeInfo"></dd>
+    	<dt>@Messages("path")</dt><dd id="pathInfo"></dd>
+    	<dt>@Messages("description")</dt><dd id="descriptionInfo"></dd>
+    </dl>
+</fieldset>
+
+<script type="text/javascript">
+	var translator = {
+		'local': '@Messages("local")'.toUpperCase(),
+		'remote': '@Messages("remote")'.toUpperCase(),
+		'success': '@Messages("printed.success")',
+		'error': '@Messages("printed.fail")'
+	};
+
+	function showInfo() {
+		translator['remote']
+		var choose = $('#target option:selected').val();
+		if (choose != undefined && choose.length > 0) {
+			var parts = choose.split("|"); 
+			var isLocal = parseBoolean(parts[1]);
+	
+			$('#locationInfo').html(translator[isLocal ? 'local' : 'remote']);
+			$('#targetTypeInfo').html(parts[2]);
+			$('#pathInfo').html(parts[3]);
+			$('#descriptionInfo').html(parts[4]);
+		}
+	}
+
+	showInfo();
+</script>

@@ -1,0 +1,13 @@
+@(form: Form[_])
+
+@standart(form, Bank.options, enums.Right.BANK_HESAP_TANITIMI, "refBank", Messages("bank.account"), false) {
+
+	<script type="text/javascript">
+		function setSimpleControllerFor_refBank() {
+			simple_combo_type = 1;
+			simple_selector = "#refBank_id";
+			simple_controller = jsRoutes.controllers.bank.Banks;
+		}
+	</script>
+
+}

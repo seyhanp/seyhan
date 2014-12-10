@@ -1,0 +1,83 @@
+@(form: Form[_], baseTag: String, label: String, refUrl: String)
+
+<input type="hidden" id="@(baseTag)_id" name="@(baseTag).id" value='@form(baseTag + ".id").value' />
+<input type="hidden" id="@(baseTag)_name" name="@(baseTag).name" value='@form(baseTag + ".name").value' />
+
+<div class="control-group">
+	<label class="control-label">@label</label>
+	<div class="dropdown inline controls">
+		<a class="btn dropdown-toggle dropdown-tree" href="#" data-toggle="dropdown" id="@(baseTag)DDButton">
+			<span id="@(baseTag)DD"></span> <b class='caret'></b>
+		</a>
+		<div class="dropdown-menu">
+			<li>
+				<div id="@(baseTag)Tree" style="height:200px">
+			</li>
+			<li>
+				<div style="height: 19px; margin: 10px 5px 0px">
+					<a class="btn btn-mini" href="#" style="width:40%;" id="@(baseTag)CleanBtn" >@Messages("clean")</a>
+					<a class="btn btn-mini" href="#" style="width:38%;">@Messages("close")</a>
+				</div>
+			</li>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	var choose = '@Messages("choose")';
+	
+	function firstInitForDDTS() {
+		$("#@(baseTag)Tree").dynatree({
+			clickFolderMode: 3,
+		    autoCollapse: true,
+			fx: { height: "toggle", duration: 100 },
+			initAjax: {url: '@refUrl'},
+		    onActivate: function(node) {
+		        $("#@(baseTag)_id").val(node.data.key);
+		        $("#@(baseTag)DD").html(node.data.title);
+		        $("#@(baseTag)_name").val(node.data.title);
+		    }
+		});
+	
+		$('#@(baseTag)CleanBtn').on('click', function() {
+			$("#@(baseTag)_id").val(null);
+	        $("#@(baseTag)DD").html(choose);
+	        $("#@(baseTag)_name").val(null);
+		});
+		
+		$('#@(baseTag)DDButton').on('click', function() {
+			var node = $("#@(baseTag)Tree").dynatree('getTree').getNodeByKey($("#@(baseTag)_id").val());
+			if (node != undefined) {
+				node.activate();
+				node.expand(true);
+			}
+		});
+	
+		$('#@(baseTag)Tree').click(function(e) {
+		    e.stopPropagation();
+	    });
+	}
+
+	var elName = $("#@(baseTag)_name").val();
+	if (elName.length <= 0) {
+		$("#@(baseTag)DD").html(choose);
+	} else {
+		$("#@(baseTag)DD").html(elName);
+	}
+
+	if(window.attachEvent) {
+	    window.attachEvent('onload', firstInitForDDTS);
+	} else {
+	    if(window.onload) {
+	        var curronload = window.onload;
+	        var newonload = function() {
+	            curronload();
+	            firstInitForDDTS();
+	        };
+	        window.onload = newonload;
+	    } else {
+	        window.onload = firstInitForDDTS;
+	    }
+	}	
+
+</script>

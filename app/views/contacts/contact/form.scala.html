@@ -1,0 +1,203 @@
+@(_form: Form[Contact])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@investigationBlock = {
+	@if(_form("id").value != null && ! _form("id").value.isEmpty()) {
+		<a class="btn btn-info pull-left" onclick="investigation()">@Messages("inspect")</a>
+	}
+}
+
+@tools.templates.basic_form(ScriptBlock) {
+
+	@tools.imports.forms_header(
+		_form("id").value,
+		enums.Right.CARI_TANITIMI,
+		contact.routes.Contacts.remove(if(_form("id").value != null && ! _form("id").value.isEmpty()) _form("id").value.toInt else -1),
+		labelKey="contact.account"
+	)
+
+	@helper.form(action = contact.routes.Contacts.save, 'class-> "form-horizontal zell", 'id-> "mainFieldsForm") {
+
+		@tools.imports.base_hidden_fields(_form)
+
+		<fieldset>
+
+			@tools.components.code_input(_form, "contact", Messages("contact.code"))
+
+			@inputText(_form("name"),
+				'_label -> Messages("contact.name"),
+				'class -> "input-xlarge",
+				'maxlength -> "100"
+			)
+
+			@inputText(_form("relevant"),
+				'_label -> Messages("contact.relevant"),
+				'class -> "input-xlarge",
+				'maxlength -> "30"
+			)
+
+			@inputText(_form("phone"),
+				'_label -> Messages("phone"),
+				'class -> "input-medium",
+				'maxlength -> "15"
+			)
+			@inputText(_form("fax"),
+				'_label -> "Fax",
+				'class -> "input-medium",
+				'maxlength -> "15"
+			)
+			@inputText(_form("mobilePhone"),
+				'_label -> Messages("mobile_phone"),
+				'class -> "input-medium",
+				'maxlength -> "15"
+			)
+
+			@tools.dropdowns.contact_category(_form)
+
+			@select(_form("priceList.id"),
+				options(StockPriceList.options),
+				'class -> "input-medium-plus",
+				'_label -> Messages("stock.price_list"),
+				'_default -> Messages("choose")
+			)
+
+			@if(global.Profiles.chosen().gnel_hasExchangeSupport) {
+				@select(_form("excCode"),
+					options(Options.currencies),
+					'class -> "input-small",
+					'_label -> Messages("currency"),
+					'_default -> Messages("free")
+				)
+			}
+
+			@select(_form("isActive"),
+				options(Options.yesno),
+				'class -> "input-small",
+				'_label -> Messages("is_active")
+			)
+
+		</fieldset>
+
+		<div class="tabbable">
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="#connection" data-toggle="tab">@Messages("connection")</a></li>
+				<li><a href="#extra" data-toggle="tab">@Messages("extra")</a></li>
+				<li><a href="#notes" data-toggle="tab">@Messages("notes")</a></li>
+			</ul>
+			<div class="tab-content">
+
+				<div id="connection" class="tab-pane active">
+					<fieldset>
+
+						@inputText(_form("address1"),
+							'_label -> (Messages("address") + " 1"),
+							'class -> "input-xlarge",
+							'maxlength -> "100"
+						)
+
+						@inputText(_form("address2"),
+							'_label -> (Messages("address") + " 2"),
+							'class -> "input-xlarge",
+							'maxlength -> "100"
+						)
+
+						@inputText(_form("city"),
+							'_label -> Messages("city"),
+							'class -> "input-medium",
+							'maxlength -> "20"
+						)
+
+						@inputText(_form("country"),
+							'_label -> Messages("country"),
+							'class -> "input-medium",
+							'maxlength -> "20"
+						)
+
+						@inputText(_form("email"),
+							'_label -> "Email",
+							'class -> "input-xlarge",
+							'maxlength -> "100"
+						)
+
+						@inputText(_form("website"),
+							'_label -> Messages("contact.website"),
+							'class -> "input-xlarge",
+							'maxlength -> "100"
+						)
+
+					</fieldset>
+				</div>
+
+				<div id="extra" class="tab-pane">
+					<fieldset>
+						@inputText(_form("taxOffice"),
+							'_label -> Messages("contact.tax.office"),
+							'class -> "input-medium",
+							'maxlength -> "20"
+						)
+						@inputText(_form("taxNumber"),
+							'_label -> Messages("contact.tax.no"),
+							'class -> "input-medium",
+							'maxlength -> "15"
+						)
+						@inputText(_form("tcKimlik"),
+							'_label -> "TC Kimlik No",
+							'class -> "input-medium number",
+							'maxlength -> "11"
+						)
+
+						@for(aef <- models.AdminExtraFields.listAll(enums.Module.contact.name())) {
+							@tools.dropdowns.contact_extra_field(_form, aef.id, aef.idno, aef.name, aef.isRequired)
+						}
+
+						@tools.dropdowns.sale_seller(_form)
+
+						@select(_form("status"),
+							options(enums.ContactStatus.options),
+							'class -> "input-medium-plus",
+							'_label -> Messages("status"),
+							'_default -> Messages("choose")
+						)
+					</fieldset>
+				</div>
+
+				<div id="notes" class="tab-pane">
+					<textarea id="note" name="note" style="width:97%; height: 260px">@if(_form("note").value != null) {@Html(_form("note").value)}</textarea>
+					<p></p>
+				</div>
+			</div>
+		</div>
+
+		@tools.templates.form_footer_bar(enums.Right.CARI_TANITIMI, _form("id").value, forLeft = investigationBlock)
+
+	}
+
+}
+
+@ScriptBlock = {
+	<script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+	<script type="text/javascript">
+		tinymce.init({
+		    selector: "textarea",
+		    menubar: false,
+		    statusbar: false,
+	        toolbar_items_size: 'small',
+		    toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+		});
+
+		@if(_form("id").value != null && ! _form("id").value.isEmpty()) {
+			function investigation() {
+				$.getJSON('/contacts/investigation/'+@_form("id").value,
+					function(data) {
+						$("#inv_title").html('<h4>'+data.title+'</h4>');
+						$("#inv_body").html(data.body);
+		
+						$('#inv_modal\\-form').modal('show');
+					}
+				);
+			}
+		}
+	</script>
+}

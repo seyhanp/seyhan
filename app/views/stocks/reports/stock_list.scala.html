@@ -1,0 +1,53 @@
+@(_form: Form[stock.reports.StockList.Parameter])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.report_form(stock.reports.routes.StockList.generate(),enums.Right.STOK_LISTESI) {
+
+	@inputText(_form("providerCode"),
+		'_label -> Messages("provider_code"),
+		'class -> "input-medium",
+		'maxlength -> "30"
+	)
+
+	@for(aef <- models.AdminExtraFields.listAll(enums.Module.stock.name())) {
+		@tools.dropdowns.stock_extra_field(_form, aef.id, aef.idno, aef.name, aef.isRequired, hasAddNewButton=false)
+	}
+
+	@tools.components.stock_category_select(_form)
+
+	@select(_form("price"),
+		options(Options.stockPrices),
+		'class -> "input-medium",
+		'_label -> Messages("price")
+	)
+
+	@if(global.Profiles.chosen().gnel_hasExchangeSupport) {
+		@select(_form("excCode"),
+			options(Options.currencies),
+			'class -> "input-small",
+			'_label -> Messages("currency"),
+			'_default -> Messages("choose")
+		)
+	}
+
+	@select(_form("isTaxInclude"),
+		options(Options.taxStatus),
+		'class -> "input-small",
+		'_label -> Messages("tax_status")
+	)
+
+	@inputText(_form("discountRate"),
+		'_label -> Messages("stock.discount_rate"),
+		'class -> "input-small rate",
+		'maxlength -> "5"
+	)
+
+	@select(_form("orderBy"),
+		options(stock.reports.StockList.Parameter.options),
+		'class -> "input-medium",
+		'_label -> Messages("orderby")
+	)
+
+}

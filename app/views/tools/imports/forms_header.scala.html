@@ -1,0 +1,52 @@
+@(id: String, right: enums.Right, link: play.api.mvc.Call, hasRemoveButton: Boolean = true, labelKey: String = null, subTitle: String = null)
+
+<div id="elseResLabel" class="alert alert-error" style="display: none;">
+	<strong>@Messages("alert"): </strong> @Messages("you.can.edit.only.yours")
+</div>
+
+<div style="height:29px;" class="form-title">
+	<legend>@Messages(if(labelKey == null) right.key else labelKey) @if(subTitle != null) {( @subTitle )}</legend>
+
+	<div class="pull-right">
+		@if(hasRemoveButton && id != null && ! id.isEmpty()) {
+			@if(utils.AuthManager.hasPrivilege(right, enums.RightLevel.Delete)) {
+				@helper.form(link, 'id -> "deleteForm", 'style -> "margin-top:-55px") {
+					<input id="submitRemoveBtn" style="float:right; width:45px;" class="btn btn-danger" value="@Messages("remove")" />
+				}
+
+				<script type="text/javascript">
+					var deleteForm = $('#deleteForm');
+					$('#submitRemoveBtn').on('click', function() {
+						bootbox.confirm('@Messages("will.delete", Messages(if(labelKey == null) right.key else labelKey))', function(result) {
+								if (result) {
+									deleteForm.submit();
+								}
+						});
+
+						return false;
+					});
+				</script>
+
+			}
+
+		}
+	</div>
+</div>
+
+@if(flash.containsKey("success")) {
+	<div id="successPanel">
+		<div class="alert alert-success">
+			<a class="close" data-dismiss="alert" onclick="$('#successPanel').html('')">x</a>
+			<strong>@Messages("info"): </strong> @flash.get("success")
+		</div>
+	</div>
+}
+
+@if(flash.containsKey("error")) {
+	<div id="errorPanel">
+		<div class="alert alert-error">
+			<a class="close" data-dismiss="alert" onclick="$('#errorPanel').html('')">x</a>
+			<strong>@Messages("error"): </strong> @flash.get("error")
+		</div>
+	</div>
+}

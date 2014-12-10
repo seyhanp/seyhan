@@ -1,0 +1,21 @@
+@(elements: helper.FieldElements)
+
+@**************************************************
+* Generate input according twitter bootsrap rules *
+**************************************************@
+<div class="control-group @if(elements.hasErrors) {error}">
+	<label class="control-label" for="@elements.id">@elements.label</label>
+	
+	<div class="controls inline">
+		@elements.input
+		<span style="color: red; font-size: 18px; font-weight: bold">
+			@if(elements.field.constraints.map(c => c._1).contains("constraint.required")) {*}
+		</span>
+		@if(elements.hasErrors) {
+			<span class="errors label label-warning">@elements.errors.mkString(", ")</span>
+		}
+		@if(elements.args.get('_help).size > 0) {
+			<span style="font-size:90%; color: blue;margin-bottom: 6px">@elements.args.get('_help)</span>
+		}
+	</div>
+</div>

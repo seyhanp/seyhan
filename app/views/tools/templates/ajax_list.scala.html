@@ -1,0 +1,164 @@
+@(
+	currentPage: meta.PageExtend[_],
+	right: enums.Right,
+	label: String,
+	title: String = null,
+
+	has_investigation: Boolean = false,
+	deleteWarningField: String = "name",
+	toRightof_addNew: Html = null,
+	toBottomof_page: Html = null,
+
+	is_admin_page: Boolean = false,
+	is_readonly: Boolean = false
+)
+
+@buildTitle(header: meta.GridHeader) = {
+	@if(header.isSortable) {
+		<a href="javascript:sortColumn('@header.fieldName')" style="color:red">
+			@header.title
+			<i id='@(header.fieldName.replaceAll("\\.", "\\_"))Icon' class="sortDirection" style="margin:1px 3px"></i>
+		</a>
+	} else {
+		@header.title
+	}
+}
+
+@if(flash.containsKey("success")) {
+	<div id="successPanel">
+		<div class="alert alert-success">
+			<a class="close" data-dismiss="alert" onclick="$('#successPanel').html('')">x</a>
+			<strong>@Messages("info"): </strong> @flash.get("success")
+		</div>
+	</div>
+}
+
+@if(flash.containsKey("error")) {
+	<div id="errorPanel">
+		<div class="alert alert-error">
+			<a class="close" data-dismiss="alert" onclick="$('#errorPanel').html('')">x</a>
+			<strong>@Messages("error"): </strong> @flash.get("error")
+		</div>
+	</div>
+}
+
+<div id="actions">
+	<div class="pull-left">
+		<h4>@if(title != null) {@title} else {@Messages(right.key) @Messages("listof")}</h4>
+	</div>
+
+	@if(! is_readonly && utils.AuthManager.hasPrivilege(right, enums.RightLevel.Insert)) {
+		<div class="pull-right inline">
+			<a href="#modal-form" role="button" class="btn btn-success" onclick="create()" style="margin-top:7px;">
+				@Messages("add.new", label)
+			</a>
+			 @if(toRightof_addNew != null) { @toRightof_addNew }
+		</div>
+	}
+</div>
+
+<p class="clearfix"/>
+
+@if(currentPage.getTotalRowCount == 0) {
+
+	<div class="well pagination-centered" style="margin-left:0; margin-top:20px">
+		<p style="margin-top:15px">
+			@if(is_admin_page) {
+				@Html(Messages("any.not.found", label))
+			} else {
+				@Html(Messages("any.not.found.ws", utils.CacheUtils.getUser().username, utils.CacheUtils.getWorkspaceName(), label))
+			}
+		</p>
+		<p>
+			<a class="btn btn-info" href="javascript: history.go(-1)">@Messages("turn_back.page")</a>
+			<a class="btn btn-info" href="javascript: location.reload()">@Messages("refresh")</a>
+		</p>
+	</div>
+
+} else {
+
+	<table style="width:100%;table-layout:fixed">
+		<thead>
+			<tr>
+				@if(has_investigation) {<th style="width:4%"></th>}
+				@for(header <- currentPage.getHeaders()) {
+					@if(header.width != null) {
+						<th style="width: @header.width">@buildTitle(header)</th>
+					} else {
+						<th>@buildTitle(header)</th>}
+				}
+				@if(! is_readonly) {<th style="width:4%"></th>}
+			</tr>
+		</thead>
+		<tbody>
+			@for(data <- currentPage.getData()) {
+				<tr class="clickableRow ajax" data-ref="@data.get(-1)">
+					@if(has_investigation) {
+						<td>
+							<a class="btn btn-mini" onclick="investigation(@data.get(-1))" title="@Messages("inspect")"><i class="icon-search" style="margin-top:1px"></i></a>
+						</td>
+					}
+					@for(i <- 0 to currentPage.getHeaders().size-1) {
+						@defining(currentPage.getHeaders().get(i)) {header =>
+							@if(header.isBool) {
+								<td style="text-align:center;overflow:hidden;white-space:nowrap"><span class="label label-@if(data.get(i).equals("true")) {info} else {warning}">@Messages(data.get(i))</span></td>
+							} else {
+								<td style="text-align:@header.align;color:@header.color;overflow:hidden;white-space:nowrap">@data.get(i)</td>
+							}
+						}
+					}
+					@if(! is_readonly) {
+						<td>
+							@if(utils.AuthManager.hasPrivilege(right, enums.RightLevel.Delete)) {
+								<a class="btn btn-mini" onclick="remowe(@data.get(-1), '@data.get(0)');" title="@Messages("remove")">
+									<i class="icon-remove" style="margin-top:1px"></i>
+								</a>}
+						</td>
+					}
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+
+@if(toBottomof_page != null) { <p>@toBottomof_page</p> }
+
+<script type="text/javascript">
+
+	var deleteQuestion = '@Messages("will.delete.empty")';
+	var hasUpdateRight = @(utils.AuthManager.hasPrivilege(right, enums.RightLevel.Update));
+	var hasInsertRight = @(utils.AuthManager.hasPrivilege(right, enums.RightLevel.Insert));
+	var hasInvestigation = @has_investigation;
+
+	$('#successPanel').delay(2000).fadeOut();
+
+	var sortField = null;
+	var sortDirection = null;
+
+	$(document).ready(function() {
+		sortField = $.cookie("sorting.@(right).field");
+		sortDirection = $.cookie("sorting.@(right).direction");
+
+		sortField = sortField.replace('\.', '\_');
+		if (sortDirection != null) {
+			if (sortDirection == "asc") {
+				$("#" + sortField + "Icon").addClass("icon-arrow-down");
+				return;
+			}
+		}
+		$("#" + sortField + "Icon").addClass("icon-arrow-up");
+	});
+
+	function sortColumn(fieldName) {
+		$.cookie("sorting.@(right).field", fieldName, { expires: 365, path: '/' });
+		if (sortField != fieldName) {
+			$.cookie("sorting.@(right).direction", "asc", { expires: 365, path: '/' });
+		} else {
+			$.cookie("sorting.@(right).direction", (sortDirection != null && sortDirection == "asc" ? "desc" : "asc"), { expires: 365, path: '/' });
+		}
+		location.reload();
+	}
+
+</script>
+
+<script type="text/javascript" src="@routes.Assets.at("javascripts/crud/main_ajax_form_man.js")"></script>

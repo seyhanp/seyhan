@@ -1,0 +1,21 @@
+@(currentPage: meta.PageExtend[OrderTransSource])
+
+@Controller = {
+	<script type="text/javascript">
+		var controller = jsRoutes.controllers.order.TransSources;
+	</script>
+}
+
+@tools.templates.ajax_index(Controller) {
+
+	@tools.templates.ajax_form(
+		right = enums.Right.SPRS_FIS_KAYNAKLARI,
+		saveAction = order.routes.TransSources.save
+	)
+
+	<div id=list>
+		@list(currentPage)
+	</div>
+
+}
+	

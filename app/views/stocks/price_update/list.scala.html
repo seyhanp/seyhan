@@ -1,0 +1,31 @@
+@(currentPage: meta.PageExtend[StockPriceUpdate], _form: Form[models.search.NameOnlySearchParam])
+
+@rollbackAction() = {
+	@if(utils.AuthManager.hasPrivilege(enums.Right.STOK_FIYAT_GUNCELLEME, enums.RightLevel.Delete)) {
+		@helper.form(stock.routes.PriceUpdates.undoLast(), 'id -> "undoForm") {
+			<a id="submitBtn" style="margin-top:7px; width:auto; display:block;" class="btn btn-danger" >@Messages("undo.last_action")</a>
+		}
+
+		<script type="text/javascript">
+			var undoForm = $('#undoForm');
+			$('#submitBtn').on('click', function() {
+				bootbox.confirm('@Messages("are_you_sure")', function(result) {
+						if (result) {
+							undoForm.submit();
+						}
+				});
+
+				return false;
+			});
+		</script>
+	}
+}
+
+@tools.templates.basic_list(
+	currentPage = currentPage,
+	filterForm = _form,
+	label = Messages("stock.price_update"),
+	right = enums.Right.STOK_FIYAT_GUNCELLEME,
+	link = stock.routes.PriceUpdates.list().url,
+	toRightof_addNew = rollbackAction()
+)

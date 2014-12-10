@@ -1,0 +1,21 @@
+@(currentPage: meta.PageExtend[SafeTransSource])
+
+@Controller = {
+	<script type="text/javascript">
+		var controller = jsRoutes.controllers.safe.TransSources;
+	</script>
+}
+
+@tools.templates.ajax_index(Controller) {
+
+	@tools.templates.ajax_form(
+		right = enums.Right.KASA_ISLEM_KAYNAKLARI,
+		saveAction = safe.routes.TransSources.save
+	)
+
+	<div id=list>
+		@list(currentPage)
+	</div>
+
+}
+	

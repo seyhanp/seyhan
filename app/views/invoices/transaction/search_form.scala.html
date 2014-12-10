@@ -1,0 +1,44 @@
+@(_form: Form[models.search.OrderTransSearchParam], rightBind: meta.RightBind)
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.search_form(_form, invoice.routes.Transes.list(rightBind), rightBind.value.name) {
+
+	<input type="hidden" name="rightBind" id="rightBind" value='@rightBind' />
+
+	@select(_form("status"),
+		options(enums.TransStatus.optionsWithoutCancelled),
+		'class -> "input-medium",
+		'_label -> Messages("status"),
+		'_default -> Messages("choose")
+	)
+
+	@tools.components.autocomplete_contact(_form, direction=rightBind.value.transType.toString(), name="refContact")
+	@tools.dropdowns.invoice_trans_source(_form, rightBind, hasAddNewButton=false)
+
+	@inputText(_form("receiptNo"),
+		'_label -> Messages("receipt_no"),
+		'class -> "input-small number",
+		'maxlength -> "9"
+	)
+
+	@inputText(_form("transNo"),
+		'_label -> Messages("trans.no"),
+		'class -> "input-medium",
+		'maxlength -> "20"
+	)
+
+	@tools.components.date_range(_form)
+
+	@inputText(_form("deliveryDate"),
+		'_label -> Messages("date.delivery"),
+		'class -> "input-small date"
+	)
+
+	@tools.components.trans_point_select(_form)
+	@tools.components.private_code_select(_form)
+
+	@tools.dropdowns.sale_seller(_form, hasAddNewButton=false)
+
+}

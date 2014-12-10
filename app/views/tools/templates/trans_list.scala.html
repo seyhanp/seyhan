@@ -1,0 +1,300 @@
+@(
+	currentPage: meta.PageExtend[_],
+	rightBind: meta.RightBind,
+	link: String,
+	title: String = null,
+
+	filterForm: Form[_] = null,	
+	searchForm: Html = null,
+	
+	hasMultiplier: Boolean = false,
+	hasAddNew: Boolean = true
+)
+
+@buildTitle(header: meta.GridHeader) = {
+	@if(header.isSortable) {
+		<a href="javascript:sortColumn('@header.fieldName')" style="color:red">
+			@header.title
+			<i id='@(header.fieldName.replaceAll("\\.", "\\_"))Icon' class="sortDirection" style="margin:1px 3px"></i>
+		</a>
+	} else {
+		@header.title
+	}
+}
+
+@main(ScriptBlock) {
+
+	@if(flash.containsKey("success")) {
+		<div id="successPanel">
+			<div class="alert alert-success">
+				<a class="close" data-dismiss="alert" onclick="$('#successPanel').html('')">x</a>
+				<strong>@Messages("info"): </strong> @flash.get("success")
+			</div>
+		</div>
+	}
+	<div id="actions">
+		<div class="pull-left">
+			<h4>@if(title != null) {@title} else {@Messages(rightBind.value.key) @Messages("listof")}</h4>
+		</div>
+
+		@if(hasAddNew && utils.AuthManager.hasPrivilege(rightBind.value, enums.RightLevel.Insert)) {
+			<div class="pull-right inline">
+				<a class="btn btn-success" style="float: right; margin-top:7px;" id="add" href="@(link + "new?rightBind=" + rightBind)">
+					@Messages("add.new", Messages(rightBind.value.key))
+				</a>
+			</div>
+		}
+	</div>
+
+	<p class="clearfix"></p>
+
+	<div class="clearfix">
+		@if(filterForm != null) {
+			@tools.templates.base_filter_form(filterForm, link.dropRight(1), rightBind)
+		}
+		<p style="margin-top:5px">
+			@if(searchForm != null) {
+				@searchForm
+			}
+		</p>
+	</div>
+
+	@if(! global.Profiles.chosen().gnel_listingType.equals(enums.TransListingType.Free)) {
+		<label>
+			* @utils.TemplateHelper.getTransListTimingAlertMessage()
+		</label>
+	}
+
+	@if(currentPage.getTotalRowCount == 0) {
+
+		<div class="well pagination-centered">
+			<p style="margin-top:15px">
+				@Html(Messages("any.not.found.ws", utils.CacheUtils.getUser().username, utils.CacheUtils.getWorkspaceName(), Messages(rightBind.value.key)))
+			</p>
+			<p>
+				<a class="btn btn-info" href="javascript: history.go(-1)">@Messages("turn_back.page")</a>
+				<a class="btn btn-info" href="javascript: location.reload()">@Messages("refresh")</a>
+			</p>
+		</div>
+
+	} else {
+
+		<table style="width:100%;table-layout:fixed">
+			<thead>
+				<tr>
+					@if(! global.Profiles.chosen().gnel_printAttitude.equals(enums.PrintAttitude.no)) {<th style="width:4%"></th>}
+					@for(header <- currentPage.getHeaders()) {
+						@if(header.width != null) {
+							<th style="width: @header.width">@buildTitle(header)</th>
+						} else {
+							<th>@buildTitle(header)</th>}
+					}
+					<th style="width:4%"></th>
+				</tr>
+			</thead>
+			<tbody>
+				@for(data <- currentPage.getData()) {
+					<tr class="clickableRow" data-ref="@link@data.get(-1)?rightBind=@rightBind">
+						@if(! global.Profiles.chosen().gnel_printAttitude.equals(enums.PrintAttitude.no)) {
+							<td style="text-align: center">
+								<a class="btn btn-mini" onclick="showPrintForm(@data.get(-1), '@rightBind.value.name()');" title="@Messages("print")">
+									<i class="icon-list" style="margin-top:1px"></i>
+								</a>
+							</td>
+						}
+						@for(i <- 0 to currentPage.getHeaders().size-1) {
+							@defining(currentPage.getHeaders().get(i)) {header =>
+								@if(header.isBool) {
+									<td style="text-align:center;overflow:hidden;white-space:nowrap"><span class="label label-@if(data.get(i).equals("true")) {info} else {warning}">@Messages(data.get(i))</span></td>
+								} else {
+									<td style="text-align: @header.align;color:@header.color;overflow:hidden;white-space:nowrap">@data.get(i)</td>
+								}
+							}
+						}
+						<td style="text-align: center">
+							@if(hasMultiplier && utils.AuthManager.hasPrivilege(rightBind.value, enums.RightLevel.Insert)) {
+								<a class="btn btn-mini" onclick="createClone(@data.get(-1));" title="@Messages("clone")"><i class="icon-retweet" style="margin-top:1px"></i></a>}
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+
+		 @if(currentPage.isMultiPage) {
+			<div id="pagination" class="pagination">
+				<ul style="float: right">
+					@if(currentPage.hasPrev) {
+						<li class="prev">
+							<a href="#" onclick="resetPage(false)">&lArr; @Messages("first")</a>
+						</li>
+						<li class="prev">
+							<a href="#" onclick="changePage(false)">&larr; @Messages("previous")</a>
+						</li>
+					} else {
+						<li class="prev disabled">
+							<a>&lArr; @Messages("first")</a>
+						</li>
+						<li class="prev disabled">
+							<a>&larr; @Messages("previous")</a>
+						</li>
+					}
+					@if(currentPage.indexOf != null) {
+		                <li class="current">
+		                    <a>@currentPage.indexOf</a>
+		                </li>
+		            }
+					@if(currentPage.hasNext) {
+						<li class="next">
+							<a href="#" onclick="changePage(true)">@Messages("next") &rarr;</a>
+						</li>
+						<li class="next">
+							<a href="#" onclick="resetPage(true)"> @Messages("last") &rArr;</a>
+						</li>
+					} else {
+						<li class="next disabled">
+							<a>@Messages("next") &rarr;</a>
+						</li>
+						<li class="next disabled">
+							<a>@Messages("last") &rArr;</a>
+						</li>
+					}
+				</ul>
+			</div>
+		 }
+	}
+
+	@********************************************************
+		Multiplier Section
+	
+	*********************************************************@
+	<div id="mul_modal-form" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+	
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true" tabindex="-1">×</button>
+			<div id="mul_title"><h4>@Messages("multiplier.form.title", Messages(rightBind.value.key))</h4></div>
+		</div>
+	
+		<div class="modal-body">
+			<div id="mul_body"></div>
+		</div>
+	
+		<div class="modal-footer">
+			<button class="btn btn-primary" onclick="saveClone()">@Messages("save")</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true">@Messages("close")</button>
+		</div>
+	
+	</div>
+
+}
+
+@ScriptBlock = {
+
+	<script type="text/javascript">
+
+	function resetPage(isNext) {
+		if (! isNext) {
+			$('.pageIndex').val(1);
+		} else {
+			$('.pageIndex').val(@(currentPage.getTotalPageCount() - 2));
+		}
+		changePage(isNext);
+	}
+
+	function changePage(isNext) {
+		var page = 0;
+		
+		if( $('#searchForm').is(':visible') ) {
+			page = parseInt($('#searchForm .pageIndex').val());
+		} else {
+			page = parseInt($('#baseFilterForm .pageIndex').val());
+		}
+
+		if (isNaN(page)) page = 0;
+
+		if (isNext) {
+			$('.pageIndex').val(page + 1);
+		} else {
+			$('.pageIndex').val(page - 1);
+		}
+
+		if( $('#searchForm').is(':visible') ) {
+			$('#searchForm').submit();
+		} else {
+			$('#baseFilterForm').submit();
+		}
+	}
+	
+		$('input, select').change(function () {
+			$('#pageIndex').val('0');
+		});
+
+		$('#successPanel').delay(2000).fadeOut();
+		
+		function createClone(id) {
+			$.ajax({
+				type: 'GET',
+				cache: false,
+				url : '/@(rightBind.value.module.name)s/trans/createClone/'+id,
+				success: function(data, status, xhr) {
+					$("#mul_body").html(data);
+					$('#mul_modal\\-form').modal('show');
+					updateFormRegulators('#mul_modal\\-form');
+				},
+			    error: function(xhr, options, error) {
+					$("#mul_body").html(xhr.responseText);
+			    }
+			});
+		}
+
+		function saveClone() {
+			$.ajax({
+				type: 'POST',
+				cache: false,
+				data : $("#multiplierForm").serialize(),
+				url : '/@(rightBind.value.module.name)s/trans/saveClone',
+				success: function(data, status, xhr) {
+					$('#mul_modal\\-form').modal('hide');
+				    window.location.reload(); 
+				},
+			    error: function(xhr, options, error) {
+					$("#mul_body").html(xhr.responseText);
+					updateFormRegulators("#mul_body");
+			    }
+			});
+		}
+
+		var sortField = null;
+		var sortDirection = null;
+
+		$(document).ready(function() {
+			sortField = $.cookie("sorting.@(rightBind.value).field");
+			sortDirection = $.cookie("sorting.@(rightBind.value).direction");
+
+			sortField = sortField.replace('\.', '\_');
+			if (sortDirection != null) {
+				if (sortDirection == "asc") {
+					$("#" + sortField + "Icon").addClass("icon-arrow-down");
+					return;
+				}
+			}
+			$("#" + sortField + "Icon").addClass("icon-arrow-up");
+		});
+
+		function sortColumn(fieldName) {
+			$.cookie("sorting.@(rightBind.value).field", fieldName, { expires: 365, path: '/' });
+			if (sortField != fieldName.replace('\.', '\_')) {
+				$.cookie("sorting.@(rightBind.value).direction", "asc", { expires: 365, path: '/' });
+			} else {
+				$.cookie("sorting.@(rightBind.value).direction", (sortDirection != null && sortDirection == "asc" ? "desc" : "asc"), { expires: 365, path: '/' });
+			}
+			if( $('#searchForm').is(':visible') ) {
+				$('#searchForm').submit();
+			} else {
+				$('#baseFilterForm').submit();
+			}
+		}
+	</script>
+
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/plugin/jquery.dynatree.min.js")"></script>
+
+}

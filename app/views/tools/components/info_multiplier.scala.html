@@ -1,0 +1,34 @@
+@(_form: Form[models.temporal.InfoMultiplier], link: String, controllerName: String = null)
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+<form method="POST" action ="@link/saveClone" class="form-horizontal" id="multiplierForm">
+
+	<input type="hidden" name="id" id="id" value='@_form("id").value' />
+
+	@if(! "Profiles".equals(controllerName)) {
+		@inputText(_form("code"),
+			'_label -> Messages("code"),
+			'class -> "input-large",
+			'maxlength -> "30"
+		)
+	} else {
+		<input type="hidden" id="code" name="code" value='fake' />
+	}
+
+	@inputText(_form("name"),
+		'_label -> Messages("name"),
+		'class -> "input-xlarge",
+		'maxlength -> "100"
+	)
+	
+	@if("Profiles".equals(controllerName)) {
+		@inputText(_form("description"),
+			'_label -> Messages("description"),
+			'class -> "input-xlarge",
+			'maxlength -> "30"
+		)
+	}
+
+</form>

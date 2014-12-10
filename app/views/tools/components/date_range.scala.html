@@ -1,0 +1,27 @@
+@(form: Form[_], startDateName: String = "startDate", endDateName: String = "endDate")
+
+@***********************************************************************
+* Generate date range input according twitter bootsrap rules *
+***********************************************************************@
+
+<div class="control-group @if(form(startDateName).hasErrors || form(endDateName).hasErrors) {error}">
+<label class="control-label" for="@startDateName">@Messages("date.range")</label>
+	<div class="controls inline">
+		<input id="@startDateName" name="@startDateName" class="input-small date" type="text" value="@form(startDateName).value" />
+		<input id="@endDateName" name="@endDateName" class="input-small date" type="text" value="@form(endDateName).value" />
+		@if(form(startDateName).hasErrors) {
+			<span class="errors label label-warning">
+				@for(error <- form(startDateName).errors) {
+					@utils.TemplateHelper.convertMessage(error)
+				}
+			</span>
+		}
+		@if(form(endDateName).hasErrors) {
+			<span class="errors label label-warning">
+				@for(error <- form(endDateName).errors) {
+					@utils.TemplateHelper.convertMessage(error)
+				}
+			</span>
+		}
+	</div>
+</div>

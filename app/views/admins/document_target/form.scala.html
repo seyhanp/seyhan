@@ -1,0 +1,85 @@
+@(_form: Form[AdminDocumentTarget])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.imports.base_hidden_fields(_form)
+
+@inputText(_form("name"),
+	'_label -> Messages("name"),
+	'class -> "input-large",
+	'maxlength -> "30"
+)
+
+@select(_form("isLocal"),
+	options(Options.printerLocations),
+	'class -> "input-small",
+	'_label -> Messages("location")
+)
+
+@select(_form("targetType"),
+	options(enums.DocTargetType.options),
+	'class -> "input-medium",
+	'_label -> Messages("print_target.type"),
+	'onchange -> "targetOnChange(false)",
+	'onkeyup -> "targetOnChange(false)"
+)
+
+<div id="target_path">
+	<div class="control-group inline">
+		<label class="control-label" for="path" id="path">@Messages("path")</label>
+		<div class="controls inline">
+			<input type="text" id="path" name="path" class="input-xlarge" value="@_form("path").value" maxlength="150" />
+		</div>
+	</div>
+</div>
+
+<div id="target_isCompressed">
+	@select(_form("isCompressed"),
+		options(Options.fontTypes),
+		'class -> "input-small",
+		'_label -> Messages("font_type")
+	)
+</div>
+
+<div id="target_viewType">
+	@select(_form("viewType"),
+		options(enums.DocViewType.options),
+		'class -> "input-small",
+		'_label -> Messages("print_view.type")
+	)
+</div>
+
+@inputText(_form("description"),
+	'_label -> Messages("description"),
+	'class -> "input-xlarge",
+	'maxlength -> "30"
+)
+
+@select(_form("isActive"),
+	options(Options.yesno),
+	'class -> "input-small",
+	'_label -> Messages("is_active")
+)
+
+<script type="text/javascript">
+	var path = '@Messages("path")';
+	var name = '@Messages("printer_name")';
+
+	function targetOnChange(isInit) {
+		$("#target_isCompressed").hide();
+		$("#target_viewType").hide();
+		$('#path').html(path);
+		
+		var index = $("#targetType option:selected").index();
+		if (index > 0) {
+			$("#target_isCompressed").show();
+			if (index > 1) {
+				$("#target_viewType").show();
+				$('#path').html(name);
+			}
+		}
+	}
+
+	targetOnChange(true);
+</script>

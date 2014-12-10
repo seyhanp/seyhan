@@ -1,0 +1,9 @@
+@(direction: String = "", amountFieldName: String = "amount")
+
+<script type="text/javascript">
+	var isBuying = @(direction.equals("Debt") || direction.equals("Input"));
+	var amountField = '#@amountFieldName';
+
+</script>
+
+<script type="text/javascript" src="@routes.Assets.at("javascripts/exchange_man.js")"></script>

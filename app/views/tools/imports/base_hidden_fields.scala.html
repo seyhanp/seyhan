@@ -1,0 +1,14 @@
+@(_form: Form[_], right : enums.Right = null)
+
+<input type="hidden" id="id" name="id" value='@_form("id").value'></input>
+<input type="hidden" id="workspace" name="workspace" value='@utils.CacheUtils.getWorkspaceId()'></input>
+<input type="hidden" id="version" name="version" value='@_form("version").value'></input>
+
+<input type="hidden" id="insertBy" name="insertBy" value='@_form("insertBy").value'></input>
+<input type="hidden" id="updateBy" name="updateBy" value='@_form("updateBy").value'></input>
+<input type="hidden" id="insertAt" name="insertAt" value='@_form("insertAt").value'></input>
+<input type="hidden" id="updateAt" name="updateAt" value='@_form("updateAt").value'></input>
+
+@if(right != null) {
+<input type="hidden" id="right" name="right" value='@right'></input>
+}

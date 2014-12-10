@@ -1,0 +1,19 @@
+@(caption: String, items: List[meta.MenuItem], isDropup: Boolean = false, btnClass: String = "primary")
+
+<div class='btn-group @if(isDropup) { dropup }'>
+
+	<button class='btn btn-@btnClass dropdown-toggle btn-small' data-toggle='dropdown'>
+		@caption <span class='caret'></span>
+	</button>
+
+	<ul class='dropdown-menu'>
+		@for(item <- items) {
+			<li>
+				<a href=@if(item.link != null) { "@item.link" } else { "#" }>
+					@Html(item.title)
+				</a>
+			</li>
+		}
+	</ul>
+
+</div>

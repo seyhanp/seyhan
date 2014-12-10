@@ -1,0 +1,94 @@
+@(subDetails: List[models.ChqbllPayrollDetail], sort: enums.ChqbllSort, right:enums.Right)
+
+@colWidth = {
+width:calc(100% - 5px)
+}
+
+<table id='chqbll_selectionTable' style="width:1920px;margin-top:0;table-layout:fixed;">
+	<thead>
+		<tr>
+			<th style="width:30px;text-align: center;"><input type="checkbox" id="selectall"/></th>
+			<th style="width:60px">@Messages("portfolio.no")</th>
+			<th style="width:80px">@Messages("serial.no")</th>
+			<th style="width:200px">@Messages("contact.name")</th>
+			<th style="width:80px">@Messages("maturity")</th>
+			<th style="width:80px">@Messages("amount")</th>
+			@if(global.Profiles.chosen().gnel_hasExchangeSupport) {
+				<th style="width:60px">@Messages("currency")</th>
+			}
+			@if(enums.ChqbllStep.isCustomer(right)) {
+				<th style="width:200px">@Messages("owner")</th>
+			}
+			<th style="width:130px">@Messages("payment_place")</th>
+			@if(enums.ChqbllSort.Cheque.equals(sort)) {
+				<th style="width:120px">@Messages("bank.name")</th>
+				@if(enums.ChqbllStep.isCustomer(right)) {
+					<th style="width:120px">@Messages("branch")</th>
+					<th style="width:120px">@Messages("account.no")</th>
+					<th style="width:120px">@Messages("correspondent_branch")</th>
+				}
+			} else {
+				@if(enums.ChqbllStep.isCustomer(right) && global.Profiles.chosen().cksn_hasSuretyFields) {
+					<th style="width:120px">@Messages("surety")</th>
+					<th style="width:120px">@Messages("address")</th>
+					<th style="width:120px">@Messages("phoneX", "1")</th>
+					<th style="width:120px">@Messages("phoneX", "2")</th>
+				}
+			}
+			<th style="width:80px">@Messages("type")</th>
+			<th style="width:330px">@Messages("description")</th>
+		</tr>
+	</thead>
+	<tbody>
+ 	@for((subDetail, index) <- subDetails.zipWithIndex) {
+		<tr>
+			<td style="text-align:center;">
+				<input type="checkbox" id="subDetails[@index]_isSelected" name="subDetails[@index].isSelected" style="@colWidth;" class="case"/>
+				<input type="hidden" id="subDetails[@index]_id" name="subDetails[@index].id" value="@subDetail.id" />
+				<input type="hidden" id="subDetails[@index]_excRate" name="subDetails[@index].excRate" value="@subDetail.excRate" />
+				<input type="hidden" id="subDetails[@index]_excEquivalent" name="subDetails[@index].excEquivalent" value="@subDetail.excEquivalent" />
+			</td>
+			<td><input type="text" readonly id="subDetails[@index]_portfolioNo" name="subDetails[@index].portfolioNo" value="@subDetail.portfolioNo" style="@colWidth;text-align:right"/></td>
+			<td><input type="text" readonly id="subDetails[@index]_serialNo" name="subDetails[@index].serialNo" value="@subDetail.serialNo" style="@colWidth"/></td>
+			<td><input type="text" readonly id="subDetails[@index]_contactName" name="subDetails[@index].contactName" value="@subDetail.contactName" style="@colWidth;"/></td>
+			<td><input type="text" readonly id="subDetails[@index]_dueDate" name="subDetails[@index].dueDate" value="@utils.Format.asDate(subDetail.dueDate)" style="@colWidth;"/></td>
+			<td><input type="text" readonly id="subDetails[@index]_amount" name="subDetails[@index].amount" value="@subDetail.amount" style="@colWidth;text-align:right"/></td>
+			@if(global.Profiles.chosen().gnel_hasExchangeSupport) {
+				<td><input type="text" readonly id="subDetails[@index]_excCode" name="subDetails[@index].excCode" value="@subDetail.excCode" style="@colWidth"/></td>
+			} else {
+				<input type="hidden" id="subDetails[@index]_excCode" name="subDetails[@index].excCode" value="@subDetail.excCode"/>
+			}
+			@if(enums.ChqbllStep.isCustomer(right)) {
+				<td><input type="text" readonly id="subDetails[@index]_owner" name="subDetails[@index].owner" value="@subDetail.owner" style="@colWidth;"/></td>
+			}
+			<td><input type="text" readonly id="subDetails[@index]_paymentPlace" name="subDetails[@index].paymentPlace" value="@subDetail.paymentPlace" style="@colWidth;"/></td>
+			@if(enums.ChqbllSort.Cheque.equals(sort)) {
+				<td><input type="text" readonly id="subDetails[@index]_bankName" name="subDetails[@index].bankName" value="@subDetail.bankName" style="@colWidth"/></td>
+				@if(enums.ChqbllStep.isCustomer(right)) {
+					<td><input type="text" readonly id="subDetails[@index]_bankBranch" name="subDetails[@index].bankBranch" value="@subDetail.bankBranch" style="@colWidth"/></td>
+					<td><input type="text" readonly id="subDetails[@index]_bankAccountNo" name="subDetails[@index].bankAccountNo" value="@subDetail.bankAccountNo" style="@colWidth"/></td>
+					<td><input type="text" readonly id="subDetails[@index]_correspondentBranch" name="subDetails[@index].correspondentBranch" value="@subDetail.correspondentBranch" style="@colWidth"/></td>
+				}
+			} else {
+				@if(enums.ChqbllStep.isCustomer(right) && global.Profiles.chosen().cksn_hasSuretyFields) {
+					<td><input type="text" readonly id="subDetails[@index]_surety" name="subDetails[@index].surety" value="@subDetail.surety" style="@colWidth"/></td>
+					<td><input type="text" readonly id="subDetails[@index]_suretyAddress" name="subDetails[@index].suretyAddress" value="@subDetail.suretyAddress" style="@colWidth"/></td>
+					<td><input type="text" readonly id="subDetails[@index]_suretyPhone1" name="subDetails[@index].suretyPhone1" value="@subDetail.suretyPhone1" style="@colWidth"/></td>
+					<td><input type="text" readonly id="subDetails[@index]_suretyPhone2" name="subDetails[@index].suretyPhone2" value="@subDetail.suretyPhone2" style="@colWidth"/></td>
+				}
+			}
+			<td><input type="text" readonly id="subDetails[@index]_cbtypeName" name="subDetails[@index].cbtype.name" value="@if(subDetail.cbtype != null) {@subDetail.cbtype.name}" style="@colWidth"/></td>
+			<td><input type="text" readonly id="subDetails[@index]_description" name="subDetails[@index].description" value="@subDetail.description" style="@colWidth"/></td>
+		</tr>
+ 	}
+	</tbody>
+</table>
+
+<script type="text/javascript" src="@routes.Assets.at("javascripts/crud/select_all.js")"></script>
+
+<script type="text/javascript">
+	$("#chqbll_selectionTable").freezeTableColumns({
+		width: 520,
+		height: 200
+	});
+</script>

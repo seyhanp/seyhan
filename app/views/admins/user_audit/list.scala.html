@@ -1,0 +1,15 @@
+@(currentPage: meta.PageExtend[AdminUserAudit], _form: Form[models.search.UserAuditSearchParam])
+
+@tools.templates.basic_list(
+	currentPage = currentPage,
+	
+	filterForm = _form,
+	searchForm = search_form(_form),
+
+	right = enums.Right.KULLANICI_HAREKETLERI,
+	label = Messages("user.audit"),
+	link = admin.routes.UserAudits.list().url,
+
+	hasAddNew = false,
+	hasActionsColumn = false
+)

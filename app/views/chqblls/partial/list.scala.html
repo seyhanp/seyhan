@@ -1,0 +1,13 @@
+@(currentPage: meta.PageExtend[ChqbllPayrollDetail], sort: enums.ChqbllSort, rightBind: meta.RightBind, _form: Form[models.search.ChqbllPartialSearchParam])
+
+@tools.templates.trans_list(
+	currentPage = currentPage,
+
+	filterForm = _form,
+	searchForm = (if(global.Profiles.chosen().cksn_isSearchFormShowed) search_form(_form, sort, rightBind) else null),
+
+	link = if(enums.ChqbllSort.Cheque.equals(sort)) "/cheques/partials/" else "/bills/partials/",
+	rightBind = rightBind,
+	
+	hasAddNew = false
+)

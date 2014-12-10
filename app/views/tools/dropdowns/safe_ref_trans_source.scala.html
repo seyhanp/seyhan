@@ -1,0 +1,13 @@
+@(form: Form[_], direction: String, hasAddNewButton:Boolean = true)
+
+@standart(form, SafeTransSource.crossOptions(direction), enums.Right.KASA_ISLEM_KAYNAKLARI, "refSafeTransSource", Messages("trans.source"), hasAddNewButton=hasAddNewButton) {
+
+	<script type="text/javascript">
+		function setSimpleControllerFor_refSafeTransSource() {
+			simple_combo_type = 2;
+			simple_selector = "#refSafeTransSource_id";
+			simple_controller = jsRoutes.controllers.safe.TransSources;
+		}
+	</script>
+
+}

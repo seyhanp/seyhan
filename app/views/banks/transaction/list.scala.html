@@ -1,0 +1,13 @@
+@(currentPage: meta.PageExtend[BankTrans], rightBind: meta.RightBind, _form: Form[models.search.BankTransSearchParam])
+
+@tools.templates.trans_list(
+	currentPage = currentPage,
+
+	filterForm = _form,
+	searchForm = (if(global.Profiles.chosen().bank_isSearchFormShowed) search_form(_form, rightBind) else null),
+
+	link = "/banks/trans/",
+	rightBind = rightBind,
+	
+	hasMultiplier = true
+)

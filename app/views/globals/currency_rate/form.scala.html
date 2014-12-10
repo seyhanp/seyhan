@@ -1,0 +1,91 @@
+@(_form: Form[GlobalCurrencyRate])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.basic_form(ScriptBlock) {
+
+	@tools.imports.forms_header(
+		_form("id").value,
+		enums.Right.GNEL_DOVIZ_KURLARI,
+		global.routes.CurrencyRates.remove(if(_form("id").value != null && ! _form("id").value.isEmpty()) _form("id").value.toInt else -1)
+	)
+
+	@helper.form(action = global.routes.CurrencyRates.save, 'class-> "form-horizontal zell", 'id -> "mainFieldsForm") {
+
+		<fieldset>
+			@tools.imports.base_hidden_fields(_form)
+			<input type="hidden" id="xmlDetail" name="xmlDetail" />
+	
+			@inputText(_form("date"),
+				'_label -> Messages("date"),
+				'class -> "input-small",
+				'readonly -> "readonly"
+			)
+	
+			@inputText(_form("source"),
+				'_label -> Messages("source"),
+				'class -> "input-xxlarge",
+				'readonly -> "readonly"
+			)
+	
+			@if(_form.hasErrors) {
+				@if(_form.errors.contains("xmlDetail")) {
+					@for(error <- _form.errors.get("xmlDetail")) {
+						<span class="label label-warning">@error.message().toString()</span><br/>
+					}
+				}
+			}
+		</fieldset>
+
+		<p>
+			<table id='detailTable' class='autoTable'>
+				<thead>
+					<tr>
+						<th width="3%">No</th>
+						<th width="10%">@Messages("code")</th>
+						<th width="67%">@Messages("name")</th>
+						<th width="10%">@Messages("buying")</th>
+						<th width="10%">@Messages("selling")</th>
+					</tr>
+				</thead>
+				<tbody>
+					@repeatWithIndex(_form("details")) { (detail, index) =>
+						<tr>
+							<td style="text-align:right">
+								<span class="rowNumber">@(index+1).</span>
+								<input type="hidden" id="details[@index]_id" name="details[@index].id" value="@detail("id").value" />
+							</td>
+							<td style="text-align:center">
+								<input type="text" tabindex="-1" readonly 
+									id="details[@index]_code" name="details[@index].code" value="@detail("code").value" style="width:95%" />
+							</td>
+							<td>
+								<input type="text" tabindex="-1" readonly
+									id="details[@index]_name" name="details[@index].name" value="@detail("name").value" style="width:98%" />
+							</td>
+							<td>
+								<input class="currency" type="text" 
+									id="details[@index]_buying" name="details[@index].buying" value="@detail("buying").value" style="width:95%" maxlength="10"/>
+							</td>
+							<td>
+								<input class="currency" type="text" 
+									id="details[@index]_selling" name="details[@index].selling" value="@detail("selling").value" style="width:95%" maxlength="10"/>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</p>
+
+		@tools.templates.form_footer_bar(enums.Right.GNEL_DOVIZ_KURLARI, _form("id").value)
+
+	}
+
+}
+
+@ScriptBlock = {
+	<script type="text/javascript">
+		$('.currency').autoNumeric({lZero: 'deny', aSep:'', mDec: 6});
+	</script>
+}

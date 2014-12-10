@@ -1,0 +1,363 @@
+@(_form: Form[WaybillTrans], rightBind:meta.RightBind, detailRows: String)
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@isSelling = @{
+	rightBind.value.equals(enums.Right.IRSL_SATIS_IRSALIYESI)
+}
+
+@isNotOpeningTrans = @{
+	! _form("isTrans").value
+}
+
+@colWidth = {
+width:calc(100% - 5px)
+}
+
+@tools.templates.trans_form(ScriptBlock) {
+
+	@if(_form("status").value == "Completed") {
+		<div class="alert alert-error">
+			<strong>@Messages("alert"): </strong> @Messages("edit.striction.for_view")
+			@if(_form("invoiceId").value != null) {
+				 @Html(utils.StringUtils.buildLinkForApprovals(rightBind.value, "invoices", _form("invoiceId").value))
+			}
+		</div>
+	}
+
+	@tools.imports.forms_header(
+		_form("id").value,
+		rightBind.value,
+		waybill.routes.Transes.remove(if(_form("id").value != null && ! _form("id").value.isEmpty()) _form("id").value.toInt else -1, rightBind),
+		hasRemoveButton = (_form("status").value != "Completed"),
+		subTitle = Messages("trans_status." + _form("status").value)
+	)
+
+	@helper.form(action = waybill.routes.Transes.save(rightBind),'class-> "form-horizontal zell", 'id -> "mainFieldsForm") {
+
+		@tools.imports.base_hidden_fields(_form, rightBind.value)
+		<input type="hidden" id="excCode" name="excCode" value='@_form("excCode").value' />
+		<input type="hidden" id="status" name="status" value='@_form("status").value' />
+		<input type="hidden" id="isTransfer" name="isTransfer" value='@_form("isTransfer").value' />
+		
+		<fieldset>
+			<div class="row-fluid">
+				<div class="span6">
+					@inputText(_form("receiptNo"),
+						'_label -> Messages("receipt_no"),
+						'class -> "input-small number",
+						'maxlength -> "9",
+						'readonly -> "readonly"
+					)
+
+					@tools.components.docno_input(_form, rightBind)
+
+					@inputText(_form("transDate"),
+						'_label -> Messages("date"),
+						'class -> "input-small date"
+					)
+
+					@tools.components.autocomplete_contact(_form, direction=rightBind.value.transType.toString(), hasExtraData=true, hasSummaryButton=true)
+
+				</div>
+
+				<div class="span6">
+					@tools.dropdowns.stock_depot(_form, false)
+					@tools.dropdowns.waybill_trans_source(_form)
+
+					@inputText(_form("totalDiscountRate"),
+						'_label -> Messages("total_discount_rate"),
+						'class -> "input-mini rate",
+						'maxlength -> "5",
+						'onkeyup -> "calculateAllFieldsForStocks()"
+					)
+
+					@inputText(_form("description"),
+						'_label -> Messages("description"),
+						'class -> "input-xlarge",
+						'maxlength -> "100"
+					)
+					@if(isSelling) {@tools.dropdowns.sale_seller(_form)}
+				</div>
+			</div>
+
+		</fieldset>
+
+		<div class="tabbable">
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="#stocks" data-toggle="tab">@Messages("stocks")</a></li>
+				@if(global.Profiles.chosen().irsl_hasPrices && isNotOpeningTrans) {
+					<li><a href="#factors" data-toggle="tab">@Messages("factors")</a></li>
+				}
+				<li><a href="#other" data-toggle="tab">@Messages("other")</a></li>
+			</ul>
+
+			<div class="tab-content" style="height:430px;margin-top:-10px; margin-bottom: 20px; overflow: hidden;">
+				@if(_form.hasErrors) {
+					@if(_form.errors.contains("stocks")) {
+						<div id="stocksErrors">
+							<div onclick="$('#stocksErrors').remove()" style="cursor:pointer;">
+								<span class="label label-important"><i class="icon-remove icon-white"></i> @Messages("stocks")</span>
+							</div>
+							 @for(error <- _form.errors.get("stocks")) {
+								<span style="margin-left: 40px" class="label label-warning">@error.message().toString()</span><br/>
+							 }
+						</div>
+					}
+				}
+				<div id="stocks" class="tab-pane active">
+
+					<p>
+						@tools.components.autocomplete_stock(_form, isContinuouslyAdded = true)
+					</p>
+
+					<table id='stockTable' class='autoTable'>
+						<thead>
+							<tr>
+								<th style="width:60px">No</th>
+								<th style="width:230px">@Messages("name")</th>
+								<th style="width:70px">@Messages("quantity")</th>
+								<th style="width:70px">@Messages("unit")</th>
+								@if(global.Profiles.chosen().irsl_hasPrices) {
+									<th style="width:80px">@Messages("price")</th>
+									<th style="width:80px">@Messages("amount")</th>
+									<th style="width:50px">@Messages("stock.discount", "1")</th>
+									<th style="width:50px">@Messages("stock.discount", "2")</th>
+									<th style="width:50px">@Messages("stock.discount", "3")</th>
+									<th style="width:80px">@Messages("discount_amount")</th>
+									<th style="width:50px">@Messages("tax_rate")</th>
+									<th style="width:80px">@Messages("tax_amount")</th>
+									<th style="width:80px">@Messages("total")</th>
+									@if(global.Profiles.chosen().gnel_hasExchangeSupport) {
+										<th style="width:60px">@Messages("currency")</th>
+										<th style="width:70px">@Messages("exchange_rate")</th>
+										<th style="width:80px">@Messages("exc_equivalent")</th>
+									}
+								}
+								<th style="width:250px">@Messages("description")</th>
+								@if(isSelling) {<th style="width:130px">@Messages("seller")</th>}
+								<th style="width:35px"></th>
+							</tr>
+						</thead>
+						<tbody>
+							@Html(detailRows)
+						</tbody>
+					</table>
+
+					@if(global.Profiles.chosen().irsl_hasPrices && isNotOpeningTrans) {
+						<div style="margin-top:10px;">
+							<div class="span2"></div>
+							<div class="span3">
+								@inputText(_form("total"),
+									'_label -> Messages("total"),
+									'class -> "input-small currency",
+									'readonly -> "readonly"
+								)
+								@inputText(_form("discountTotal"),
+									'_label -> Messages("discount_total"),
+									'class -> "input-small currency",
+									'readonly -> "readonly"
+								)
+							</div>
+							<div class="span3">
+								@inputText(_form("subtotal"),
+									'_label -> Messages("subtotal"),
+									'class -> "input-small currency",
+									'readonly -> "readonly"
+								)
+								@inputText(_form("taxTotal"),
+									'_label -> Messages("tax_total"),
+									'class -> "input-small currency",
+									'readonly -> "readonly"
+								)
+							</div>
+							<div class="span3">
+								@inputText(_form("roundingDiscount"),
+									'_label -> Messages("rounding_discount"),
+									'class -> "input-small currency",
+									'readonly -> "readonly"
+								)
+								
+								@inputText(_form("netTotal"),
+									'_label -> (Messages("net_total") + " [" + global.Profiles.chosen().gnel_excCode + "]"),
+									'class -> "input-small currency",
+									'readonly -> "readonly"
+								)
+							</div>
+						</div>
+					}
+				</div>
+
+				@if(global.Profiles.chosen().irsl_hasPrices && isNotOpeningTrans) {
+					<div id="factors" class="tab-pane" style="margin:15px 0 0 15px">
+						<p>@Messages("factor.table.desc")</p>
+						<table id='factorTable' class='autoTable'>
+							<thead>
+								<tr>
+									<th style="width:25px">No</th>
+									<th style="width:130px">@Messages("name")</th>
+									<th style="width:100px">@Messages("factor_type")</th>
+									<th style="width:100px">@Messages("calc_type")</th>
+									<th style="width:100px">@Messages("effect_type")</th>
+									<th style="width:100px">@Messages("effect")</th>
+									<th style="width:100px">@Messages("amount")</th>
+									<th style="width:35px"></th>
+								</tr>
+							</thead>
+							<tbody>
+								@repeatWithIndex(_form("factors"), min=1, add=1) { (factor, index) =>
+									@if(index == 0 || (index > 0 && (_form("factors["+(index-1)+"].factor.id").value != ""))) {
+										<tr>
+											<td style="text-align:right">
+												<span class="rowNumber">@index.</span>
+												<input type="hidden" id="factors[@index]_id" name="factors[@index].id" value="@factor("id").value" />
+												<input type="hidden" id="factors[@index]_calcTypeOri" name="factors[@index].calcTypeOri" value="@factor("factor.calcType").value" />
+												<input type="hidden" id="factors[@index]_factorTypeOri" name="factors[@index].factorTypeOri" value="@factor("factor.factorType").value" />
+												<input type="hidden" id="factors[@index]_effectTypeOri" name="factors[@index].effectTypeOri" value="@factor("factor.effectType").value" />
+											</td>
+											<td>
+												<select id="factors[@index]_factor_id" name="factors[@index].factor.id" class="factors mainInput" style="width:100%">
+									                <option class="blank" value="">@Messages("choose")</option>
+										            @StockCostFactor.options.map { v =>
+										                <option value="@v._1" @if(factor("factor.id").value == Some(v._1)){selected}>@v._2</option>
+										            }
+										        </select>
+											</td>
+											<td>
+												<input type="text" readonly
+													id="factors[@index]_calcType" name="factors[@index].calcType" value="@Messages(factor("factor.calcType").value.getOrElse("").toLowerCase)" style="width:93%"/>
+											</td>
+											<td>
+												<input type="text" readonly 
+													id="factors[@index]_factorType" name="factors[@index].factorType" value="@Messages(factor("factor.factorType").value.getOrElse("").toLowerCase)" style="width:93%"/>
+											</td>
+											<td>
+												<input type="text" readonly 
+													id="factors[@index]_effectType" name="factors[@index].effectType" value="@Messages(factor("factor.effectType").value.getOrElse("").toLowerCase)" style="width:93%"/>
+											</td>
+											<td>
+												<input type="text" readonly
+													id="factors[@index]_effect" name="factors[@index].effect" value="@factor("effect").value" style="width:93%;text-align:right"/>
+											</td>
+											<td>
+												<input type="text" readonly
+													id="factors[@index]_amount" name="factors[@index].amount" value="@factor("amount").value" style="width:93%;text-align:right"/>
+											</td>
+											<td align="center">
+												<a class="btn btn-mini delRow" title="@Messages("remove")">
+													<i class="icon-remove" style="margin-top:1px"></i>
+												</a>
+											</td>
+										</tr>
+									}
+								}
+							</tbody>
+						</table>
+	
+						<div style="margin-top:10px;width:660px">
+							<div class="pull-right">
+								@inputText(_form("plusFactorTotal"),
+									'_label -> Messages("plus_factor_total"),
+									'class -> "input-small currency",
+									'readonly -> "readonly"
+								)
+								@inputText(_form("minusFactorTotal"),
+									'_label -> Messages("minus_factor_total"),
+									'class -> "input-small currency",
+									'readonly -> "readonly"
+								)
+							</div>
+						</div>
+					</div>
+				}
+
+				<div id="other" class="tab-pane">
+					<input type="hidden" id="contactStockPriceNo" value="1" />
+					<fieldset>
+						<div class="span5">
+							@inputText(_form("contactName"),
+								'_label -> Messages("contact.name"),
+								'class -> "input-xlarge",
+								'maxlength -> "100"
+							)
+							@inputText(_form("contactTaxOffice"),
+								'_label -> Messages("contact.tax.office"),
+								'class -> "input-medium",
+								'maxlength -> "20"
+							)
+							@inputText(_form("contactTaxNumber"),
+								'_label -> Messages("contact.tax.no"),
+								'class -> "input-medium",
+								'maxlength -> "15"
+							)
+							@inputText(_form("contactAddress1"),
+								'_label -> (Messages("address") + " 1"),
+								'class -> "input-xlarge",
+								'maxlength -> "100"
+							)
+	
+							@inputText(_form("contactAddress2"),
+								'_label -> (Messages("address") + " 2"),
+								'class -> "input-xlarge",
+								'maxlength -> "100"
+							)
+	
+							@inputText(_form("consigner"),
+								'_label -> Messages("consigner"),
+								'class -> "input-xlarge",
+								'maxlength -> "50"
+							)
+							@inputText(_form("recepient"),
+								'_label -> Messages("recepient"),
+								'class -> "input-xlarge",
+								'maxlength -> "50"
+							)
+						</div>
+						<div class="span4">
+							<div style="display: @(if(global.Profiles.chosen().irsl_hasPrices) "block" else "none")">
+								@select(_form("isTaxInclude"),
+									options(Options.taxStatus),
+									'class -> "input-small",
+									'_label -> Messages("tax_status"),
+									'onchange -> "calculateAllFieldsForStocks()"
+								)
+			
+								@select(_form("roundingDigits"),
+									options("0"->"0", "1"->"1", "2"->"2"),
+									'class -> "input-small",
+									'_label -> Messages("rounding_digits"),
+									'onchange -> "findTotalsForStocks()",
+									'_default -> Messages("choose")
+								)
+							</div>
+		
+							@inputText(_form("deliveryDate"),
+								'_label -> Messages("date.delivery"),
+								'class -> "input-small date"
+							)
+						</div>
+					</fieldset>
+				</div>
+			</div>
+		</div>
+
+		@tools.templates.form_footer_bar(rightBind.value, _form("id").value, _form("status").value != "Completed")
+
+	}
+
+	<script type="text/javascript">
+		var defaultExcCode = '@global.Profiles.chosen().gnel_excCode';
+		var isBuying = ('@rightBind.value.transType' === 'Input');
+		var amountField = '#netTotal';
+		var tableHeight = @(if(global.Profiles.chosen().irsl_hasPrices && isNotOpeningTrans) 320 else 520);
+		var isNotOpeningTrans = @isNotOpeningTrans;
+	</script>
+
+}
+
+@ScriptBlock = {
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/plugin/jquery.table.addrow.js")"></script>
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/plugin/jquery.freezetablecolumns.js")"></script>
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/crud/stock_tables.js")"></script>
+}

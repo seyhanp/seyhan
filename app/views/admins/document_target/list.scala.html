@@ -1,0 +1,8 @@
+@(currentPage: meta.PageExtend[AdminDocumentTarget])
+
+@tools.templates.ajax_list(
+	currentPage = currentPage,
+	label = Messages("target"),
+	right = enums.Right.BELGE_HEDEFLERI,
+	is_admin_page = true
+)

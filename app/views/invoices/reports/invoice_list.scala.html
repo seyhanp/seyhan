@@ -1,0 +1,61 @@
+@(_form: Form[invoice.reports.InvoiceList.Parameter])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.report_form(invoice.reports.routes.InvoiceList.generate(),enums.Right.FATR_FATURA_LISTESI) {
+
+	@select(_form("status"),
+		options(enums.TransStatus.optionsWithoutCancelled),
+		'class -> "input-medium",
+		'_label -> Messages("status"),
+		'_default -> Messages("choose")
+	)
+
+	@select(_form("transType"),
+		options(Options.transSources(enums.Module.invoice)),
+		'class -> "input-medium",
+		'_label -> Messages("trans.type"),
+		'_default -> Messages("choose")
+	)
+
+	@tools.components.autocomplete_contact(_form)
+	@tools.dropdowns.invoice_trans_source(_form, hasAddNewButton=false)
+
+	@inputText(_form("transNo"),
+		'_label -> Messages("trans.no"),
+		'class -> "input-small"
+	)
+
+	@tools.components.date_range(_form)
+	@tools.dropdowns.stock_depot(_form, true, hasAddNewButton=false)
+	@tools.dropdowns.sale_seller(_form, hasAddNewButton=false)
+
+	@inputText(_form("deliveryDate"),
+		'_label -> Messages("date.delivery"),
+		'class -> "input-small date"
+	)
+
+	@tools.components.trans_point_select(_form)
+	@tools.components.private_code_select(_form)
+
+	@select(_form("isCash"),
+		options(Options.yesno),
+		'class -> "input-small",
+		'_label -> Messages("is_cash"),
+		'_default -> Messages("choose")
+	)
+
+	@select(_form("orderby"),
+		options(invoice.reports.InvoiceList.Parameter.options),
+		'class -> "input-medium",
+		'_label -> Messages("orderby")
+	)
+
+	@select(_form("showType"),
+		options(invoice.reports.InvoiceList.Parameter.showTypes),
+		'class -> "input-small",
+		'_label -> Messages("report.show")
+	)
+
+}

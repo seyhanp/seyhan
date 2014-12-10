@@ -1,0 +1,57 @@
+@(items: List[meta.MenuItem])
+
+@item_template(item: meta.MenuItem) = {
+	@if(item.itemType.equals(enums.MenuItemType.Normal)) {
+		<li>
+			<a href=@if(item.link != null) { "@item.link" } else { "#" }  @if(item.onclick != null) { onclick="@item.onclick" }>
+				@Html(item.title)
+			</a>
+		</li>
+	}
+}
+
+@submenu(item: meta.MenuItem, isSubMenu: Boolean, index: Int, sindex: Int) = {
+
+	@if(item.subItems != null) {
+
+		@if(isSubMenu) {
+			<li id="menu-l2-@index-@sindex">
+				<a href="#"><span class="@item.icon"></span><span>@item.title</span></a>
+				<ul>
+		}
+
+		@for((sitem, zindex) <- item.subItems.zipWithIndex) {
+			@if(sitem.subItems != null) {
+				@submenu(sitem, true, index, zindex)
+			} else {
+				@item_template(sitem)
+			}
+		}
+	}
+
+	@if(isSubMenu) { </ul> }
+}
+
+@for((item, index) <- items.zipWithIndex) {
+	@if(item.link == null) {
+
+		@if(index == 0) {
+			<ul>
+		} else {
+			</ul>
+		}
+		
+		<li id="menu-l1-@index">
+			<h3><a href="#"><span class="@item.icon"></span>@item.title</a></h3>
+			<ul>
+	}
+
+	@if(item.subItems != null) {
+		@submenu(item, false, index, 1)
+	} else {
+		@item_template(item)
+	}
+
+}
+
+</ul>

@@ -1,0 +1,13 @@
+@(form: Form[_])
+
+@standart(form, Safe.options, enums.Right.KASA_TANITIMI, "refSafe", Messages("safe"), false) {
+
+	<script type="text/javascript">
+		function setSimpleControllerFor_refSafe() {
+			simple_combo_type = 1;
+			simple_selector = "#refSafe_id";
+			simple_controller = jsRoutes.controllers.safe.Safes;
+		}
+	</script>
+
+}

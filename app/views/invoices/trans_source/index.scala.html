@@ -1,0 +1,21 @@
+@(currentPage: meta.PageExtend[InvoiceTransSource])
+
+@Controller = {
+	<script type="text/javascript">
+		var controller = jsRoutes.controllers.invoice.TransSources;
+	</script>
+}
+
+@tools.templates.ajax_index(Controller) {
+
+	@tools.templates.ajax_form(
+		right = enums.Right.FATR_FATURA_KAYNAKLARI,
+		saveAction = invoice.routes.TransSources.save
+	)
+
+	<div id=list>
+		@list(currentPage)
+	</div>
+
+}
+	

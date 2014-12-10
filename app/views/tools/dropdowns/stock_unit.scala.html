@@ -1,0 +1,14 @@
+@(form: Form[_], no: String, hasAddNewButton:Boolean = true)
+
+@standart_by_name(form, StockUnit.options, enums.Right.STOK_BIRIM_TANITIMI, "unit" + no, Messages("stock.unit", no), ! no.equals("1"), hasAddNewButton=hasAddNewButton) {
+
+	<script type="text/javascript">
+		function setSimpleControllerFor_unit@(no)() {
+			simple_combo_type = 3;
+			simple_selector = "#unit@no";
+			simple_addition_of_name = '@no';
+			simple_controller = jsRoutes.controllers.stock.Units;
+		}
+	</script>
+
+}

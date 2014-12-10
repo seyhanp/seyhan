@@ -1,0 +1,45 @@
+@*******************************************************************
+* Generate dropdown info selector according twitter bootsrap rules *
+*******************************************************************@
+
+@(form: Form[_], options: Map[String, String], right: enums.Right, base: String, title: String, hasBlankOption: Boolean = true, hasAddNewButton:Boolean = true, additionIdForBase: String="", additionForCreate: String="")(content: Html)
+
+<script type="text/javascript">
+	function tidyUp_@(base+additionIdForBase)() {
+		var baseId = null;
+		@if(! additionForCreate.isEmpty) {baseId = @additionForCreate};
+		setSimpleControllerFor_@(base+additionIdForBase)();
+		if (baseId != null) {
+			simple_create(baseId);
+		} else {
+			simple_create();
+		}
+		$('#simple\\-title').html('@Messages("definition.of", title)');
+		$('#simple\\-ajax\\-form').attr('action', '/@(right.module.name)s/@base');
+	}
+</script>
+	
+<div class="control-group @if(form(base+additionIdForBase+".id").hasErrors) {error}">
+	<label class="control-label" for="@(base+additionIdForBase)_id">@title</label>
+	<div class="controls inline">
+		<select id="@(base+additionIdForBase)_id" name="@(base+additionIdForBase).id" @if(hasAddNewButton) {style="width:133px"} else {class="input-medium"}>
+			@if(hasBlankOption) {<option value="" class="blank">@Messages("choose")</option>}
+			@for((key, value) <- options) {
+				<option value="@key" @if(form(base+additionIdForBase+".id").value == key) {selected}>@value</option>
+			}
+        </select>
+        @if(hasAddNewButton && utils.AuthManager.hasSavePrivilege(right)) {
+			<a id="add_@(base+additionIdForBase)" class="btn btn-mini cohesive-btn" onclick="tidyUp_@(base+additionIdForBase)();">...</a>
+		}
+		<span style="color: red; font-size: 18px; font-weight: bold">@if(form(base+additionIdForBase).constraints.map(c => c._1).contains("constraint.required")) {*}</span>
+		@if(form(base+additionIdForBase+".id").hasErrors) {
+			<span class="errors label label-warning">
+				@for(error <- form(base+additionIdForBase+".id").errors) {
+					@utils.TemplateHelper.convertMessage(error)
+				}
+			</span>
+		}
+	</div>
+</div>
+
+@content

@@ -1,0 +1,37 @@
+@(_form: Form[stock.reports.TopNReport.Parameter])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.report_form(stock.reports.routes.TopNReport.generate(),enums.Right.STOK_TOPN_RAPORU) {
+
+	@for(aef <- models.AdminExtraFields.listAll(enums.Module.stock.name())) {
+		@tools.dropdowns.stock_extra_field(_form, aef.id, aef.idno, aef.name, aef.isRequired, hasAddNewButton=false)
+	}
+
+	@tools.components.stock_category_select(_form)
+
+	@tools.dropdowns.stock_depot(_form, hasAddNewButton=false)
+	@tools.components.trans_point_select(_form)
+	@tools.components.date_range(_form)
+
+	@select(_form("rowLimit"),
+		options("10"->"10", "25"->"25", "50"->"50", "100"->"100"),
+		'class -> "input-small",
+		'_label -> Messages("first"),
+		'_help -> Messages("stock")
+	)
+
+	@select(_form("orderField"),
+		options(stock.reports.TopNReport.Parameter.orderFieldOptions),
+		'class -> "input-medium",
+		'_label -> Messages("order_field")
+	)
+
+	@select(_form("orderDir"),
+		options(stock.reports.TopNReport.Parameter.orderDirOptions),
+		'class -> "input-small",
+		'_label -> Messages("order_dir")
+	)
+
+}

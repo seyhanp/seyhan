@@ -1,0 +1,20 @@
+@(currentPage: meta.PageExtend[StockCostFactor])
+
+@Controller = {
+	<script type="text/javascript">
+		var controller = jsRoutes.controllers.stock.CostFactors;
+	</script>
+}
+
+@tools.templates.ajax_index(Controller) {
+
+	@tools.templates.ajax_form(
+		right = enums.Right.STOK_MALIYET_FAKTORLERI,
+		saveAction = stock.routes.CostFactors.save
+	)
+
+	<div id=list>
+		@list(currentPage)
+	</div>
+
+}

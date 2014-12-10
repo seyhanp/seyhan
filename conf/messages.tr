@@ -1,0 +1,1136 @@
+# Türkçe mesajlar
+
+# --- Genel mesajlar
+saved={0} başarıyla kaydedildi.
+deleted={0} silindi.
+pulled={0} başarıyla çekildi.
+rolled_back={0} başarıyla geri alındı.
+imported={0} dosyası başarıyla içe aktarıldı.
+exported={0} başarıyla dışa aktarıldı (dosya adı : {1}).
+printed.success=Belge başarıyla yazdırıldı.
+printed.fail=Belge yazdırılamadı.
+error.in.import=Aktarım esnasında bir hata oluştu : {0}
+not.unique={0} daha önceden kullanılmış.
+id.is.null=Hatalı id bilgisi!
+not.found={0} bulunamadı!
+is.not.null={0} boş veya tanımsız olamaz!
+ref.accounts.same=Ana hesap ile yansı hesap aynı olamaz!
+depots.same=Transfer depoları aynı olamaz!
+workspaces.same=Transfer firmaları aynı olamaz!
+delete.violation={0} başka bir kayıt ile bağlantısı var, silinemez!
+edit.striction.for_controller=Bu kayıt onaylandığı için düzenlenemez!
+edit.striction.for_view=Bu kayıt onaylandığı için düzenlenemez! Düzenlemek istiyorsanız bağlandığı fişi silip F5 tuşuna basmalısınız : 
+edit.striction.for_chqbll=Bordroda bulunan bazı {0}ler başka hareket kaydına sahip oldukları için bu bordroyu düzenleyemezsiniz! 
+already.exist={0} zaten var!
+not.authorized.or.disconnect=Yapmak istediğiniz işlem için yetkiniz yok veya sunucu bağlantınızı kaybettiniz!
+you.can.edit.only.yours=Sadece kendi oluşturduğunuz kayıtları düzenleyebilirsiniz.
+multiplier.form.title={0} kopyalama
+trans_list.timing.restriction.alert=Detaylı arama formunda tarih belirtilmezse, listede sadece {0} zamanına ait veriler listelenir!
+factor.table.desc=Fişin tamamına yansıtılacak ekstra masraf ve indirimleri bu tabloya girebilirsiniz.
+printing.ok=Yazdırma işlemi başarıyla yapıldı.
+printing.problem=Yazdırma işlemi esnasında hata oluştu, loglara bakınız!
+
+panels.have.some.errors=Aşağıdaki panellerde bazı hatalar oluştu!
+turn_back.page=Bir önceki sayfaya dön!
+
+table.min.row.alert=Tabloya en az bir satır veri girmelisiniz!
+table.zero.value.alert=Satır: {0} -> {1} sıfır olmamalı!
+is.not.null.for.table=Satır: {0} -> {1} boş veya tanımsız olamaz!
+too.small.for.table=Satır: {0} -> {1} alanı için çok küçük veri. En az {2} olabilir.
+too.long.for.table=Satır: {0} -> {1} alanı için çok uzun veri. En fazla {2} karakter girilebilir.
+too.high.for.table=Satır: {0} -> {1} alanı için çok büyük veri. En fazla {2} girilebilir.
+less.than.minimum.table=Satır: {0} -> Minimum değerin altına inecek! Olabilecek minimum değer : {1}
+greater.than.maximum.table=Satır: {0} -> Maximum değerin üstüne çıkacak! Olabilecek maximum değer : {1}
+cannot.be.zero.table=Satır: {0} -> Stok miktarı sıfır olamaz!
+date.less.for.table=Satır: {0} -> Tarihi bugün ya da  daha ileri bir tarihe ait olmalıdır.
+date.less.from.due.for.table=Satır: {0} -> Vade tarihinden  daha ileri bir tarihe ait olmalıdır.
+duedate.close.for.table=Satır: {0} -> Vade tarihi bordro tarihinden daha ileri bir tarihe ait olmalıdır.
+contacts.are.same.table=Satır: {0} -> Fiş ve Detayının Cari Hesapları aynı olamaz!
+limit.alert={0} tanıtımında en fazla {1} seviye verilebilir. 
+record.limit.alert={0} tanıtımında en fazla {1} kayıt girilebilir. 
+prices.min.alert=En az bir fiyat seçmelisiniz!
+must.be.unique=Aynı {0} iki kez kullanımış!
+triple.cannot.be.zero.table=Satır: {0} -> Genişlik, Satır ve Sütun değerleri sıfır olamaz!
+
+editing_limit=Düzenleme Sınırı
+editing_timeout=Zamanaşımı
+editing_difdate=Farklı Gün
+editing_difdate.alert=Sadece bugüne ait işlemleri yapabilirsiniz!
+editing_difdate.description=bu izin verilmezse sadece bugünün kayıtlarını düzenleyebilir! 
+editing_timeout.alert=Zamanaşımı nedeniyle ({0} gün), bu kaydı düzenleyemezsiniz!
+editing_timeout.description=günden daha eski günlere ait işlemleri düzenleyemez (0, limitsiz)! 
+
+# --- Sorular
+will.delete={0} silinecek, emin misiniz?
+will.delete.empty=silinecek, emin misiniz?
+are_you_sure=Emin misiniz?
+has.stock.limit.control.active=Limit Kontrolü?
+has.contact.category.control.active=Kategori Denetimi?
+has.chqbll.surety.fields=Kefil Bilgileri?
+has.exchange.support=Dövizli işlem desteği olsun mu?
+has.continuously.recording=Sürekli Kayıt modu, açık olsun mu?
+will.costing.executed=Kaydettikten sonra maliyetlendirme yapılacak mı?
+print.attitude.info=Hareket işlemlerinin belge tasarımları nasıl bastırılacak!
+
+# --- Özel mesajlar
+category.sibling.alert=Bir kategori kendi alt kategorisi olarak kopyalanamaz! 
+click.for.the.others=Diğer arama seçenekleri için klikleyiniz.
+waiting_stocks.costing.constraint=Bu raporu alabilmeniz için FIFO veya LIFO türünde maliyetlendirme yapmış olmanız gerekiyor!
+
+# --- İşlemler
+actions=İşlemler
+action=İşlem
+edit=Düzenle
+add=Ekle
+show=Göster
+remove=Sil
+clone=Çoğalt
+report=Rapor
+clean=Temizle
+refresh=Yenile
+save=Kaydet
+create=Oluştur
+ok=Tamam
+cancel=Vazgeç
+previous=Önceki
+next=Sonraki
+all=Tümü
+choose=-- Seçiniz --
+report_unit=Çıkış Birimi
+orderby=Sırlama
+search=ara...
+criterias=Kriterler
+results=Arama Sonuçları
+logout=Çıkış
+transfer.selection=Seçilenleri Aktar
+approval.properties=Onaylama Parametreleri
+
+search_panel=Arama Paneli?
+show.search_panel=detaylı arama panelini aç
+hide.search_panel=detaylı arama panelini kapat
+
+# --- Mesajlar
+definition.of={0} Tanıtımı
+add.new=Yeni bir {0} ekle
+add.new.be.a={0} olarak yeni bir {1} ekle
+any.not.found=Herhangi bir <strong>{0}</strong> bulunamadı!
+any.not.found.ws=<strong>{0}</strong> kullanıcısı için <strong>{1}</strong> firmasında herhangi bir <strong>{2}</strong> bulunamadı!
+any.not.found.firstly.do=Herhangi bir {0} bulunamadı, öncelikle tanımlamalısınız!
+any.not.found.workspace=Kullanabileceğiniz herhangi bir firma izniniz yok, sistem yöneticisi size izin vermeli!
+firstly.select=Öncelikle bir {0} seçmelisiniz!
+any.design.found.firstly.do=  Herhangi bir Belge Tasarımı bulunamadı, super user olarak Admin Menüsü>>Belgeler kısmıda tanımlayabilirsiniz!
+any.design.target.found.firstly.do=  Herhangi bir Belge Hedefi bulunamadı, super user olarak Admin Menüsü>>Belge Hedefleri kısmıda tanımlayabilirsiniz!
+old.password.is.wrong=Eski şifre hatalı!
+passwords.arent.equal=Şifreler eşit değil!
+invalid.user.or.password=Geçersiz kullanıcı adı veya şifre girdiniz!
+logged.out=Sistemden çıkş yaptınız!
+login=Giriş
+logout=Çıkış
+please.login=Lütfen giriş yapın.
+please.wait=Lütfen bekleyiniz...
+language=Dil
+languages=Diller
+welcome=Hoşgeldin, {0}
+welcome.message=Seyhan'a hoşgeldiniz.
+cannot.delete={0} silinemez!
+wrong.parameters=Verdiğiniz kriterlere uyan herhangi bir kayıt bulunamadı!
+unexpected.problem.occured=Beklenmeyen bir hata oluştu -> {0}
+unknown.report.unit=Tanımsız rapor çıkış birimi!
+example=Örnek
+manual.entry={0} - Manuel giriş
+copy.whole.node=Seçilenle beraber alt elemanları da kopyala
+copy.only.title=Sadece seçilenin başlığını kopyala
+copy.only.children=Sadece alt elemanları kopyala
+has.been.approved=Toplam {0} adet {1} onaylanarak {2} adet {3} oluşturuldu.
+has.been.cancelled=Toplam {0} adet {1} VAZGEÇILDI statüsüne alındı!
+has.been.closed=Toplam {0} adet {1} KAPANDI statüsüne alındı!
+has.not.been.created=Herhangi bir fiş oluşturulamadı!
+has.not.been.closed=Herhangi bir fiş kapatılamadı!
+general.info=Genel Bilgiler
+insert_by=Ekleyen
+insert_at=Ekleme Zamanı
+update_by=Düzenleyen
+update_at=Düzenleme Zamanı
+
+# --- Tanım etiketleri
+info=Bilgi
+defines=Basit Tanıtımlar
+error=Hata
+alert=Uyarı
+name=Adı
+username=Kullanıcı Adı
+user.audit=Kullanıcı Hareketleri
+user.info=Kullanıcı Bilgileri
+title=Ünvanı
+password=Şifre
+old_password=Eski Şifre
+repeat_password=Şifre Tekrar
+category=Kategori
+categories=Kategoriler
+department=Departman
+type=Tip
+group=Gurup
+status=Statü
+last_status=Son Durumu
+payment_period=Ödeme Aralığı
+role=Rol
+roles=Roller
+section=Kısım
+right=Hak
+rights=Haklar
+reports=Raporlar
+level=Seviye
+definition=Tanım
+phone=Telefon
+phoneX=Telefon {0}
+mobile_phone=Cep Tel.
+address=Adres
+city=Şehir
+branch=Şube
+connection=İletişim
+extra=Ekstra
+amount=Tutar
+amounts=TUTARLAR
+amount_net=Net Tutar
+percent=Yüzde
+time=Saat
+date=Tarih
+date.start=Baş.Tarih
+date.end=Bit.Tarih
+date.range=Tarih Aralığı
+date.execution=Yürütme Tarihi
+date.real=Sevk Tar.
+date.delivery=Tes.Tar.
+date.maturity=Vade Tarihi
+date.avarage=Ort.Tarih
+description=Açıklama
+description.no=Açıklama {0}
+dir=Yön
+private_code=Özel Kod
+working_dir=Çalışma Yönü
+eq.zero=Sıfıra Eşit
+lt.zero=Sıfırdan Küçük
+gt.zero=Sıfırdan Büyük
+debt=Borç
+credit=Alacak
+equal=Eşit
+debt.sum=Borç T.
+debt.limit=Borç Limiti
+credit.sum=Alacak T.
+credit.limit=Alacak Limiti
+responsible=Sorumlu
+code=Kodu
+provider_code=Sağlayıcı Kodu
+prefix=Ön ek
+suffix=Son ek
+transfer=Devir
+transaction=İşlem
+close=Kapat
+go=Git
+back=Geri
+free=Serbest
+free.fortrans=-- Serbest --
+is_active=Aktif?
+is_admin=Admin?
+is_cash=Peşin?
+has_returns=İadeler?
+has_prices=Fiyatlı Çalışma?
+has_restriction=Kısıtlama?
+has_labels=Etiketler?
+has_paging=Sayfalama?
+label_dir=Etiket Yönü
+label_width=Etiket Uzn.
+source=Kaynak
+target=Hedef
+period=Periodu
+include=Dahil
+included=Dahil
+exclude=Hariç
+excluded=Hariç
+increase=Artış
+decrease=Azalış
+rcpno.rnw.type=Fiş No Yenileme
+docno.inc.type=Belg.No Artışı
+root_element=Kök Eleman
+under_selected_element=Seçilmiş Elemanın altına {0}
+other=Diğer
+tax=Vergi
+vat=KDV%
+discount=İndirim
+total_discount_rate=Dip İsk.Orn.
+expense=Masraf
+maturity=Vadesi
+other_ops=Diğer İşlemler
+ordered=Sıralı
+order_field=Sıralama Alanı
+order_dir=Sıralama Yönü
+ascending=Artan
+descending=Azalan
+first=İlk
+last=Son
+value=Değeri
+true=Evet
+false=Hayır
+inspect=İncele
+print=Yazdır
+consigner=Teslim Eden
+recepient=Teslim Alan
+postcode=Posta Kodu
+country=Ülke
+note=Not
+notes=Notlar
+field=Alan
+piece=Adet
+headsup=Uyarı: 
+payment=Ödeme
+collecting=Tahsilat
+change=Değiştir
+select=Seç
+selected=Seçilmiş
+detail=Detay
+details=Detaylar
+export=Dışa Aktar
+import=İçe Aktar
+file=Dosya
+location=Konum
+local=Yerel
+remote=Uzak
+path=Yol
+extra_field=Ekstra Alan
+extra_fields=Ekstra Alanlar
+priority=Önceliği
+
+withholding.rate=Tevkifat Orn.
+withholding.amount=Tevkifat Tut.
+withholding.before=Tevkifat Öncesi
+withholding.after=Tevkifat Sonrası
+
+balance=Bakiye
+balance.type=Bakiye Türü
+balance.open=Açık
+balance.completed=Kapanan
+balance.cancelled=Vazgeçilen
+
+printer_name=Yazıcı Adı
+page=Sayfa
+print_view.type=Görünüm
+print_view.PORTRAIT=Dikey
+print_view.LANDSCAPE=Yatay
+print_target.type=Hedef
+print_target.FILE=Dosyaya
+print_target.DOT_MATRIX=Dot Matrix Yazıcıya
+print_target.LASER=Lazer/InkJet Yazıcıya
+font_type=Font Tipi
+font.compessed=Sıkışık
+font.normal=Normal
+margin.left=Sol Marj
+margin.right=Sağ Marj
+margin.top=Üst Marj
+margin.bottom=Alt Marj
+width=Genişlik
+row=Satır
+column=Sutun
+format=Format
+value=Değeri
+selectable_fields=Seçilebilir Alanlar
+selected_fields=Seçilmiş Alanlar
+properties=Özellikler
+system=Sistem
+constant=Değişmez
+infosof={0} Bilgileri
+ReportTitle.band=RAPOR BAŞI
+PageTitle.band=SAYFA BAŞI
+Detail.band=DETAY
+PageFooter.band=SAYFA SONU
+ReportFooter.band=RAPOR SONU
+tables=Tablolar
+tableof.tax1=KDV Dağılım Tablosu 1
+tableof.exchange1=Döviz Kuru Tablosu 1
+tableof.currency1=Döviz Dağılım Tablosu 1
+tableof.factor1=Faktörler Tablosu 1
+with_writing=Yazı İle - {0}
+
+statusOf=Durumu : {0}
+typesOf={0} Türleri
+typeOf={0} Türü
+receiptOf={0} Fişi
+receiptsOf={0} Fişleri
+
+row_count=Satır S.
+page_row_number=Liste Satır Sayısı
+penny_digit_number=Kuruş Sayısı
+undo.last_action=Yapılan son işlemi geri al!
+transfer.from.yesterday=Dünden devir...
+transfer.to.tomorrow=Yarına devir...
+info.table.of={0} tanıtım tabloları aktarımı!
+trans.table.of={0} hareket tabloları aktarımı!
+trans.table.unclosed=Kapanmamış {0} aktarımı!
+company.name=Firma
+listof=Listesi
+list_of={0} Listesi
+from.where=Nereden
+to.where=Nereye
+to.left=Sola Dayalı
+to.center=Ortalı
+to.right=Sağa Dayalı
+
+visibility.of.fields=Alanların Görünürlüğü
+vof.serialNo=Seri No
+vof.taxRate2=ÖTV
+vof.taxRate3=ÖİV
+
+audit.right=İşlem :
+audit.name=Adı : 
+audit.code=Kodu : 
+audit.date=Tarihi : 
+audit.receipt_no=Fiş No : 
+audit.trans_no=Belge No : 
+audit.amount=Tutarı : 
+
+workspace=Firma 
+workspaces=Firmalar
+workspace.for={0} Firma
+
+pull=Çek
+pull.TCMB.exchange=TC Merkez Bankası döviz kurları
+pull.TCMB.effective=TC Merkez Bankası efektif kurları
+
+exchange=Döviz
+exchange_rate=Döviz Kuru
+exchange_rates=Döviz Kurları
+exchange_support=Dövizli Çalışma?
+exc_equivalent=Karşılığı
+actual_exchange_rates=Güncel Döviz Kurları
+buying=Alış
+selling=Satış
+diff_rate=Fark Yüzdesi
+distance=Mesafe
+continuously_recording=Sürekli Kayıt?
+print_attitude=Belge Yazdırma
+
+total=Toplam
+discount_total=İndirim Topl.
+subtotal=Ara Toplam
+tax_total=KDV Toplamı
+rounding_discount=Yuvarlama İsk.
+net_total=Net Toplam
+carrying_over=NAKLI YEKÜN..: 
+
+general=Genel
+yes=Evet
+no=Hayır
+nothing=Yok
+version=Sürüm
+purposed=Kullanım Amacı
+thanks=Teşekkürler
+
+period.daily=Günlük
+period.weekly=Haftalık
+period.monthly=Aylık
+
+edit.cut=Kes
+edit.copy=Kopyala
+edit.paste=Yapıştır
+edit.copied=kopyalandı
+edit.kut=kesildi
+
+make.waybill=İrsaliye Oluştur
+make.invoice=Fatura Oluştur
+related=İlgili {0}
+related.waybill=Bağlı İrsaliye
+related.invoice=Bağlı Fatura
+
+setting=Ayar
+settings=Ayarlar
+global=Genel
+global.settings=Genel Ayarlar
+
+trans.source=İşlem Kaynağı
+trans.no=Belge No
+trans.type=Fiş Tipi
+trans.usefor=Kullanım Yeri
+trans.point=İşlem Noktası
+trans.month=Yıl/Ay
+trans.year=Yıl
+receipt_no=Fiş No
+
+trans_status.Waiting=Beklemede
+trans_status.Completed=Kapandı
+trans_status.Cancelled=Vazgeçildi
+
+ref.account=Yansı Hesap
+ref.contact=Yansı Cari
+ref.safe=Yansı Kasa
+ref.bank=Yansı Banka
+ref.no=Yansı Hesap
+ref.name=Yansı Adı
+ref.amount=Yansı Tutarı
+ref.currency=Yansı ParaB.
+
+# --- Siparis
+order=Sipariş
+orders=Siparişler
+
+# --- İrsaliye
+waybill=İrsaliye
+waybills=İrsaliyeler
+
+# --- Fatura
+invoice=Fatura
+invoices=Faturalar
+invoice.trans.source=Fatura Kaynağı
+invoice.close=Seçilen Faturaları Kapat
+
+# --- Çek/Senet
+chqbll=Çek/Senet
+cheque=Çek
+cheques=Çekler
+bill=Senet
+bills=Senetler
+payroll.source=Bordro Kaynağı
+portfolio.no=Port.No
+serial.no=Seri No
+owner=Sahibi
+payment_place=Ödeme Yeri
+correspondent_branch=Muhabir Şube
+surety=Kefil
+sequential.doc.entry=Sıralı {0} girişi
+sequential.doc.add=Sıralı {0} ekle
+cheque_payroll=Çek Giriş-Çıkış Bordrosu
+cheque_transaction=Çek Hareket Bordrosu
+cheque_partial=Parçalı Çek Tah/Ödm
+bill_payroll=Senet Giriş-Çıkış Bordrosu
+bill_transaction=Senet Hareket Bordrosu
+bill_partial=Parçalı Senet Tah/Ödm
+
+# --- Stok
+stock=Stok
+stocks=Stoklar
+stock.card=Stok Kartı
+stock.group=Stok Grubu
+stock.trans.source=Fiş Kaynağı
+stock.provider=Sağlayıcı
+stock.providers=Sağlayıcılar
+stock.code=Stok Kodu
+stock.name=Stok Adı
+stock.barcode=Barkodu
+stock.price_update=Fiyat Güncelleme
+stock.price_list=Fiyat Listesi
+stock.price=Fiyat
+stock.receipt.desc=Açıklama Tablosu
+brand=Marka
+depot=Depo
+ref.depot=Transfer Depo
+barcode=Barkod
+barcodes=Barkodlar
+last_buy_price=Son Alış Fiyatı
+last_sell_price=Son Satış Fiyatı
+buy_price=Alış Fiyatı
+buy_prices=Alış Fiyatları
+sell_price=Satış Fiyatı
+sell_prices=Satış Fiyatları
+base_price=Birim Fiyat
+tax_status=KDV Durumu
+tax_rate=KDV
+tax_amount=Vergi T.
+buy_tax=Alış KDV
+sell_tax=Satış KDV
+tax_both=Alış/Satış KDV
+basis=Matrah
+price=Fiyat
+prices=Fiyatlar
+currency=ParaB.
+currencies=Para Birimileri
+rate=Oran
+e_according_to={0}' e göre
+a_according_to={0}' a göre
+rounding_digits=Yuvarlama
+quantity=Miktar
+unit=Birim
+units=Birimler
+discount_amount=Isk Tut.
+total=Toplam
+totals=Toplamlar
+total.input=Toplam Giren
+total.output=Toplam Çıkan
+input=Giren
+output=Çıkan
+remaining=Kalan
+paid=Ödenen
+value=Değeri
+total_input=Gir. Mik.
+total_output=Çık. Mik.
+total_in_amount=Gir. Tut.
+total_out_amount=Çık. Tut.
+total_ret_input=Gir.İad.Mik.
+total_ret_output=Çık.İad.Mik.
+total_ret_in_amount=Gir.İad.Tut.
+total_ret_out_amount=Çık.İad.Tut.
+
+row_combining=Satır Birleşimi
+
+short.io=G/Ç
+short.Input=GİR
+short.Output=ÇIK
+
+stock.discount.abbr=Isk
+stock.discount=Isk {0}
+stock.discount_rate=Isk Orn
+stock.discount_rate_total=Isk Oranları Toplamı
+stock.unit=Birim {0}
+unit.ratio=Katsayısı
+stock.unit_ratio=Birim {0} Katsayısı
+unit.no=Birim No
+
+max.limit=Max. Limit
+min.limit=Min. Limit
+both.limit=Min/Max Limit
+
+# --- Cari
+contact=Cari
+contacts=Cariler
+contact.account=Cari Hesap
+contact.code=Cari Kodu
+contact.name=Cari Adı
+contact.tax.office=Vergi Dairesi
+contact.tax.no=Vergi No
+contact.relevant=İlgili
+contact.website=Web Sitesi
+
+# --- Kasa
+safe=Kasa
+safes=Kasalar
+safe.name=Kasa Adı
+safe.expense=Gider Türü
+
+# --- Banka
+bank=Banka
+banks=Banka Hesapları
+bank.account=Banka Hesabı
+bank.name=Banka Adı
+bank.expense=Masraf
+expense.amount=Masraf Tutarı
+account.no=Hesap No
+
+# --- Satis
+sale=Satış
+seller=Satıcı
+campaign=Kampanya
+prim_rate=Pirim Orn.
+prim_amount=Pirim Tut.
+
+# --- Genel
+glob=Genel
+document=Belge
+documents=Belgeler
+design=Belge Tasarımı
+designs=Belge Tasarımları
+design.for={0} için Belge Tasarımı
+target=Hedef
+targets=Hedefler
+
+factor=Faktör
+factors=Faktörler
+factor_type=Faktör Tipi
+calc_type=Hesaplama
+effect_type=Etki Tipi
+effect_dir=Etki Yönü
+effect=Etki
+plus_factor_total=Artı Maliyet
+minus_factor_total=Eksi Maliyet
+cost_factor=Maliyet Faktörü
+costing_type=Maliyet H.Tipi
+costing=Maliyetlendirme
+cost_price=Maliyet Fyt.
+cost_total=Maliyet Tut.
+sell_total=Satış Top.
+buy_total=Alış Top.
+start_costing=Maliyetlendirmeyi Başlat!
+has_cost_effect=Maliyetlere etkisi var mı?
+has_stock_effect=Stok Yansıması?
+has_carrying_over=N.Yekün Alanı
+profit_loss=Kar/Zarar
+
+# --- Kullanıcı
+admin=Admin
+user=Kullanıcı
+users=Kullanıcılar
+profile=Profil
+profiles=Profiler
+
+# -----------------------
+# --- Enum karşılıkları
+# -----------------------
+
+module=Modül
+
+enum.KULLANICI_TANITIMI=Kullanıcı Tanımları
+enum.KULLANICI_GURUPLARI=Kullanıcı Gurupları
+enum.KULLANICI_ROLLERI=Kullanıcı Rolleri
+enum.KULLANICI_HAREKETLERI=Kullanıcı Hareketleri
+enum.GENEL_AYARLAR=Genel Ayarlar
+enum.CALISMA_ALANI=Firma Tanımları
+enum.CALISMA_ALANI_TRANSFER=Firmadan Firmaya Transfer
+enum.BELGE_TASARIMI=Belge Tasarımları
+enum.BELGE_HEDEFLERI=Belge Hedefleri
+
+enum.EKSTRA_STOK_ALANLARI=Stok Alanları
+enum.EKSTRA_CARI_ALANLARI=Cari Alanları
+
+enum.STOK=Stok
+enum.STOK_TANITIMI=Stok Kart Tanımları
+enum.STOK_KATEGORI_TANITIMI=Stok Kategorileri
+enum.STOK_EKSTRA_ALANLAR=Stok Kartı Ekstra Alanları
+enum.STOK_DEPO_TANITIMI=Depo Tanımları
+enum.STOK_FIS_KAYNAKLARI=Stok Fiş Kaynakları
+enum.STOK_BIRIM_TANITIMI=Birim Tanımları
+enum.STOK_ACILIS_ISLEMI=Stok Açılış Fişi
+enum.STOK_GIRIS_FISI=Stok Giriş Fişi
+enum.STOK_CIKIS_FISI=Stok Çıkış Fişi
+enum.STOK_GIRIS_IADE_FISI=Stok Giriş İade Fişi
+enum.STOK_CIKIS_IADE_FISI=Stok Çıkış İade Fişi
+enum.STOK_TRANSFER_FISI=Transfer Fişi
+enum.STOK_TRANSFER_YANSI=Transferden Yansıyan
+enum.STOK_FIYAT_GUNCELLEME=Toplu Fiyat Güncelleme
+enum.STOK_FIYAT_LISTESI=Fiyat Listesi
+enum.STOK_MALIYET_FAKTORLERI=Maliyet Faktörleri
+enum.STOK_MALIYET_HESAPLAMALARI=Maliyet Hesaplamaları
+enum.STOK_LISTESI=Stok Listesi
+enum.STOK_FIYAT_LISTESI=Fiyat Listesi
+enum.STOK_HAREKETSIZ_STOKLAR_LISTESI=Hareketsiz Stoklar Listesi
+enum.STOK_FIS_LISTESI=Fiş Listesi
+enum.STOK_HAREKET_RAPORU=Hareket Raporu
+enum.STOK_ICMAL_RAPORU=İcmal Raporu
+enum.STOK_ENVANTER_RAPORU=Envanter Raporu
+enum.STOK_KAR_ZARAR_RAPORU=Kar/Zarar Raporu
+enum.STOK_DURUM_RAPORU=Durum Raporu
+enum.STOK_BEKLEYEN_STOKLAR_RAPORU=Bekleyen Stoklar Raporu
+enum.STOK_SON_ISLEM_RAPORU=Son İşlem Raporu
+enum.STOK_TOPN_RAPORU=Top N Raporu
+
+enum.SPRS=Sipariş
+enum.SPRS_FIS_KAYNAKLARI=Sipraiş Fiş Kaynakları
+enum.SPRS_ALINAN_SIPARIS_FISI=Alınan Sipariş Fişi
+enum.SPRS_VERILEN_SIPARIS_FISI=Verilen Sipariş Fişi
+enum.SPRS_ONAYLAMA_ADIMLARI=Sipariş Onaylama Adımları
+enum.SPRS_FIS_LISTESI=Sipariş Listesi
+enum.SPRS_DAGILIM_RAPORU=Dağılım Raporu
+
+enum.IRSL=İrsaliye
+enum.IRSL_IRSALIYE_KAYNAKLARI=İrsaliye Kaynakları
+enum.IRSL_ALIS_IRSALIYESI=Alış İrsaliyesi
+enum.IRSL_SATIS_IRSALIYESI=Satış İrsaliyesi
+enum.IRSL_ONAYLAMA_ADIMLARI=İrsaliye Onaylama Adımları
+enum.IRSL_FIS_LISTESI=İrsaliye Listesi
+enum.IRSL_DAGILIM_RAPORU=Dağılım Raporu
+
+enum.FATR=Fatura
+enum.FATR_FATURA_KAYNAKLARI=Fatura Kaynakları
+enum.FATR_ALIS_FATURASI=Alış Faturası
+enum.FATR_SATIS_FATURASI=Satış Faturası
+enum.FATR_ALIS_IADE_FATURASI=Alış İade Faturası
+enum.FATR_SATIS_IADE_FATURASI=Satış İade Faturası
+enum.FATR_KAPAMA_ISLEMI=Fatura Kapama İşlemi
+enum.FATR_FATURA_LISTESI=Fatura Listesi
+enum.FATR_DAGILIM_RAPORU=Dağılım Raporu
+
+enum.CARI=Cari
+enum.CARI_TANITIMI=Cari Hesap Tanımları
+enum.CARI_ISLEM_KAYNAKLARI=Cari İşlem Kaynakları
+enum.CARI_KATEGORI_TANITIMI=Cari Kategorileri
+enum.CARI_EKSTRA_ALANLAR=Cari Kartı Ekstra Alanları
+enum.CARI_ACILIS_ISLEMI=Cari Açılış Fişi
+enum.CARI_BORC_DEKONTU=Borç Dekontu
+enum.CARI_ALACAK_DEKONTU=Alacak Dekontu
+enum.CARI_HESAP_LISTESI=Hesap Listesi
+enum.CARI_HAREKETSIZ_CARILER_LISTESI=Hareketsiz Cariler Listesi
+enum.CARI_ISLEM_LISTESI=İşlem Listesi
+enum.CARI_DURUM_RAPORU=Durum Raporu
+enum.CARI_YASLANDIRMA_RAPORU=Yaşlandırma Raporu
+enum.CARI_HAREKET_RAPORU=Hareket Raporu
+enum.CARI_SON_ISLEM_RAPORU=Son İşlem Raporu
+
+enum.CEK=Çek
+enum.CEK_TURLERI=Çek Türleri
+enum.CEK_BORDRO_KAYNAKLARI=Çek Bordro Kaynakları
+enum.CEK_MUSTERI_ACILIS_ISLEMI=M.Ç. Açılış Bordrosu
+enum.CEK_GIRIS_BORDROSU=M.Ç. Giriş Bordrosu
+enum.CEK_MUSTERI_HAREKETLERI=M.Ç. Hareket Bordrosu
+enum.CEK_PARCALI_TAHSILAT=M.Ç. Parçalı Tahsilat
+enum.CEK_FIRMA_ACILIS_ISLEMI=F.Ç. Açılış Bordrosu
+enum.CEK_CIKIS_BORDROSU=F.Ç. Çıkış Bordrosu
+enum.CEK_FIRMA_HAREKETLERI=F.Ç. Hareket Bordrosu
+enum.CEK_PARCALI_ODEME=F.Ç. Parçalı Ödeme
+enum.CEK_LISTESI=Çek Listesi
+enum.CEK_DAGILIM_RAPORU=Çek Dağılım Raporu
+enum.CEK_PARCALI_LISTESI=Parçalı Çek Listesi
+enum.CEK_ISLEM_BORDRO_LISTESI=Giriş/Çıkış Bordro Listesi
+enum.CEK_HAREKET_BORDRO_LISTESI=Hareket Bordro Listesi
+
+enum.SENET=Senet
+enum.SENET_TURLERI=Senet Türleri
+enum.SENET_BORDRO_KAYNAKLARI=Senet Bordro Kaynakları
+enum.SENET_MUSTERI_ACILIS_ISLEMI=M.S. Açılış Bordrosu
+enum.SENET_GIRIS_BORDROSU=M.S. Giriş Bordrosu
+enum.SENET_MUSTERI_HAREKETLERI=M.S. Hareket Bordrosu
+enum.SENET_PARCALI_TAHSILAT=M.S. Parçalı Tahsilat
+enum.SENET_FIRMA_ACILIS_ISLEMI=F.S. Açılış Bordrosu
+enum.SENET_CIKIS_BORDROSU=F.S. Çıkış Bordrosu
+enum.SENET_FIRMA_HAREKETLERI=F.S. Hareket Bordrosu
+enum.SENET_PARCALI_ODEME=F.S. Parçalı Ödeme
+enum.SENET_LISTESI=Senet Listesi
+enum.SENET_PARCALI_LISTESI=Parçalı Senet Listesi
+enum.SENET_ISLEM_BORDRO_LISTESI=Giriş/Çıkış Bordro Listesi
+enum.SENET_HAREKET_BORDRO_LISTESI=Hareket Bordro Listesi
+
+enum.KASA=Kasa
+enum.KASA_TANITIMI=Kasa Tanımları
+enum.KASA_ISLEM_KAYNAKLARI=Kasa İşlem Kaynakları
+enum.KASA_GIDER_TANITIMI=Gider Tanımları
+enum.KASA_ACILIS_ISLEMI=Kasa Açılış Fişi
+enum.KASA_TAHSIL_FISI=Tahsil Fişi
+enum.KASA_TEDIYE_FISI=Tediye Fişi
+enum.KASA_MAHSUP_FISI=Mahsup Fişi
+enum.KASA_GUNLUK_RAPOR=Günlük Durum Rapor
+enum.KASA_KASA_DEFTERI=Günlük Kasa Defteri
+enum.KASA_ISLEM_LISTESI=İşlem Listesi
+enum.KASA_DURUM_RAPORU=Durum Raporu
+enum.KASA_HAREKET_RAPORU=Hareket Raporu
+
+enum.BANK=Banka
+enum.BANK_HESAP_TANITIMI=Hesap Tanımları
+enum.BANK_ISLEM_KAYNAKLARI=Banka İşlem Kaynakları
+enum.BANK_MASRAF_TANITIMI=Masraf Tanımları
+enum.BANK_ACILIS_ISLEMI=Banka Açılış Fişi
+enum.BANK_HESABA_PARA_GIRISI=Para Yatırma İşlemi
+enum.BANK_HESAPTAN_PARA_CIKISI=Para Çekme İşlemi
+enum.BANK_ISLEM_LISTESI=İşlem Listesi
+enum.BANK_GUNLUK_RAPOR=Günlük Durum Rapor
+enum.BANK_DURUM_RAPORU=Bakiye Raporu
+enum.BANK_HAREKET_RAPORU=Hareket Raporu
+
+enum.SATS=Satış
+enum.SATS_SATICI_TANITIMI=Satıcı Tanımları
+enum.SATS_KAMPANYA_TANITIMI=Kampanya Tanımları
+enum.SATS_SATIS_RAPORU=Satış Raporu
+
+enum.GNEL=Genel
+enum.GNEL_ISLEM_NOKTALARI=İşlem Noktaları
+enum.GNEL_OZEL_KODLAR=Özel Kodlar
+enum.GNEL_DOVIZ_BIRIMLERI=Döviz Birimleri
+enum.GNEL_DOVIZ_KURLARI=Döviz Kurları
+enum.GNEL_PROFIL_TANITIMI=Profil Tanımları
+
+enum.CARI_VIRMAN=Cariden Yansıyan
+enum.KASA_VIRMAN=Kasadan Yansıyan
+enum.BANK_VIRMAN=Bankadan Yansıyan
+
+enum.Login=Giriş
+enum.Logout=Çıkış
+enum.Enable=Var
+enum.Disable=Yok
+enum.Read=Okur
+enum.Insert=Ekler
+enum.Update=Günceller
+enum.Delete=Siler
+
+enum.Waiting=Beklemede
+enum.Normal=Normal
+enum.In_Blacklist=Kara Listede
+
+enum.General=Genel
+enum.Client=Müşteri
+enum.Vendor=Satıcı
+enum.Distributor=Dağıtıcı
+enum.Dealer=Bayi
+enum.Partnership=Ortaklık
+
+enum.Input=Giriş
+enum.Output=Çıkış
+enum.Debt=Borç
+enum.Credit=Alacak
+
+enum.UserEditingLimit.Free=Tüm kullanıcıların kayıtlarını düzenleyebilir.
+enum.UserEditingLimit.Restricted=Sadece kendi oluşturduğu kayıtları düzenleyebilir.
+
+enum.module.contact=Cari
+enum.module.stock=Stok
+enum.module.order=Sipariş
+enum.module.waybill=İrsaliye
+enum.module.invoice=Fatura
+enum.module.cheque=Çek
+enum.module.bill=Senet
+enum.module.safe=Kasa
+enum.module.bank=Banka
+enum.module.sale=Satış
+enum.module.global=Genel
+enum.module.admin=Admin
+
+enum.EFT=EFT
+enum.Transfer=Havale
+
+enum.no=Yok
+enum.Manual=Manuel
+enum.Half_Automatic=Yarı Otomatik
+enum.Full_Automatic=Tam Otomatik
+enum.Automatic=Otomatik
+
+enum.costing_type.Simple=Basit Ortalama
+enum.costing_type.Weighted=Ağırlıklı Ortalama
+enum.costing_type.Moving=Hareketli Ortalama
+enum.costing_type.FIFO=FIFO
+enum.costing_type.LIFO=LIFO
+
+enum.Free=Serbest
+enum.Daily=Günlük
+enum.Monthly=Aylık
+
+chqbll.of={0} {1}i
+chqbll.ofs={0} {1}leri
+
+enum.cqbl.Firm=Firma
+enum.cqbl.Customer=Müşteri
+enum.cqbl.Cheque=Çek
+enum.cqbl.Bill=Senet
+enum.cqbl.step.InPortfolio=Portföyde
+enum.cqbl.step.Endorsed=Cirolu
+enum.cqbl.step.Issued=Verildi
+enum.cqbl.step.InCollection=Tahsilata Verilen
+enum.cqbl.step.Warrantee=Teminata Verildi
+enum.cqbl.step.Collected=Tahsil Edildi
+enum.cqbl.step.Deposited=Hesaba Geçti
+enum.cqbl.step.PaidByCash=Elden Ödendi
+enum.cqbl.step.PaidByBank=Bankadan Ödendi
+enum.cqbl.step.Returned=İade Edildi
+enum.cqbl.step.Bounced=Karşılıksız
+enum.cqbl.step.InPursue=Takipte
+enum.cqbl.step.Closed=Kapandı
+enum.cqbl.step.PartCollection=Parçalı Tahsilat
+enum.cqbl.step.PartPayment=Parçalı Ödeme
+
+exchange.rate.period.Manual=El ile
+exchange.rate.period.Once_A_Day=Günde bir kez otomatik
+exchange.rate.period.Hourly=Her saatte bir kez otomatik
+exchange.rate.period.Every_3_Hours=Her üç saatte bir kez otomatik
+
+exchange.rate.source.TCMB_Exchange=TC Merkez Bankası Döviz kurları
+exchange.rate.source.TCMB_Effective=TC Merkez Bankası Efektif kurları
+
+documents.column.title.type=Başlık Tipi
+documents.column.title.desc=Detay Kolon Başlığı için tip açıklamaları:
+documents.column.type.0=Kolon başlığını eklemez. 
+documents.column.type.1=Her sayfada detay satırları başlamadan önce kolon başlığını ekler. 
+documents.column.type.2=Her sayfada detay satırları başlamadan önce kolon başlığını iki çizgi arasına ekler ve satırların bittiği yere de bir çizgi satırı ekler. 
+documents.column.type.3=Her sayfada detay satırları başlamadan önce kolon başlığını iki boş satırın arasına ekler ve satırların bittiği yere de boş bir satır ekler. 
+
+enum.NOTHING=YOK
+enum.PLAIN=SADE
+enum.DASHED=ÇİZGİLİ
+enum.UNLINED=ÇİZGİSİZ
+
+# --- Hatalar
+error.required=Gerekli
+error.invalid=Geçersiz değer
+error.invalid.java.util.Date=Geçersiz tarih değeri
+error.expected.date=Geçersiz tarih değeri
+error.number=Sayısal değer olmalı
+error.real=Ondalıklı sayı olmalı
+error.min={0} dan büyük ya da eşit olmalı
+error.min.strict={0} dan büyük olmalı
+error.max={0} dan küçük ya da eşit olmalı
+error.max.strict={0} dan küçük olmalı
+error.minLength=Minimum uzunluk {0} olabilir
+error.maxLength=Maksimum uzunluk {0} olabilir
+error.email=Geçerli bir email olmalı
+error.dateRange=Bitiş tarihi Başlama tarihinden önce olamaz!
+error.dateRange.x={0} tarihi bugünden önce olamaz!
+error.numberRange=En az {0}, en fazla {1} olabilir!
+error.numberRangeByName={0}, En az {1}, en fazla {2} olabilir!
+error.dateBefore={0} İşlem tarihinden önce olamaz!
+error.zero={0} sıfırdan büyük olmalı!
+error.exc_code={0} sadece {1} işlemlerini kabul edebilir!
+
+warning.balance.limit=Limit bu tutar ile sınırı aşıyor, en fazla verilebilecek değer {0}
+msg.empty.data=Gösterilecek veri bulunamadı!
+
+exception.optimistic.lock=Bu form başka kullanıcı tarafından sizden önce kaydedilmiş, formu kapatıp tekrar açmalısınız!
+
+# --- Rapor Tipleri
+report.type=Rapor Tipi
+report.type.stock_based=Stok Bazlı
+report.type.contact_based=Cari Bazlı
+report.type.depot_based=Depo Bazlı
+report.type.group_based=Grup Bazlı
+report.type.day_based=Gün Bazlı
+report.type.month_based=Yıl/Ay Bazlı
+report.type.year_based=Yıl Bazlı
+report.type.maturity_based=Vade Bazlı
+report.type.deldate_based=Teslim Tarihi Bazlı
+report.type.category_based=Kategori Bazlı
+report.type.private_code_based=Özel Kod Bazlı
+report.type.trans_point_based=İşlem Noktası Bazlı
+report.type.trans_type_based=İşlem Tipi Bazlı
+report.type.trans_source_based=İşlem Kaynağı Bazlı
+report.type.receipt_type_based=Fiş Tipi Bazlı
+report.type.category_based=Kategori Bazlı
+report.type.seller_based=Satıcı Bazlı
+report.type.city_based=Şehir Bazlı
+report.type.account_based=Hesap Bazlı
+report.type.safe_based=Kasa Bazlı
+report.type.status_based=Durum Bazlı
+report.type.last_status_based=Son Durum Bazlı
+report.type.payment_place_based=Ödeme Yeri Bazlı
+report.type.bank_based=Banka Bazlı
+report.type.bank_account_based=Banka Hesabı Bazlı
+report.type.type_based=Tip Bazlı
+report.type.exc_based=Para Birimi Bazlı
+report.type.x_based={0} Bazlı
+
+report.show=Gösterim Şekli
+report.show.summary=Özet
+report.show.detail=Detay
+
+# --- Kısıtlamalar	
+constraint.required=Gerekli
+constraint.min=Minimum değer: {0}
+constraint.max=Maksimum değer: {0}
+constraint.minLength=Minimum uzunluk: {0}
+constraint.maxLength=Maksimum uzunluk: {0}
+
+# --- Uygulama seviyesi
+app.licence.desc=2013 - Açık Kaynak ERP Projesi
+
+# --- Hazır haklar
+instant_rights.label=Hazır Haklar
+instant_rights.read=Okuma
+instant_rights.insert=Ekleme
+instant_rights.update=Güncelleme
+instant_rights.delete=Silme
+instant_rights.report=Rapor
+
+instant_rights.special.none=Tüm hakları kaldır
+instant_rights.special.guest=Misafir haklarını ver
+instant_rights.special.admin=Tüm hakları ver
+instant_rights.special.allow=Tüm modüller için {0} hakkını ver
+instant_rights.special.deny=Tüm modüller için {0} hakkını kaldır
+instant_rights.module.allow={0} modülü için tüm hakları ver
+instant_rights.module.deny={0} modülü için tüm hakları kaldır 
+
+for.reports=Raporlarda kullanılacak
+reporter.company=Firma
+reporter.page=Sayfa
+reporter.continues=Devam ediyor...
+reporter.last_page=Rapor sonu.
+reporter.information=Bilgi
+
+report.info.date=Tarih : {0}
+report.info.date_range=Tarih Aralığı : {0} - {1}
+
+report_title.BalanceReport={0}_Durum_Raporu
+report_title.StatusReport={0}_Durum_Raporu
+report_title.DailyReport=Gunluk_{0}_Raporu
+report_title.TransactionList={0}_Islem_Listesi
+report_title.TransReportXBased={0}_Hareket_Raporu
+report_title.CumulativeReportXBased={0}_Icmal_Raporu
+report_title.DistReportXBased={0}_Dagilim_Raporu
+report_title.List={0}_Listesi
+report_title.InactiveList=Hareketsiz_{0}_Listesi
+report_title.LastTransReport={0}_Son_Hareket_Raporu
+report_title.ReceiptList={0}_Fis_Listesi
+report_title.InvoiceList={0}_Fatura_Listesi
+report_title.TopNReport={0}_TopN_Raporu
+
+report_title.WaitingStocksReport=Bekleyen_Stoklar_Raporu
+report_title.TransReportStockBased=Stok_Bazli_Hareket_Raporu
+report_title.DistReportStockBased=Stok_Bazli_Dagilim_Raporu
+report_title.InventoryReport=Stok_Envanter_Raporu
+report_title.ProfitLossReportXBased=Stok_KarZarar_Raporu
+report_title.CashbookList=Kasa_Defteri
+report_title.SellingReport=Satis_Raporu
+
+listing_type=Listeleme Şekli
+approval_type=Oluşum Tipi
+approval_type.contact=Fişler Cari Hesap bazında guruplansın
+approval_type.receipt=Her bir Fiş olduğu gibi onaylansın
+
+helpers.stock.roundingDigits=Seçilmezse yuvarlama yapılmaz. 0 seçilirse sadece kuruşlar yuvarlanır.
+helpers.stock.checkLimits=Bu denetim aktif hale getirilirse (ek kontroller nedeni ile) yavaşlamalar olabilir!
+helpers.stock.depot=Stok giriş tablolarında depo alanı için ön tanımlı olarak bu değer kullanılır.
+helpers.stock.unit=Stok tanımlarken, birinci birim bilgisi için ön tanımlı olarak bu değer kullanılır.
+helpers.stock.taxRate=Stok tanımlarken, kdv alanı için ön tanımlı olarak bu değer kullanılır.
+helpers.stock.isTaxInclude=Stoklu girişlerde kdv durumu alanı için hazır olarak bu değer kullanılır.
+helpers.contact.checkLimits=Bu denetim aktif hale getirilirse (ek kontroller nedeni ile) yavaşlamalar olabilir!
+helpers.order.approval.contact=Sipariş onaylama formunda fişlerin nasıl oluşacağı burdan belirlenir.
+helpers.order.hasPrices=Sipariş fişlerinde fiyat alanlarının çıkıp-çıkmayacağı bu değere göre belirlenir.
+helpers.waybill.approval.contact=İrsaliye onaylama formunda fişlerin nasıl oluşacağı burdan belirlenir.
+helpers.waybill.hasPrices=İrsaliye fişlerinde fiyat alanlarının çıkıp-çıkmayacağı bu değere göre belirlenir.
+helpers.invoice.isCash=Faturaların peşin olup-olmayacağı bu değere göre belirlenir.
+helpers.invoice.withholding=Faturalarda tevkifat olup-olmayacağı bu değere göre belirlenir.
+helpers.chqbll.suretyFields=Senet girişlerinde Kefil Bilgileri de girilecekse bu değer EVET yapılmalıdır.
+helpers.general.exchange.source=Döviz kurlarının çekileceği kaynak. 
+helpers.general.rowNumber=Tanıtım/İşlem liste formlarında gösterilecek satır sayısı. 
+helpers.general.diffRate.buying=ALIŞ FİYATI için fark oranı, negatif sayı olabilir!
+helpers.general.diffRate.selling=SATIŞ FİYATI için fark oranı, negatif sayı olabilir!
+helpers.general.trans.listingType=Hareket formlarında gösterilecek kayıtlar için listeleme şekli.
+helpers.general.show.search_panel=Listelerde daha detaylı arama yapmak istiyorsanız bu değeri EVET yapmalısınız.
+helpers.general.show.row_combining=Stok girişi yapılan fişlerde aynı koda ve fiyata sahip stokların tek satır halinde kaydedilmesini istiyorsanız bu değeri EVET yapmalısınız.
+helpers.general.reportUnit=Raporlar için seçili çıkış birimi
+helpers.general.receiptNoRnwType=Fiş girişlerinde bulunan Fiş No alanın arttırım şekli bu alan ile belirlenir.
+helpers.general.docNoIncType=Hareket işlemlerinde bulunan Belge No alanın arttırım şekli bu alan ile belirlenir.
+helpers.general.pennyDigitNumber=Parasal alanlarda bulunacak kuruş hane sayısı bu alan ile belirlenir.
+helpers.general.excCode=Para birimi seçilen yerlerde ön tanımlı olarak bu değer gelir.
+helpers.general.vof=Bu alanlar ilk kullanımla beraber kapalı olarak gelirler. Kullanmak istediğiniz alanı seçmelisiniz.
+
+dialogs.workspace.selection.tableTitle=Firma seçim tablosu
+dialogs.workspace.selection.tableDesc=Aşağıdaki tabloda kullanabileceğiniz firmaları görüyorsunuz.
+dialogs.workspace.selection.tableList1=Aktif olan firmanın zemin rengi diğerlerinden farklıdır.
+dialogs.workspace.selection.tableList2=Çalışmak istediğiniz firmanın Seç butonuna basabilirsiniz.
+dialogs.workspace.selection.tableList3=Yeni bir firma oluşturmak istiyorsanız super user kullanıcısı olarak giriş yaptıktan sonra Admin menüsünden Firmalar kısmını kullanabilirsiniz.
+
+dialogs.data_transfer.ws2ws.title=İki Firma arasında veri transferi
+
+dialogs.index.os.title=İşletim sistemi bağımsız
+dialogs.index.os.desc=Java 1.6+ platformunun çalışabildiği tüm sistemlerde çalışır; linux, unix, mac, windows...
+dialogs.index.db.title=Veritabanı bağımsız
+dialogs.index.db.desc=Popüler ilişkisel veritabanları ile çalışır; mysql, postgresql, mssql, h2...
+dialogs.index.browser.title=Tarayıcı bağımsız
+dialogs.index.browser.desc=Tüm tarayıcılarla çalışır; internet explorer, firefox, chrome...
+dialogs.index.source.title=Açık kaynak
+dialogs.index.source.desc=Seyhan Projesi açık kaynak kodludur. Ücretsiz olarak kullanabilir, projenin kendisi ile birlikte kaynak kodlarına da erişbilirsiniz.
+dialogs.index.multilanguage.title=Çoklu dil desteği
+dialogs.index.multilanguage.desc=Çoklu dil desteğine sahiptir. Şuan için Türkçe ve İngilizce desteği var.
+dialogs.index.printer.title=Yazıcı kullanımı
+dialogs.index.printer.desc=Rapor ve belgelerinizi pdf, excel ve metin dosyası olarak kaydedebilirsiniz. Ayrıca, nokta vuruşlu, lazer... yazıcılardan da çıktı alabilirsiniz.
+dialogs.index.support.title=Destek
+dialogs.index.support.desc1=Her türlü sorun ve talebi
+dialogs.index.support.desc2=adresine iletebilirsiniz.
+dialogs.index.purposed.java=Backend geliştirme platformu
+dialogs.index.purposed.eclipse=Java platformu için bütünleşik geliştirme ortamı
+dialogs.index.purposed.mint=Açık kaynak linux işletim sistemi
+dialogs.index.purposed.playfw=RestFUL WEB uygulama çatısı
+dialogs.index.purposed.scala=Template hazırlama dili
+dialogs.index.purposed.bootstrap=Frontend WEB arayüz hazırlama çatısı
+dialogs.index.purposed.h2=Demo projesi için veritabanı
+dialogs.index.purposed.mysql=Geliştirme veritabanı
+dialogs.index.purposed.jquery=Temel Javascript kütüphanesi
+dialogs.index.purposed.bitbucket=Kod reposu (git) ve talep yönetimi
+dialogs.index.purposed.flyway=Versiyonlar arası veritabanı geçiş sistemi
+dialogs.index.purposed.ant=Betik tabanlı derleme sistemi
+
+formats.integer=###
+formats.currency=#,##0.00
+formats.exchange=###0.0000
+formats.rate=###.##
+formats.double=###.##
+formats.longdate=dd/MM/yyyy HH:mm:ss
+formats.date=dd/MM/yyyy
+formats.time=HH:mm:ss
+formats.balance=#,##0.00 BB;#,##0.00 AB
+
+LINE=Çizgi
+STATIC_TEXT=Etiket
+SYS_DATE=Sistem Tarihi
+SYS_TIME=Sistem Saati
+SYS_DATE_FULL=Sistem Tarih ve Saati
+PAGE_NUMBER=Sayfa No
+PAGE_COUNT=Sayfa Sayısı

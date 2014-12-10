@@ -1,0 +1,38 @@
+@(_form: Form[models.temporal.DocumentMultiplier])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@helper.form(action = admin.routes.Documents.saveClone, 'class-> "form-horizontal", 'id-> "multiplierForm") {
+	<input type="hidden" name="id" id="id" value='@_form("id").value' />
+	<input type="hidden" name="module" id="module" value='@_form("module").value' />
+	<input type="hidden" name="header" id="header" value='@_form("header").value' />
+
+	@inputText(_form("name"),
+		'_label -> Messages("name"),
+		'class -> "input-medium",
+		'maxlength -> "20"
+	)
+
+	@select(_form("right"),
+		options(
+			_form("header").value match {
+		        case "cheque_payroll" => {Options.chqbllTransSources(true, enums.ChqbllSort.Cheque)}
+		        case "cheque_transaction" => {Options.chqbllTransSources(false, enums.ChqbllSort.Cheque)}
+		        case "cheque_partial" => {Options.chqbllPartialSources(enums.ChqbllSort.Cheque)}
+		        case "bill_payroll" => {Options.chqbllTransSources(true, enums.ChqbllSort.Bill)}
+		        case "bill_transaction" => {Options.chqbllTransSources(false, enums.ChqbllSort.Bill)}
+		        case "bill_partial" => {Options.chqbllPartialSources(enums.ChqbllSort.Bill)}
+		        case _ => {Options.transSources(_form("module").value, true, false)}
+		    }					
+		),
+		'_label -> Messages("action")
+	)
+
+	@inputText(_form("description"),
+		'_label -> Messages("description"),
+		'class -> "input-xlarge",
+		'maxlength -> "30"
+	)
+
+}

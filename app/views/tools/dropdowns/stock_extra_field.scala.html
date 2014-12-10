@@ -1,0 +1,15 @@
+@(form: Form[_], extraFieldId: Integer, idno: Integer, msgKey: String, isRequired: Boolean = false, hasAddNewButton:Boolean = true)
+
+@standart(form, StockExtraFields.options(extraFieldId), enums.Right.STOK_EKSTRA_ALANLAR, "extraField", Messages(msgKey), 
+	hasBlankOption=(! isRequired), hasAddNewButton=hasAddNewButton, additionIdForBase=""+idno, additionForCreate=""+extraFieldId) {
+
+	<script type="text/javascript">
+		function setSimpleControllerFor_extraField@(idno)() {
+			simple_combo_type = 3;
+			simple_addition_of_name = @extraFieldId;
+			simple_selector = "#extraField@(idno)_id";
+			simple_controller = jsRoutes.controllers.stock.ExtraFields;
+		}
+	</script>
+
+}

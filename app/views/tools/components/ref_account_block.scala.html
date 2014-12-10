@@ -1,0 +1,102 @@
+@(form: Form[_], direction: String = "", amountFieldName: String = "amount", hasContactOption: Boolean = true, hasOnlyScripts: Boolean = false )
+
+@implicitFieldConstructor = @{ helper.FieldConstructor(twitterBootstrapInput.f) }
+
+@***********************************************************************
+* Generate reflection account inputs according twitter bootsrap rules *
+***********************************************************************@
+
+<input type="hidden" name="refId" value='@form("refId").value' />
+<input type="hidden" name="refOldModule" value='@form("refOldModule").value' />
+
+<div>
+	@helper.select(
+		form("refModule"),
+		helper.options(enums.Module.reflectionOps(hasContactOption)),
+		'class -> "input-small",
+		'_label -> Messages("ref.account"),
+		'onchange -> "refModuleOnChange(false)",
+		'onkeyup -> "refModuleOnChange(false)"
+	)
+	
+	<div id="ra_contact">
+		@tools.components.autocomplete_contact(form, "refContact", direction)
+		@tools.dropdowns.contact_ref_trans_source(form, direction)
+	</div>
+	
+	<div id="ra_safe">
+		@tools.dropdowns.safe_ref(form)
+		@tools.dropdowns.safe_ref_trans_source(form, direction)
+	</div>
+	
+	<div id="ra_bank">
+		@tools.dropdowns.bank_ref(form)
+		@tools.dropdowns.bank_ref_trans_source(form, direction)
+	</div>
+	
+	<div id="ra_exchange">
+		@if(global.Profiles.chosen().gnel_hasExchangeSupport) {
+			<div class="control-group inline">
+				<label class="control-label" for="refExcCode">@Messages("currency")</label>
+				<div class="controls inline">
+					<select name="refExcCode" id="refExcCode" class="input-small" onchange="setRefRate()">
+						@for(code <- models.GlobalCurrency.options) {
+							<option value="@code" @(if(code.equals(form("refExcCode").value)) {"selected"})>@code</option>
+						}
+					</select>
+					<input type="text" id="refExcRate" name="refExcRate" class="input-small rate" value="@form("refExcRate").value" />
+					<input type="text" id="refExcEquivalent" name="refExcEquivalent" class="input-small currency" value="@form("refExcEquivalent").value" />
+				</div>
+			</div>
+		} else {
+			<input type="hidden" id="refExcCode" name="refExcCode" value="@form("refExcCode").value" />
+			<input type="hidden" id="refExcRate" name="refExcRate" value="@form("refExcRate").value" />
+			<input type="hidden" id="refExcEquivalent" name="refExcEquivalent" value="@form("refExcEquivalent").value" />
+		}
+	</div>
+</div>
+
+<script type="text/javascript">
+	function refModuleOnChange(isInit) {
+		var ra_contact = document.getElementById("ra_contact");
+		var ra_safe = document.getElementById("ra_safe");
+		var ra_bank = document.getElementById("ra_bank");
+		var ra_exchange = document.getElementById("ra_exchange");
+
+		ra_contact.style.display = "none";
+		ra_safe.style.display = "none";
+		ra_bank.style.display = "none";
+
+		if (document.getElementById("refModule").selectedIndex == 0) {
+			ra_exchange.style.display = "none";
+		} else {
+			ra_exchange.style.display = "block";
+			@if(global.Profiles.chosen().gnel_hasExchangeSupport) { if (! isInit) findEquivalent(); }
+		}
+
+		switch (document.getElementById("refModule").selectedIndex) {
+			case 1: {
+				ra_safe.style.display = "block";
+				break;
+			}
+			case 2: {
+				ra_bank.style.display = "block";
+				break;
+			}
+			case 3: {
+				ra_contact.style.display = "block";
+				break;
+			}
+		}
+
+	}
+</script>
+
+@exchange_block(direction, amountFieldName)
+
+<script type="text/javascript">
+	/**
+	* Bu metod cagrilmadan once exchange_man.js dosyasinin yuklenmis olmasi gerekiyor!
+	*/
+	refModuleOnChange(true);
+</script>

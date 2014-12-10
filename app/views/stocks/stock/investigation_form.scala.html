@@ -1,0 +1,130 @@
+@(transList: List[models.temporal.InvTrans], summaryList: List[models.temporal.InvSummary], properties: List[models.temporal.Pair])
+
+<div class="tabbable">
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="#inv_actions" data-toggle="tab">@Messages("actions")</a></li>
+		<li><a href="#inv_properties" data-toggle="tab">@Messages("info")</a></li>
+		<li><a href="#inv_totals" data-toggle="tab">@Messages("totals")</a></li>
+	</ul>
+
+	<div class="tab-content" style="overflow: hidden">
+
+		<div id="inv_actions" class="tab-pane active">
+			@if(transList.size == 0) {
+		
+				<div class="zell">
+					@Html(Messages("any.not.found", Messages("action")))
+				</div>
+		
+			} else {
+			
+				<table id="actionsTable">
+					<thead>
+						<tr>
+							<th style="width:250px">@Messages("contact.name")</th>
+							<th style="width:80px;text-align:center">@Messages("date")</th>
+							<th style="width:150px">@Messages("depot")</th>
+							<th style="width:150px">@Messages("trans.type")</th>
+							<th style="width:70px;text-align:right">@Messages("quantity")</th>
+							<th style="width:30px">@Messages("short.io")</th>
+							<th style="width:80px;text-align:right;">@Messages("price")</th>
+							@if(global.Profiles.chosen().gnel_hasExchangeSupport) {
+								<th style="width:50px;text-align:center">@Messages("currency")</th>
+							}
+							<th style="width:50px">@Messages("action")</th>
+						</tr>
+					</thead>
+					<tbody>
+						@for(trans <- transList) {
+							<tr>
+								<td>@trans.title</td>
+								<td style="text-align:center">@trans.date.format("dd/MM/yyyy")</td>
+								<td>@trans.depot</td>
+								<td>@Messages("enum."+trans.right)</td>
+								<td style="text-align:right">@utils.Format.asQuantity(trans.quantity)</td>
+								<td>@trans.transType</td>
+								<td style="text-align:right">@utils.Format.asMoney(trans.price)</td>
+								@if(global.Profiles.chosen().gnel_hasExchangeSupport) {
+									<td style="text-align:center">@trans.excCode</td>
+								}
+								<td><a style="width:70%" class="btn btn-mini" href="@trans.link">@Messages("go")</a></td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			}
+		</div>
+
+		<div id="inv_properties" class="tab-pane">
+			<table>
+				<tbody>
+					@for(property <- properties) {
+						@if(models.temporal.Pair.EMPTY.equals(property)) {
+							</tbody></table>
+							<table style="margin-top:10px"><tbody>
+						} else {
+							<tr>
+								<td class="property_key_col">@property.key :</td>
+								<td class="property_val_col">@if(property.value != null) {@Html(property.value)}</td>
+							</tr>
+						}
+					}
+				</tbody>
+			</table>
+		</div>
+
+		<div id="inv_totals" class="tab-pane">
+			@if(summaryList.size == 0) {
+		
+				<div class="zell">
+					@Html(Messages("any.not.found", Messages("action")))
+				</div>
+		
+			} else {
+			
+				<table width="100%" id="totalsTable">
+					<thead>
+						<tr>
+							<th>@Messages("trans.month")</th>
+							<th style="width:  9%">@Messages("total_input")</th>
+							<th style="width: 11%">@Messages("total_in_amount")</th>
+							<th style="width:  9%">@Messages("total_output")</th>
+							<th style="width: 11%">@Messages("total_out_amount")</th>
+							<th style="width:  9%">@Messages("total_ret_input")</th>
+							<th style="width: 11%">@Messages("total_ret_in_amount")</th>
+							<th style="width:  9%">@Messages("total_ret_output")</th>
+							<th style="width: 11%">@Messages("total_ret_out_amount")</th>
+							<th style="width:  8%">@Messages("balance")</th>
+						</tr>
+					</thead>
+					<tbody>
+						@for(summary <- summaryList) {
+							<tr @if(summary.isImportant) {style="font-weight: bold; color: red;"}>
+								<td>@summary.title</td>
+								<td style="text-align: right">@utils.Format.asQuantity(summary.netInput)</td>
+								<td style="text-align: right">@utils.Format.asMoney(summary.netInTotal)</td>
+								<td style="text-align: right">@utils.Format.asQuantity(summary.netOutput)</td>
+								<td style="text-align: right">@utils.Format.asMoney(summary.netOutTotal)</td>
+								<td style="text-align: right">@utils.Format.asQuantity(summary.retInput)</td>
+								<td style="text-align: right">@utils.Format.asMoney(summary.retInTotal)</td>
+								<td style="text-align: right">@utils.Format.asQuantity(summary.retOutput)</td>
+								<td style="text-align: right">@utils.Format.asMoney(summary.retOutTotal)</td>
+								<td style="text-align: right">@utils.Format.asQuantity(summary.balance)</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			}
+		</div>
+
+	</div>
+</div>
+
+<script type="text/javascript" src="@routes.Assets.at("javascripts/plugin/jquery.freezetablecolumns.js")"></script>
+
+<script type="text/javascript">
+	$("#actionsTable").freezeTableColumns({
+		width: 730,
+		height: 200
+	});
+</script>

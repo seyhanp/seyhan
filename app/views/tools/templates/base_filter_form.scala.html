@@ -1,0 +1,17 @@
+@(_form: Form[_], link: String, rightBind: meta.RightBind = null)
+
+<form method="GET" action ="@link" class="form-horizontal form-search pull-left" id="baseFilterForm" style="margin-bottom:6px">
+
+	<input type="hidden" class="pageIndex" name="pageIndex" id="pageIndex" value='@_form("pageIndex").value' />
+	<input type="hidden" name="showStatus" id="showStatus" value='@_form("showStatus").value' />
+	@if(rightBind != null) {<input type="hidden" name="rightBind" id="rightBind" value='@rightBind' />}
+
+	<div class="input-append">
+		<input  type="text" class="span4 search-query noenter" id="fullText" name="fullText" value='@_form("fullText").value' placeholder="@Messages("search")" />
+		<button type="submit" class="btn"><i class="icon-search"></i></button>
+	</div>
+
+	<script type="text/javascript">
+		$('#fullText').focus();
+	</script>
+</form>

@@ -1,0 +1,35 @@
+@(_form: Form[models.search.ContactTransSearchParam], rightBind: meta.RightBind)
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.search_form(_form, contact.routes.Transes.list(rightBind), rightBind.value.name) {
+
+	<input type="hidden" name="rightBind" id="rightBind" value='@rightBind' />
+
+	@tools.components.autocomplete_contact(_form, direction=rightBind.value.transType.toString(), name="refContact")
+	@tools.components.trans_point_select(_form)
+	@tools.dropdowns.contact_trans_source(_form, rightBind, hasAddNewButton=false)
+
+	@inputText(_form("receiptNo"),
+		'_label -> Messages("receipt_no"),
+		'class -> "input-small number",
+		'maxlength -> "9"
+	)
+
+	@inputText(_form("transNo"),
+		'_label -> Messages("trans.no"),
+		'class -> "input-medium",
+		'maxlength -> "20"
+	)
+
+	@tools.components.date_range(_form)
+
+	@inputText(_form("maturity"),
+		'_label -> Messages("maturity"),
+		'class -> "input-small date"
+	)
+
+	@tools.components.private_code_select(_form)
+
+}

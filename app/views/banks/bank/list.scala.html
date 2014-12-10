@@ -1,0 +1,8 @@
+@(currentPage: meta.PageExtend[Bank])
+
+@tools.templates.ajax_list(
+	currentPage = currentPage,
+	label = Messages("bank.account"),
+	right = enums.Right.BANK_HESAP_TANITIMI,
+	has_investigation = true
+)

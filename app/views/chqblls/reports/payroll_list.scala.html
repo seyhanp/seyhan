@@ -1,0 +1,48 @@
+@(_form: Form[chqbll.reports.PayrollList.Parameter], sort: enums.ChqbllSort)
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.report_form(chqbll.reports.routes.PayrollList.generate(sort.name), 
+							if(enums.ChqbllSort.Cheque.equals(sort)) enums.Right.CEK_ISLEM_BORDRO_LISTESI else enums.Right.SENET_ISLEM_BORDRO_LISTESI) {
+
+	<input type="hidden" id="sort" name="sort" value='@sort' />
+
+	@tools.components.autocomplete_contact(_form)
+
+	@select(_form("right"),
+		options(chqbll.reports.PayrollList.Parameter.rights(sort)),
+		'class -> "input-medium",
+		'_label -> Messages("trans.type")
+	)
+
+	@tools.dropdowns.chqbll_payroll_source(_form, sort, hasAddNewButton=false)
+
+	@inputText(_form("transNo"),
+		'_label -> Messages("trans.no"),
+		'class -> "input-small"
+	)
+
+	@tools.components.date_range(_form)
+
+	@inputText(_form("avarageDate"),
+		'_label -> Messages("date.avarage"),
+		'class -> "input-small date"
+	)
+
+	@tools.components.trans_point_select(_form)
+	@tools.components.private_code_select(_form)
+
+	@select(_form("orderby"),
+		options(chqbll.reports.PayrollList.Parameter.options),
+		'class -> "input-medium",
+		'_label -> Messages("orderby")
+	)
+
+	@select(_form("showType"),
+		options(chqbll.reports.PayrollList.Parameter.showTypes),
+		'class -> "input-small",
+		'_label -> Messages("report.show")
+	)
+
+}

@@ -1,0 +1,53 @@
+<configuration>
+
+  <conversionRule conversionWord="coloredLevel" converterClass="play.api.Logger$ColoredLevel" />
+  
+  <appender name="STDFILE" class="ch.qos.logback.core.FileAppender">
+     <file>${application.home}/logs/standart.log</file>
+     
+     <filter class="ch.qos.logback.classic.filter.LevelFilter">
+       <level>INFO</level>
+       <onMatch>ACCEPT</onMatch>
+       <onMismatch>DENY</onMismatch>
+     </filter>
+
+     <encoder>
+       <pattern>%d [%-5level] %logger{0} %msg%n</pattern>
+     </encoder>
+   </appender>
+  
+  <appender name="ERRFILE" class="ch.qos.logback.core.FileAppender">
+     <file>${application.home}/logs/errors.log</file>
+
+     <filter class="ch.qos.logback.classic.filter.LevelFilter">
+       <level>ERROR</level>
+       <onMatch>ACCEPT</onMatch>
+       <onMismatch>DENY</onMismatch>
+     </filter>
+
+     <encoder>
+       <pattern>%d [%-5level] %logger{0} %msg%n</pattern>
+     </encoder>
+   </appender>
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%-5p %class{0}:%L -> %m%n</pattern>
+    </encoder>
+  </appender>
+  
+  <logger name="play" level="INFO" />
+  <logger name="application" level="DEBUG" />
+  
+  <logger name="com.avaje.ebeaninternal.server.deploy.parse.DeployCreateProperties" level="WARN" />
+
+  <root level="DEBUG">
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="STDFILE" />
+  </root>
+
+  <root level="ERROR">
+    <appender-ref ref="ERRFILE" />
+  </root>
+
+</configuration>

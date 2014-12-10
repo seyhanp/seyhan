@@ -1,0 +1,39 @@
+@(_form: Form[sale.reports.SellingReport.Parameter])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.report_form(sale.reports.routes.SellingReport.generate(),enums.Right.SATS_SATIS_RAPORU) {
+
+	@tools.dropdowns.sale_seller(_form, hasAddNewButton=false)
+	@tools.components.autocomplete_stock(_form)
+
+	@for(aef <- models.AdminExtraFields.listAll(enums.Module.stock.name())) {
+		@tools.dropdowns.stock_extra_field(_form, aef.id, aef.idno, aef.name, aef.isRequired, hasAddNewButton=false)
+	}
+
+	@tools.components.stock_category_select(_form)
+	@tools.components.autocomplete_contact(_form)
+	@tools.dropdowns.stock_trans_source(_form, hasAddNewButton=false)
+	@tools.components.date_range(_form)
+	@tools.dropdowns.stock_depot(_form, hasAddNewButton=false)
+	@tools.components.trans_point_select(_form)
+	@tools.components.private_code_select(_form)
+
+	@for(aef <- models.AdminExtraFields.listAll(enums.Module.stock.name())) {
+		@tools.dropdowns.stock_extra_field(_form, aef.id, aef.idno, aef.name, aef.isRequired, hasAddNewButton=false)
+	}
+
+	@inputText(_form("providerCode"),
+		'_label -> Messages("provider_code"),
+		'class -> "input-medium",
+		'maxlength -> "30"
+	)
+
+	@select(_form("reportType"),
+		options(sale.reports.SellingReport.Parameter.reportTypes),
+		'class -> "input-medium",
+		'_label -> Messages("report.type")
+	)
+
+}

@@ -1,0 +1,26 @@
+@(_form: Form[stock.reports.ProfitLossReport.Parameter])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.report_form(stock.reports.routes.ProfitLossReport.generate(),enums.Right.STOK_KAR_ZARAR_RAPORU) {
+
+	@select(_form("costing.id"),
+		options(StockCosting.options),
+		'class -> "input-xlarge",
+		'_label -> Messages("costing")
+	)
+
+	@for(aef <- models.AdminExtraFields.listAll(enums.Module.stock.name())) {
+		@tools.dropdowns.stock_extra_field(_form, aef.id, aef.idno, aef.name, aef.isRequired, hasAddNewButton=false)
+	}
+
+	@tools.components.stock_category_select(_form)
+
+	@select(_form("reportType"),
+		options(stock.reports.ProfitLossReport.Parameter.reportTypes),
+		'class -> "input-medium",
+		'_label -> Messages("report.type")
+	)
+
+}

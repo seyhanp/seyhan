@@ -1,0 +1,66 @@
+@(_form: Form[models.temporal.SettingData])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.basic_form() {
+
+	@tools.imports.forms_header(
+		id = _form("id").value,
+		right = enums.Right.GENEL_AYARLAR,
+		link = null,
+		hasRemoveButton = false
+	)
+
+	@helper.form(action = admin.routes.Settings.save, 'class-> "form-horizontal zell", 'id-> "mainFieldsForm") {
+
+		@tools.imports.base_hidden_fields(_form)
+		<input type="hidden" id="code" name="code" value='@_form("code").value' />
+
+		<fieldset>
+
+			@inputText(_form("description"),
+				'_label -> Messages("description"),
+				'class -> "input-xxlarge",
+				'readonly -> "readonly"
+			)
+
+			@inputText(_form("companyName"),
+				'_label -> Messages("company.name"),
+				'class -> "input-xxlarge",
+				'_help -> Messages("for.reports")
+				
+			)
+
+			@select(_form("exchangeSource"),
+				options(Options.exchangeSource),
+				'_label -> Messages("source"),
+				'_help -> Messages("helpers.general.exchange.source")
+			)
+
+			@select(_form("exchangePeriod"),
+				options(Options.exchangePeriod),
+				'_label -> Messages("period")
+			)
+
+			@inputText(_form("exchangeDiffRateForBuying"),
+				'_label -> Messages("diff_rate"),
+				'class -> "input-small rate",
+				'maxlength -> "5",
+				'_help -> Messages("helpers.general.diffRate.buying")
+			)
+
+			@inputText(_form("exchangeDiffRateForSelling"),
+				'_label -> Messages("diff_rate"),
+				'class -> "input-small rate",
+				'maxlength -> "5",
+				'_help -> Messages("helpers.general.diffRate.selling")
+			)
+
+		</fieldset>
+
+		@tools.templates.form_footer_bar(enums.Right.GENEL_AYARLAR, "1")
+
+	}
+
+}

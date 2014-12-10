@@ -1,0 +1,39 @@
+@*******************************************************************
+* Generate dropdown info selector according twitter bootsrap rules *
+*******************************************************************@
+
+@(form: Form[_], options: Map[String, String], right: enums.Right, base: String, title: String, hasBlankOption: Boolean = true, hasAddNewButton:Boolean = true)(content: Html)
+
+<script type="text/javascript">
+	function tidyUp_@(base)() {
+		setSimpleControllerFor_@(base)();
+		simple_create();
+		$('#simple\\-title').html('@Messages("definition.of", title)');
+		$('#simple\\-ajax\\-form').attr('action', '/@(right.module.name)s/@base');
+	}
+</script>
+	
+<div class="control-group @if(form(base).hasErrors) {error}">
+	<label class="control-label" for="@base">@title</label>
+	<div class="controls inline">
+		<select id="@base" name="@base" @if(hasAddNewButton) {style="width:133px"} else {class="input-medium"}>
+			@if(hasBlankOption) {<option value="" class="blank">@Messages("choose")</option>}
+			@for((key, value) <- options) {
+				<option value="@value" @if(form(base).value == value) {selected}>@value</option>
+			}
+        </select>
+        @if(hasAddNewButton && utils.AuthManager.hasSavePrivilege(right)) {
+			<a id="add_@(base)" class="btn btn-mini cohesive-btn" onclick="tidyUp_@(base)();">...</i></a>
+		}
+		<span style="color: red; font-size: 18px; font-weight: bold">@if(form(base).constraints.map(c => c._1).contains("constraint.required")) {*}</span>
+		@if(form(base).hasErrors) {
+			<span class="errors label label-warning">
+				@for(error <- form(base).errors) {
+					@utils.TemplateHelper.convertMessage(error)
+				}
+			</span>
+		}
+	</div>
+</div>
+
+@content

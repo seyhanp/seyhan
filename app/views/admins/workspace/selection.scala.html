@@ -1,0 +1,68 @@
+@(workspaceList: List[AdminWorkspace])
+
+@findColClass(name:String) = @{
+	if(Application.isActiveWorkspace(name)) {
+		"class=selected"
+	}
+}
+
+@tools.templates.basic_form() {
+
+	@if(workspaceList.size() == 0) {
+
+		<div class="zell pagination-centered" style="margin-left:0; margin-top:20px">
+			<p>
+				@Html(Messages("any.not.found", Messages("workspace")))
+			</p>
+			<p>
+				<a class="btn btn-info" href="javascript: history.go(-1)">@Messages("turn_back.page")</a>
+				<a class="btn btn-info" href="javascript: location.reload()">@Messages("refresh")</a>
+			</p>
+		</div>
+
+	} else {
+
+		<h4>@Messages("dialogs.workspace.selection.tableTitle")</h4>
+		<p>
+			@Messages("dialogs.workspace.selection.tableDesc")
+			<ul>
+				<li>@Messages("dialogs.workspace.selection.tableList1")</li>
+				<li>@Messages("dialogs.workspace.selection.tableList2")</li>
+				<li>@Messages("dialogs.workspace.selection.tableList3")</li>
+			</ul>
+		</p>
+		<table style="width:100%;table-layout:fixed">
+			<thead>
+				<tr>
+					<th style="width:4%"></th>
+					<th style="width:12%">@Messages("name")</th>
+					<th>@Messages("description")</th>
+					<th style="width:8%">@Messages("date.start")</th>
+					<th style="width:8%">@Messages("date.end")</th>
+					<th style="width:8%">@Messages("has_restriction")</th>
+				</tr>
+			</thead>
+			<tbody>
+				@for(ws <- workspaceList) {
+					<tr>
+						<td @findColClass(ws.name) style="text-align: center">
+							@if(! Application.isActiveWorkspace(ws.name)) {
+								<a class="btn btn-mini" href="/change_workspace/@ws.name">@Messages("select")</a>
+							} else {
+								<i class="icon-ok" style="margin-top:2px"></i>
+							}
+						</td>
+						<td @findColClass(ws.name)>@ws.name</td>
+						<td @findColClass(ws.name)>@ws.description</td>
+						<td @findColClass(ws.name) style="text-align:center">@utils.DateUtils.formatDateStandart(ws.startDate)</td>
+						<td @findColClass(ws.name) style="text-align:center">@utils.DateUtils.formatDateStandart(ws.endDate)</td>
+						<td @findColClass(ws.name) style="text-align:center">
+							<span class="label label-@if(ws.hasDateRestriction) {info} else {warning}">@Messages(ws.hasDateRestriction.toString())</span>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+
+}

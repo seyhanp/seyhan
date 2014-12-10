@@ -1,0 +1,50 @@
+@(_form: Form[bank.reports.TransReport.Parameter])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.report_form(bank.reports.routes.TransReport.generate(),enums.Right.BANK_HAREKET_RAPORU) {
+
+	@tools.dropdowns.bank(_form, hasAddNewButton=false)
+
+	@select(_form("transType"),
+		options(Options.transSources(enums.Module.bank)),
+		'class -> "input-medium",
+		'_label -> Messages("trans.type"),
+		'_default -> Messages("choose")
+	)
+
+	@tools.dropdowns.bank_trans_source(_form, hasAddNewButton=false)
+
+	@inputText(_form("transNo"),
+		'_label -> Messages("trans.no"),
+		'class -> "input-small"
+	)
+
+	@tools.components.date_range(_form)
+
+	@if(global.Profiles.chosen().gnel_hasExchangeSupport) {
+		@select(_form("excCode"),
+			options(Options.currencies),
+			'class -> "input-small",
+			'_label -> Messages("currency"),
+			'_default -> Messages("choose")
+		)
+	}
+
+	@tools.components.trans_point_select(_form)
+	@tools.components.private_code_select(_form)
+
+	@select(_form("reportType"),
+		options(bank.reports.TransReport.Parameter.reportTypes),
+		'class -> "input-medium",
+		'_label -> Messages("report.type")
+	)
+
+	@select(_form("showType"),
+		options(bank.reports.TransReport.Parameter.showTypes),
+		'class -> "input-small",
+		'_label -> Messages("report.show")
+	)
+
+}

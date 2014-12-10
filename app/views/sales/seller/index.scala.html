@@ -1,0 +1,21 @@
+@(currentPage: meta.PageExtend[SaleSeller])
+
+@Controller = {
+	<script type="text/javascript">
+		var controller = jsRoutes.controllers.sale.Sellers;
+	</script>
+}
+
+@tools.templates.ajax_index(Controller) {
+
+	@tools.templates.ajax_form(
+		right = enums.Right.SATS_SATICI_TANITIMI,
+		saveAction = sale.routes.Sellers.save
+	)
+
+	<div id=list>
+		@list(currentPage)
+	</div>
+
+}
+	

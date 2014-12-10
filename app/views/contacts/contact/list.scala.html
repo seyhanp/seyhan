@@ -1,0 +1,16 @@
+@(currentPage: meta.PageExtend[Contact], _form: Form[models.search.ContactSearchParam])
+
+@tools.templates.basic_list(
+	currentPage = currentPage,
+	
+	filterForm = _form,
+	searchForm = (if(global.Profiles.chosen().cari_isSearchFormShowed) search_form(_form) else null),
+
+	right = enums.Right.CARI_TANITIMI,
+	label = Messages("contact.account"),
+	link = contact.routes.Contacts.list().url,
+
+	hasMultiplier = true,
+
+	investigation_link = "/contacts/investigation"
+)

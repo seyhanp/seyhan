@@ -1,0 +1,13 @@
+@(form: Form[_], hasAddNewButton:Boolean = true)
+
+@standart(form, SaleSeller.options, enums.Right.SATS_SATICI_TANITIMI, "seller", Messages("seller"), hasAddNewButton=hasAddNewButton) {
+
+	<script type="text/javascript">
+		function setSimpleControllerFor_seller() {
+			simple_combo_type = 0;
+			simple_selector = "#seller_id";
+			simple_controller = jsRoutes.controllers.sale.Sellers;
+		}
+	</script>
+
+}

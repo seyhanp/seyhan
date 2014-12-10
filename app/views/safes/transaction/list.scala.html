@@ -1,0 +1,13 @@
+@(currentPage: meta.PageExtend[SafeTrans], rightBind: meta.RightBind, _form: Form[models.search.SafeTransSearchParam])
+
+@tools.templates.trans_list(
+	currentPage = currentPage,
+
+	filterForm = _form,
+	searchForm = (if(global.Profiles.chosen().kasa_isSearchFormShowed) search_form(_form, rightBind) else null),
+
+	link = "/safes/trans/",
+	rightBind = rightBind,
+	
+	hasMultiplier = true
+)

@@ -1,0 +1,20 @@
+@(currentPage: meta.PageExtend[BankTransSource])
+
+@Controller = {
+	<script type="text/javascript">
+		var controller = jsRoutes.controllers.bank.TransSources;
+	</script>
+}
+
+@tools.templates.ajax_index(Controller) {
+
+	@tools.templates.ajax_form(
+		right = enums.Right.BANK_ISLEM_KAYNAKLARI,
+		saveAction = bank.routes.TransSources.save
+	)
+
+	<div id=list>
+		@list(currentPage)
+	</div>
+
+}

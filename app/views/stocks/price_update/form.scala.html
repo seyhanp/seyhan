@@ -1,0 +1,110 @@
+@(_form: Form[StockPriceUpdate])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.trans_form(ScriptBlock) {
+
+	@tools.imports.forms_header(
+		_form("id").value,
+		enums.Right.STOK_FIYAT_GUNCELLEME,
+		null, false
+	)
+
+	@helper.form(action = stock.routes.PriceUpdates.save, 'class-> "form-horizontal zell", 'id-> "mainFieldsForm") {
+
+		@tools.imports.base_hidden_fields(_form)
+
+		<fieldset>
+
+			@inputText(_form("name"),
+				'_label -> Messages("name"),
+				'class -> "input-xlarge",
+				'maxlength -> "30"
+			)
+
+			@tools.components.stock_category_select(_form)
+
+			@for(aef <- models.AdminExtraFields.listAll(enums.Module.stock.name())) {
+				@tools.dropdowns.stock_extra_field(_form, aef.id, aef.idno, aef.name, aef.isRequired, hasAddNewButton=false)
+			}
+
+			@inputText(_form("providerCode"),
+				'_label -> Messages("provider_code"),
+				'class -> "input-large",
+				'maxlength -> "30"
+			)
+
+			@select(_form("effectType"),
+				options(enums.EffectType.options),
+				'_label -> Messages("effect_type"),
+				'class -> "input-small"
+			)
+			
+			@inputText(_form("effect"),
+				'_label -> Messages("effect"),
+				'class -> "input-small currency",
+				'maxlength -> "7"
+			)
+			
+			@select(_form("effectDirection"),
+				options(enums.EffectDirection.options),
+				'_label -> Messages("effect_dir"),
+				'class -> "input-small"
+			)
+
+			@inputText(_form("description"),
+				'_label -> Messages("description"),
+				'class -> "input-xlarge",
+				'maxlength -> "50"
+			)
+
+			@inputText(_form("execDate"),
+				'_label -> Messages("date.execution"),
+				'class -> "input-medium",
+				'readonly -> "readonly"
+			)
+
+			<div class="control-group">
+				<label class="control-label" for="priceTable">@Messages("prices")</label>
+				<div class="controls">
+					@if(_form.hasErrors) {
+						@if(_form.errors.contains("prices")) {
+							<span class="label label-warning">@Messages("prices.min.alert")</span><br/>
+						}
+					}
+					<table width="250px" id="priceTable">
+						<thead>
+							<tr>
+								<th style="width: 10%"><input type="checkbox" id="selectall"/></th>
+								<th>@Messages("buy_price")</th>
+								<th style="width: 10%"></th>
+								<th>@Messages("sell_price")</th>
+							</tr>
+						</thead>
+							<tr>
+								<td>
+									<input class="case" type="checkbox" name="buyPrice" @(if(_form("buyPrice").value != null && _form("buyPrice").value.equals("true")) "checked")/>
+								</td>
+								<td>@Messages("buy_price")</td>
+
+								<td>
+									<input class="case" type="checkbox" name="sellPrice" @(if(_form("sellPrice").value != null && _form("sellPrice").value.equals("true")) "checked")/>
+								</td>
+								<td>@Messages("sell_price")</td>
+							</tr>
+					</table>
+				</div>
+			</div>
+
+		</fieldset>
+
+		@tools.templates.form_footer_bar(enums.Right.STOK_FIYAT_GUNCELLEME, _form("id").value, _form("id").value == null || _form("id").value.isEmpty)
+
+	}
+
+}
+
+@ScriptBlock = {
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/crud/select_all.js")"></script>
+}

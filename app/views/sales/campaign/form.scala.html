@@ -1,0 +1,69 @@
+@(_form: Form[SaleCampaign])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.basic_form() {
+
+	@tools.imports.forms_header(
+		_form("id").value,
+		enums.Right.SATS_KAMPANYA_TANITIMI,
+		sale.routes.Campaigns.remove(if(_form("id").value != null && ! _form("id").value.isEmpty()) _form("id").value.toInt else -1)
+	)
+
+	@helper.form(action = sale.routes.Campaigns.save, 'class-> "form-horizontal zell", 'id-> "mainFieldsForm") {
+
+		@tools.imports.base_hidden_fields(_form)
+
+		<fieldset>
+
+			@inputText(_form("name"),
+				'_label -> Messages("name"),
+				'class -> "input-xlarge",
+				'maxlength -> "30"
+			)
+
+			@inputText(_form("priority"),
+				'_label -> Messages("priority"),
+				'class -> "input-small number",
+				'maxlength -> "2"
+			)
+
+			@select(_form("isActive"),
+				options(Options.yesno),
+				'class -> "input-small",
+				'_label -> Messages("is_active")
+			)
+
+			@tools.components.date_range(_form)
+			@tools.components.stock_category_select(_form)
+
+			@for(aef <- models.AdminExtraFields.listAll(enums.Module.stock.name())) {
+				@tools.dropdowns.stock_extra_field(_form, aef.id, aef.idno, aef.name, aef.isRequired, hasAddNewButton=false)
+			}
+
+			@inputText(_form("discountRate1"),
+				'_label -> Messages("stock.discount", "1"),
+				'class -> "input-small rate",
+				'maxlength -> "5"
+			)
+
+			@inputText(_form("discountRate2"),
+				'_label -> Messages("stock.discount", "2"),
+				'class -> "input-small rate",
+				'maxlength -> "5"
+			)
+
+			@inputText(_form("discountRate3"),
+				'_label -> Messages("stock.discount", "3"),
+				'class -> "input-small rate",
+				'maxlength -> "5"
+			)
+
+		</fieldset>
+
+		@tools.templates.form_footer_bar(enums.Right.SATS_KAMPANYA_TANITIMI, _form("id").value)
+
+	}
+
+}

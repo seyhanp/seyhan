@@ -1,0 +1,16 @@
+@(currentPage: meta.PageExtend[Stock], _form: Form[models.search.StockSearchParam])
+
+@tools.templates.basic_list(
+	currentPage = currentPage,
+	
+	filterForm = _form,
+	searchForm = (if(global.Profiles.chosen().stok_isSearchFormShowed) search_form(_form) else null),
+
+	right = enums.Right.STOK_TANITIMI,
+	label = Messages("stock.card"),
+	link = stock.routes.Stocks.list().url,
+
+	hasMultiplier = true,
+
+	investigation_link = "/stocks/investigation"
+)

@@ -1,0 +1,9 @@
+@(currentPage: meta.PageExtend[StockCosting], _form: Form[models.search.NameOnlySearchParam])
+
+@tools.templates.basic_list(
+	currentPage = currentPage,
+	filterForm = _form,
+	right = enums.Right.STOK_MALIYET_HESAPLAMALARI,
+	label = Messages("costing"),
+	link = stock.routes.Costings.list().url
+)

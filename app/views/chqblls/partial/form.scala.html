@@ -1,0 +1,212 @@
+@(_form: Form[models.temporal.ChqbllPartialList], sort: enums.ChqbllSort, rightBind:meta.RightBind)
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@colWidth = {
+width:calc(100% - 5px)
+}
+
+@colWidthForDate = {
+width:calc(100% - 29px)
+}
+
+@tools.templates.trans_form(ScriptBlock) {
+
+	@tools.imports.forms_header(
+		_form("detailId").value,
+		rightBind.value,
+		utils.TemplateHelper.getRemoveActionForChqbllPartial(sort, _form("detailId").value.toInt, rightBind),
+		hasRemoveButton = (_form("paid").value.toDouble > 0)
+	)
+
+	@helper.form(
+		action = utils.TemplateHelper.getSaveActionForChqbllPartial(sort, rightBind)
+		,'class-> "form-horizontal zell", 'id -> "mainFieldsForm") {
+
+		<input type="hidden" id="detailId" name="detailId" value="@_form("detailId").value" />
+		<input type="hidden" id="sort" name="sort" value="@_form("sort").value" />
+		<input type="hidden" id="isCustomer" name="isCustomer" value="@_form("isCustomer").value" />
+		<input type="hidden" id="excCode" name="excCode" value="@_form("excCode").value" />
+		<input type="hidden" id="amount" name="amount" value="@_form("amount").value" />
+		<input type="hidden" id="paid" name="paid" value="@_form("paid").value" />
+		<input type="hidden" id="remaining" name="remaining" value="@_form("remaining").value" />
+		
+		<fieldset>
+
+			<div class="row-fluid">
+				<div class="span6">
+					@inputText(_form("contactName"),
+						'_label -> Messages("contact.name"),
+						'class -> "input-xlarge",
+						'readonly -> "readonly"
+					)
+					@inputText(_form("portfolioNo"),
+						'_label -> Messages("portfolio.no"),
+						'class -> "input-small number",
+						'readonly -> "readonly"
+					)
+					@inputText(_form("serialNo"),
+						'_label -> Messages("serial.no"),
+						'class -> "input-small number",
+						'readonly -> "readonly"
+					)
+					@inputText(_form("dueDate"),
+						'_label -> Messages("maturity"),
+						'class -> "input-small",
+						'readonly -> "readonly"
+					)
+				</div>
+
+				<div class="span6">
+					@inputText(_form("cbtype"),
+						'_label -> Messages("type"),
+						'class -> "input-small",
+						'readonly -> "readonly"
+					)
+					@if(_form("isCustomer").value.equals("true")) {
+						@inputText(_form("owner"),
+							'_label -> Messages("owner"),
+							'class -> "input-large",
+							'readonly -> "readonly"
+						)
+					}
+					@if(_form("sort").value.equals("Cheque")) {
+						@inputText(_form("bankName"),
+							'_label -> Messages("bank.name"),
+							'class -> "input-large",
+							'readonly -> "readonly"
+						)
+					} else {
+						@if(_form("isCustomer").value.equals("true")) {
+							@inputText(_form("surety"),
+								'_label -> Messages("surety"),
+								'class -> "input-large",
+								'readonly -> "readonly"
+							)
+						}
+					}
+					@inputText(_form("paymentPlace"),
+						'_label -> Messages("payment_place"),
+						'class -> "input-large",
+						'readonly -> "readonly"
+					)
+					@inputText(_form("description"),
+						'_label -> Messages("description"),
+						'class -> "input-large",
+						'readonly -> "readonly"
+					)
+				</div>
+			</div>
+
+		</fieldset>
+		
+		<div>
+			<div style="height:450px; margin-top:15px; overflow: hidden;">
+				@if(_form.hasErrors) {
+					@if(_form.errors.contains("partials")) {
+						<div id="partialsErrors">
+							<div onclick="$('#partialsErrors').remove()" style="cursor:pointer;">
+								<span class="label label-important"><i class="icon-remove icon-white"></i> @Messages("chqbll")</span>
+							</div>
+							 @for(error <- _form.errors.get("partials")) {
+								<span style="margin-left: 40px" class="label label-warning">@error.message().toString()</span><br/>
+							 }
+						</div>
+					}
+				}
+				<div id="partials">
+					<table id="partialTable" class='autoTable'>
+						<thead>
+							<tr>
+								<th style="width:60px">No</th>
+								<th style="width:100px;text-align:center">@Messages("date")</th>
+								<th style="width:80px">@Messages("amount")</th>
+								@if(global.Profiles.chosen().gnel_hasExchangeSupport) {
+									<th style="width:60px">@Messages("currency")</th>
+									<th style="width:70px">@Messages("exchange_rate")</th>
+									<th style="width:80px">@Messages("exc_equivalent")</th>
+								}
+								<th style="width:150px">@Messages("safe")</th>
+								<th style="width:270px">@Messages("description")</th>
+								<th style="width:35px"></th>
+							</tr>
+						</thead>
+						<tbody>
+							@repeatWithIndex(_form("details"), min=1, add=1) { (detail, index) =>
+								<tr>
+									<td>
+										<span class="rowNumber" style="display:block; margin:0px auto; text-align:right;">@index</span>
+										<input type="hidden" id="details[@index]_id" name="details[@index].id" value="@detail("id").value" />
+										<input type="hidden" id="details[@index]_detail_id" name="details[@index].detail.id" value="@detail("detail.id").value" />
+										<input type="hidden" id="details[@index]_trans_id" name="details[@index].trans.id" value="@detail("trans.id").value" />
+										<input type="hidden" id="details[@index]_insertBy" name="details[@index].insertBy" value="@detail("insertBy").value" />
+										<input type="hidden" id="details[@index]_insertAt" name="details[@index].insertAt" value="@detail("insertAt").value" />
+									</td>
+									<td><input type="text" class="attention input-small date" id="details[@index]_transDate" name="details[@index].transDate" value="@detail("transDate").value" style="@colWidthForDate;"/></td>
+									<td><input type="text" class="currency attention mainInput" id="details[@index]_amount" name="details[@index].amount" value="@detail("amount").value" style="@colWidth;"/></td>
+									@if(global.Profiles.chosen().gnel_hasExchangeSupport) {
+										<td><input type="text" readonly id="details[@index]_excCode" name="details[@index].excCode" value="@detail("excCode").value" style="@colWidth; text-align:center"/></td>
+										<td><input type="text" class="rate attention" id="details[@index]_excRate" name="details[@index].excRate" value="@detail("excRate").value" style="@colWidth;"/></td>
+										<td><input type="text" class="currency attention" id="details[@index]_excEquivalent" name="details[@index].excEquivalent" value="@detail("excEquivalent").value" style="@colWidth;"/></td>
+									} else {
+										<input type="hidden" id="details[@index]_excCode" name="details[@index].excCode" value="@detail("excCode").value"/>
+										<input type="hidden" id="details[@index]_excRate" name="details[@index].excRate" value="@detail("excRate").value"/>
+										<input type="hidden" id="details[@index]_excEquivalent" name="details[@index].excEquivalent" value="@detail("excEquivalent").value"/>
+									}
+									<td>
+										<select id="details[@index]_safe_id" name="details[@index].safe.id" style="width:100%">
+								            @Safe.options.map { v =>
+								                <option value="@v._1" @if(detail("safe.id").value == Some(v._1)){selected}>@v._2</option>
+								            }
+								        </select>
+									</td>
+									<td><input type="text" id="details[@index]_description" name="details[@index].description" value="@detail("description").value" style="@colWidth;"/></td>
+									<td align="center">
+										<a class="btn btn-mini delRow" title="@Messages("remove")">
+											<i class="icon-remove" style="margin-top:1px"></i>
+										</a>
+									</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+
+					<div class="pull-right" style="margin-top:10px">
+						@inputText(_form("total"),
+							'_label -> Messages("total"),
+							'class -> "input-small currency",
+							'readonly -> "readonly"
+						)
+						@inputText(_form("payment"),
+							'_label -> Messages("paid"),
+							'class -> "input-small currency",
+							'readonly -> "readonly"
+						)
+						@inputText(_form("remain"),
+							'_label -> Messages("remaining"),
+							'class -> "input-small currency",
+							'readonly -> "readonly"
+						)
+					</div>
+				</div>
+			</div>
+		</div>
+
+		@tools.templates.form_footer_bar(rightBind.value, _form("id").value)
+
+	}
+	
+	<script type="text/javascript">
+		var excCode = ' @_form("excCode").value';
+		var isCustomer = @_form("isCustomer").value;
+		var global_excCode = '@global.Profiles.chosen().gnel_excCode';
+	</script>
+
+}
+
+@ScriptBlock = {
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/plugin/jquery.table.addrow.js")"></script>
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/plugin/jquery.freezetablecolumns.js")"></script>
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/crud/chqbll_partials.js")"></script>
+}

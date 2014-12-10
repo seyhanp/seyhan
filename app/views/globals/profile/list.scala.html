@@ -1,0 +1,10 @@
+@(currentPage: meta.PageExtend[GlobalProfile])
+
+@tools.templates.basic_list(
+	currentPage = currentPage,
+	right = enums.Right.GNEL_PROFIL_TANITIMI,
+	label = Messages("profile"),
+	link = global.routes.Profiles.list().url,
+
+	hasMultiplier = true
+)

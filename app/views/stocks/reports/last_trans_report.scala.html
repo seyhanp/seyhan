@@ -1,0 +1,34 @@
+@(_form: Form[stock.reports.LastTransReport.Parameter])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.report_form(stock.reports.routes.LastTransReport.generate(),enums.Right.STOK_SON_ISLEM_RAPORU) {
+
+	@tools.components.autocomplete_stock(_form)
+
+	@select(_form("transType"),
+		options(Options.transSources(enums.Module.stock)),
+		'class -> "input-medium",
+		'_label -> Messages("trans.type"),
+		'_default -> Messages("choose")
+	)
+
+	@for(aef <- models.AdminExtraFields.listAll(enums.Module.stock.name())) {
+		@tools.dropdowns.stock_extra_field(_form, aef.id, aef.idno, aef.name, aef.isRequired, hasAddNewButton=false)
+	}
+
+	@tools.components.stock_category_select(_form)
+	@tools.components.trans_point_select(_form)
+	@tools.dropdowns.stock_trans_source(_form, hasAddNewButton=false)
+
+	@select(_form("hasReturns"),
+		options(Options.yesno),
+		'class -> "input-small",
+		'_label -> Messages("has_returns")
+	)
+
+	@tools.components.date_range(_form)
+	@tools.dropdowns.stock_depot(_form, hasAddNewButton=false)
+
+}

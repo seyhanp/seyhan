@@ -1,0 +1,168 @@
+@findColClassForWS(name:String) = @{
+	if(Application.isActiveWorkspace(name)) {
+		"class=selected"
+	}
+}
+
+@findColClassForProfile(name:String) = @{
+	if(Application.isActiveProfile(name)) {
+		"class=selected"
+	}
+}
+
+@findColClassForLang(name:String) = @{
+	if(Application.isActiveLang(name)) {
+		"class=selected"
+	}
+}
+
+<a id="toggleSettingsPanel" class="btn" href="#" onclick="togglePanel();" tabIndex="-1">
+	<i id="toggleIcon" class="icon-chevron-left" style="margin-left:-4px"></i>
+</a>
+
+<div id="body">
+	<div id="tabs" class="tabbable" style="width:300px; display: none">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="#exchangePanel" data-toggle="tab">@Messages("exchange_rates")</a></li>
+			<li><a href="#workspacePanel" data-toggle="tab">@Messages("workspaces")</a></li>
+			<li><a href="#profilePanel" data-toggle="tab">@Messages("profiles")</a></li>
+			<li><a href="#langPanel" data-toggle="tab">@Messages("languages")</a></li>
+		</ul>
+
+		<div class="tab-content">
+
+			<div id="exchangePanel" class="tab-pane active">
+				<div>
+					<table style="margin-top:-6px;table-layout:fixed">
+						<thead>
+							<tr>
+								<th style="width:7%; text-align: center">@Messages("currency")</th>
+								<th style="text-align: right">@Messages("buying")</th>
+								<th style="text-align: right">@Messages("selling")</th>
+							</tr>
+						</thead>
+						<tbody>
+							@for((cur, rates) <- global.CurrencyRates.getActualExchangeRatesMap()) {
+								@if(! cur.equals("info") && ! cur.equals(global.Profiles.chosen().gnel_excCode)) {
+									<tr>
+										<td style="width:7%; text-align: center">@cur</td>
+										<td style="text-align: right">@rates.buying</td>
+										<td style="text-align: right">@rates.selling</td>
+									</tr>
+								}
+							}
+						</tbody>
+					</table>
+					<div style="margin-top:5px">
+						<span style="color:red; font-weight: bold">* </span><small style="color:blue;">@global.CurrencyRates.getActualExchangeRatesMap().get("info").name</small>
+					</div>
+					
+				</div>
+			</div>
+
+			<div id="workspacePanel" class="tab-pane">
+				<div>
+					<table style="margin-top:-6px;table-layout:fixed">
+						<thead>
+							<tr>
+								<th></th>
+								<th style="width:5%"></th>
+							</tr>
+						</thead>
+						<tbody>
+							@for((name, workspace) <- admin.Workspaces.getWsMap()) {
+								<tr>
+									<td @findColClassForWS(name)>@name</td>
+									<td @findColClassForWS(name) style="text-align: center">
+										@if(! Application.isActiveWorkspace(name)) {
+											<a class="btn btn-mini" href="/change_workspace/@name">@Messages("select")</a>
+										} else {
+											<i class="icon-ok" style="margin-top:2px"></i>
+										}
+									</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+					@if(utils.CacheUtils.isSuperUser()) {
+						<a href="/admins/workspace" class="btn btn-mini" style="margin-top:5px">@Messages("workspaces")</a>
+					} else {
+						<a href="/workspace/list" class="btn btn-mini" style="margin-top:5px">@Messages("workspaces")</a>
+					}
+				</div>
+			</div>
+
+			<div id="profilePanel" class="tab-pane">
+				<div>
+					<table style="margin-top:-6px;table-layout:fixed">
+						<thead>
+							<tr>
+								<th></th>
+								<th style="width:5%"></th>
+							</tr>
+						</thead>
+						<tbody>
+							@for(profile <- GlobalProfile.getNames()) {
+								<tr>
+									<td @findColClassForProfile(profile)>@profile</td>
+									<td @findColClassForProfile(profile) style="text-align: center">
+										@if(! Application.isActiveProfile(profile)) {
+											<a class="btn btn-mini" href="/change_profile/@profile">@Messages("select")</a>
+										} else {
+											<i class="icon-ok" style="margin-top:2px"></i>
+										}
+									</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+					@if(utils.AuthManager.hasPrivilege(enums.Right.GNEL_PROFIL_TANITIMI, enums.RightLevel.Enable)) {
+						<a href="/globals/profile" class="btn btn-mini" style="margin-top:5px">@Messages("profiles")</a>
+					}
+				</div>
+			</div>
+
+			<div id="langPanel" class="tab-pane">
+				<div>
+					<table style="margin-top:-6px;table-layout:fixed">
+						<thead>
+							<tr>
+								<th style="width:12%"></th>
+								<th></th>
+								<th style="width:5%"></th>
+							</tr>
+						</thead>
+						<tbody>
+							@for((key, value) <- utils.GlobalCons.getLangMap()) {
+								<tr>
+									<td @findColClassForLang(key) style="text-align: center"><img src='/assets/img/@(key).png'/></td>
+									<td @findColClassForLang(key)>@value</td>
+									<td @findColClassForLang(key) style="text-align: center">
+										@if(! Application.isActiveLang(key)) {
+											<a class="btn btn-mini" href="/change_lang/@key">@Messages("select")</a>
+										} else {
+											<i class="icon-ok" style="margin-top:2px"></i>
+										}
+									</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	function togglePanel() {
+		$('#tabs').toggle('slide', { direction: 'right' }, 'fast', function(e) {
+			if ($("#tabs").is(':visible')) {
+				$("#toggleIcon").removeClass("icon-chevron-left").addClass("icon-chevron-right");
+			} else {
+				$("#toggleIcon").removeClass("icon-chevron-right").addClass("icon-chevron-left");
+			}
+		});
+	}
+</script>

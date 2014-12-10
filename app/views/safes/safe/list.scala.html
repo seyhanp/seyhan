@@ -1,0 +1,8 @@
+@(currentPage: meta.PageExtend[Safe])
+
+@tools.templates.ajax_list(
+	currentPage = currentPage,
+	label = Messages("safe"),
+	right = enums.Right.KASA_TANITIMI,
+	has_investigation = true
+)

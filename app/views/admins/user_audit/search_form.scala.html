@@ -1,0 +1,60 @@
+@(_form: Form[models.search.UserAuditSearchParam])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.search_form(_form, admin.routes.UserAudits.list(), "user_audit") {
+
+	@select(_form("username"),
+		options(AdminUser.options),
+		'_label -> Messages("username"),
+		'_default -> Messages("choose")
+	)
+
+	@tools.components.date_range(_form)
+
+	@inputText(_form("ip"),
+		'_label -> "IP",
+		'class -> "input-large",
+		'maxlength -> "16"
+	)
+
+	<div class="control-group">
+		<label class="control-label" for="chooseActionTable">@Messages("actions")</label>
+		<div class="controls">
+			<table width="120px" id="chooseActionTable">
+				<thead>
+					<tr>
+						<th style="width: 10%"><input type="checkbox" id="selectall"/></th>
+						<th>@Messages("action")</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><input class="case" type="checkbox" name="loginAction" @(if(_form("loginAction").value) "checked")/></td>
+						<td>Login</td>
+					</tr>
+					<tr>
+						<td><input class="case" type="checkbox" name="logoutAction" @(if(_form("logoutAction").value) "checked")/></td>
+						<td>Logout</td>
+					</tr>
+					<tr>
+						<td><input class="case" type="checkbox" name="insertAction" @(if(_form("insertAction").value) "checked")/></td>
+						<td>@Messages("instant_rights.insert")</td>
+					</tr>
+					<tr>
+						<td><input class="case" type="checkbox" name="updateAction" @(if(_form("updateAction").value) "checked")/></td>
+						<td>@Messages("instant_rights.update")</td>
+					</tr>
+					<tr>
+						<td><input class="case" type="checkbox" name="deleteAction" @(if(_form("deleteAction").value) "checked")/></td>
+						<td>@Messages("instant_rights.delete")</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/crud/select_all.js")"></script>
+
+}

@@ -1,0 +1,22 @@
+@(form: Form[_], sort: enums.ChqbllSort, rightBind: meta.RightBind = null, hasAddNewButton:Boolean = true)
+
+@standart(form, 
+			ChqbllPayrollSource.options(sort, if(rightBind != null) rightBind.value else null), 
+			if(sort.equals(enums.ChqbllSort.Cheque)) enums.Right.CEK_BORDRO_KAYNAKLARI else  enums.Right.SENET_BORDRO_KAYNAKLARI,
+			"transSource", 
+			Messages("payroll.source"),
+			hasAddNewButton=hasAddNewButton) {
+
+	<script type="text/javascript">
+		function setSimpleControllerFor_transSource() {
+			simple_combo_type = 2;
+			simple_selector = "#transSource_id";
+			@if(sort.equals(enums.ChqbllSort.Cheque)) {
+				simple_controller = jsRoutes.controllers.chqbll.PayrollSourcesForCheque;
+			} else {
+				simple_controller = jsRoutes.controllers.chqbll.PayrollSourcesForBill;
+			}
+		}
+	</script>
+
+}

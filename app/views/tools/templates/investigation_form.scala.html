@@ -1,0 +1,128 @@
+@(transList: List[models.temporal.InvTrans], summaryList: List[models.temporal.InvSummary], properties: List[models.temporal.Pair] = null, note: String = null)
+
+<div class="tabbable">
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="#inv_actions" data-toggle="tab">@Messages("actions")</a></li>
+		<li><a href="#inv_totals" data-toggle="tab">@Messages("totals")</a></li>
+		@if(properties != null) {
+			<li><a href="#inv_properties" data-toggle="tab">@Messages("info")</a></li>
+		}
+		@if(note != null) {
+			<li><a href="#inv_note" data-toggle="tab">@Messages("notes")</a></li>
+		}
+	</ul>
+
+	<div class="tab-content">
+
+		<div id="inv_actions" class="tab-pane active">
+			@if(transList.size == 0) {
+		
+				<div class="zell">
+					@Html(Messages("any.not.found", Messages("action")))
+				</div>
+
+			} else {
+			
+				<table id='actionsTable'>
+					<thead>
+						<tr>
+							<th style="width:80px;text-align:center">@Messages("date")</th>
+							<th style="width:130px">@Messages("trans.type")</th>
+							<th style="width:80px;text-align:right">@Messages("debt")</th>
+							<th style="width:70px;text-align:right">@Messages("credit")</th>
+							@if(global.Profiles.chosen().gnel_hasExchangeSupport) {
+								<th style="width:50px;text-align:center">@Messages("currency")</th>
+								<th style="width:250px">@Messages("description")</th>
+							} else {
+								<th style="width:300px">@Messages("description")</th>
+							}
+							<th style="width:50px">@Messages("action")</th>
+						</tr>
+					</thead>
+					<tbody>
+						@for(trans <- transList) {
+							<tr>
+								<td style="text-align:center">@trans.date.format("dd/MM/yyyy")</td>
+								<td>@Messages("enum."+trans.right)</td>
+								<td style="text-align:right">@utils.Format.asMoney(trans.debt)</td>
+								<td style="text-align:right">@utils.Format.asMoney(trans.credit)</td>
+								@if(global.Profiles.chosen().gnel_hasExchangeSupport) {
+									<td style="text-align:center">@trans.excCode</td>
+								}
+								<td>@trans.title</td>
+								<td><a style="width:70%" class="btn btn-mini" href="#" onclick="window.open('@trans.link', '@trans.id')">@Messages("go")</a></td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			}
+		</div>
+
+		<div id="inv_totals" class="tab-pane">
+			@if(summaryList.size == 0) {
+		
+				<div class="zell">
+					@Html(Messages("any.not.found", Messages("action")))
+				</div>
+		
+			} else {
+			
+				<table width="100%" id="totalsTable">
+					<thead>
+						<tr>
+							<th>@Messages("trans.month")</th>
+							<th style="width: 17%">@Messages("debt.sum")</th>
+							<th style="width: 17%">@Messages("credit.sum")</th>
+							<th style="width: 17%">@Messages("balance")</th>
+						</tr>
+					</thead>
+					<tbody>
+						@for(summary <- summaryList) {
+							<tr @if(summary.isImportant) {style="font-weight: bold; color: red;"}>
+								<td>@summary.title</td>
+								<td style="text-align: right">@utils.Format.asMoney(summary.debt)</td>
+								<td style="text-align: right">@utils.Format.asMoney(summary.credit)</td>
+								<td style="text-align: right">@utils.Format.asMoneyB(summary.balance)</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			}
+		</div>
+
+		@if(properties != null) {
+			<div id="inv_properties" class="tab-pane">
+				<table>
+					<tbody>
+						@for(property <- properties) {
+							@if(models.temporal.Pair.EMPTY.equals(property)) {
+								</tbody></table>
+								<table style="margin-top:10px"><tbody>
+							} else {
+								<tr>
+									<td class="property_key_col">@property.key :</td>
+									<td class="property_val_col">@property.value</td>
+								</tr>
+							}
+						}
+					</tbody>
+				</table>
+			</div>
+		}
+		@if(note != null) {
+			<div id="inv_note" class="tab-pane" style="height:250px; overflow:auto; white-space:nowrap; background:#F5F5F5">
+				@Html(note)
+			</div>
+		}
+
+	</div>
+</div>
+
+<script type="text/javascript" src="@routes.Assets.at("javascripts/plugin/jquery.freezetablecolumns.js")"></script>
+
+<script type="text/javascript">
+	$("#actionsTable").freezeTableColumns({
+		width: 730,
+		height: 200
+	});
+</script>

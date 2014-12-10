@@ -1,0 +1,10 @@
+@(form: Form[_], name: String, label: String)
+
+@***********************************************************************
+* Generate checkbox input
+***********************************************************************@
+
+<label onclick="$('#@name').val($('#@(name)_temp').is(':checked'))">
+	<input type="checkbox" id="@(name)_temp" @if(form(name).value == "true") {checked} style="margin:2px 1px 0px 10px" /> @label
+	<input type="hidden" id="@name" name="@name" value="@form(name).value"/>
+</label>

@@ -1,0 +1,21 @@
+@(currentPage: meta.PageExtend[ContactTransSource])
+
+@Controller = {
+	<script type="text/javascript">
+		var controller = jsRoutes.controllers.contact.TransSources;
+	</script>
+}
+
+@tools.templates.ajax_index(Controller) {
+
+	@tools.templates.ajax_form(
+		right = enums.Right.CARI_ISLEM_KAYNAKLARI,
+		saveAction = contact.routes.TransSources.save
+	)
+
+	<div id=list>
+		@list(currentPage)
+	</div>
+
+}
+	

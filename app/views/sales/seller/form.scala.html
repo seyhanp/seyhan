@@ -1,0 +1,24 @@
+@(_form: Form[SaleSeller])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.imports.base_hidden_fields(_form)
+
+@inputText(_form("name"),
+	'_label -> Messages("name"),
+	'class -> "input-xlarge",
+	'maxlength -> "30"
+)
+
+@inputText(_form("primRate"),
+	'_label -> Messages("prim_rate"),
+	'class -> "input-small rate",
+	'maxlength -> "5"
+)
+
+@select(_form("isActive"),
+	options(Options.yesno),
+	'class -> "input-small",
+	'_label -> Messages("is_active")
+)

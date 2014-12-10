@@ -1,0 +1,58 @@
+@(_form: Form[_], action: play.api.mvc.Call, key: String)(fields: Html)
+
+<a id="showSearchButton" class="btn btn-mini pull-right" onclick="showHide(false)" style="margin-bottom:6px">@Messages("show.search_panel")</a>
+
+@helper.form(action = action, 'class-> "form-horizontal zell offset3", 'id -> "searchForm", 'style -> "width: 425px; display: none") {
+
+	<input type="hidden" class="pageIndex" name="pageIndex" id="pageIndex" value='@_form("pageIndex").value' />
+	<input type="hidden" name="showStatus" id="showStatus" value='@_form("showStatus").value' />
+
+	<fieldset>
+		@fields
+		<div style="padding-top:8px">
+			<div class="controls inline">
+				<button type="submit" class="btn" onclick="$('.pageIndex').val('0');">
+					<i class="icon-search"></i> @Messages("search")
+				</button>
+			</div>
+		</div>
+
+	</fieldset>
+}
+
+<script type="text/javascript">
+	var lastStatus = false;
+	var showPanelText = '@Messages("show.search_panel")';
+	var hidePanelText = '@Messages("hide.search_panel")';
+
+	function showHide(isFirstTime) {
+		lastStatus = ! lastStatus;
+
+		if (lastStatus) {
+			$('#showSearchButton').html(hidePanelText);
+			$('#baseFilterForm').hide();
+			if (isFirstTime) {
+				$('#searchForm').show();
+			} else {
+				$('#searchForm').show("clip", 300);
+			}
+		} else {
+			$('#showSearchButton').html(showPanelText);
+			if (isFirstTime) {
+				$('#searchForm').hide();
+			} else {
+				$('#searchForm').hide("clip", 300);
+			}
+			$('#baseFilterForm').show();
+		}
+		$('#showStatus').val(lastStatus);
+		$('#refContact_cancel').hide();
+
+		$.cookie("searching.@(key).status", lastStatus, { expires: 365, path: '/' });
+	}
+	
+	$(document).ready(function() {
+		lastStatus = ! parseBoolean($.cookie("searching.@(key).status"));
+		showHide(true);
+	});
+</script>

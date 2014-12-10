@@ -1,0 +1,7 @@
+@(currentPage: meta.PageExtend[ChqbllPayroll], sort: enums.ChqbllSort, rightBind: meta.RightBind)
+
+@tools.templates.trans_list(
+	currentPage = currentPage,
+	link = if(enums.ChqbllSort.Cheque.equals(sort)) "/cheques/payrolls/" else "/bills/payrolls/",
+	rightBind = rightBind
+)

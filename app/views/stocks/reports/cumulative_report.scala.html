@@ -1,0 +1,55 @@
+@(_form: Form[stock.reports.CumulativeReport.Parameter])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.report_form(stock.reports.routes.CumulativeReport.generate(),enums.Right.STOK_ICMAL_RAPORU) {
+
+	@tools.components.autocomplete_stock(_form)
+
+	@select(_form("transType"),
+		options(Options.transSources(enums.Module.stock)),
+		'class -> "input-medium",
+		'_label -> Messages("trans.type"),
+		'_default -> Messages("choose")
+	)
+
+	@inputText(_form("providerCode"),
+		'_label -> Messages("provider_code"),
+		'class -> "input-medium",
+		'maxlength -> "30"
+	)
+
+	@tools.components.autocomplete_contact(_form)
+
+	@for(aef <- models.AdminExtraFields.listAll(enums.Module.stock.name())) {
+		@tools.dropdowns.stock_extra_field(_form, aef.id, aef.idno, aef.name, aef.isRequired, hasAddNewButton=false)
+	}
+
+	@tools.dropdowns.stock_trans_source(_form, hasAddNewButton=false)
+
+	@inputText(_form("transNo"),
+		'_label -> Messages("trans.no"),
+		'class -> "input-small"
+	)
+
+	@tools.components.date_range(_form)
+	@tools.dropdowns.stock_depot(_form, hasAddNewButton=false)
+	@tools.dropdowns.sale_seller(_form, hasAddNewButton=false)
+
+	@inputText(_form("deliveryDate"),
+		'_label -> Messages("date.delivery"),
+		'class -> "input-small date"
+	)
+
+	@tools.components.stock_category_select(_form)
+	@tools.components.trans_point_select(_form)
+	@tools.components.private_code_select(_form)
+
+	@select(_form("reportType"),
+		options(stock.reports.CumulativeReport.Parameter.reportTypes),
+		'class -> "input-medium",
+		'_label -> Messages("report.type")
+	)
+
+}

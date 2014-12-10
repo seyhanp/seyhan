@@ -1,0 +1,7 @@
+@(currentPage: meta.PageExtend[StockDepot])
+
+@tools.templates.ajax_list(
+	currentPage = currentPage,
+	label = Messages("depot"),
+	right = enums.Right.STOK_DEPO_TANITIMI
+)

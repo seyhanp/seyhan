@@ -1,0 +1,7 @@
+@(currentPage: meta.PageExtend[SafeExpense])
+
+@tools.templates.ajax_list(
+	currentPage = currentPage,
+	label = Messages("safe.expense"),
+	right = enums.Right.KASA_GIDER_TANITIMI
+)

@@ -1,0 +1,37 @@
+@(_form: Form[ContactCategory])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.imports.base_hidden_fields(_form)
+
+@inputText(_form("name"),
+	'_label -> Messages("name"),
+	'class -> "input-xlarge",
+	'maxlength -> "30"
+)
+
+@select(_form("workingDir"),
+	options(enums.TransType.contactOptions),
+	'class -> "input-medium",
+	'_label -> Messages("working_dir"),
+	'_default -> Messages("free")
+)
+
+@inputText(_form("debtLimit"),
+	'_label -> Messages("debt.limit"),
+	'class -> "input-small currency",
+	'maxlength -> "10"
+)
+
+@inputText(_form("creditLimit"),
+	'_label -> Messages("credit.limit"),
+	'class -> "input-small currency",
+	'maxlength -> "10"
+)
+
+@select(_form("isActive"),
+	options(Options.yesno),
+	'class -> "input-small",
+	'_label -> Messages("is_active")
+)

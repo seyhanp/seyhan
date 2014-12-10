@@ -1,0 +1,334 @@
+.navbar .dropdown-menu {
+	margin-top: 0px;
+}
+
+body {
+	padding-top: 50px;
+	padding-bottom: 40px;
+    font-size: 13px;
+}
+
+.btn {
+	font-size: 13px;
+}
+
+.grid-actions {
+	width: 90px;
+}
+
+.center {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: auto;
+	margin-top: auto;
+}
+
+.bottom_bar {
+	width: 100%;
+}
+
+.typeahead.dropdown-menu {
+	width: 300px;
+	font-size: 12px;
+}
+
+.form-horizontal .control-label {
+	float: left;
+	width: 100px; /* changed from 160px to 100px */
+	padding-top: 4px;
+	text-align: right;
+}
+
+.form-horizontal .controls {
+	*display: inline-block;
+	*padding-left: 20px;
+	margin-left: 110px;  /* changed from 180px to 110px */
+	*margin-left: 0;
+}
+
+.form-horizontal .control-group {
+	margin-bottom: 0px;
+}
+
+.btn-group .dropdown-menu {
+    font-size: 12px;
+}
+
+body #modal-form,#inv_modal-form {
+  width: 40%; /* desired relative width */
+  left: 30%; /* (100%-width)/2 */
+  /* place center */
+  margin-left:auto;
+  margin-right:auto;     
+}
+
+form {
+    margin: 0 0 0;
+}
+
+.modal-body {
+	padding: 15px 15px 5px;
+}
+
+.cat-label {
+	color: #FFFFFF;
+	border-radius: 3px 3px 3px 3px;
+	font-weight: bold;
+	margin: 2px;
+}
+
+.pagination {
+    margin: 10px 0;
+}
+
+label, button {
+    font-size: 13px;
+    line-height: 18px;
+}
+
+input[type="text"], input[type="password"], .ui-autocomplete-input, textarea, .uneditable-input, select, textarea {
+    font-size: 12px;
+    height: 17px;
+    padding: 2px;
+    color: black;
+}
+
+input[disabled], select[disabled], textarea[disabled], input[readonly], select[readonly], textarea[readonly] {
+    background-color: #E6F8E0;
+    cursor: not-allowed;
+}
+
+.input-medium-plus {
+	width: 157px;
+}
+
+.number, .currency, .rate, .to-right {
+	text-align: right;
+}
+
+select {
+    height: 25px;
+}
+
+.input-append .btn {
+    line-height: 9px;
+}
+
+element.style {
+    margin-top: 5px;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	margin-top: -2px;
+}
+
+.dropdown-tree {
+	height:15px;
+	line-height:15px;
+	margin-bottom:3px;
+	width:auto;
+	text-align:left;
+	background:white;
+}
+
+.navbar-inverse .navbar-inner {
+    background: none repeat scroll 0 0 #444;
+    height: 50px;
+}
+
+.navbar-inverse .brand, .navbar-inverse .nav > li > a {
+    color: #fff;
+}
+
+.navbar-inverse .brand {
+    color: #0ff;
+}
+
+.navbar .nav > li > a {
+    padding: 10px;
+}
+
+.navbar-inverse .nav li.dropdown.open > .dropdown-toggle, .navbar-inverse .nav li.dropdown.active > .dropdown-toggle, .navbar-inverse .nav li.dropdown.open.active > .dropdown-toggle {
+    color: #FFFFFF;
+    background-color: #556B7B;
+}
+
+.form-title {
+    font-size: 18px;
+    height: 25px;
+    margin: 1px;
+    padding: 3px 4px 2px 5px;
+}
+
+.form-note {
+    color: black;
+    font-size: 12px;
+    height: auto;
+    margin: 1px;
+    padding: 5px;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 1);
+    background: none repeat scroll 0 0 #F2F2F2;
+}
+
+.tab-content {
+	background: #f2f2f2;
+}
+
+.nav-tabs > .active > a, .nav-tabs > .active > a:hover, .nav-tabs > .active > a:focus {
+	background-color: #FFFFFF;
+	border-color: #FF0000 #DDDDDD rgba(0, 0, 0, 0);
+}
+
+.nav-tabs > li > a {
+	padding-bottom: 3px;
+    padding-top: 3px;
+}
+
+.cohesive-btn {
+    height: 23px;
+    margin-left: -5px;
+    width: 10px;
+}
+.alert {
+    margin: 15px 0 1px 0;
+}
+
+.navbar .brand {
+	padding: 10px 10px 0 0;
+}
+
+.nav {
+    margin-bottom: 10px;
+}
+
+.property_key_col {
+	width:100px;
+	font-weight: bold;
+	text-align:right;
+	background: -moz-linear-gradient(center top , #EDEDED, #EBEBEB) repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+.property_val_col {
+	width:630px;
+	padding-left: 8px;
+	background: white;
+}
+
+fieldset {
+	margin: 25px 0;
+}
+
+a {
+	outline: 0 none;
+}
+
+.modal-header {
+	padding: 0 15px;
+}
+
+.modal-footer {
+	padding: 5px;
+}
+
+.well {
+	padding: 0 19px 15px;
+	margin-bottom: 10px;
+}
+
+.tabs-left > .nav-tabs > li, .tabs-right > .nav-tabs > li {
+    float: none;
+}
+.tabs-left > .nav-tabs > li > a, .tabs-right > .nav-tabs > li > a {
+    min-width: 74px;
+    margin-right: 0;
+    margin-bottom: 3px;
+}
+.tabs-left > .nav-tabs {
+    float: left;
+    margin-right: 5px;
+    border-right: 1px solid #ddd;
+}
+.tabs-left > .nav-tabs > li > a {
+    margin-right: -1px;
+    -webkit-border-radius: 4px 0 0 4px;
+    -moz-border-radius: 4px 0 0 4px;
+    border-radius: 4px 0 0 4px;
+}
+.tabs-left > .nav-tabs > li > a:hover, .tabs-left > .nav-tabs > li > a:focus {
+	border-color: #eeeeee #dddddd #eeeeee #eeeeee;
+}
+.tabs-left > .nav-tabs .active > a, .tabs-left > .nav-tabs .active > a:hover, .tabs-left > .nav-tabs .active > a:focus {
+    border-color: #ddd transparent #ddd #ddd;
+    *border-right-color: #ffffff;
+}
+
+.title-in-tab {
+	color: white;
+	background: gray;
+    border-bottom: 1px solid #E0E0E0;
+    border-top: 2px solid #E0E0E0;
+    padding: 2px 0;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 7px;
+}
+
+.mini-title-yellow {
+	background: #ea6c6c;
+	font-weight: bold;
+	text-align: center;
+	border: 1px solid #bbb;
+	color: white;
+}
+
+.pleaseWait {
+    display: none;
+	position:fixed;
+    top: 60%;
+    left: 41%;
+    width:700px;
+    margin-top: -9em; /*set to a negative number 1/2 of your height*/
+    margin-left: -15em; /*set to a negative number 1/2 of your width*/
+    border: 1px solid #000;
+    z-index: 1000;
+    border-radius: 25px;
+    background: rgba( 205, 155, 185, .8 ) 
+                50% 50% 
+                no-repeat;
+}
+
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+body.loading {
+    overflow: hidden;   
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+body.loading .pleaseWait {
+    display: block;
+}
+
+dl {
+    font-size: 85%;
+    margin-bottom: 0;
+}
+
+dd {
+    color: green;
+}
+
+.container {
+    margin-left: 310px;
+}
+
+.tiny-info {
+	margin-top:13px;
+}
+
+.tiny-info span {
+	font-weight:bold; 
+	text-shadow: 2px 2px 2px #000;
+}

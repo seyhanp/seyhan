@@ -1,0 +1,319 @@
+@(_form: Form[Stock])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@investigationBlock = {
+	@if(_form("id").value != null && ! _form("id").value.isEmpty()) {
+		<a class="btn btn-info pull-left" onclick="investigation()">@Messages("inspect")</a>
+	}
+}
+
+@tools.templates.basic_form(ScriptBlock) {
+
+	@tools.imports.forms_header(
+		_form("id").value,
+		enums.Right.STOK_TANITIMI,
+		stock.routes.Stocks.remove(if(_form("id").value != null && ! _form("id").value.isEmpty()) _form("id").value.toInt else -1),
+		labelKey="stock.card"
+	)
+
+	@helper.form(action = stock.routes.Stocks.save, 'class-> "form-horizontal zell", 'id -> "mainFieldsForm") {
+
+		@tools.imports.base_hidden_fields(_form)
+
+		<fieldset>
+
+			@tools.components.code_input(_form, "stock", Messages("code"))
+
+			@inputText(_form("name"),
+				'_label -> Messages("name"),
+				'class -> "input-xxlarge",
+				'maxlength -> "100"
+			)
+
+			@inputText(_form("barcode"),
+				'_label -> Messages("barcode"),
+				'class -> "input-large",
+				'maxlength -> "50"
+			)
+
+			@for(aef <- models.AdminExtraFields.listAll(enums.Module.stock.name())) {
+				@tools.dropdowns.stock_extra_field(_form, aef.id, aef.idno, aef.name, aef.isRequired, hasAddNewButton=false)
+			}
+
+			@if(global.Profiles.chosen().gnel_hasExchangeSupport) {
+				@select(_form("excCode"),
+					options(Options.currencies),
+					'class -> "input-small",
+					'_label -> Messages("currency"),
+					'_default -> Messages("choose")
+				)
+			}
+
+			<div class="row-fluid">
+				<div class="span5">
+					@inputText(_form("buyPrice"),
+						'_label -> Messages("buy_price"),
+						'class -> "input-small currency",
+						'maxlength -> "6"
+					)
+					@inputText(_form("sellPrice"),
+						'_label -> Messages("sell_price"),
+						'class -> "input-small currency",
+						'maxlength -> "6"
+					)
+				</div>
+
+				<div class="span3">
+					@inputText(_form("buyTax"),
+						'_label -> Messages("buy_tax"),
+						'class -> "input-small rate",
+						'maxlength -> "5"
+					)
+					@inputText(_form("sellTax"),
+						'_label -> Messages("sell_tax"),
+						'class -> "input-small rate",
+						'maxlength -> "5"
+					)
+				</div>
+			</div>
+
+			@if(global.Profiles.chosen().isFieldVisible(enums.Module.stock, "taxRate2")) {
+				@inputText(_form("taxRate2"),
+					'_label -> Messages("vof.taxRate2"),
+					'class -> "input-small rate",
+					'maxlength -> "5"
+				)
+			}
+			@if(global.Profiles.chosen().isFieldVisible(enums.Module.stock, "taxRate3")) {
+				@inputText(_form("taxRate3"),
+					'_label -> Messages("vof.taxRate3"),
+					'class -> "input-small rate",
+					'maxlength -> "5"
+				)
+			}
+
+			@tools.dropdowns.stock_unit(_form, "1")
+
+			<div class="row-fluid">
+				<div class="span5">
+					@tools.dropdowns.stock_unit(_form, "2")
+				</div>
+
+				<div class="span3">
+					@inputText(_form("unit2Ratio"),
+						'_label -> Messages("unit.ratio", 1),
+						'class -> "input-small number",
+						'maxlength -> "5"
+					)
+				</div>
+				<div class="span3">
+					<i>
+						<span style="color: red; font-size: 10pt">
+							@Messages("e_according_to", Messages("stock.unit", "1"))
+						</span>
+					</i>
+				</div>
+			</div>
+
+			<div class="row-fluid">
+				<div class="span5">
+					@tools.dropdowns.stock_unit(_form, "3")
+				</div>
+
+				<div class="span3">
+					@inputText(_form("unit3Ratio"),
+						'_label -> Messages("unit.ratio", 2),
+						'class -> "input-small number",
+						'maxlength -> "5"
+					)
+				</div>
+				<div class="span3">
+					<i>
+						<span style="color: red; font-size: 10pt">
+							@Messages("e_according_to", Messages("stock.unit", "1"))
+						</span>
+					</i>
+				</div>
+			</div>
+
+			@tools.components.stock_category_select(_form)
+
+			<div class="row-fluid">
+				<div class="span5">
+					@inputText(_form("maxLimit"),
+						'_label -> Messages("max.limit"),
+						'class -> "input-small number",
+						'maxlength -> "10"
+					)
+		
+					@inputText(_form("minLimit"),
+						'_label -> Messages("min.limit"),
+						'class -> "input-small number",
+						'maxlength -> "10"
+					)
+				</div>
+				<div class="span3">
+					@inputText(_form("primRate"),
+						'_label -> Messages("prim_rate"),
+						'class -> "input-small rate",
+						'maxlength -> "5"
+					)
+					@inputText(_form("providerCode"),
+						'_label -> Messages("provider_code"),
+						'class -> "input-large",
+						'maxlength -> "30"
+					)
+				</div>
+			</div>
+
+			@select(_form("isActive"),
+				options(Options.yesno),
+				'class -> "input-small",
+				'_label -> Messages("is_active")
+			)
+
+		</fieldset>
+
+		@if(_form.hasErrors) {
+			@if(_form.errors.contains("barcodes")) {
+				<div id="barcodesErrors">
+					<div onclick="$('#barcodesErrors').remove()" style="cursor:pointer;">
+						<span class="label label-important"><i class="icon-remove icon-white"></i> @Messages("barcodes")</span>
+					</div>
+					 @for(error <- _form.errors.get("barcodes")) {
+						<span style="margin-left: 40px" class="label label-warning">@error.message().toString()</span><br/>
+					}
+				</div>
+			}
+		}
+
+		<div class="tabbable">
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="#barcodes" data-toggle="tab">@Messages("barcodes")</a></li>
+				<li><a href="#notes" data-toggle="tab">@Messages("notes")</a></li>
+			</ul>
+			<div class="tab-content">
+
+				<div id="barcodes" class="tab-pane active">
+					<table id='barcodeTable' class='autoTable'>
+						<thead>
+							<tr>
+								<th style="width:25px">No</th>
+								<th style="width:250px">@Messages("barcode")</th>
+								<th style="width:150px">@Messages("prefix")</th>
+								<th style="width:150px">@Messages("suffix")</th>
+								<th style="width:70px">@Messages("unit.no")</th>
+								<th style="width:35px"></th>
+							</tr>
+						</thead>
+						<tbody>
+							@repeatWithIndex(_form("barcodes"), min=1, add=1) { (barcode, index) =>
+								@if(index == 0 || (index > 0 && (_form("barcodes["+(index-1)+"].barcode").value != ""))) {
+									<tr>
+										<td>
+											<span class="rowNumber" style="text-align:right">@index.</span>
+											<input type="hidden" id="barcodes[@index]_id" name="barcodes[@index].id" value="@barcode("id").value" />
+										</td>
+										<td>
+											<input class="mainInput" type="text" 
+												id="barcodes[@index]_barcode" name="barcodes[@index].barcode" value="@barcode("barcode").value" style="width:98%" maxlength="50"/>
+										</td>
+										<td>
+											<input type="text" 
+												id="barcodes[@index]_prefix" name="barcodes[@index].prefix" value="@barcode("prefix").value" style="width:98%" maxlength="30"/>
+										</td>
+										<td>
+											<input type="text" 
+												id="barcodes[@index]_suffix" name="barcodes[@index].suffix" value="@barcode("suffix").value" style="width:98%" maxlength="30"/>
+										</td>
+										<td>
+											<select id="barcodes[@index]_unitNo" name="barcodes[@index].unitNo" style="width:98%">
+								                <option value="1" @if(barcode("unitNo").value == Some("1")) {selected}>1</option>
+								                <option value="2" @if(barcode("unitNo").value == Some("2")) {selected}>2</option>
+								                <option value="3" @if(barcode("unitNo").value == Some("3")) {selected}>3</option>
+									        </select>
+										</td>
+										<td align="center">
+											<a class="btn btn-mini delRow" title="@Messages("remove")">
+												<i class="icon-remove" style="margin-top:1px"></i>
+											</a>
+										</td>
+									</tr>
+								}
+							}
+						</tbody>
+					</table>
+				</div>
+				
+				<div id="notes" class="tab-pane">
+					<textarea id="note" name="note" style="width:97%; height:136px">@if(_form("note").value != null) {@Html(_form("note").value)}</textarea>
+					<p/>
+				</div>
+
+			</div>
+		</div>
+
+		@tools.templates.form_footer_bar(enums.Right.STOK_TANITIMI, _form("id").value, forLeft = investigationBlock)
+
+	}
+
+}
+
+@ScriptBlock = {
+	<script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/plugin/jquery.table.addrow.js")"></script>
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/plugin/jquery.freezetablecolumns.js")"></script>
+	
+	<script type="text/javascript">
+		$("document").ready(function(){
+
+			$(".autoTable").tableAutoAddRow({
+				inputBoxAutoNumber: true, 
+				autoAddRow: true, 
+				rowNumColumn: "rowNumber"
+			});
+
+			$(".delRow").btnDelRow();
+			
+			$("#barcodeTable").freezeTableColumns({
+		        width: 700,
+		        height: 150
+		    });
+			
+		});	
+
+		/***************************************************************************
+		 Genel seyler
+		***************************************************************************/
+		$('#buyTax').on('keyup', function(event) {
+			if ((event.keyCode > 47 && event.keyCode < 58) 
+			  || (event.keyCode > 96 && event.keyCode < 107) 
+			  || (event.keyCode == 8 || event.keyCode == 46)) {
+			 	$('#sellTax').val($('#buyTax').val());
+			 }
+		});
+
+		tinymce.init({
+			selector: "textarea",
+		    menubar: false,
+		    statusbar: false,
+	        toolbar_items_size: 'small',
+		    toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+		});
+
+		@if(_form("id").value != null && ! _form("id").value.isEmpty()) {
+			function investigation() {
+				$.getJSON('/stocks/investigation/'+@_form("id").value,
+					function(data) {
+						$("#inv_title").html('<h4>'+data.title+'</h4>');
+						$("#inv_body").html(data.body);
+		
+						$('#inv_modal\\-form').modal('show');
+					}
+				);
+			}
+		}
+	</script>
+}

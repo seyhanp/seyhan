@@ -1,0 +1,13 @@
+@(form: Form[_], hasAddNewButton:Boolean = true)
+
+@standart(form, StockDepot.options, enums.Right.STOK_DEPO_TANITIMI, "refDepot", Messages("ref.depot"), hasAddNewButton=hasAddNewButton) {
+
+	<script type="text/javascript">
+		function setSimpleControllerFor_refDepot() {
+			simple_combo_type = 1;
+			simple_selector = "#refDepot_id";
+			simple_controller = jsRoutes.controllers.stock.Depots;
+		}
+	</script>
+
+}

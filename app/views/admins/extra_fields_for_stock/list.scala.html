@@ -1,0 +1,9 @@
+@(currentPage: meta.PageExtend[AdminExtraFields])
+
+@tools.templates.ajax_list(
+	currentPage = currentPage,
+	label = Messages("extra_field"),
+	right = enums.Right.EKSTRA_STOK_ALANLARI,
+	is_admin_page = true,
+	is_readonly = true
+)

@@ -1,0 +1,31 @@
+@(_form: Form[bank.reports.BalanceReport.Parameter])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.report_form(bank.reports.routes.BalanceReport.generate(),enums.Right.BANK_DURUM_RAPORU) {
+
+	@tools.dropdowns.bank(_form, hasAddNewButton=false)
+
+	@inputText(_form("date"),
+		'_label -> Messages("date"),
+		'class -> "input-small date"
+	)
+
+	@if(global.Profiles.chosen().gnel_hasExchangeSupport) {
+		@select(_form("excCode"),
+			options(Options.currencies),
+			'class -> "input-small",
+			'_label -> Messages("currency"),
+			'_default -> Messages("choose")
+		)
+	}
+
+	@select(_form("having"),
+		options(bank.reports.BalanceReport.Parameter.options),
+		'class -> "input-medium",
+		'_label -> Messages("balance.type"),
+		'_default -> Messages("choose")
+	)
+
+}

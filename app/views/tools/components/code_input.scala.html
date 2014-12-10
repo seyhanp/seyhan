@@ -1,0 +1,35 @@
+@(form: Form[_], module: String, label: String)
+
+@*********************************************************************************
+* Generate autoincrement input for code fields, according twitter bootsrap rules *
+**********************************************************************************@
+
+<div class="control-group @if(form("code").hasErrors) {error}">
+	<label class="control-label" for="code" >@label</label>
+	<div class="controls inline">
+		<input type="text" id="code" name="code" value="@form("code").value" class="input-large" maxlength="30" />
+		@if(form("id").value == null) {
+			<a class="btn btn-mini" style="margin-left:-6px;margin-top:-2px;height:21px" onclick="findLastCode()">
+				<i class="icon-play-circle" style="margin-top:2px"></i>
+			</a>
+		}
+		<span style="color: red; font-size: 18px; font-weight: bold">@if(form("code").constraints.map(c => c._1).contains("constraint.required")) {*}</span>
+		@if(form("code").hasErrors) {
+			<span class="errors label label-warning">
+				@for(error <- form("code").errors) {
+					@utils.TemplateHelper.convertMessage(error)
+				}
+			</span>
+		}
+	</div>
+</div>
+
+<script type="text/javascript">
+	function findLastCode() {
+		$.getJSON('/as/get/last_@(module)_code?q=' + $('#code').val(),
+			function(data) {
+				$('#code').val(data);
+			}
+		);
+	}
+</script>

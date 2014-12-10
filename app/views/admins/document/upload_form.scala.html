@@ -1,0 +1,24 @@
+@(totalRowCount: Int)
+<p style="height:10px"></p>
+
+<a type="submit" class="btn btn-small btn-success" onclick="$('#uploadForm').toggle()">@Messages("import")</a>
+
+@if(totalRowCount > 0) {
+	<a type="submit" class="btn btn-small btn-default" onclick="$('#uploadForm').hide();location.reload();" href="@admin.routes.Documents.export">@Messages("export")</a>
+}
+
+<p style="height:30px"></p>
+
+<script type="text/javascript" src="@routes.Assets.at("javascripts/plugin/bootstrap-filestyle.min.js")"></script>
+
+@helper.form(action = admin.routes.Documents.imbort, 'class-> "form-horizontal", 'id -> "uploadForm", 'style -> "display: none", 'enctype -> "multipart/form-data") {
+	@Messages("file") :
+	<input type="file" id="file" name="file" class="filestyle" data-buttonText="" data-classButton="btn btn-mini">
+   	<a class="btn btn-mini" onclick="$('#file').filestyle('clear')" title="@Messages("remove")">
+		<i class="icon-remove" style="margin-top:1px"></i>
+	</a>
+	<p style="margin:5px 205px">
+		<a class="btn btn-small" onclick="$('#file').filestyle('clear');$('#uploadForm').toggle();">@Messages("close")</a>
+	   	<button class="btn btn-small btn-primary">@Messages("ok")</button>
+	</p>
+}

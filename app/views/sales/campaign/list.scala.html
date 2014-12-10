@@ -1,0 +1,9 @@
+@(currentPage: meta.PageExtend[SaleCampaign], _form: Form[models.search.NameOnlySearchParam])
+
+@tools.templates.basic_list(
+	currentPage = currentPage,
+	filterForm = _form,
+	right = enums.Right.SATS_KAMPANYA_TANITIMI,
+	label = Messages("campaign"),
+	link = sale.routes.Campaigns.list().url
+)

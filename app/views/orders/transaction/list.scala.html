@@ -1,0 +1,13 @@
+@(currentPage: meta.PageExtend[OrderTrans], rightBind: meta.RightBind, _form: Form[models.search.OrderTransSearchParam])
+
+@tools.templates.trans_list(
+	currentPage = currentPage,
+
+	filterForm = _form,
+	searchForm = (if(global.Profiles.chosen().sprs_isSearchFormShowed) search_form(_form, rightBind) else null),
+
+	link = "/orders/trans/",
+	rightBind = rightBind,
+	
+	hasMultiplier = true
+)

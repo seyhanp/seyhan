@@ -1,0 +1,13 @@
+@(currentPage: meta.PageExtend[ContactTrans], rightBind: meta.RightBind, _form: Form[models.search.ContactTransSearchParam])
+
+@tools.templates.trans_list(
+	currentPage = currentPage,
+
+	filterForm = _form,
+	searchForm = (if(global.Profiles.chosen().cari_isSearchFormShowed) search_form(_form, rightBind) else null),
+
+	link = "/contacts/trans/",
+	rightBind = rightBind,
+	
+	hasMultiplier = true
+)

@@ -1,0 +1,54 @@
+@(_form: Form[waybill.reports.ReceiptList.Parameter])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.report_form(waybill.reports.routes.ReceiptList.generate(),enums.Right.IRSL_FIS_LISTESI) {
+
+	@select(_form("status"),
+		options(enums.TransStatus.optionsWithoutCancelled),
+		'class -> "input-medium",
+		'_label -> Messages("status"),
+		'_default -> Messages("choose")
+	)
+
+	@select(_form("transType"),
+		options(Options.transSources(enums.Module.waybill)),
+		'class -> "input-medium",
+		'_label -> Messages("trans.type"),
+		'_default -> Messages("choose")
+	)
+
+	@tools.components.autocomplete_contact(_form)
+	@tools.dropdowns.waybill_trans_source(_form, hasAddNewButton=false)
+
+	@inputText(_form("transNo"),
+		'_label -> Messages("trans.no"),
+		'class -> "input-small"
+	)
+
+	@tools.components.date_range(_form)
+	@tools.dropdowns.stock_depot(_form, hasAddNewButton=false)
+	@tools.dropdowns.sale_seller(_form, hasAddNewButton=false)
+
+	@tools.components.trans_point_select(_form)
+	@tools.components.private_code_select(_form)
+
+	@inputText(_form("deliveryDate"),
+		'_label -> Messages("date.delivery"),
+		'class -> "input-small date"
+	)
+
+	@select(_form("orderby"),
+		options(waybill.reports.ReceiptList.Parameter.options),
+		'class -> "input-medium",
+		'_label -> Messages("orderby")
+	)
+
+	@select(_form("showType"),
+		options(waybill.reports.ReceiptList.Parameter.showTypes),
+		'class -> "input-small",
+		'_label -> Messages("report.show")
+	)
+
+}

@@ -1,0 +1,24 @@
+@(currentPage: meta.PageExtend[ChqbllType], right: enums.Right)
+
+@Controller = {
+	<script type="text/javascript">
+		@if(right.equals(enums.Right.CEK_BORDRO_KAYNAKLARI)) {
+			var controller = jsRoutes.controllers.chqbll.TypesForCheque;
+		} else {
+			var controller = jsRoutes.controllers.chqbll.TypesForBill;
+		}
+	</script>
+}
+
+@tools.templates.ajax_index(Controller) {
+
+	@tools.templates.ajax_form(
+		right = right,
+		saveAction = if(right.equals(enums.Right.CEK_TURLERI)) chqbll.routes.TypesForCheque.save() else chqbll.routes.TypesForBill.save()
+	)
+
+	<div id=list>
+		@list(currentPage, right)
+	</div>
+
+}

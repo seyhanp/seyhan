@@ -1,0 +1,25 @@
+@(currentPage: meta.PageExtend[ChqbllPayrollSource], right: enums.Right)
+
+@Controller = {
+	<script type="text/javascript">
+		@if(right.equals(enums.Right.CEK_BORDRO_KAYNAKLARI)) {
+			var controller = jsRoutes.controllers.chqbll.PayrollSourcesForCheque;
+		} else {
+			var controller = jsRoutes.controllers.chqbll.PayrollSourcesForBill;
+		}
+	</script>
+}
+
+@tools.templates.ajax_index(Controller) {
+
+	@tools.templates.ajax_form(
+		right = right,
+		saveAction = if(right.equals(enums.Right.CEK_BORDRO_KAYNAKLARI)) chqbll.routes.PayrollSourcesForCheque.save() else chqbll.routes.PayrollSourcesForBill.save()
+	)
+
+	<div id=list>
+		@list(currentPage, right)
+	</div>
+
+}
+	

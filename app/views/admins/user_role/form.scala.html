@@ -1,0 +1,133 @@
+@(_form: Form[AdminUserRole], userRights: List[AdminUserRight])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@findClass(right : AdminUserRight) = @{
+	var clazz = "input-small right";
+	if(right.isCRUD) {
+		clazz = clazz + " crud ";
+	} else {
+		clazz = clazz + " basic ";
+	}
+	clazz = clazz + right.right.module.name;
+	clazz 
+}
+
+@findSpecialSelects(module : String, isReport : Boolean) = {
+	@for((right, index) <- userRights.zipWithIndex) {
+		@if(right.right.module.name.equals(module) && right.isReport == isReport) {
+			<input type='hidden' name='rights[@index].id' value='@userRights.get(index).id' />
+			@select(_form(("rights[" + index + "].rightLevel")),
+				options(if(right.isCRUD) Options.crudRightLevels else Options.basicRightLevels),
+				'_label -> right.title,
+				'class -> findClass(right)
+			)(FieldConstructor(twitterBootstrapInput.f), lang)
+		}
+	}
+}
+
+@buildSpecialSelectDiv(module : String) = {
+	<div class="row-fluid">
+		<div class="span4">
+			@findSpecialSelects(module, false)
+		</div>
+		<div class="span4">
+			@findSpecialSelects(module, true)
+		</div>
+	</div>
+}
+
+@tools.templates.basic_form(ScriptBlock) {
+
+	@tools.imports.forms_header(
+		_form("id").value,
+		enums.Right.KULLANICI_ROLLERI,
+		admin.routes.UserRoles.remove(if(_form("id").value != null && ! _form("id").value.isEmpty()) _form("id").value.toInt else -1)
+	)
+	
+	<style media="screen" type="text/css">
+		.form-horizontal .control-label {
+			width : 140px;
+			padding-right : 25px;
+		}
+	</style>
+	
+	@helper.form(action = admin.routes.UserRoles.save, 'id -> "itemForm", 'class-> "form-horizontal zell", 'id-> "mainFieldsForm") {
+
+		<fieldset>
+			@tools.imports.base_hidden_fields(_form)
+	
+			@inputText(_form("name"),
+				'_label -> Messages("role"),
+				'class -> "input-medium",
+				'maxlength -> "30"
+			)
+	
+			@select(_form("instantRights"),
+				options(Options.instantRights),
+				'_label -> Messages("instant_rights.label"),
+				'_default -> Messages("choose"),
+				'onchange -> "changeRights()"
+			)
+		</fieldset>
+
+		<div class="tabbable">
+			<ul class="nav nav-tabs">
+				@for(module <- enums.Module.values()) {
+					@if(! module.name.equals("admin") && ! module.name.equals("no")) {
+						<li class='@if(module.name.equals("contact")) { active }' >
+							<a href="#@(module.name)Tab" data-toggle="tab">@Messages(module.name)</a>
+						</li>
+					}
+				}
+			</ul>
+
+			<div class="tab-content">
+				@for(module <- enums.Module.values()) {
+					@if(! module.name.equals("admin") && ! module.name.equals("no")) {
+						<div id="@(module.name)Tab" class='tab-pane @if(module.name.equals("contact")) { active }'>
+							@buildSpecialSelectDiv(module.name)
+						</div>
+					}
+				}
+			</div>
+		</div>
+
+		@tools.templates.form_footer_bar(enums.Right.KULLANICI_ROLLERI, _form("id").value)
+
+	}
+
+}
+
+@ScriptBlock = {
+	<script type="text/javascript">
+		function changeRights() {
+			var choose = $('#instantRights option:selected').val();
+
+			if (choose === 'special.none')  $(".right").val('Disable');
+			if (choose === 'special.guest') $(".right").val('Enable');
+
+			if (choose === 'special.admin') {
+				$(".right.basic").val('Enable');
+				$(".right.crud").val('Delete');
+			}
+
+			if (choose === 'special.allow.read')   $(".right.crud").val('Enable');
+			if (choose === 'special.allow.insert') $(".right.crud").val('Insert');
+			if (choose === 'special.allow.update') $(".right.crud").val('Update');
+			if (choose === 'special.allow.delete') $(".right.crud").val('Delete');
+
+			if (choose === 'special.allow.report') $(".right.basic").val('Enable');
+			if (choose === 'special.deny.report')  $(".right.basic").val('Disable');
+
+			if (choose.startsWith('module.allow')) {
+				 $(".right.basic." + choose.split("\.")[2]).val('Enable');
+				 $(".right.crud." + choose.split("\.")[2]).val('Delete');
+			}
+			if (choose.startsWith('module.deny')) {
+				 $(".right." + choose.split("\.")[2]).val('Disable');
+			}
+		}
+	</script>
+}

@@ -1,0 +1,15 @@
+@(_form: Form[safe.reports.CashbookList.Parameter])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.report_form(safe.reports.routes.CashbookList.generate(),enums.Right.KASA_KASA_DEFTERI) {
+
+	@tools.dropdowns.safe(_form, false, hasAddNewButton=false)
+
+	@inputText(_form("date"),
+		'_label -> Messages("date"),
+		'class -> "input-small date"
+	)
+
+}

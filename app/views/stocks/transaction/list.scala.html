@@ -1,0 +1,13 @@
+@(currentPage: meta.PageExtend[StockTrans], rightBind: meta.RightBind, _form: Form[models.search.StockTransSearchParam])
+
+@tools.templates.trans_list(
+	currentPage = currentPage,
+
+	filterForm = _form,
+	searchForm = (if(global.Profiles.chosen().stok_isSearchFormShowed) search_form(_form, rightBind) else null),
+
+	link = "/stocks/trans/",
+	rightBind = rightBind,
+	
+	hasMultiplier = (! rightBind.value.isReturn)
+)

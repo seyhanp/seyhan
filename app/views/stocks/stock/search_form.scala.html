@@ -1,0 +1,32 @@
+@(_form: Form[models.search.StockSearchParam])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.search_form(_form, stock.routes.Stocks.list(), "stock") {
+
+	@inputText(_form("code"),
+		'_label -> Messages("code"),
+		'class -> "input-large",
+		'maxlength -> "30"
+	)
+
+	@inputText(_form("name"),
+		'_label -> Messages("name"),
+		'class -> "input-large",
+		'maxlength -> "100"
+	)
+	
+	@tools.components.stock_category_select(_form)
+
+	@for(aef <- models.AdminExtraFields.listAll(enums.Module.stock.name())) {
+		@tools.dropdowns.stock_extra_field(_form, aef.id, aef.idno, aef.name, aef.isRequired, hasAddNewButton=false)
+	}
+
+	@inputText(_form("providerCode"),
+		'_label -> Messages("provider_code"),
+		'class -> "input-medium",
+		'maxlength -> "30"
+	)
+
+}

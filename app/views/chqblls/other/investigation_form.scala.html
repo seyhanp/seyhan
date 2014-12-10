@@ -1,0 +1,52 @@
+@(title: String= "", historyList: List[models.temporal.ChqbllHistory], properties: List[models.temporal.Pair])
+
+<div class="tabbable">
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="#inv_properties" data-toggle="tab">@title</a></li>
+	</ul>
+
+	<div class="tab-content">
+
+		<div id="inv_properties" class="tab-pane active">
+			<table>
+				<tbody>
+					@for(property <- properties) {
+						@if(models.temporal.Pair.EMPTY.equals(property)) {
+							</tbody></table>
+							<table style="margin-top:10px"><tbody>
+						} else {
+							<tr>
+								<td class="property_key_col">@property.key :</td>
+								<td class="property_val_col">@if(property.value != null) {@Html(property.value)}</td>
+							</tr>
+						}
+					}
+				</tbody>
+			</table>
+
+			<table style="margin-top:10px"">
+				<thead>
+					<tr>
+						<th style="width:80px;text-align:center">@Messages("date")</th>
+						<th style="width:100px">@Messages("action")</th>
+						<th style="width:225px">@Messages("bank.name")</th>
+						<th style="width:225px">@Messages("safe.name")</th>
+						<th style="width:100px">@Messages("username")</th>
+					</tr>
+				</thead>
+				<tbody>
+					@for(history <- historyList) {
+						<tr>
+							<td style="text-align:center">@history.date</td>
+							<td>@history.step</td>
+							<td>@history.bank</td>
+							<td>@history.safe</td>
+							<td>@history.user</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+</div>

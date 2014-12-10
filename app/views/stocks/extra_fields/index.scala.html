@@ -1,0 +1,22 @@
+@(currentPage: meta.PageExtend[StockExtraFields], parent: AdminExtraFields)
+
+@Controller = {
+	<script type="text/javascript">
+		var extraFields_id = @(parent.idno);
+		var controller = jsRoutes.controllers.stock.ExtraFields;
+	</script>
+}
+
+@tools.templates.ajax_index(Controller) {
+
+	@tools.templates.ajax_form(
+		right = enums.Right.STOK_EKSTRA_ALANLAR,
+		saveAction = stock.routes.ExtraFields.save,
+		title = Messages("definition.of", parent.name)
+	)
+
+	<div id=list>
+		@list(currentPage, parent)
+	</div>
+
+}

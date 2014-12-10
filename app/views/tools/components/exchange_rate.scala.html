@@ -1,0 +1,31 @@
+@(_form: Form[_])
+
+@***********************************************************************
+* Generate exchange inputs according twitter bootsrap rules *
+***********************************************************************@
+
+@if(global.Profiles.chosen().gnel_hasExchangeSupport) {
+	<div class="control-group inline">
+		<label class="control-label" for="excCode">@Messages("currency")</label>
+		<div class="controls inline">
+			<select name="excCode" id="excCode" class="input-small" onchange="setRate()">
+				@for(code <- models.GlobalCurrency.options) {
+					<option value="@code" @(if(code.equals(_form("excCode").value)) {"selected"})>@code</option>
+				}
+			</select>
+			<input type="text" id="excRate" name="excRate" class="input-small rate" value="@_form("excRate").value" maxlength="10" />
+			<input type="text" id="excEquivalent" name="excEquivalent" class="input-small currency" value="@_form("excEquivalent").value" maxlength="10"/>
+			<span style="color: green;">@global.Profiles.chosen().gnel_excCode</span>
+		</div>
+		<div>
+			<i><span id="exchange_info" style="color: red; font-size: 9pt; margin-left: 50px" class="pull-left"></span></i>
+			<script type="text/javascript">
+				if (@(_form("id").value != null && ! _form("id").value.isEmpty())) $("#exchange_info").hide();
+			</script>
+		</div>
+	</div>
+} else {
+	<input type="hidden" id="excCode" name="excCode" value="@_form("excCode").value" />
+	<input type="hidden" id="excRate" name="excRate" value="@_form("excRate").value" />
+	<input type="hidden" id="excEquivalent" name="excEquivalent" value="@_form("excEquivalent").value" />
+}

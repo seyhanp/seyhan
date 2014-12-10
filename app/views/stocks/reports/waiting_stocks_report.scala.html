@@ -1,0 +1,42 @@
+@(_form: Form[stock.reports.WaitingStocksReport.Parameter])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.report_form(
+	stock.reports.routes.WaitingStocksReport.generate(),
+	enums.Right.STOK_BEKLEYEN_STOKLAR_RAPORU,
+	Messages("waiting_stocks.costing.constraint")) {
+
+	@select(_form("costing.id"),
+		options(StockCosting.optionsForxFO),
+		'class -> "input-xlarge",
+		'_label -> Messages("costing")
+	)
+
+	@inputText(_form("date"),
+		'_label -> Messages("date"),
+		'class -> "input-small date"
+	)
+
+	@tools.components.autocomplete_stock(_form)
+
+	@for(aef <- models.AdminExtraFields.listAll(enums.Module.stock.name())) {
+		@tools.dropdowns.stock_extra_field(_form, aef.id, aef.idno, aef.name, aef.isRequired, hasAddNewButton=false)
+	}
+
+	@tools.components.stock_category_select(_form)
+
+	@inputText(_form("providerCode"),
+		'_label -> Messages("provider_code"),
+		'class -> "input-medium",
+		'maxlength -> "30"
+	)
+
+	@select(_form("orderBy"),
+		options(stock.reports.WaitingStocksReport.Parameter.options),
+		'class -> "input-medium",
+		'_label -> Messages("orderby")
+	)
+
+}

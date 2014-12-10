@@ -1,0 +1,21 @@
+@(currentPage: meta.PageExtend[StockUnit])
+
+@Controller = {
+	<script type="text/javascript">
+		var controller = jsRoutes.controllers.stock.Units;
+	</script>
+}
+
+@tools.templates.ajax_index(Controller) {
+
+	@tools.templates.ajax_form(
+		right = enums.Right.STOK_BIRIM_TANITIMI,
+		saveAction = stock.routes.Units.save
+	)
+
+	<div id=list>
+		@list(currentPage)
+	</div>
+
+}
+	

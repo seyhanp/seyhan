@@ -1,0 +1,38 @@
+@(_form: Form[models.temporal.UserData])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+<fieldset>
+
+	@inputText(_form("title"),
+		'_label -> Messages("title"),
+		'class -> "input-xlarge",
+		'maxlength -> "30"
+	)
+
+	@inputText(_form("email"),
+		'_label -> "Email",
+		'class -> "input-xlarge",
+		'maxlength -> "100"
+	)
+
+	@inputPassword(_form("oldPassword"),
+		'_label -> Messages("old_password"),
+		'class -> "input-medium",
+		'maxlength -> "30"
+	)
+
+	@inputPassword(_form("password"),
+		'_label -> Messages("password"),
+		'class -> "input-medium",
+		'maxlength -> "30"
+	)
+
+	@inputPassword(_form("repeatPassword"),
+		'_label -> Messages("repeat_password"),
+		'class -> "input-medium",
+		'maxlength -> "30"
+	)
+
+</fieldset>

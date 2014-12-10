@@ -1,0 +1,54 @@
+@(_form: Form[order.reports.ReceiptList.Parameter])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.report_form(order.reports.routes.ReceiptList.generate(),enums.Right.SPRS_FIS_LISTESI) {
+
+	@select(_form("status"),
+		options(enums.TransStatus.options),
+		'class -> "input-medium",
+		'_label -> Messages("status"),
+		'_default -> Messages("choose")
+	)
+
+	@select(_form("transType"),
+		options(Options.transSources(enums.Module.order)),
+		'class -> "input-medium",
+		'_label -> Messages("trans.type"),
+		'_default -> Messages("choose")
+	)
+
+	@tools.components.autocomplete_contact(_form)
+	@tools.dropdowns.order_trans_source(_form, hasAddNewButton=false)
+	@tools.components.trans_point_select(_form)
+
+	@inputText(_form("transNo"),
+		'_label -> Messages("trans.no"),
+		'class -> "input-small"
+	)
+
+	@tools.components.date_range(_form)
+	@tools.dropdowns.stock_depot(_form, hasAddNewButton=false)
+	@tools.dropdowns.sale_seller(_form, hasAddNewButton=false)
+
+	@inputText(_form("deliveryDate"),
+		'_label -> Messages("date.delivery"),
+		'class -> "input-small date"
+	)
+
+	@tools.components.private_code_select(_form)
+
+	@select(_form("orderBy"),
+		options(order.reports.ReceiptList.Parameter.options),
+		'class -> "input-medium",
+		'_label -> Messages("orderby")
+	)
+
+	@select(_form("showType"),
+		options(order.reports.ReceiptList.Parameter.showTypes),
+		'class -> "input-small",
+		'_label -> Messages("report.show")
+	)
+
+}

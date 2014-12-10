@@ -1,0 +1,10 @@
+@(currentPage: meta.PageExtend[AdminUserGroup])
+
+@tools.templates.basic_list(
+	currentPage = currentPage,
+	label = Messages("group"),
+	right = enums.Right.KULLANICI_GURUPLARI,
+	link = admin.routes.UserGroups.list().url,
+	
+	is_admin_page = true
+)

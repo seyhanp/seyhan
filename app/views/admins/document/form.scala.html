@@ -1,0 +1,406 @@
+@(_form: Form[models.AdminDocument], isSinglePage: Boolean)
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.basic_form(ScriptBlock) {
+
+	@tools.imports.forms_header(
+		_form("id").value,
+		enums.Right.BELGE_TASARIMI,
+		admin.routes.Documents.remove(if(_form("id").value != null && ! _form("id").value.isEmpty()) _form("id").value.toInt else -1),
+		labelKey = Messages("design.for", Messages(if(_form("header").value == null || _form("header").value.equals("")) {"enum.module." + _form("module").value} else {_form("header").value}))
+	)
+	
+	@helper.form(action = admin.routes.Documents.save, 'class-> "form-horizontal zell", 'id-> "mainFieldsForm") {
+
+		@tools.imports.base_hidden_fields(_form)
+		<input type="hidden" id="module" name="module" value='@_form("module").value' />
+		<input type="hidden" id="header" name="header" value='@_form("header").value' />
+		<input type="hidden" id="isSinglePage" name="isSinglePage" value='@isSinglePage' />
+
+		<fieldset>
+			@inputText(_form("name"),
+				'_label -> Messages("name"),
+				'class -> "input-medium",
+				'maxlength -> "20"
+			)
+
+			@select(_form("right"),
+				options(
+					_form("header").value match {
+				        case "cheque_payroll" => {Options.chqbllTransSources(true, enums.ChqbllSort.Cheque)}
+				        case "cheque_transaction" => {Options.chqbllTransSources(false, enums.ChqbllSort.Cheque)}
+				        case "cheque_partial" => {Options.chqbllPartialSources(enums.ChqbllSort.Cheque)}
+				        case "bill_payroll" => {Options.chqbllTransSources(true, enums.ChqbllSort.Bill)}
+				        case "bill_transaction" => {Options.chqbllTransSources(false, enums.ChqbllSort.Bill)}
+				        case "bill_partial" => {Options.chqbllPartialSources(enums.ChqbllSort.Bill)}
+				        case _ => {Options.transSources(_form("module").value, true, false)}
+				    }					
+				),
+				'_label -> Messages("action")
+			)
+
+			@inputText(_form("description"),
+				'_label -> Messages("description"),
+				'class -> "input-xlarge",
+				'maxlength -> "30"
+			)
+
+			@select(_form("isActive"),
+				options(Options.yesno),
+				'class -> "input-small",
+				'_label -> Messages("is_active")
+			)
+		</fieldset>
+
+		@if(_form.hasErrors) {
+			@for(band <- enums.DocBand.values()) {
+				@if(_form.errors.contains(band.name())) {
+					<div id="@(band.name())Errors">
+						<div onclick="$('#@(band.name())Errors').remove()" style="cursor:pointer;">
+						<span class="label label-important"><i class="icon-remove icon-white"></i> @Messages(band.name()+".band")</span>
+					</div>
+					 @for(error <- _form.errors.get(band.name())) {
+						<span style="margin-left: 40px" class="label label-warning">@error.message().toString()</span><br/>
+					 }
+				}
+			}
+		}
+
+		<div class="tabbable">
+			<ul class="nav nav-tabs">
+				@if(isSinglePage) {
+					<li class="active"><a href="#detailBand" data-toggle="tab">@Messages("Detail.band")</a></li>
+				} else {
+					<li class="active"><a href="#reportTitleBand" data-toggle="tab">@Messages("ReportTitle.band")</a></li>
+					<li><a href="#pageTitleBand" data-toggle="tab">@Messages("PageTitle.band")</a></li>
+					<li><a href="#detailBand" data-toggle="tab">@Messages("Detail.band")</a></li>
+					<li><a href="#pageFooterBand" data-toggle="tab">@Messages("PageFooter.band")</a></li>
+					<li><a href="#reportFooterBand" data-toggle="tab">@Messages("ReportFooter.band")</a></li>
+				}
+				<li><a href="#page" data-toggle="tab">@Messages("page").toUpperCase()</a></li>
+				<li><a href="#template" data-toggle="tab">TEMPLATE</a></li>
+			</ul>
+
+			<div class="tab-content" style="overflow:hidden">
+
+				@if(! isSinglePage) {
+					<div id="reportTitleBand" class="tab-pane active">
+						<div class="title-in-tab">@Messages("ReportTitle.band")</div>
+						@inputText(_form("reportTitleRows"),
+							'_label -> Messages("row_count"),
+							'class -> "input-small number",
+							'maxlength -> "2"
+						)
+						@select(_form("reportTitleLabels"),
+							options(Options.yesno),
+							'class -> "input-small",
+							'_label -> Messages("has_labels"),
+							'onchange -> "changeFieldLabelVisibility('reportTitle')"
+						)
+						@bandBlock("reportTitle")
+					</div>
+
+					<div id="pageTitleBand" class="tab-pane">
+						<div class="title-in-tab">@Messages("PageTitle.band")</div>
+						@inputText(_form("pageTitleRows"),
+							'_label -> Messages("row_count"),
+							'class -> "input-small number",
+							'maxlength -> "2"
+						)
+						@select(_form("pageTitleLabels"),
+							options(Options.yesno),
+							'class -> "input-small",
+							'_label -> Messages("has_labels"),
+							'onchange -> "changeFieldLabelVisibility('pageTitle')"
+						)
+						@bandBlock("pageTitle")
+					</div>
+				}
+
+				<div id="detailBand" class="tab-pane @if(isSinglePage) {active}">
+					<div class="title-in-tab">@Messages("Detail.band")</div>
+					@inputText(_form("detailRows"),
+						'_label -> Messages("row_count"),
+						'class -> "input-small number",
+						'maxlength -> "2"
+					)
+					@if(isSinglePage) {
+						@select(_form("detailLabels"),
+							options(Options.yesno),
+							'class -> "input-small",
+							'_label -> Messages("has_labels"),
+							'onchange -> "changeFieldLabelVisibility('detail')"
+						)
+					}
+					@bandBlock("detail")
+				</div>
+
+				@if(! isSinglePage) {
+					<div id="pageFooterBand" class="tab-pane">
+						<div class="title-in-tab">@Messages("PageFooter.band")</div>
+						@inputText(_form("pageFooterRows"),
+							'_label -> Messages("row_count"),
+							'class -> "input-small number",
+							'maxlength -> "2"
+						)
+						@select(_form("pageFooterLabels"),
+							options(Options.yesno),
+							'class -> "input-small",
+							'_label -> Messages("has_labels"),
+							'onchange -> "changeFieldLabelVisibility('pageFooter')"
+						)
+						@bandBlock("pageFooter")
+					</div>
+
+					<div id="reportFooterBand" class="tab-pane">
+						<div class="title-in-tab">@Messages("ReportFooter.band")</div>
+						@inputText(_form("reportFooterRows"),
+							'_label -> Messages("row_count"),
+							'class -> "input-small number",
+							'maxlength -> "2"
+						)
+						@select(_form("reportFooterLabels"),
+							options(Options.yesno),
+							'class -> "input-small",
+							'_label -> Messages("has_labels"),
+							'onchange -> "changeFieldLabelVisibility('reportFooter')"
+						)
+						@bandBlock("reportFooter")
+					</div>
+				}
+
+				<div id="page" class="tab-pane">
+					<div class="title-in-tab">@Messages("page").toUpperCase()</div>
+					<div class="clearfix" style="margin-top:10px">
+						<div style="width:25%; float:left">
+							@select(_form("hasPaging"),
+								options(Options.yesno),
+								'class -> "input-small",
+								'_label -> Messages("has_paging")
+							)
+							@inputText(_form("pageRows"),
+								'_label -> Messages("row_count"),
+								'class -> "input-small number",
+								'maxlength -> "2"
+							)
+							@inputText(_form("leftMargin"),
+								'_label -> Messages("margin.left"),
+								'class -> "input-small number",
+								'maxlength -> "2"
+							)
+							@inputText(_form("topMargin"),
+								'_label -> Messages("margin.top"),
+								'class -> "input-small number",
+								'maxlength -> "2"
+							)
+							@inputText(_form("bottomMargin"),
+								'_label -> Messages("margin.bottom"),
+								'class -> "input-small number",
+								'maxlength -> "2"
+							)
+							@if(! isSinglePage) {
+								@select(_form("carryingOverName"),
+									options(documents.Helper.findCarryingOverOptions(_form("module").value, _form("header").value)),
+									'class -> "input-small",
+									'_label -> Messages("has_carrying_over"),
+									'_default -> Messages("choose")
+								)
+							}
+						</div>
+						@if(! isSinglePage) {
+							<div style="width:75%; float:left">
+								@select(_form("columnTitleType"),
+									options(enums.ColumnTitleType.options()),
+									'class -> "input-medium",
+									'_label -> Messages("documents.column.title.type")
+								)
+								<div class="alert alert-info">
+									<div>
+										<strong>@Messages("documents.column.title.desc")</strong>
+									</div>
+									<div>
+										<span class="label label-warning">@Messages("enum.NOTHING")</span> : @Messages("documents.column.type.0")
+									</div>
+									<div>
+										<span class="label label-warning">@Messages("enum.PLAIN")</span> : @Messages("documents.column.type.1")
+									</div>
+									<div>
+										<span class="label label-warning">@Messages("enum.DASHED")</span> : @Messages("documents.column.type.2")
+									</div>
+									<div>
+										<span class="label label-warning">@Messages("enum.UNLINED")</span> : @Messages("documents.column.type.3")
+									</div>
+								</div>
+							</div>
+						}
+					</div>
+				</div>
+
+				<div id="template" class="tab-pane">
+					<textarea id="templateRows" name="templateRows" style="height:350px" wrap="off">@_form("templateRows").value</textarea>
+					<p></p>
+				</div>
+
+			</div>
+		</div>
+
+		@tools.templates.form_footer_bar(enums.Right.BELGE_TASARIMI, _form("id").value)
+
+	}
+
+}
+
+@ScriptBlock = {
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/plugin/jquery.table.addrow.js")"></script>
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/plugin/jquery.freezetablecolumns.js")"></script>
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/plugin/jquery-linenumbers.js")"></script>
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/crud/document_design.js")"></script>
+
+	<script type="text/javascript">
+		var isSinglePage = @isSinglePage;
+		var propsMsg = '@Messages("properties")';
+
+		$("document").ready(function(){
+			$("#templateRows").linenumbers();
+		});
+	</script>
+}
+
+@bandBlock(name:String) = {
+	<div class="clearfix" style="margin-top:10px">
+		<div style="width:27%; float:left">
+			<div class="mini-title-yellow" style="width:220px">@Messages("selectable_fields")</div>
+			<select id="@(name)Fields" size="20">
+				@admin.Documents.getBandFields(name, _form("module").value, _form("header").value).map { v =>
+	            	@if(v._1.startsWith("/start")) {
+	            		<optgroup label="@v._2.toUpperCase()">
+	            	} else {
+	            		@if(v._1.startsWith("/end")) {
+	            			</optgroup>
+	            		} else {
+	                		<option value="@v._1">@v._2.toUpperCase()</option>
+	                	}
+	                }
+	            }
+	        </select>
+		</div>
+		<div style="width:30%; float:left">
+			<div class="mini-title-yellow">@Messages("selected_fields")</div>
+			<table id='@(name)Table' class='autoTable'>
+				<thead>
+					<tr>
+						<th style="width:30px">No</th>
+						<th style="width:200px">@Messages("name")</th>
+						<th style="width:35px"></th>
+					</tr>
+				</thead>
+				<tbody>
+					@repeatWithIndex(_form(name+"Fields"), min=1, add=1) { (field, index) =>
+						<tr>
+							<td style="text-align:right">
+								<span class="rowNumber" style="display:block; margin:0px auto; text-align:right;">@index</span>
+								<input type="hidden" id="@(name)Fields[@index]_id" name="@(name)Fields[@index].id" value="@field("id").value" />
+								<input type="hidden" id="@(name)Fields[@index]_module" name="@(name)Fields[@index].module" value="@field("module").value" />
+								<input type="hidden" id="@(name)Fields[@index]_band" name="@(name)Fields[@index].band" value="@field("band").value" />
+								<input type="hidden" id="@(name)Fields[@index]_type" name="@(name)Fields[@index].type" value="@field("type").value" />
+								<input type="hidden" id="@(name)Fields[@index]_name" name="@(name)Fields[@index].name" value="@field("name").value" />
+								<input type="hidden" id="@(name)Fields[@index]_nickName" name="@(name)Fields[@index].nickName" value="@field("nickName").value" />
+								<input type="hidden" id="@(name)Fields[@index]_hiddenField" name="@(name)Fields[@index].hiddenField" value="@field("hiddenField").value" />
+								<input type="hidden" id="@(name)Fields[@index]_isDbField" name="@(name)Fields[@index].isDbField" value="@field("isDbField").value" />
+								<input type="hidden" id="@(name)Fields[@index]_defauld" name="@(name)Fields[@index].defauld" value="@field("defauld").value" />
+								<input type="hidden" id="@(name)Fields[@index]_msgPrefix" name="@(name)Fields[@index].msgPrefix" value="@field("msgPrefix").value" />
+								<input type="hidden" id="@(name)Fields[@index]_tableType" name="@(name)Fields[@index].tableType" value="@field("tableType").value" />
+								<input type="hidden" id="@(name)Fields[@index]_row" name="@(name)Fields[@index].row" value="@field("row").value" />
+								<input type="hidden" id="@(name)Fields[@index]_column" name="@(name)Fields[@index].column" value="@field("column").value" />
+								<input type="hidden" id="@(name)Fields[@index]_width" name="@(name)Fields[@index].width" value="@field("width").value" />
+								<input type="hidden" id="@(name)Fields[@index]_value" name="@(name)Fields[@index].value" value="@field("value").value" />
+								<input type="hidden" id="@(name)Fields[@index]_format" name="@(name)Fields[@index].format" value="@field("format").value" />
+								<input type="hidden" id="@(name)Fields[@index]_prefix" name="@(name)Fields[@index].prefix" value="@field("prefix").value" />
+								<input type="hidden" id="@(name)Fields[@index]_suffix" name="@(name)Fields[@index].suffix" value="@field("suffix").value" />
+								<input type="hidden" id="@(name)Fields[@index]_originalLabel" name="@(name)Fields[@index].originalLabel" value="@field("originalLabel").value" />
+								<input type="hidden" id="@(name)Fields[@index]_labelWidth" name="@(name)Fields[@index].labelWidth" value="@field("labelWidth").value" />
+								<input type="hidden" id="@(name)Fields[@index]_labelAlign" name="@(name)Fields[@index].labelAlign" value="@field("labelAlign").value" />
+							</td>
+							<td>
+								<input type="text" class="mainInput" id="@(name)Fields[@index]_label" name="@(name)Fields[@index].label" value="@field("label").value" style="width:97%" />
+							</td>
+							<td align="center">
+								<a class="btn btn-mini delRow" title="@Messages("remove")">
+									<i class="icon-remove" style="margin-top:1px"></i>
+								</a>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+		<div style="width:40%; float:left">
+			<input type="hidden" id="@(name)_id" />
+			<div class="mini-title-yellow" style="margin-left:30px;width:300px" id="@(name)_label">@Messages("properties")</div>
+			<div class="control-group">
+				<label class="control-label" for="@(name)_row" >@Messages("row")</label>
+				<div class="controls inline">
+					<input type="text" id="@(name)_row" class="number input-small" onkeyup="onFieldChange('@(name)', 'row')" />
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="@(name)_column" >@Messages("column")</label>
+				<div class="controls inline">
+					<input type="text" id="@(name)_column" class="number input-small" onkeyup="onFieldChange('@(name)', 'column')" />
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="@(name)_width" >@Messages("width")</label>
+				<div class="controls inline">
+					<input type="text" id="@(name)_width" class="number input-small" onkeyup="onFieldChange('@(name)', 'width')" />
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="@(name)_format" >@Messages("format")</label>
+				<div class="controls inline">
+					<input type="text" id="@(name)_format" onkeyup="onFieldChange('@(name)', 'format')" />
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="@(name)_prefix" >@Messages("prefix")</label>
+				<div class="controls inline">
+					<input type="text" id="@(name)_prefix" onkeyup="onFieldChange('@(name)', 'prefix')" />
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="@(name)_suffix" >@Messages("suffix")</label>
+				<div class="controls inline">
+					<input type="text" id="@(name)_suffix" onkeyup="onFieldChange('@(name)', 'suffix')" />
+				</div>
+			</div>
+			<div class="control-group" id="@(name)_valueGroup">
+				<label class="control-label" for="@(name)_value" >@Messages("value")</label>
+				<div class="controls inline">
+					<input type="text" id="@(name)_value" onkeyup="onFieldChange('@(name)', 'value')" />
+				</div>
+			</div>
+			<div id="@(name)_labelGroup">
+				<div class="control-group">
+					<label class="control-label" for="@(name)_labelAlign" >@Messages("label_dir")</label>
+					<div class="controls inline">
+						<select id="@(name)_labelAlign" onchange="onFieldChange('@(name)', 'labelAlign')" class="input-medium">
+							<option value="Left">@Messages("to.left")</option>
+							<option value="Center" selected>@Messages("to.center")</option>
+							<option value="Right" selected>@Messages("to.right")</option>
+						</select>
+					</div>
+				</div>
+				@if(! name.equals("detail") || isSinglePage) {
+					<div class="control-group">
+						<label class="control-label" for="@(name)_labelWidth" >@Messages("label_width")</label>
+						<div class="controls inline">
+							<input type="text" id="@(name)_labelWidth" class="number input-small" onkeyup="onFieldChange('@(name)', 'labelWidth')" />
+						</div>
+					</div>
+				}
+			</div>
+		</div>
+	</div>
+}

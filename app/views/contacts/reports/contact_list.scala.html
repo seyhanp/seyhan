@@ -1,0 +1,28 @@
+@(_form: Form[contact.reports.ContactList.Parameter])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.report_form(contact.reports.routes.ContactList.generate(),enums.Right.CARI_HESAP_LISTESI) {
+
+	@tools.dropdowns.contact_category(_form, hasAddNewButton=false)
+	@tools.dropdowns.sale_seller(_form, hasAddNewButton=false)
+
+	@for(aef <- models.AdminExtraFields.listAll(enums.Module.contact.name())) {
+		@tools.dropdowns.contact_extra_field(_form, aef.id, aef.idno, aef.name, aef.isRequired, hasAddNewButton=false)
+	}
+
+	@select(_form("status"),
+		options(enums.ContactStatus.options),
+		'class -> "input-medium",
+		'_label -> Messages("status"),
+		'_default -> Messages("choose")
+	)
+
+	@select(_form("orderBy"),
+		options(contact.reports.ContactList.Parameter.options),
+		'class -> "input-medium",
+		'_label -> Messages("orderby")
+	)
+
+}

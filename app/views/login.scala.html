@@ -1,0 +1,58 @@
+@(form: Form[Application.Login])
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=10; IE=9; IE=8; IE=7; IE=EDGE,chrome=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Seyhan</title>
+	<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+	<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+	<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/login.css")">
+</head>
+<body>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<img src="/assets/img/seyhan_p_d.png" style="height:50px"></img>
+		</div>
+	</div>
+
+	@helper.form(routes.Application.authenticate, 'class -> "form-login", 'id -> "login") {
+
+		@if(form.hasGlobalErrors) {
+			<p class="error">
+				@form.globalError.message
+			</p>
+		}
+
+		@if(flash.contains("success")) {
+			<p class="success">
+				@flash.get("success")
+			</p>
+		}
+		
+		<h3>@Messages("login")</h3>
+
+		<input type="text" class="input-xlarge noenter" placeholder="@Messages("username")" name="username" value="@form("username").value" />
+		<input type="password" class="input-xlarge noenter" placeholder="@Messages("password")" name="password" />
+
+		<div class="clearfix"/>
+
+		<div style="float:right; margin-right:11px">
+			<button class="btn btn-primary" type="submit">Login</button>
+		</div>
+		<div class="clearfix" />
+
+	}
+
+	<script type="text/javascript">
+		$(window).keydown(function(event) {
+			if (event.keyCode == 13) {
+				$('#login').submit();
+			}
+		});
+	</script>
+
+</body>
+</html>

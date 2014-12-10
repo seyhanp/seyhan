@@ -1,0 +1,57 @@
+@(action: play.api.mvc.Call, right: enums.Right, alertNote : String = null)(fields: Html)
+
+@main() {
+
+	<div style="width:470px">
+		<legend>@Messages(right.key)</legend>
+	</div>
+
+	@helper.form(action = action, 'class-> "form-horizontal zell", 'id -> "reportForm", 'style -> "width: 430px") {
+
+		@if(flash.containsKey("warning")) {
+			<div id="formWarning">
+				<div class="alert alert-warning">
+					<a class="close" data-dismiss="alert" onclick="$('#formWarning').html('')">x</a>
+					@flash.get("warning")
+				</div>
+			</div>
+		}
+		<fieldset>
+			@fields
+			<div class="control-group inline">
+				<label class="control-label" for="unit">@Messages("report_unit")</label>
+				<div class="controls inline">
+					<select name="unit" id="unit" class="input-small">
+						@for(unit <- enums.ReportUnit.values()) {
+							<option value="@unit" @(if(unit.equals(global.Profiles.chosen().gnel_reportUnit)) {"selected"})>@unit</option>
+						}
+					</select>
+				</div>
+		</fieldset>
+
+		<div class="controls">
+			<input type="submit" value="@Messages("report")" class="btn btn-primary" style="margin-top:3px"/>
+		</div>
+	}
+	@if(alertNote != null) {
+		<div style="width:470px">
+			<div class="form-note">
+				<span class="label label-important">@Messages("alert") </span> @alertNote
+			</div>
+		</div>
+	}
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#reportForm').submit(function() {
+				$('#formWarning').html('');
+				if ($('#unit').val() === 'Html') {
+					$('#reportForm').attr('target', '_blank');
+				} else {
+					$('#reportForm').removeAttr('target');
+				}
+			});
+		});
+	</script>
+
+}

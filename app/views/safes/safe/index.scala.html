@@ -1,0 +1,20 @@
+@(currentPage: meta.PageExtend[Safe])
+
+@Controller = {
+	<script type="text/javascript">
+		var controller = jsRoutes.controllers.safe.Safes;
+	</script>
+}
+
+@tools.templates.ajax_index(Controller) {
+
+	@tools.templates.ajax_form(
+		right = enums.Right.KASA_TANITIMI,
+		saveAction = safe.routes.Safes.save
+	)
+
+	<div id=list>
+		@list(currentPage)
+	</div>
+
+}
