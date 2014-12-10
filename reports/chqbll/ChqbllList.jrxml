@@ -30,7 +30,7 @@
 		<defaultValueExpression><![CDATA["Cheque"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select is_customer, t.sort, portfolio_no, serial_no, last_contact_name, due_date, last_step, owner, surety, bank_name, payment_place, amount, exc_code, description, cb.name as type_name
+		<![CDATA[select is_customer, t.sort, portfolio_no, serial_no, last_contact_name, due_date, last_step, owner, surety, bank_name, payment_place, amount, t.exc_code, description, cb.name as type_name
 from chqbll_payroll_detail t
 left join contact c on c.id = t.contact_id and c.is_active = $P!{TRU}
 left join chqbll_type cb on cb.id = t.cbtype_id and cb.is_active = $P!{TRU}
