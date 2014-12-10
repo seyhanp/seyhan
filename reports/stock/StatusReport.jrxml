@@ -31,6 +31,7 @@
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
 	<parameter name="FOR_DOTMATRIX" class="java.lang.String"/>
+	<parameter name="TRU" class="java.lang.String"/>
 	<parameter name="SHOW_TYPE" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[new Integer(0)]]></defaultValueExpression>
 	</parameter>

@@ -25,6 +25,7 @@
 	</parameter>
 	<parameter name="REPORT_INFO" class="java.lang.String"/>
 	<parameter name="FOR_DOTMATRIX" class="java.lang.String"/>
+	<parameter name="TRU" class="java.lang.String"/>
 	<parameter name="SORT" class="java.lang.String">
 		<defaultValueExpression><![CDATA["Cheque"]]></defaultValueExpression>
 	</parameter>
