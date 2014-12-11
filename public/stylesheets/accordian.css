@@ -1,20 +1,20 @@
 #accordian_body {
-    top: 52px;
-    position: fixed;
+  top: 62px;
+  position: fixed;
 	margin-left: 0;
 	width: 300px;
-	height: -moz-calc(100% - 46px); /* Firefox */
-	height: -webkit-calc(100% - 46px); /* Chrome, Safari */
-	height: calc(100% - 46px); /* IE9+ and future browsers */
+	height: -moz-calc(100% - 56px); /* Firefox */
+	height: -webkit-calc(100% - 56px); /* Chrome, Safari */
+	height: calc(100% - 56px); /* IE9+ and future browsers */
 	overflow: auto;
 	box-shadow: 0 0 7px rgba(0, 0, 0, 0.8), 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 -1px 0 rgba(0, 0, 0, 0.8) inset;
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 #accordian {
-    background: none repeat scroll 0 0 #f4f4f4;
-    border-bottom: 1px solid #cdcdcd;
-    box-shadow: 0 1px 4px #ccc;
+  background: none repeat scroll 0 0 #f4f4f4;
+  border-bottom: 1px solid #cdcdcd;
+  box-shadow: 0 1px 4px #ccc;
 	width: 100%;
 	height: 99.5%;
 	color: white;
