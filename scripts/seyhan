@@ -307,6 +307,7 @@ declare -r app_classpath="$lib_dir/default.seyhan-1.0.0.jar:$lib_dir/activemq-al
 addJava "-Duser.dir=$(cd "${app_home}"; pwd -P)"
 addJava "-Dconfig.file=./conf/application.conf"
 addJava "-Dlogger.file=./conf/logger.xml"
+addJava "-Duser.language=en"
 
 declare -r java_cmd=$(get_java_cmd)
 

@@ -19,7 +19,7 @@ for %%x in (%cmdcmdline%) do if %%~x==/c set DOUBLECLICKED=1
 
 rem FIRST we load the config file of extra options.
 set "CFG_FILE=%SEYHAN_HOME%\SEYHAN_config.txt"
-set "CFG_OPTS=-Dconfig.file=./conf/application.conf -Dlogger.file=./conf/logger.xml"
+set "CFG_OPTS=-Dconfig.file=./conf/application.conf -Dlogger.file=./conf/logger.xml -Duser.language=en"
 if exist %CFG_FILE% (
   FOR /F "tokens=* eol=# usebackq delims=" %%i IN ("%CFG_FILE%") DO (
     set DO_NOT_REUSE_ME=%%i
