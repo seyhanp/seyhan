@@ -16,3 +16,4 @@ RUNNING_PID
 bin/
 h2db/
 org.scala-ide.sdt.core.prefs
+/.target/
