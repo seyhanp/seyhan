@@ -134,7 +134,6 @@ element.style {
 
 .navbar-inverse .navbar-inner {
     background: none repeat scroll 0 0 #444;
-    height: 50px;
 }
 
 .navbar-inverse .brand, .navbar-inverse .nav > li > a {
@@ -311,11 +310,6 @@ body.loading .pleaseWait {
     display: block;
 }
 
-dl {
-    font-size: 85%;
-    margin-bottom: 0;
-}
-
 dd {
     color: green;
 }
@@ -325,10 +319,14 @@ dd {
 }
 
 .tiny-info {
-	margin-top:13px;
+	margin-top:18px;
 }
 
 .tiny-info span {
 	font-weight:bold; 
 	text-shadow: 2px 2px 2px #000;
+}
+
+dt {
+    font-weight: normal;
 }

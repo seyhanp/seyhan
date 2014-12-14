@@ -1,6 +1,6 @@
 #toggleSettingsPanel {
     position: fixed;
-    top: 52px;
+    top: 62px;
     right: 0;
     width: 5px;
 	height: 15px;
@@ -22,7 +22,7 @@
 
 #body {
     position:absolute;
-    top:78px;
+    top:88px;
     right:0;
     max-width: 450px;
 }
