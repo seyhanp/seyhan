@@ -1,4 +1,4 @@
-#**Seyhan Projesi' ne Hoşgeldiniz** 
+#**Seyhan Projesi'ne Hoşgeldiniz** 
 
 ####Seyhan, küçük ve orta ölçekli firmalara yönelik bir ön muhasebe projesidir. 
 
