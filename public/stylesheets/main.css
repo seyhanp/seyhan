@@ -316,10 +316,12 @@ dd {
 
 .container {
     margin-left: 310px;
+    margin-top: 15px;
 }
 
 .tiny-info {
 	margin-top:18px;
+	margin-right: 10px;
 }
 
 .tiny-info span {
