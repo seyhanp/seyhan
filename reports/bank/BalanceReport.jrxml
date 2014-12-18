@@ -22,12 +22,12 @@
 	<parameter name="FOR_DOTMATRIX" class="java.lang.String"/>
 	<parameter name="TRU" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select s.account_no, s.name, exc_code, SUM(t.debt) as debt_sum, SUM(t.credit) as credit_sum, SUM(t.debt-t.credit) as balance
+		<![CDATA[select s.account_no, s.name, t.exc_code, SUM(t.debt) as debt_sum, SUM(t.credit) as credit_sum, SUM(t.debt-t.credit) as balance
 from bank_trans t
 	left join bank s on s.id = t.bank_id and s.is_active = $P!{TRU}
 where 1=1
 $P!{QUERY_STRING}
-GROUP BY s.account_no, s.name, exc_code
+GROUP BY s.account_no, s.name, t.exc_code
 $P!{HAVING_STRING}]]>
 	</queryString>
 	<field name="account_no" class="java.lang.String">

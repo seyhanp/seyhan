@@ -25,14 +25,14 @@
 	<parameter name="FOR_DOTMATRIX" class="java.lang.String"/>
 	<parameter name="TRU" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select s.account_no, s.name, t.trans_date, exc_code, SUM(t.debt) as debt_sum, SUM(t.credit) as credit_sum, SUM(t.debt-t.credit) as balance, IFNULL((select SUM(debt-credit) as transfer from bank_trans sub_t where sub_t.bank_id = s.id and sub_t.trans_date < $P!{BASE_DATE}), 0) as transfer
+		<![CDATA[select s.account_no, s.name, t.trans_date, t.exc_code, SUM(t.debt) as debt_sum, SUM(t.credit) as credit_sum, SUM(t.debt-t.credit) as balance, IFNULL((select SUM(debt-credit) as transfer from bank_trans sub_t where sub_t.bank_id = s.id and sub_t.trans_date < $P!{BASE_DATE}), 0) as transfer
 from bank_trans t
 left join bank s on s.id = t.bank_id and s.is_active = $P!{TRU}
 $P!{TRANS_POINT_SQL}
 $P!{PRIVATE_CODE_SQL}
 where 1=1
 $P!{QUERY_STRING}
-GROUP BY s.account_no, s.name, t.trans_date, exc_code]]>
+GROUP BY s.account_no, s.name, t.trans_date, t.exc_code]]>
 	</queryString>
 	<field name="account_no" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
