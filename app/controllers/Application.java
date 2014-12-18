@@ -22,7 +22,9 @@ import static play.data.Form.form;
 
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
@@ -32,10 +34,11 @@ import models.AdminWorkspace;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import play.Play;
+import play.api.Play;
 import play.data.Form;
 import play.i18n.Messages;
 import play.mvc.Controller;
+import play.mvc.Http;
 import play.mvc.Http.Cookie;
 import play.mvc.Result;
 import utils.AuthManager;
@@ -71,6 +74,23 @@ public class Application extends Controller {
 			}
 		} else {
 			return ok(login.render(form(Login.class)));
+		}
+	}
+	
+	public static Result stop() {
+		List<String> localIPs = new ArrayList<String>();
+		localIPs.add("localhost");
+		localIPs.add("127.0.0.1");
+		localIPs.add("0.0.0.0");
+
+		//sadece localhost dan gelenlere izin ver
+		String requestIP = Http.Context.current().request().remoteAddress();
+		if (localIPs.contains(requestIP)) { 
+			Play.stop();
+			System.exit(0);
+			return null;
+		} else {
+			return logout();
 		}
 	}
 
@@ -206,7 +226,7 @@ public class Application extends Controller {
 		} else {
 			FileInputStream fis;
 			try {
-				fis = new FileInputStream(Play.application().path().getAbsolutePath() + "/conf/messages." + getLang());
+				fis = new FileInputStream(Play.current().path().getAbsolutePath() + "/conf/messages." + getLang());
 				return new PropertyResourceBundle(new InputStreamReader(fis, "UTF-8"));
 			} catch (Exception e) {
 				log.error(e.getMessage());
