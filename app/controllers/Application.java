@@ -22,11 +22,11 @@ import static play.data.Form.form;
 
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import models.AdminUserAudit;
 import models.AdminWorkspace;
@@ -61,7 +61,16 @@ import enums.UserLogLevel;
 public class Application extends Controller {
 
 	private final static Logger log = LoggerFactory.getLogger(Application.class);
+
 	private static ResourceBundle bundle;
+	private static Set<String> localIPSet;
+
+	static {
+		localIPSet = new HashSet<String>();
+		localIPSet.add("localhost");
+		localIPSet.add("127.0.0.1");
+		localIPSet.add("0.0.0.0");
+	}
 	
 	public static Result index() {
 		changeLang(getLang());
@@ -77,20 +86,30 @@ public class Application extends Controller {
 		}
 	}
 	
-	public static Result stop() {
-		List<String> localIPs = new ArrayList<String>();
-		localIPs.add("localhost");
-		localIPs.add("127.0.0.1");
-		localIPs.add("0.0.0.0");
+	private static boolean isLocalRequest() {
+		String requestIP = null;
+		try {
+			requestIP = Http.Context.current().request().remoteAddress();
+		} catch (Exception e) {};
+ 
+		return requestIP != null && localIPSet.contains(requestIP);
+	}
 
-		//sadece localhost dan gelenlere izin ver
-		String requestIP = Http.Context.current().request().remoteAddress();
-		if (localIPs.contains(requestIP)) { 
+	public static Result stop() {
+		if (isLocalRequest()) { 
 			Play.stop();
 			System.exit(0);
-			return null;
+			return ok("seyhan uygulamasi durduruldu!");
 		} else {
-			return logout();
+			return badRequest();
+		}
+	}
+
+	public static Result isAlive() {
+		if (isLocalRequest()) { 
+			return ok();
+		} else {
+			return badRequest();
 		}
 	}
 

@@ -4,6 +4,8 @@
 ###  Helper methods for BASH scripts ###
 ###  ------------------------------- ###
 
+source ./conf/init.sh
+
 realpath () {
 (
   TARGET_FILE="$1"
@@ -239,6 +241,12 @@ run() {
   if [[ "$JAVA_OPTS" != "" ]]; then
     java_opts="${JAVA_OPTS}"
   fi
+
+  # stop the formaly instance
+  "$java_cmd" -cp ./lib/stopper.jar com.seyhanproject.stopper.Stopper $http_port
+  if [ -f ./RUNNING_PID ]; then
+     rm RUNNING_PID
+  fi
   
   # run sbt
   execRunner "$java_cmd" \
@@ -308,6 +316,13 @@ addJava "-Duser.dir=$(cd "${app_home}"; pwd -P)"
 addJava "-Dconfig.file=./conf/application.conf"
 addJava "-Dlogger.file=./conf/logger.xml"
 addJava "-Duser.language=en"
+addJava "-Dhttp.port=$http_port"
+
+conf_file=./conf/jvm_params.txt
+if [ -f $conf_file ]; then
+    configs=$(cat $conf_file)
+    addJava configs
+fi
 
 declare -r java_cmd=$(get_java_cmd)
 

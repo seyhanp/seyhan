@@ -4,22 +4,22 @@
 @REM JAVA_HOME - location of a JDK home dir (optional if java on path)
 @REM CFG_OPTS  - JVM options (optional)
 @REM Configuration:
-@REM SEYHAN_config.txt found in the SEYHAN_HOME.
 @setlocal enabledelayedexpansion
 
 @echo off
-if "%SEYHAN_HOME%"=="" set "SEYHAN_HOME=%~dp0\\.."
 set ERROR_CODE=0
 
-set "APP_LIB_DIR=%SEYHAN_HOME%\lib\"
+call .\conf\init.bat
+
+set "APP_LIB_DIR=.\lib\"
 
 rem Detect if we were double clicked, although theoretically A user could
 rem manually run cmd /c
 for %%x in (%cmdcmdline%) do if %%~x==/c set DOUBLECLICKED=1
 
 rem FIRST we load the config file of extra options.
-set "CFG_FILE=%SEYHAN_HOME%\SEYHAN_config.txt"
-set "CFG_OPTS=-Dconfig.file=./conf/application.conf -Dlogger.file=./conf/logger.xml -Duser.language=en"
+set "CFG_FILE=.\conf\jvm_params.txt"
+set "CFG_OPTS=-Dconfig.file=./conf/application.conf -Dlogger.file=./conf/logger.xml -Duser.language=en -Dhttp.port=%http_port%"
 if exist %CFG_FILE% (
   FOR /F "tokens=* eol=# usebackq delims=" %%i IN ("%CFG_FILE%") DO (
     set DO_NOT_REUSE_ME=%%i
@@ -89,6 +89,12 @@ if "%_JAVA_OPTS%"=="" set _JAVA_OPTS=%CFG_OPTS%
 :run
  
 set "APP_MAIN_CLASS=play.core.server.NettyServer"
+
+rem stop the formaly instance
+"%_JAVACMD%" -cp ./lib/stopper.jar com.seyhanproject.stopper.Stopper %http_port%
+if exist RUNNING_PID (
+   del RUNNING_PID
+)
 
 rem TODO - figure out how to pass arguments....
 "%_JAVACMD%" %_JAVA_OPTS% %SEYHAN_OPTS% -cp "./lib/*;" play.core.server.NettyServer .

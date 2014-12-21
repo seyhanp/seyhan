@@ -17,6 +17,7 @@ POST    /login                                          controllers.Application.
 GET     /logout                                         controllers.Application.logout()
 GET     /forbidden                                      controllers.Application.getForbiddenResult()
 GET     /stop                                           controllers.Application.stop()
+GET     /is_alive                                       controllers.Application.isAlive()
 
 # ------------------------------------------------------------------------------------------------------------------------
 # Contact

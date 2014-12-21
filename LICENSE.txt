@@ -3,8 +3,8 @@ This package contains software licensed under different
 licenses, please refer to the NOTICE.txt file for further
 information.
 
-The software ("Software") developed and owned by Mustafa DUMLUPINAR is
-licensed under the GNU GENERAL PUBLIC LICENSE Version 3 to all third
+The software ("Software") developed and owned by Mustafa DUMLUPINAR (mdumlupinar@gmail.com)
+is licensed under the GNU GENERAL PUBLIC LICENSE Version 3 to all third
 parties and that license is included below.
 
 However, if you have executed an End User Software License and Services
