@@ -591,6 +591,11 @@ public class Transes extends Controller {
 			for (int i = 1; i < model.details.size() + 1; i++) {
 				StockTransDetail std = model.details.get(i-1);
 
+				if (std.taxRate == null) std.taxRate = 0d;
+				if (std.discountRate1 == null) std.discountRate1 = 0d;
+				if (std.discountRate2 == null) std.discountRate2 = 0d;
+				if (std.discountRate3 == null) std.discountRate3 = 0d;
+
 				if (std.quantity == null || std.quantity <= 0) {
 					veList.add(new ValidationError("stocks", Messages.get("cannot.be.zero.table", i)));
 				}
@@ -600,16 +605,16 @@ public class Transes extends Controller {
 				if (std.unit == null) {
 					veList.add(new ValidationError("stocks", Messages.get("is.not.null.for.table", i, Messages.get("unit"))));
 				}
-				if (std.taxRate != null && std.taxRate.doubleValue() > 100) {
+				if (std.taxRate.doubleValue() > 100) {
 					veList.add(new ValidationError("stocks", Messages.get("too.high.for.table", i, Messages.get("tax_rate"), 100)));
 				}
-				if (std.discountRate1 != null && std.discountRate1.doubleValue() > 100) {
+				if (std.discountRate1.doubleValue() > 100) {
 					veList.add(new ValidationError("stocks", Messages.get("too.high.for.table", i, Messages.get("stock.discount", 1), 100)));
 				}
-				if (std.discountRate2 != null && std.discountRate2.doubleValue() > 100) {
+				if (std.discountRate2.doubleValue() > 100) {
 					veList.add(new ValidationError("stocks", Messages.get("too.high.for.table", i, Messages.get("stock.discount", 2), 100)));
 				}
-				if (std.discountRate3 != null && std.discountRate3.doubleValue() > 100) {
+				if (std.discountRate3.doubleValue() > 100) {
 					veList.add(new ValidationError("stocks", Messages.get("too.high.for.table", i, Messages.get("stock.discount", 3), 100)));
 				}
 

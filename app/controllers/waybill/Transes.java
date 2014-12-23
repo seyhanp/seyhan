@@ -581,7 +581,7 @@ public class Transes extends Controller {
 					if (std.discountRate2.doubleValue() > 100) {
 						veList.add(new ValidationError("stocks", Messages.get("too.high.for.table", i, Messages.get("stock.discount", 2), 100)));
 					}
-					if (std.discountRate2.doubleValue() > 100) {
+					if (std.discountRate3.doubleValue() > 100) {
 						veList.add(new ValidationError("stocks", Messages.get("too.high.for.table", i, Messages.get("stock.discount", 3), 100)));
 					}
 
