@@ -58,6 +58,7 @@ public class Settings extends Controller {
 			AdminSetting model = new AdminSetting();
 			model.id = modelData.id;
 			model.code = modelData.code;
+			model.version = modelData.version;
 			model.description = modelData.description;
 
 			model.jsonData = StringUtils.toJson(modelData);
@@ -109,6 +110,7 @@ public class Settings extends Controller {
 				global = StringUtils.fromJson(setting.jsonData, SettingData.class);
 				global.id = setting.id;
 			}
+			global.version = setting.version;
 		}
 
 		return global;

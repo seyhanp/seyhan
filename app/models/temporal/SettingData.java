@@ -47,4 +47,6 @@ public class SettingData {
 	public Double exchangeDiffRateForBuying = 0d;
 	public Double exchangeDiffRateForSelling = 0d;
 
+	public Integer version;
+
 }
