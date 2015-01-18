@@ -93,6 +93,9 @@ public class InvoiceTrans extends AbstractStockTrans {
 			if (searchParam.status != null) {
 				expList.eq("status", searchParam.status);
 			}
+			if (searchParam.isCash != null) {
+				expList.eq("isCash", searchParam.isCash);
+			}
 			if (searchParam.receiptNo != null && searchParam.receiptNo.intValue() > 0) {
 				expList.eq("receiptNo", searchParam.receiptNo);
 			}

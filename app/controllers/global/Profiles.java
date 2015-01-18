@@ -31,6 +31,8 @@ import javax.persistence.PersistenceException;
 import meta.GridHeader;
 import meta.PageExtend;
 import models.GlobalProfile;
+import models.Safe;
+import models.StockDepot;
 import models.temporal.InfoMultiplier;
 import models.temporal.ProfileData;
 import play.data.Form;
@@ -308,18 +310,28 @@ public class Profiles extends Controller {
 	}
 
 	public static ProfileData chosen() {
+		ProfileData result = null;
 		if (Http.Context.current.get() == null) return fakePD;
 
 		String name = CacheUtils.getProfile();
 		if (name != null) {
 			GlobalProfile profile = GlobalProfile.findByName(name);
-			if (profile != null) return StringUtils.fromJson(profile.jsonData, ProfileData.class);
+			result = StringUtils.fromJson(profile.jsonData, ProfileData.class);
 		} else {
 			GlobalProfile profile = GlobalProfile.findFirst();
 			if (profile != null) {
 				CacheUtils.setProfile(profile.name);
-				return StringUtils.fromJson(profile.jsonData, ProfileData.class);
+				result = StringUtils.fromJson(profile.jsonData, ProfileData.class);
 			}
+		}
+		
+		if (result != null) {
+			if (result.gnel_safe == null) result.gnel_safe = Safe.findById(1);
+			if (result.stok_depot == null) result.stok_depot = StockDepot.findById(1);
+			return result;
+		} else {
+			fakePD.gnel_safe = Safe.findById(1);
+			fakePD.stok_depot = StockDepot.findById(1);
 		}
 
 		GlobalProfile model = new GlobalProfile();

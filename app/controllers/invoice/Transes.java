@@ -188,6 +188,17 @@ public class Transes extends Controller {
 		model.transMonth = DateUtils.getYearMonth(model.transDate);
 		model.excEquivalent = model.netTotal;
 
+		if (model.isCash) {
+			if (model.refModule == null || ! model.refModule.equals(Module.safe)) {
+				model.refModule = Module.safe;
+				model.refSafe = Profiles.chosen().gnel_safe;
+			}
+			model.refExcCode = model.excCode;
+			model.refExcRate = model.excRate;
+			model.refExcEquivalent = model.excEquivalent;
+			model.status = TransStatus.Completed;
+		}
+
 		/*
 		 * Stok ayarlari
 		 */

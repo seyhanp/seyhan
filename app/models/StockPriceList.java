@@ -22,6 +22,7 @@ import java.util.Date;
 import java.util.Map;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 import models.search.NameOnlySearchParam;
 import play.data.format.Formats.DateTime;
@@ -55,7 +56,9 @@ public class StockPriceList extends BaseStockExtraFieldsModel {
 	@DateTime(pattern = "dd/MM/yyyy")
 	public Date endDate;
 
+	@ManyToOne
 	public StockCategory category;
+
 	public String providerCode;
 
 	public Boolean isSellPrice = Boolean.TRUE;

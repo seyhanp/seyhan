@@ -67,11 +67,11 @@ public class Stock extends BaseStockExtraFieldsModel {
 	@Constraints.MaxLength(3)
 	public String excCode;
 
-	public Double buyTax;
-	public Double sellTax;
+	public Double buyTax = 0d;
+	public Double sellTax = 0d;
 
-	public Double taxRate2;
-	public Double taxRate3;
+	public Double taxRate2 = 0d;
+	public Double taxRate3 = 0d;
 
 	public Double buyPrice = 0d;
 	public Double sellPrice = 0d;

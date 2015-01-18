@@ -55,6 +55,8 @@ public class OrderTransSearchParam extends StockTransSearchParam {
 
 	public Integer rowNumber = 50;
 
+	public Boolean isCash;
+
 	/*
 	 * Onaylanan / Onaylanacak satirlar
 	 */

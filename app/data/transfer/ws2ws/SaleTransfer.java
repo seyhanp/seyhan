@@ -40,16 +40,15 @@ class SaleTransfer extends BaseTransfer {
 		rnmForCampaign.add("stock_category");
 
 		Set<String> privateDeniedListForCampaign = new HashSet<String>();
-
 		for (int i = 0; i < 10; i++) {
-			privateDeniedListForCampaign.add("extra_fields");
+			privateDeniedListForCampaign.add("extraField" + i);
 		}
 
 		privateDeniedListForCampaign.add("category");
 		executeInsertQueryForInfoTables(new SaleCampaign(), sourceWS, targetWS, rnmForCampaign, privateDeniedListForCampaign);
 
 		for (int i = 0; i < 10; i++) {
-			updateRelation("sale_campaign", "contact_extra_fields", "extra_fields"+i+"_id",  "name", sourceWS, targetWS);
+			updateRelation("sale_campaign", "stock_extra_fields", "extra_field"+i+"_id",  "name", sourceWS, targetWS);
 		}
 
 		updateRelation("sale_campaign", "stock_category", "stock_category_id", "name", sourceWS, targetWS);

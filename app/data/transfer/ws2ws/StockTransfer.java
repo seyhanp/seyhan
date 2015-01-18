@@ -60,25 +60,29 @@ class StockTransfer extends BaseTransfer {
 	@Override
 	public void transferInfo(int sourceWS, int targetWS) {
 		executeInsertQueryForInfoTables(new StockUnit(""), sourceWS, targetWS);
-		executeInsertQueryForInfoTables(new StockExtraFields(), sourceWS, targetWS);
 		executeInsertQueryForInfoTables(new StockDepot(), sourceWS, targetWS);
 		executeInsertQueryForInfoTables(new StockCostFactor(""), sourceWS, targetWS);
 		executeInsertQueryForInfoTables(new StockTransSource(), sourceWS, targetWS);
 		executeInsertQueryForInfoTables(new StockCategory(), sourceWS, targetWS, false);
 
+		Set<String> privateDeniedListForExtraFields = new HashSet<String>();
+		privateDeniedListForExtraFields.add("extraFields");
+
+		executeInsertQueryForInfoTables(new StockExtraFields(), sourceWS, targetWS, privateDeniedListForExtraFields);
+		
 		Set<String> privateDeniedListForStock = new HashSet<String>();
 		privateDeniedListForStock.add("barcode");
 		privateDeniedListForStock.add("barcodes");
 
 		Set<String> rnmForStock = new HashSet<String>();
 		for (int i = 0; i < 10; i++) {
-			rnmForStock.add("extra_fields"+i);
+			rnmForStock.add("extraField"+i);
 		}
 		rnmForStock.add("category");
 		executeInsertQueryForInfoTables(new Stock(), sourceWS, targetWS, rnmForStock, privateDeniedListForStock);
 
 		for (int i = 0; i < 10; i++) {
-			updateRelation("stock", "stock_extra_fields", "extra_fields"+i+"_id",  "name", sourceWS, targetWS);
+			updateRelation("stock", "stock_extra_fields", "extra_field"+i+"_id",  "name", sourceWS, targetWS);
 		}
 		updateRelation("stock", "stock_category", "category_id", "name", sourceWS, targetWS);
 		

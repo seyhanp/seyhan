@@ -17,7 +17,7 @@ width:calc(100% - 5px)
 		_form("id").value,
 		rightBind.value,
 		invoice.routes.Transes.remove(if(_form("id").value != null && ! _form("id").value.isEmpty()) _form("id").value.toInt else -1, rightBind),
-		hasRemoveButton = (_form("status").value != "Completed"),
+		hasRemoveButton = (_form("isCash").value || _form("status").value != "Completed"),
 		subTitle = Messages("trans_status." + _form("status").value)
 	)
 
@@ -346,7 +346,7 @@ width:calc(100% - 5px)
 			</div>
 		</div>
 
-		@tools.templates.form_footer_bar(rightBind.value, _form("id").value, _form("status").value != "Completed")
+		@tools.templates.form_footer_bar(rightBind.value, _form("id").value, _form("isCash").value || _form("status").value != "Completed")
 
 	}
 

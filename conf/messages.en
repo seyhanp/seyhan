@@ -392,12 +392,12 @@ workspaces=Workspaces
 workspace.for={0} Workspace
 
 pull=Pull
-pull.TCMB.exchange=TC Merkez Bankası exchange rates
-pull.TCMB.effective=TC Merkez Bankası effective rates
+pull.TCMB.exchange=TC Central Bank exchange rates
+pull.TCMB.effective=TC Central Bank effective rates
 
 exchange=Exch.
-exchange_rate=Exchange Rate
-exchange_rates=Exchange Rates
+exchange_rate=Exc.Rate
+exchange_rates=Exc.Rates
 exchange_support=Exchange Support?
 exc_equivalent=Equivalent
 actual_exchange_rates=Actual Exchange Support

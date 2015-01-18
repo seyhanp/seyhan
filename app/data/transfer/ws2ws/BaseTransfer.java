@@ -285,7 +285,7 @@ abstract class BaseTransfer implements ITransfer {
 	StockDepot findDepotInTargetWS(Integer id, int targetWS) {
 		if (id == null) return null;
 
-		SqlRow row = Ebean.createSqlQuery("select id from stock_depot where workspace = :workspace and code = (select code from stock_depot where id = :id )")
+		SqlRow row = Ebean.createSqlQuery("select id from stock_depot where workspace = :workspace and name = (select name from stock_depot where id = :id )")
 							.setParameter("id", id)
 							.setParameter("workspace", targetWS)
 						.findUnique();

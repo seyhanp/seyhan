@@ -24,8 +24,8 @@ import java.util.List;
 import java.util.Set;
 
 import models.Contact;
-import models.ContactExtraFields;
 import models.ContactCategory;
+import models.ContactExtraFields;
 import models.ContactTrans;
 import models.ContactTransSource;
 import models.SaleSeller;
@@ -48,27 +48,37 @@ class ContactTransfer extends BaseTransfer {
 
 	@Override
 	public void transferInfo(int sourceWS, int targetWS) {
-		executeInsertQueryForInfoTables(new ContactExtraFields(), sourceWS, targetWS);
-		executeInsertQueryForInfoTables(new StockPriceList(), sourceWS, targetWS);
 		executeInsertQueryForInfoTables(new SaleSeller(""), sourceWS, targetWS);
 		executeInsertQueryForInfoTables(new ContactCategory(), sourceWS, targetWS);
 		executeInsertQueryForInfoTables(new ContactTransSource(), sourceWS, targetWS);
 		
+		Set<String> privateDeniedListForExtraFields = new HashSet<String>();
+		privateDeniedListForExtraFields.add("extraFields");
+		executeInsertQueryForInfoTables(new ContactExtraFields(), sourceWS, targetWS, privateDeniedListForExtraFields);
+
+		Set<String> privateDeniedListForStockPriceList = new HashSet<String>();
+		privateDeniedListForStockPriceList.add("category");
+		for (int i = 0; i < 10; i++) {
+			privateDeniedListForStockPriceList.add("extraField" + i);
+		}
+		executeInsertQueryForInfoTables(new StockPriceList(), sourceWS, targetWS, privateDeniedListForStockPriceList);
+		
 		Set<String> rnmForContact = new HashSet<String>();
 		for (int i = 0; i < 10; i++) {
-			rnmForContact.add("extra_fields"+i);
+			rnmForContact.add("extraField"+i);
 		}
 		rnmForContact.add("seller");
 		rnmForContact.add("category");
+		rnmForContact.add("priceList");
 		executeInsertQueryForInfoTables(new Contact(), sourceWS, targetWS, rnmForContact);
 
 		for (int i = 0; i < 10; i++) {
-			updateRelation("contact", "contact_extra_fields", "extra_fields"+i+"_id",  "name", sourceWS, targetWS);
+			updateRelation("contact", "contact_extra_fields", "extra_field"+i+"_id",  "name", sourceWS, targetWS);
 		}
 		
 		updateRelation("contact", "sale_seller", "seller_id", "name", sourceWS, targetWS);
 		updateRelation("contact", "contact_category", "category_id", "name", sourceWS, targetWS);
-		updateRelation("contact", "stock_price_list", "price_id", "name", sourceWS, targetWS);
+		updateRelation("contact", "stock_price_list", "price_list_id", "name", sourceWS, targetWS);
 	}
 
 	@Override

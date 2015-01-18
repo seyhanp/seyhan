@@ -36,6 +36,13 @@
 		'class -> "input-small date"
 	)
 
+	@select(_form("isCash"),
+		options(Options.yesno),
+		'class -> "input-small",
+		'_label -> Messages("is_cash"),
+		'_default -> Messages("all")
+	)
+
 	@tools.components.trans_point_select(_form)
 	@tools.components.private_code_select(_form)
 
