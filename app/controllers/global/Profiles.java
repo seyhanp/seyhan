@@ -316,7 +316,9 @@ public class Profiles extends Controller {
 		String name = CacheUtils.getProfile();
 		if (name != null) {
 			GlobalProfile profile = GlobalProfile.findByName(name);
-			result = StringUtils.fromJson(profile.jsonData, ProfileData.class);
+			if (profile != null) {
+				result = StringUtils.fromJson(profile.jsonData, ProfileData.class);
+			}
 		} else {
 			GlobalProfile profile = GlobalProfile.findFirst();
 			if (profile != null) {
