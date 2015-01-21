@@ -1,0 +1,14 @@
+sürüm 1.0.3 - 21/01/2015
+	- genel parametrelerdeki kdv durumu fatura ve fislere dogru yansimiyordu, duzeltildi
+	- belge tasarimlarinda label align center olunca hata veriyordu, duzeltildi
+	- fatura pesin oldugunda hem kapali konuma gecmiyordu hem de kasa yansimasi yapmiyordu, duzeltildi
+	- firmadan firmaya veri transferindeki hata duzeltildi
+	- version.txt eklendi
+
+sürüm 1.0.2 - 27/12/2014
+	- başlatma ve durdurma scriptleri yenilendi (start ve stop scriptleri eklendi)
+	- farklı portları kullanarak birden fazla seyhan çalıştırabilmek için port bilgisi rahatlıkla düzenlenebilir hale getirildi (conf dizini altındaki init.bat ya da init.sh dosyasındaki http.port değeri)
+	- bildirilen bug lar giderildi
+
+sürüm 1.0.0 - 11/12/2014
+	- proje duyruldu
