@@ -532,7 +532,7 @@ public class Documents extends Controller {
 		if (file != null) {
 			ct = "content format isn't json!";
 			ct = file.getContentType();
-			if (file.getContentType().contains("json")) {
+			if (file.getFilename().endsWith(".json") || file.getContentType().contains("json")) {
 				try {
 					BufferedReader br = new BufferedReader(new FileReader(file.getFile()));
 					String line;
@@ -552,6 +552,7 @@ public class Documents extends Controller {
 					ct = null;
 				} catch (Exception e) {
 					ct = e.getMessage();
+					log.error("ERROR", e);
 				}
 			}
 		}

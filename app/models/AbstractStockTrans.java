@@ -43,10 +43,10 @@ public abstract class AbstractStockTrans extends AbstractBaseTrans {
 	@ManyToOne
 	public Contact contact;
 
-	public boolean isTaxInclude;
+	public Boolean isTaxInclude = Profiles.chosen().stok_isTaxInclude;
 
 	@ManyToOne
-	public StockDepot depot;
+	public StockDepot depot = Profiles.chosen().stok_depot;
 
 	public String contactName;
 	public String contactTaxOffice;
@@ -69,10 +69,5 @@ public abstract class AbstractStockTrans extends AbstractBaseTrans {
 
 	@ManyToOne
 	public SaleSeller seller;
-
-	public AbstractStockTrans() {
-		this.depot = Profiles.chosen().stok_depot;
-		this.isTaxInclude = Profiles.chosen().stok_isTaxInclude;
-	}
 
 }

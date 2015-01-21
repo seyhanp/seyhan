@@ -56,7 +56,7 @@ public class StockBarcode extends Model {
 
 	public Integer unitNo = 1;
 
-	public boolean isPrimary = false;
+	public Boolean isPrimary = false;
 
 	@ManyToOne
 	public Stock stock;

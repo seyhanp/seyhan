@@ -32,7 +32,7 @@ public enum Alignment {
 	@EnumValue("Left")
 	Left,
 	
-	@EnumValue("Center")
+	@EnumValue("Centr")
 	Center,
 
 	@EnumValue("Right")
