@@ -506,8 +506,7 @@ create table contact_extra_fields (
   is_active                 bit default 1,
   extra_fields_id           integer,
   workspace                 integer not null,
-  version                   integer default 0,
-  primary key (id)
+  version                   integer default 0
 );
 create index contact_extra_fields_ix1 on contact_extra_fields (workspace, extra_fields_id, name);
 
@@ -1237,8 +1236,7 @@ create table stock_extra_fields (
   is_active                 bit default 1,
   extra_fields_id           integer,
   workspace                 integer not null,
-  version                   integer default 0,
-  primary key (id)
+  version                   integer default 0
 );
 create index stock_extra_fields_ix1 on stock_extra_fields (workspace, extra_fields_id, name);
 
@@ -1953,26 +1951,26 @@ insert into admin_document_target (name, is_local, target_type, view_type, path,
 insert into admin_document_target (name, is_local, target_type, view_type, path, is_compressed, description, is_active) values ('remote_printer', 0, 'DOT_MATRIX', 'PORTRAIT', 'LPT1:', 1, 'Uzak Nokta Vuruşlu yazıcı', 0);
 insert into admin_document_target (name, is_local, target_type, view_type, path, is_compressed, description, is_active) values ('remote_lazer', 0, 'LASER', 'PORTRAIT', '', 1, 'Uzak Lazer yazıcı', 0);
 
-insert into admin_extra_fields (id, idno, distinction, name, is_required, is_active) values (1, 0, 'contact', 'Gurup', 0, 1);
-insert into admin_extra_fields (id, idno, distinction, name, is_required, is_active) values (2, 1, 'contact', 'ek_alan1', 0, 0);
-insert into admin_extra_fields (id, idno, distinction, name, is_required, is_active) values (3, 2, 'contact', 'ek_alan2', 0, 0);
-insert into admin_extra_fields (id, idno, distinction, name, is_required, is_active) values (4, 3, 'contact', 'ek_alan3', 0, 0);
-insert into admin_extra_fields (id, idno, distinction, name, is_required, is_active) values (5, 4, 'contact', 'ek_alan4', 0, 0);
-insert into admin_extra_fields (id, idno, distinction, name, is_required, is_active) values (6, 5, 'contact', 'ek_alan5', 0, 0);
-insert into admin_extra_fields (id, idno, distinction, name, is_required, is_active) values (7, 6, 'contact', 'ek_alan6', 0, 0);
-insert into admin_extra_fields (id, idno, distinction, name, is_required, is_active) values (8, 7, 'contact', 'ek_alan7', 0, 0);
-insert into admin_extra_fields (id, idno, distinction, name, is_required, is_active) values (9, 8, 'contact', 'ek_alan8', 0, 0);
-insert into admin_extra_fields (id, idno, distinction, name, is_required, is_active) values (10,9, 'contact', 'ek_alan9', 0, 0);
+insert into admin_extra_fields (idno, distinction, name, is_required, is_active) values (0, 'contact', 'Gurup', 0, 1);
+insert into admin_extra_fields (idno, distinction, name, is_required, is_active) values (1, 'contact', 'ek_alan1', 0, 0);
+insert into admin_extra_fields (idno, distinction, name, is_required, is_active) values (2, 'contact', 'ek_alan2', 0, 0);
+insert into admin_extra_fields (idno, distinction, name, is_required, is_active) values (3, 'contact', 'ek_alan3', 0, 0);
+insert into admin_extra_fields (idno, distinction, name, is_required, is_active) values (4, 'contact', 'ek_alan4', 0, 0);
+insert into admin_extra_fields (idno, distinction, name, is_required, is_active) values (5, 'contact', 'ek_alan5', 0, 0);
+insert into admin_extra_fields (idno, distinction, name, is_required, is_active) values (6, 'contact', 'ek_alan6', 0, 0);
+insert into admin_extra_fields (idno, distinction, name, is_required, is_active) values (7, 'contact', 'ek_alan7', 0, 0);
+insert into admin_extra_fields (idno, distinction, name, is_required, is_active) values (8, 'contact', 'ek_alan8', 0, 0);
+insert into admin_extra_fields (idno, distinction, name, is_required, is_active) values (9, 'contact', 'ek_alan9', 0, 0);
 
-insert into admin_extra_fields (id, idno, distinction, name, is_required, is_active) values (11, 0, 'stock', 'Gurup', 0, 1);
-insert into admin_extra_fields (id, idno, distinction, name, is_required, is_active) values (12, 1, 'stock', 'Marka', 0, 0);
-insert into admin_extra_fields (id, idno, distinction, name, is_required, is_active) values (13, 2, 'stock', 'Model', 0, 0);
-insert into admin_extra_fields (id, idno, distinction, name, is_required, is_active) values (14, 3, 'stock', 'Raf', 0, 0);
-insert into admin_extra_fields (id, idno, distinction, name, is_required, is_active) values (15, 4, 'stock', 'Renk', 0, 0);
-insert into admin_extra_fields (id, idno, distinction, name, is_required, is_active) values (16, 5, 'stock', 'Beden', 0, 0);
-insert into admin_extra_fields (id, idno, distinction, name, is_required, is_active) values (17, 6, 'stock', 'Boy', 0, 0);
-insert into admin_extra_fields (id, idno, distinction, name, is_required, is_active) values (18, 7, 'stock', 'ek_alan7', 0, 0);
-insert into admin_extra_fields (id, idno, distinction, name, is_required, is_active) values (19, 8, 'stock', 'ek_alan8', 0, 0);
-insert into admin_extra_fields (id, idno, distinction, name, is_required, is_active) values (20, 9, 'stock', 'ek_alan9', 0, 0);
+insert into admin_extra_fields (idno, distinction, name, is_required, is_active) values (0, 'stock', 'Gurup', 0, 1);
+insert into admin_extra_fields (idno, distinction, name, is_required, is_active) values (1, 'stock', 'Marka', 0, 0);
+insert into admin_extra_fields (idno, distinction, name, is_required, is_active) values (2, 'stock', 'Model', 0, 0);
+insert into admin_extra_fields (idno, distinction, name, is_required, is_active) values (3, 'stock', 'Raf', 0, 0);
+insert into admin_extra_fields (idno, distinction, name, is_required, is_active) values (4, 'stock', 'Renk', 0, 0);
+insert into admin_extra_fields (idno, distinction, name, is_required, is_active) values (5, 'stock', 'Beden', 0, 0);
+insert into admin_extra_fields (idno, distinction, name, is_required, is_active) values (6, 'stock', 'Boy', 0, 0);
+insert into admin_extra_fields (idno, distinction, name, is_required, is_active) values (7, 'stock', 'ek_alan7', 0, 0);
+insert into admin_extra_fields (idno, distinction, name, is_required, is_active) values (8, 'stock', 'ek_alan8', 0, 0);
+insert into admin_extra_fields (idno, distinction, name, is_required, is_active) values (9, 'stock', 'ek_alan9', 0, 0);
 
 COMMIT TRANSACTION;
