@@ -1,3 +1,6 @@
+sürüm 1.0.4 - 02/02/2015
+        - cari tanitim formunda TC Kimlik No alanina 11 hane veri girisine izin verildi
+
 sürüm 1.0.3 - 21/01/2015
 	- genel parametrelerdeki kdv durumu fatura ve fislere dogru yansimiyordu, duzeltildi
 	- belge tasarimlarinda label align center olunca hata veriyordu, duzeltildi
