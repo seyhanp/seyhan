@@ -314,7 +314,7 @@ $P!{ORDER_BY}]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{price}]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.##" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement key="textField-5" x="297" y="0" width="41" height="15" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -327,7 +327,7 @@ $P!{ORDER_BY}]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{input_sum}]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.##" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement key="textField-5" x="338" y="0" width="41" height="15" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -340,7 +340,7 @@ $P!{ORDER_BY}]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{output_sum}]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.##" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement key="textField-5" x="379" y="0" width="41" height="15" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -381,7 +381,7 @@ $P!{ORDER_BY}]]>
 $F{price}.doubleValue()*$V{REMAIN}.doubleValue() :
 0)]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.##" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement key="textField-5" x="256" y="0" width="41" height="15" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>

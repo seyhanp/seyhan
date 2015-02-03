@@ -1,5 +1,7 @@
-sürüm 1.0.4 - 02/02/2015
-        - cari tanitim formunda TC Kimlik No alanina 11 hane veri girisine izin verildi
+sürüm 1.0.4 - 03/02/2015
+	- stok raporlarındaki miktar alanlarının formatı ondalık haneleri gösterecek hale getirildi
+	- stoklu girişlerde bulunan miktar alanına küsuratlı değer girişine izin verildi
+	- cari tanıtım formundaki TC Kimlik No alani için 11 hane veri girişine izin verildi
 
 sürüm 1.0.3 - 21/01/2015
 	- genel parametrelerdeki kdv durumu fatura ve fislere dogru yansimiyordu, duzeltildi

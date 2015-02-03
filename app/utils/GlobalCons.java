@@ -45,6 +45,8 @@ public class GlobalCons {
 	public static String defaultExcCode;
 	public static String TRUE;
 	public static String FALSE;
+	
+	public static boolean isInitScriptExecuted = false;
 
 	static {
 		Configuration conf = Play.application().configuration();

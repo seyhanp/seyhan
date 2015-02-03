@@ -286,7 +286,7 @@ $P!{ORDER_BY}]]>
 						<pen lineStyle="Dashed"/>
 					</graphicElement>
 				</line>
-				<textField evaluationTime="Report" pattern="###0.##" isBlankWhenNull="true">
+				<textField evaluationTime="Report" isBlankWhenNull="true">
 					<reportElement key="textField-5" x="270" y="1" width="46" height="14" isPrintWhenDetailOverflows="true"/>
 					<box>
 						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -513,7 +513,7 @@ $P!{ORDER_BY}]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{price}]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.##" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement key="textField-5" x="276" y="1" width="40" height="13" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>

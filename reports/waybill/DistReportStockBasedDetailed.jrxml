@@ -462,7 +462,7 @@ order by s.name, t.trans_date, t.trans_type]]>
 				</textElement>
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{trans_date}]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.##" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement key="textField-5" x="238" y="0" width="40" height="15" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -566,7 +566,7 @@ order by s.name, t.trans_date, t.trans_type]]>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[str("enum." + $F{_right})]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.##" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement key="textField-5" x="398" y="0" width="20" height="15" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -579,7 +579,7 @@ order by s.name, t.trans_date, t.trans_type]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{discount_rate1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.##" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement key="textField-5" x="418" y="0" width="20" height="15" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -592,7 +592,7 @@ order by s.name, t.trans_date, t.trans_type]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{discount_rate2}]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.##" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement key="textField-5" x="438" y="0" width="20" height="15" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -605,7 +605,7 @@ order by s.name, t.trans_date, t.trans_type]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{discount_rate3}]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.##" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement key="textField-5" x="500" y="0" width="20" height="15" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>

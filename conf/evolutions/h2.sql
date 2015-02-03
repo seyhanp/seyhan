@@ -491,7 +491,7 @@ create table contact (
   name                      varchar(100) not null,
   tax_office                varchar(20),
   tax_number                varchar(15),
-  tc_kimlik                 int,
+  tc_kimlik                 varchar(11),
   relevant                  varchar(30),
   phone                     varchar(15),
   fax                       varchar(15),

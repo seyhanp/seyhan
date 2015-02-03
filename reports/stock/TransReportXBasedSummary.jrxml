@@ -197,7 +197,7 @@ order by $P!{GROUP_FIELD}, s.name, t.exc_code]]>
 				<line>
 					<reportElement key="line-1" x="50" y="1" width="483" height="1"/>
 				</line>
-				<textField evaluationTime="Group" evaluationGroup="xGroup" pattern="###0.##" isBlankWhenNull="true">
+				<textField evaluationTime="Group" evaluationGroup="xGroup" isBlankWhenNull="true">
 					<reportElement key="textField-5" x="251" y="2" width="40" height="14" isPrintWhenDetailOverflows="true"/>
 					<box>
 						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -236,7 +236,7 @@ order by $P!{GROUP_FIELD}, s.name, t.exc_code]]>
 					</textElement>
 					<textFieldExpression class="java.lang.Double"><![CDATA[$V{SUM_IN_TOTAL}]]></textFieldExpression>
 				</textField>
-				<textField evaluationTime="Group" evaluationGroup="xGroup" pattern="###0.##" isBlankWhenNull="true">
+				<textField evaluationTime="Group" evaluationGroup="xGroup" isBlankWhenNull="true">
 					<reportElement key="textField-5" x="338" y="2" width="40" height="14" isPrintWhenDetailOverflows="true"/>
 					<box>
 						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -275,7 +275,7 @@ order by $P!{GROUP_FIELD}, s.name, t.exc_code]]>
 					</textElement>
 					<textFieldExpression class="java.lang.Double"><![CDATA[$V{SUM_RET_OUT_TOTAL}]]></textFieldExpression>
 				</textField>
-				<textField evaluationTime="Group" evaluationGroup="xGroup" pattern="###0.##" isBlankWhenNull="true">
+				<textField evaluationTime="Group" evaluationGroup="xGroup" isBlankWhenNull="true">
 					<reportElement key="textField-5" x="425" y="2" width="40" height="14" isPrintWhenDetailOverflows="true"/>
 					<box>
 						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -405,7 +405,7 @@ order by $P!{GROUP_FIELD}, s.name, t.exc_code]]>
 	</columnHeader>
 	<detail>
 		<band height="15">
-			<textField pattern="###0.##" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement key="textField-5" x="251" y="0" width="40" height="15" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -418,7 +418,7 @@ order by $P!{GROUP_FIELD}, s.name, t.exc_code]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{sumInput}]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.##" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement key="textField-5" x="338" y="0" width="40" height="15" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -470,7 +470,7 @@ order by $P!{GROUP_FIELD}, s.name, t.exc_code]]>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{stock_name}]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.##" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement key="textField-5" x="425" y="0" width="40" height="15" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>

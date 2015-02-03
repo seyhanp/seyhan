@@ -264,7 +264,7 @@ $P!{ORDER_BY}]]>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{code}]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.##" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement key="textField-5" x="448" y="0" width="41" height="15" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -277,7 +277,7 @@ $P!{ORDER_BY}]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{max_limit}]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.##" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement key="textField-5" x="317" y="0" width="45" height="15" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -290,7 +290,7 @@ $P!{ORDER_BY}]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[($F{completed_sum} != null ? $F{completed_sum}.doubleValue() : 0)]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.##" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement key="textField-5" x="407" y="0" width="41" height="15" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -303,7 +303,7 @@ $P!{ORDER_BY}]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{min_limit}]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.##" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement key="textField-5" x="489" y="0" width="45" height="15" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -329,7 +329,7 @@ $P!{ORDER_BY}]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[($F{quantity_sum} != null ? $F{quantity_sum}.doubleValue() : 0)]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.##" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement key="textField-5" x="362" y="0" width="45" height="15" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>

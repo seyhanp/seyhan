@@ -59,7 +59,8 @@ public class Contact extends BaseContactExtraFieldsModel {
 	@Constraints.MaxLength(15)
 	public String taxNumber;
 
-	public Integer tcKimlik;
+	@Constraints.MaxLength(11)
+	public String tcKimlik;
 
 	@Constraints.MaxLength(30)
 	public String relevant;

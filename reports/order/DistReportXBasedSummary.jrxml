@@ -292,7 +292,7 @@ order by $P!{GROUP_FIELD}, s.name]]>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{stock_name}]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.##" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement key="textField-5" x="404" y="0" width="41" height="15" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -305,7 +305,7 @@ order by $P!{GROUP_FIELD}, s.name]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{min_limit}]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.##" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement key="textField-5" x="359" y="0" width="45" height="15" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -318,7 +318,7 @@ order by $P!{GROUP_FIELD}, s.name]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[($F{cancelled_sum} != null ? $F{cancelled_sum}.doubleValue() : 0)]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.##" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement key="textField-5" x="486" y="0" width="45" height="15" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -331,7 +331,7 @@ order by $P!{GROUP_FIELD}, s.name]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{balance}]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.##" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement key="textField-5" x="314" y="0" width="45" height="15" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -357,7 +357,7 @@ order by $P!{GROUP_FIELD}, s.name]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[($F{quantity_sum} != null ? $F{quantity_sum}.doubleValue() : 0)]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.##" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement key="textField-5" x="445" y="0" width="41" height="15" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>

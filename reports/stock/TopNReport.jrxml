@@ -309,7 +309,7 @@ LIMIT $P!{ROW_LIMIT}]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{sumOutTotal}]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.##" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement key="textField-5" x="368" y="0" width="35" height="15" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -335,7 +335,7 @@ LIMIT $P!{ROW_LIMIT}]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{sumInTotal}]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.##" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement key="textField-5" x="266" y="0" width="47" height="15" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -348,7 +348,7 @@ LIMIT $P!{ROW_LIMIT}]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{sumOutput}]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.##" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement key="textField-5" x="164" y="0" width="47" height="15" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -374,7 +374,7 @@ LIMIT $P!{ROW_LIMIT}]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{sumRetInTotal}]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.##" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement key="textField-5" x="450" y="0" width="35" height="15" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>

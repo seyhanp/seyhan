@@ -394,7 +394,7 @@ order by s.name, cos.sell_cost_price, cos.buy_cost_price]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{SUM_BUY}]]></textFieldExpression>
 			</textField>
-			<textField evaluationTime="Page" pattern="###0.##" isBlankWhenNull="true">
+			<textField evaluationTime="Page" isBlankWhenNull="true">
 				<reportElement key="textField-5" x="183" y="10" width="55" height="14" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>

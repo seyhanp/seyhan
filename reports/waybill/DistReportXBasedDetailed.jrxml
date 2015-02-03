@@ -399,7 +399,7 @@ order by $P!{GROUP_FIELD}, t.trans_date, t.trans_type]]>
 	</columnHeader>
 	<detail>
 		<band height="15">
-			<textField pattern="###0.##" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement key="textField-5" x="443" y="0" width="40" height="15" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -490,7 +490,7 @@ order by $P!{GROUP_FIELD}, t.trans_date, t.trans_type]]>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[str("enum." + $F{_right})]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.##" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement key="textField-5" x="603" y="0" width="20" height="15" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -503,7 +503,7 @@ order by $P!{GROUP_FIELD}, t.trans_date, t.trans_type]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{discount_rate1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.##" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement key="textField-5" x="623" y="0" width="20" height="15" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -516,7 +516,7 @@ order by $P!{GROUP_FIELD}, t.trans_date, t.trans_type]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{discount_rate2}]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.##" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement key="textField-5" x="643" y="0" width="20" height="15" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>

@@ -38,6 +38,7 @@ import models.InvoiceTransCurrency;
 import models.InvoiceTransDetail;
 import models.InvoiceTransFactor;
 import models.InvoiceTransTax;
+import models.Safe;
 import models.SaleSeller;
 import models.Stock;
 import models.search.OrderTransSearchParam;
@@ -189,10 +190,8 @@ public class Transes extends Controller {
 		model.excEquivalent = model.netTotal;
 
 		if (model.isCash) {
-			if (model.refModule == null || ! model.refModule.equals(Module.safe)) {
-				model.refModule = Module.safe;
-				model.refSafe = Profiles.chosen().gnel_safe;
-			}
+			model.refModule = Module.safe;
+			if (model.refSafe == null || model.refSafe.id == null) model.refSafe = Safe.findById(1);
 			model.refExcCode = model.excCode;
 			model.refExcRate = model.excRate;
 			model.refExcEquivalent = model.excEquivalent;
@@ -325,7 +324,12 @@ public class Transes extends Controller {
 			return badRequest(form.render(filledForm, rightBind, InvoiceTransRows.build(model)));
 		}
 
-		if (Profiles.chosen().stok_isRowCombining) doRowCombining(model);
+		if (Profiles.chosen().stok_isRowCombining) {
+			doRowCombining(model);
+			for (int i = 0; i < model.details.size(); i++) {
+				model.details.get(i).rowNo = i + 1;
+			}
+		}
 
 		String res = RefModuleUtil.save(model, Module.invoice, model.contact);
 		if (res != null) {

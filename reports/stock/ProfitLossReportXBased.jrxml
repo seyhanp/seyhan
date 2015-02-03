@@ -223,7 +223,7 @@ order by s.name, $P!{GROUP_FIELD}, cos.sell_cost_price, cos.buy_cost_price]]>
 					</textElement>
 					<textFieldExpression class="java.lang.String"><![CDATA[$F{stock_name}]]></textFieldExpression>
 				</textField>
-				<textField evaluationTime="Group" evaluationGroup="xGroup" pattern="###0.##" isBlankWhenNull="true">
+				<textField evaluationTime="Group" evaluationGroup="xGroup" isBlankWhenNull="true">
 					<reportElement key="textField-5" x="183" y="2" width="55" height="14" isPrintWhenDetailOverflows="true"/>
 					<box>
 						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>

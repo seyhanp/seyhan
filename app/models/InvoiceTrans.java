@@ -210,6 +210,12 @@ public class InvoiceTrans extends AbstractStockTrans {
 	}
 
 	@Override
+	public void singleDelete() {
+		deleteStockTrans(true);
+		super.singleDelete();
+	}
+
+	@Override
 	public void save() {
 		super.save();
 		addStockTrans();
@@ -320,6 +326,7 @@ public class InvoiceTrans extends AbstractStockTrans {
 			stockDet.seller = detail.seller;
 			stockDet.transPoint = detail.transPoint;
 			stockDet.privateCode = detail.privateCode;
+			stockDet.rowNo = detail.rowNo;
 			stockDet.name = detail.name;
 			stockDet.quantity = detail.quantity;
 			stockDet.unit = detail.unit;

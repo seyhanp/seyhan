@@ -103,7 +103,7 @@ input[disabled], select[disabled], textarea[disabled], input[readonly], select[r
 	width: 157px;
 }
 
-.number, .currency, .rate, .to-right {
+.number, .currency, .amount, .rate, .to-right {
 	text-align: right;
 }
 

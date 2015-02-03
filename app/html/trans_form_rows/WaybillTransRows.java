@@ -76,7 +76,7 @@ public class WaybillTransRows {
 				row.append("</td>");
 
 				row.append("<td>");
-					row.append("<input type='text' class='number attention stocks' id='details["+i+"]_quantity' name='details["+i+"].quantity' value='"+detail.quantity+"' style='width:calc(100% - 5px);' />");
+					row.append("<input type='text' class='amount attention stocks' id='details["+i+"]_quantity' name='details["+i+"].quantity' value='"+detail.quantity+"' style='width:calc(100% - 5px);' />");
 				row.append("</td>");
 
 				row.append("<td>");

@@ -284,7 +284,7 @@ $P!{ORDER_BY}]]>
 				</textElement>
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{_date}]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.##" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement key="textField-5" x="300" y="0" width="41" height="15" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -297,7 +297,7 @@ $P!{ORDER_BY}]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{input}]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.##" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement key="textField-5" x="341" y="0" width="41" height="15" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>

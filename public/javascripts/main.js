@@ -7,6 +7,7 @@ function updateFormRegulators(selector) {
 	try {
 		$((selector ? selector : "") + " .currency").autoNumeric({lZero: 'deny', aSep:'', mDec: pennyDigits});
 		$((selector ? selector : "") + " .rate").autoNumeric({lZero: 'keep', aSep:'', vMin: '-99.99', vMax: '100', aPad: false});
+		$((selector ? selector : "") + " .amount").autoNumeric({lZero: 'keep', aSep:'', vMin: '0', mDec: '5', aPad: false});
 		$((selector ? selector : "") + " .number").autoNumeric({lZero: 'deny', aSep:'', mDec:'0'});
 		
 		$((selector ? selector : "") + " .date").inputmask("dd/mm/yyyy", {clearIncomplete: true, placeholder: "", yearrange: {minyear: 2000, maxyear: 2099}});

@@ -49,6 +49,9 @@ public class V1_0_0__Create_Tables implements JdbcMigration {
 			log.error("ERROR : " + fileName + " not found!!!");
 			return;
 		} else {
+			
+			GlobalCons.isInitScriptExecuted = true;
+			
 			log.info("DB migrations are executing for : " + fileName);
 		
 			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(initFile), Charsets.UTF_8));
