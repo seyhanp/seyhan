@@ -45,9 +45,13 @@ class StockMenu extends AbstractMenu {
 			subReportMenu.add(new MenuItem(Messages.get(Right.STOK_LISTESI.key),
 				controllers.stock.reports.routes.StockList.index().url()));
 		}
+		if (AuthManager.hasPrivilege(Right.STOK_FIYATLI_LISTE, RightLevel.Enable)) {
+			subReportMenu.add(new MenuItem(Messages.get(Right.STOK_FIYATLI_LISTE.key),
+				controllers.stock.reports.routes.StockPriceList.index().url()));
+		}
 		if (AuthManager.hasPrivilege(Right.STOK_FIS_LISTESI, RightLevel.Enable)) {
 			subReportMenu.add(new MenuItem(Messages.get(Right.STOK_FIS_LISTESI.key),
-					controllers.stock.reports.routes.ReceiptList.index().url()));
+				controllers.stock.reports.routes.ReceiptList.index().url()));
 		}
 
 		if (subReportMenu.size() > 0) subReportMenu.add(new MenuItem(MenuItemType.Divider));

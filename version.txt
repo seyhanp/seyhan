@@ -1,3 +1,7 @@
+sürüm 1.0.5 - 01/03/2015
+	- stok listesindeki sağlayıcı kodu, birim ve fiyat alanları kaldırılarak yerine ekstra alanlardan 1 ve 2 ile birincil barkod eklendi
+	- fiyatlı stok listesi eklendi
+
 sürüm 1.0.4 - 03/02/2015
 	- stok raporlarındaki miktar alanlarının formatı ondalık haneleri gösterecek hale getirildi
 	- stoklu girişlerde bulunan miktar alanına küsuratlı değer girişine izin verildi

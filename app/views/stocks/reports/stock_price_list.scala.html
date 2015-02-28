@@ -1,9 +1,15 @@
-@(_form: Form[stock.reports.StockList.Parameter])
+@(_form: Form[stock.reports.StockPriceList.Parameter])
 
 @import helper._
 @implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
 
-@tools.templates.report_form(stock.reports.routes.StockList.generate(),enums.Right.STOK_LISTESI) {
+@tools.templates.report_form(stock.reports.routes.StockPriceList.generate(),enums.Right.STOK_FIYATLI_LISTE) {
+
+	@select(_form("priceList.id"),
+		options(StockPriceList.options),
+		'class -> "input-medium-plus",
+		'_label -> Messages("stock.price_list")
+	)
 
 	@inputText(_form("providerCode"),
 		'_label -> Messages("provider_code"),

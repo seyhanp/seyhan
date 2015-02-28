@@ -36,7 +36,9 @@ import utils.CacheUtils;
 import utils.GlobalCons;
 import utils.InstantSQL;
 import utils.QueryUtils;
-import views.html.stocks.reports.stock_list;
+import views.html.stocks.reports.stock_price_list;
+import enums.EffectDirection;
+import enums.EffectType;
 import enums.ReportUnit;
 import enums.Right;
 import enums.RightLevel;
@@ -44,12 +46,12 @@ import enums.RightLevel;
 /**
  * @author mdpinar
 */
-public class StockList extends Controller {
+public class StockPriceList extends Controller {
 
-	private final static Right RIGHT_SCOPE = Right.STOK_LISTESI;
-	private final static String REPORT_NAME = "List";
+	private final static Right RIGHT_SCOPE = Right.STOK_FIYATLI_LISTE;
+	private final static String REPORT_NAME = "PriceList";
 
-	private final static Form<StockList.Parameter> parameterForm = form(StockList.Parameter.class);
+	private final static Form<StockPriceList.Parameter> parameterForm = form(StockPriceList.Parameter.class);
 
 	public static class Parameter extends ExtraFieldsForStock {
 
@@ -57,6 +59,8 @@ public class StockList extends Controller {
 		public ReportUnit unit;
 
 		public String excCode;
+		
+		public models.StockPriceList priceList;
 
 		public static Map<String, String> options() {
 			LinkedHashMap<String, String> options = new LinkedHashMap<String, String>();
@@ -94,10 +98,10 @@ public class StockList extends Controller {
 		Result hasProblem = AuthManager.hasProblem(RIGHT_SCOPE, RightLevel.Enable);
 		if (hasProblem != null) return hasProblem;
 
-		Form<StockList.Parameter> filledForm = parameterForm.bindFromRequest();
+		Form<StockPriceList.Parameter> filledForm = parameterForm.bindFromRequest();
 
 		if(filledForm.hasErrors()) {
-			return badRequest(stock_list.render(filledForm));
+			return badRequest(stock_price_list.render(filledForm));
 		} else {
 
 			Parameter params = filledForm.get();
@@ -117,10 +121,28 @@ public class StockList extends Controller {
 				repPar.paramMap.put("CATEGORY_SQL", InstantSQL.buildCategorySQL(params.category.id));
 			}
 
+			repPar.paramMap.put("PRICE_MULTIPLIER", "");
+			if (params.priceList != null && params.priceList.id != null) {
+				models.StockPriceList spl = models.StockPriceList.findById(params.priceList.id);
+				if (spl.effectDirection.equals(EffectDirection.Increase)) {
+					if (spl.effectType.equals(EffectType.Amount)) {
+						repPar.paramMap.put("PRICE_MULTIPLIER", " + "+spl.effect);
+					} else {
+						repPar.paramMap.put("PRICE_MULTIPLIER", " * ((100+"+spl.effect+") / 100)");
+					}
+				} else {
+					if (spl.effectType.equals(EffectType.Amount)) {
+						repPar.paramMap.put("PRICE_MULTIPLIER", " - "+spl.effect);
+					} else {
+						repPar.paramMap.put("PRICE_MULTIPLIER", " * ((100-"+spl.effect+") / 100)");
+					}
+				}
+			}
+			
 			ReportResult repRes = ReportService.generateReport(repPar, response());
 			if (repRes.error != null) {
 				flash("warning", repRes.error);
-				return ok(stock_list.render(filledForm));
+				return ok(stock_price_list.render(filledForm));
 			} else {
 				return ok(repRes.stream);
 			}
@@ -132,7 +154,7 @@ public class StockList extends Controller {
 		Result hasProblem = AuthManager.hasProblem(RIGHT_SCOPE, RightLevel.Enable);
 		if (hasProblem != null) return hasProblem;
 
-		return ok(stock_list.render(parameterForm.fill(new Parameter())));
+		return ok(stock_price_list.render(parameterForm.fill(new Parameter())));
 	}
 
 }

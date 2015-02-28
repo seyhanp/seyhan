@@ -304,6 +304,10 @@ POST    /stocks/cost_factor/:id/delete                  controllers.stock.CostFa
 GET     /stocks/report/stock_list                       controllers.stock.reports.StockList.index()
 POST    /stocks/report/stock_list                       controllers.stock.reports.StockList.generate()
 
+# Stock Price List
+GET     /stocks/report/stock_price_list                 controllers.stock.reports.StockPriceList.index()
+POST    /stocks/report/stock_price_list                 controllers.stock.reports.StockPriceList.generate()
+
 # Inactive Stocks List
 GET     /stocks/report/inactive_stocks_list             controllers.stock.reports.InactiveStocksList.index()
 POST    /stocks/report/inactive_stocks_list             controllers.stock.reports.InactiveStocksList.generate()

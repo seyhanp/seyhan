@@ -87,7 +87,7 @@ public class TCMBExchanges {
 			log.info("xml service connection was successfuly done.");
 
 		} catch (Exception e) {
-			log.error(e.getMessage(), e);
+			log.error(e.getMessage());
 		}
 
 		return result;

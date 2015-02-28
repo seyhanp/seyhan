@@ -241,6 +241,9 @@ public enum Right {
 
 	@EnumValue("STOK_LISTESI")
 	STOK_LISTESI(Module.stock, false, false, false),
+	
+	@EnumValue("STOK_FIYATLI_LISTE")
+	STOK_FIYATLI_LISTE(Module.stock, false, false, false),
 
 	@EnumValue("STOK_FIS_LISTESI")
 	STOK_FIS_LISTESI(Module.stock, false, false, false),
