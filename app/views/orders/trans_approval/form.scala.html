@@ -11,6 +11,7 @@
 		<div id="criteriaSection">
 
 			<h4>@Messages("enum.SPRS_ONAYLAMA_ADIMLARI")</h4>
+			<label>@Messages("helpers.you.should.search.before")</label>
 			<div class="zell">
 				<div class="row-fluid">
 					<div class="span6">
@@ -100,9 +101,10 @@
 			<thead>
 				<tr>
 					<th style="width: 5%"><input type="checkbox" id="selectall" checked="false"/></th>
-					<th style="width: 8%">@Messages("receipt_no")</th>
+					<th style="width: 6%">@Messages("receipt_no")</th>
 					<th style="width:25%">@Messages("contact")</th>
-					<th style="width: 8%">@Messages("date")</th>
+					<th style="width: 6%">@Messages("date")</th>
+					<th style="width: 7%">@Messages("date.delivery")</th>
 					@if(global.Profiles.chosen().sprs_hasPrices) {
 						<th style="width:10%">@Messages("amount")</th>
 						@if(global.Profiles.chosen().gnel_hasExchangeSupport) {
@@ -129,6 +131,7 @@
 								<td><a class="contactRowChooser" href="#" data-index="@index">@detail.contactName</a></td>
 							} else {<td>@detail.contactName</td>}
 							<td style="text-align: center">@detail.date</td>
+							<td style="text-align: center">@detail.deliveryDate</td>
 							@if(global.Profiles.chosen().sprs_hasPrices) {
 								<td style="text-align: right;">@detail.amount</td>
 								@if(global.Profiles.chosen().gnel_hasExchangeSupport) {

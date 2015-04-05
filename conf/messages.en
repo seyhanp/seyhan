@@ -1080,6 +1080,7 @@ helpers.general.docNoIncType=Determined "How to increase of Document No in trans
 helpers.general.pennyDigitNumber=For currency fields, this value is used as penny digit number.
 helpers.general.excCode=In transaction forms, this value is used as chosen exchange code.
 helpers.general.vof=These fields are closed for first usage. You need to select what you want to use from them.
+helpers.you.should.search.before=Yap Attention: You shuold search before approval!
 
 dialogs.workspace.selection.tableTitle=Table of workspace choice
 dialogs.workspace.selection.tableDesc=In following table you see the workspaces that you be able to use.

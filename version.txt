@@ -1,3 +1,8 @@
+sürüm 1.0.6 - 05/04/2015
+	- admin_user_audit tablosundaki description alanin kapasitesi 255 e cikarildi
+	- siparis girislerinde teslim tarihi girildiginde hata aliniyordu, duzeltildi
+	- siparis fisi onaylama formunda aramalar islem tarihinden yapiliyordu, teslim tarihi olarak degistirildi
+
 sürüm 1.0.5 - 01/03/2015
 	- stok listesindeki sağlayıcı kodu, birim ve fiyat alanları kaldırılarak yerine ekstra alanlardan 1 ve 2 ile birincil barkod eklendi
 	- fiyatlı stok listesi eklendi

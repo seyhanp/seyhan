@@ -34,10 +34,9 @@ public abstract class AbstractStockTrans extends AbstractBaseTrans {
 
 	private static final long serialVersionUID = 1L;
 
-	@DateTime(pattern = "dd/MM/yyyy HH:mm:ss")
 	public Date realDate = new Date();
 
-	@DateTime(pattern = "dd/MM/yyyy HH:mm:ss")
+	@DateTime(pattern = "dd/MM/yyyy")
 	public Date deliveryDate;
 
 	@ManyToOne

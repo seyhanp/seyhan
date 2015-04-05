@@ -33,8 +33,10 @@ public class V1_0_4__Changing_TC_No_data_type_in_Contact_table implements JdbcMi
 			
 			if (GlobalCons.dbVendor.equals("mysql")) {
 				sta.executeUpdate("alter table contact change tc tc_kimlik varchar(11)");
-			} else  if (GlobalCons.dbVendor.equals("mssql")) {
-				sta.executeUpdate("EXEC sp_rename 'tc', 'tc_kimlik_no', 'COLUMN';");
+			} else if (GlobalCons.dbVendor.equals("mssql")) {
+				sta.executeUpdate("EXEC sp_rename 'contact.tc', 'tc_kimlik_no', 'COLUMN';");
+			} else if (GlobalCons.dbVendor.equals("h2")) {
+				sta.executeUpdate("alter table contact alter column tc rename to tc_kimlik");
 			} else {
 				sta.executeUpdate("alter table contact rename column tc to tc_kimlik");
 			}

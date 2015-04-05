@@ -125,7 +125,7 @@ create table admin_user_audit (
   _date                     datetime,
   _right                    varchar(30),
   ip                        varchar(45),
-  description               varchar(100),
+  description               varchar(255),
   log_level                 varchar(7),
   workspace                 varchar(30)
 );

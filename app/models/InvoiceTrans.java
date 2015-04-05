@@ -148,10 +148,14 @@ public class InvoiceTrans extends AbstractStockTrans {
 			expList.eq("transNo", searchParam.transNo);
 		}
 		if (searchParam.startDate != null) {
-			expList.ge("transDate", searchParam.startDate);
+			expList.ge("deliveryDate", searchParam.startDate);
 		}
 		if (searchParam.endDate != null) {
-			expList.le("transDate", searchParam.endDate);
+			if (searchParam.startDate != null) {
+				expList.le("deliveryDate", searchParam.endDate);
+			} else {
+				expList.or(Expr.isNull("deliveryDate"), Expr.le("deliveryDate", searchParam.endDate));
+			}
 		}
 		if (searchParam.refContact != null && searchParam.refContact.id != null) {
 			expList.eq("contact", searchParam.refContact);

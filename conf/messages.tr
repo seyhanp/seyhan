@@ -1080,6 +1080,7 @@ helpers.general.docNoIncType=Hareket işlemlerinde bulunan Belge No alanının a
 helpers.general.pennyDigitNumber=Parasal alanlarda bulunacak kuruş hane sayısı bu alan ile belirlenir.
 helpers.general.excCode=Para birimi seçilen yerlerde ön tanımlı olarak bu değer gelir.
 helpers.general.vof=Bu alanlar ilk kullanımla beraber kapalı olarak gelirler. Kullanmak istediğiniz alanı seçmelisiniz.
+helpers.you.should.search.before=Lütfen Dikkat: İşlem yapmadan önce arama yapmalısınız!
 
 dialogs.workspace.selection.tableTitle=Firma seçim tablosu
 dialogs.workspace.selection.tableDesc=Aşağıdaki tabloda kullanabileceğiniz firmaları görüyorsunuz.

@@ -34,6 +34,7 @@ public class ReceiptListModel {
 	public Integer contactId;
 	public String contactName;
 	public String date;
+	public String deliveryDate;
 	public String transNo;
 	public String amount;
 	public String excCode;

@@ -173,6 +173,7 @@ public class OrderTrans extends AbstractStockTrans {
 			receipt.receiptNo = trans.receiptNo;
 			receipt.contactName = trans.contactName;
 			receipt.date = DateUtils.formatDateStandart(trans.transDate);
+			receipt.deliveryDate = DateUtils.formatDateStandart(trans.deliveryDate);
 			receipt.transNo = trans.transNo;
 			receipt.amount = Format.asMoney(trans.netTotal);
 			receipt.excCode = trans.excCode;
