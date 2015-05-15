@@ -32,7 +32,7 @@ $(document).ready(function(){
 	
 	$("#chqbllTable").on({keyup: function(e){
 		var rowNo = this.id.match(/\[(.*?)\]/)[1];
-		var name  = this.id.substring(this.id.indexOf('\_')+1)
+		var name  = this.id.substring(this.id.indexOf('\_')+1);
 		
 		calculateFields(rowNo, name);
 		findTotals();
@@ -40,7 +40,7 @@ $(document).ready(function(){
 
 	$("#chqbllTable").on({change: function(e){
 		var rowNo = this.id.match(/\[(.*?)\]/)[1];
-		var name  = this.id.substring(this.id.indexOf('\_')+1)
+		var name  = this.id.substring(this.id.indexOf('\_')+1);
 		
 		calculateFields(rowNo, name);
 		findTotals();

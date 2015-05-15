@@ -30,7 +30,7 @@ $(document).ready(function(){
 
 	$("#stockTable").on({keyup: function(e){
 		var rowNo = this.id.match(/\[(.*?)\]/)[1];
-		var name  = this.id.substring(this.id.indexOf('\_')+1)
+		var name  = this.id.substring(this.id.indexOf('\_')+1);
 		
 		calculateFieldsForStocks(rowNo, name);
 		findTotalsForStocks();
@@ -38,7 +38,7 @@ $(document).ready(function(){
 
 	$("#stockTable").on({change: function(e){
 		var rowNo = this.id.match(/\[(.*?)\]/)[1];
-		var name  = this.id.substring(this.id.indexOf('\_')+1)
+		var name  = this.id.substring(this.id.indexOf('\_')+1);
 		
 		calculateFieldsForStocks(rowNo, name);
 		findTotalsForStocks();

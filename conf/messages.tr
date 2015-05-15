@@ -709,7 +709,7 @@ enum.STOK_SON_ISLEM_RAPORU=Son İşlem Raporu
 enum.STOK_TOPN_RAPORU=Top N Raporu
 
 enum.SPRS=Sipariş
-enum.SPRS_FIS_KAYNAKLARI=Sipraiş Fiş Kaynakları
+enum.SPRS_FIS_KAYNAKLARI=Sipariş Fiş Kaynakları
 enum.SPRS_ALINAN_SIPARIS_FISI=Alınan Sipariş Fişi
 enum.SPRS_VERILEN_SIPARIS_FISI=Verilen Sipariş Fişi
 enum.SPRS_ONAYLAMA_ADIMLARI=Sipariş Onaylama Adımları
