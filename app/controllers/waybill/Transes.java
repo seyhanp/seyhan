@@ -596,13 +596,15 @@ public class Transes extends Controller {
 
 				if (std.stock.id != null && Profiles.chosen().stok_hasLimitControls) {
 					Stock stock = Stock.findById(std.stock.id);
-					double balance = Math.abs(QueryUtils.findStockBalance(stock.id, model.depot.id, std.id));
-					boolean isInput = model.transType.equals(TransType.Input);
-
-					if (isInput && stock.maxLimit != null && stock.maxLimit > 0 && balance + std.netInput > stock.maxLimit) {
-						veList.add(new ValidationError("stocks", Messages.get("greater.than.maximum.table", i, stock.maxLimit)));
-					} else if (! isInput && ((stock.minLimit != null  && stock.minLimit > 0 && balance - std.netOutput < stock.minLimit) || (balance - std.netOutput <= 0))) {
-						veList.add(new ValidationError("stocks", Messages.get("less.than.minimum.table", i, (stock.minLimit != null ? stock.minLimit : 0))));
+					if (stock.maxLimit != null && stock.minLimit != null && (stock.maxLimit.doubleValue() > 0 || stock.minLimit.doubleValue() > 0)) {
+						double balance = Math.abs(QueryUtils.findStockBalance(stock.id, model.depot.id, std.id));
+						boolean isInput = model.transType.equals(TransType.Input);
+	
+						if (isInput && balance + std.netInput.doubleValue() > stock.maxLimit.doubleValue()) {
+							veList.add(new ValidationError("stocks", Messages.get("greater.than.maximum.table", i, stock.maxLimit, (stock.maxLimit.doubleValue() - balance))));
+						} else if ((balance - std.netOutput.doubleValue() < stock.minLimit.doubleValue())) {
+							veList.add(new ValidationError("stocks", Messages.get("less.than.minimum.table", i, (stock.minLimit != null ? stock.minLimit : 0), balance)));
+						}
 					}
 				}
 			}

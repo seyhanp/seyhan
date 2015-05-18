@@ -144,7 +144,11 @@ function findTotals() {
 			total += parseFloat($(chqbllBaseId + 'excEquivalent').val());
 		}
 	}
-	var factor = totalDays / total;
+
+	var factor = 0;
+	if (totalDays * total > 0) {
+		factor = totalDays / total;
+	}
 
 	var totalEffects = 0;
 	for(var rowNo=0;rowNo<rowCount;rowNo++) {
@@ -153,11 +157,12 @@ function findTotals() {
 		&&  $(chqbllBaseId + 'excEquivalent').val() > 0) {
 			var amount = parseFloat($(chqbllBaseId + 'excEquivalent').val());
 			var degree = factor * amount * dayDistanceList[rowNo];
-			var effect = degree / totalDays;
-			totalEffects += effect;
+			if (degree * totalDays > 0) {
+				totalEffects += (degree / totalDays);
+			}
 		}
-	}			
-	
+	}
+
 	$('#rowCount').val(rowCount-1);
 	$('#avarageDate').val(baseDate.add(totalEffects, 'days').format('DD/MM/YYYY'));
 	$('#adat').val(totalEffects|0);
@@ -166,6 +171,7 @@ function findTotals() {
 	try {
 		findEquivalent();
 	} catch (e) {}
+
 }
 
 /*************************************************************************

@@ -89,8 +89,8 @@ public class Stock extends BaseStockExtraFieldsModel {
 	public Double unit2Ratio = 0d;
 	public Double unit3Ratio = 0d;
 
-	public Double maxLimit;
-	public Double minLimit;
+	public Double maxLimit = 0d;
+	public Double minLimit = 0d;
 
 	public Double primRate = 0d;
 

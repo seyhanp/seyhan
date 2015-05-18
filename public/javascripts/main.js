@@ -79,12 +79,10 @@ function parseBoolean(str) {
 	return /^true$/i.test(str);
 }
 
+var dateRegEx = /^(0[1-9]|[12][0-9]|3[01]|[1-9])[- /.](0[1-9]|1[012]|[1-9])[- /.](19|20)\d\d$/;
 function isDate(val) {
 	if (val != null && val != undefined) {
-		var date = new Date(val);
-		if (Object.prototype.toString.call(date) === "[object Date]") {
-			if (! isNaN(date.getTime())) return true;
-		}
+		return (val.match(dateRegEx) !== null);
 	}
 	return false;
 }
