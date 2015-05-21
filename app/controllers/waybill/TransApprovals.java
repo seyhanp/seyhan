@@ -655,7 +655,7 @@ public class TransApprovals extends Controller {
 		/*
 		 * Stok yansimalari artik fatura kismindan idare edilecegi icin, faturalasan irsaliyelerin stok yansimalari silinir.
 		 */
-		StockTrans trans = StockTrans.findByRefIdAndModule(source.id, right);
+		StockTrans trans = StockTrans.findByRefIdAndModule(source.id, source.right);
 		if (trans != null) trans.delete();
 	}
 

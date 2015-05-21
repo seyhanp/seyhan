@@ -31,24 +31,28 @@ public class Format {
         return DateUtils.formatDateStandart(date);
 	}
 
-	public static String asMoney(double money) {
+	public static String asMoney(Double money) {
+		if (money == null) return "0.00";
 		DecimalFormat df = new DecimalFormat("#,##0.00");
-        return df.format(money);
+        return df.format(money.doubleValue());
 	}
 
-	public static String asDecimal(double decimal) {
+	public static String asDecimal(Double decimal) {
+		if (decimal == null) return "0";
 		DecimalFormat df = new DecimalFormat("#,##0.##");
-        return df.format(decimal);
+        return df.format(decimal.doubleValue());
 	}
 
-	public static String asMoneyB(double money) {
+	public static String asMoneyB(Double money) {
+		if (money == null) return "0.00";
 		DecimalFormat df = new DecimalFormat("#,##0.00 BB;#,##0.00 AB");
-        return df.format(money);
+        return df.format(money.doubleValue());
 	}
 
-	public static String asQuantity(double quantity) {
+	public static String asQuantity(Double quantity) {
+		if (quantity == null) return "0";
 		DecimalFormat df = new DecimalFormat("#,##0.##");
-        return df.format(quantity);
+        return df.format(quantity.doubleValue());
 	}
 
 	public static String asInteger(Integer value, String format, int width) {

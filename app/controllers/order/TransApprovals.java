@@ -700,13 +700,14 @@ public class TransApprovals extends Controller {
 
 		WaybillTrans master = new WaybillTrans();
 
+		master.workspace = CacheUtils.getWorkspaceId();
 		master.receiptNo = DocNoUtils.findLastReceiptNo(right);
 		master.right = right;
 		master.transSource = approvalModel.waybillTransSource;
 		master.transPoint = approvalModel.submitTransPoint;
 		master.privateCode = approvalModel.submitPrivateCode;
 		master.transType = right.transType;
-
+		
 		if (Profiles.chosen().gnel_docNoIncType.equals(DocNoIncType.Full_Automatic)) {
 			master.transNo = DocNoUtils.findLastTransNo(right);
 		} else {
@@ -757,6 +758,7 @@ public class TransApprovals extends Controller {
 			for (AbstractStockTransDetail det : source.details) {
 
 				WaybillTransDetail detail = new WaybillTransDetail();
+				detail.workspace = master.workspace;
 				detail.trans = master;
 				detail.receiptNo = master.receiptNo;
 				detail.right = master.right;
@@ -922,6 +924,7 @@ public class TransApprovals extends Controller {
 
 		InvoiceTrans master = new InvoiceTrans();
 
+		master.workspace = CacheUtils.getWorkspaceId();
 		master.receiptNo = DocNoUtils.findLastReceiptNo(right);
 		master.right = right;
 		master.transSource = approvalModel.invoiceTransSource;
@@ -979,6 +982,7 @@ public class TransApprovals extends Controller {
 			for (AbstractStockTransDetail det : source.details) {
 
 				InvoiceTransDetail detail = new InvoiceTransDetail();
+				detail.workspace = master.workspace;
 				detail.trans = master;
 				detail.receiptNo = master.receiptNo;
 				detail.right = master.right;

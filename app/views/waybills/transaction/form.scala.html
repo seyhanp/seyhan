@@ -349,6 +349,7 @@ width:calc(100% - 5px)
 	<script type="text/javascript">
 		var defaultExcCode = '@global.Profiles.chosen().gnel_excCode';
 		var isBuying = ('@rightBind.value.transType' === 'Input');
+
 		var amountField = '#netTotal';
 		var tableHeight = @(if(global.Profiles.chosen().irsl_hasPrices && isNotOpeningTrans) 320 else 520);
 		var isNotOpeningTrans = @isNotOpeningTrans;

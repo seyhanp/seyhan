@@ -2,7 +2,7 @@ import play.Project._
 
 name := "seyhan"
 
-version := "1.0.6"
+version := "1.0.7"
 
 libraryDependencies ++= Seq(
   jdbc,
@@ -18,5 +18,13 @@ libraryDependencies ++= Seq(
   "com.google.code.gson" % "gson" % "1.7.1",
   "com.googlecode.flyway" % "flyway-core" % "2.2"
 )     
+
+buildInfoSettings
+
+sourceGenerators in Compile <+= buildInfo
+
+buildInfoKeys := Seq[BuildInfoKey](name, version, scalaVersion, sbtVersion)
+
+buildInfoPackage := "AppInfo"
 
 playJavaSettings

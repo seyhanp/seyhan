@@ -25,7 +25,12 @@
 
 	<div class="navbar navbar-inverse navbar-fixed-top" data-dropdown="dropdown">
 		<div class="navbar-inner">
-			<a href="/"><img src="/assets/img/seyhan_p_d.png" style="padding-left: 10px" title="Ana sayfa"></a>
+			<span class="pull-left">
+				<a href="/"><img src="/assets/img/seyhan_p_d.png" style="padding-left: 10px" title="Ana sayfa"></a>
+				<span class="tiny-info">
+					<span style="color:cyan">@controllers.Application.getVersion()</span>
+				</span> 
+			</span>
 
 				@if(utils.CacheUtils.isLoggedIn()) {
 					<div class="pull-right tiny-info">

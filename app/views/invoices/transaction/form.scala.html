@@ -7,6 +7,10 @@
 	rightBind.value.equals(enums.Right.FATR_SATIS_FATURASI)
 }
 
+@isBuying = @{
+	rightBind.value.equals(enums.Right.FATR_ALIS_FATURASI) || rightBind.value.equals(enums.Right.FATR_ALIS_IADE_FATURASI)
+}
+
 @colWidth = {
 width:calc(100% - 5px)
 }
@@ -353,11 +357,12 @@ width:calc(100% - 5px)
 	<script type="text/javascript">
 		var withholdingRate = '@global.Profiles.chosen().fatr_withholding';
 		var defaultExcCode = '@global.Profiles.chosen().gnel_excCode';
-		var isBuying = ('@rightBind.value.transType' === 'Input');
+		var isBuying = @isBuying;
+		var isSelling = @isSelling;
+
 		var amountField = '#netTotal';
 		var tableHeight = 460;
 		var isNotOpeningTrans = true;
-		var isSelling = @isSelling;
 	</script>
 
 }

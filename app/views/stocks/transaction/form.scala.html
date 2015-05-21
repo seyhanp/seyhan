@@ -7,6 +7,10 @@
 	rightBind.value.equals(enums.Right.STOK_CIKIS_FISI)
 }
 
+@isBuying = @{
+	rightBind.value.equals(enums.Right.STOK_GIRIS_FISI) || rightBind.value.equals(enums.Right.STOK_GIRIS_IADE_FISI)
+}
+
 @isTransfer = @{
 	rightBind.value.equals(enums.Right.STOK_TRANSFER_FISI)
 }
@@ -372,7 +376,8 @@ width:calc(100% - 5px)
 
 	<script type="text/javascript">
 		var defaultExcCode = '@global.Profiles.chosen().gnel_excCode';
-		var isBuying = ('@rightBind.value.transType' === 'Input' || @isTransfer);
+		var isBuying = @isBuying;
+		var isSelling = @isSelling;
 		
 		var hasTaxRate2 = @global.Profiles.chosen().isFieldVisible(enums.Module.stock, "taxRate2");
 		var hasTaxRate3 = @global.Profiles.chosen().isFieldVisible(enums.Module.stock, "taxRate3");
@@ -380,7 +385,6 @@ width:calc(100% - 5px)
 		var amountField = '#netTotal';
 		var tableHeight = @if(isNotOpeningTrans) {460} else {600};
 		var isNotOpeningTrans = @isNotOpeningTrans;
-		var isSelling = @isSelling;
 	</script>
 
 }

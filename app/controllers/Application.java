@@ -238,6 +238,10 @@ public class Application extends Controller {
 	public static boolean isActiveLang(String name) {
 		return (name != null && name.equals(getLang()));
 	}
+	
+	public static String getVersion() {
+		return AppInfo.BuildInfo.version();
+	}
 
 	public static ResourceBundle getResourceBundle() {
 		if (bundle != null) {
