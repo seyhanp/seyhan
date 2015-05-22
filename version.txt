@@ -1,12 +1,20 @@
+﻿sürüm 1.0.8 - 22/05/2015
+	- iade fatura ve fişlerde fiyatlar ters (alış fiyatları satışta) geliyordu
+	- sipariş onaylama kısmında atlanılan workspace ataması yüzünden veritabanı hatası alınıyordu
+	- irsaliyeler faturalaştırılırken, (irsaliyenin) silinmeyen stok yansımaları yüzünden stoklara iki kez yansıma oluyordu
+	- cari modülündeki işlemlerde limit kontrolleri açık oldugunda adından arama yapılırsa workingDir kolonu bulunamadı hatası alınıyordu
+	- sipariş ve irsaliye onaylama adımlarında oluşan faturalar için cari modulune yansima yapılmıyordu
+	- sipariş ve irsaliye onaylama adımlarında oluşan fatura-fişler için fiyatlar düzgün yansıtılmıyordu
+
 sürüm 1.0.7 - 17/05/2015
-	- yeni bir çek türü tanıtıldığında senet türleri kısmında görünüyordu, düzeltildi
+	- yeni bir çek türü tanıtıldığında senet türleri kısmında görünüyordu
 	- stok giris-çıkış fişlerindeki limit kontrolleri daha düzenli hale getirildi
-	- chrome tarayıcısından çek-senet giriş bordrosu yapılırken alt toplamlar oluşmuyordu, düzeltildi
+	- chrome tarayıcısından çek-senet giriş bordrosu yapılırken alt toplamlar oluşmuyordu
 
 sürüm 1.0.6 - 05/04/2015
-	- admin_user_audit tablosundaki description alanin kapasitesi 255 e cikarildi
-	- siparis girislerinde teslim tarihi girildiginde hata aliniyordu, duzeltildi
-	- siparis fisi onaylama formunda aramalar islem tarihinden yapiliyordu, teslim tarihi olarak degistirildi
+	- admin_user_audit tablosundaki description alanın kapasitesi 255 e çıkarıldı
+	- sipariş girişlerinde teslim tarihi girildiğinde hata alınıyordu
+	- sipariş fişi onaylama formunda aramalar işlem tarihinden yapılıyordu, teslim tarihi olarak değiştirildi
 
 sürüm 1.0.5 - 01/03/2015
 	- stok listesindeki sağlayıcı kodu, birim ve fiyat alanları kaldırılarak yerine ekstra alanlardan 1 ve 2 ile birincil barkod eklendi
@@ -18,16 +26,16 @@ sürüm 1.0.4 - 03/02/2015
 	- cari tanıtım formundaki TC Kimlik No alani için 11 hane veri girişine izin verildi
 
 sürüm 1.0.3 - 21/01/2015
-	- genel parametrelerdeki kdv durumu fatura ve fislere dogru yansimiyordu, duzeltildi
-	- belge tasarimlarinda label align center olunca hata veriyordu, duzeltildi
-	- fatura pesin oldugunda hem kapali konuma gecmiyordu hem de kasa yansimasi yapmiyordu, duzeltildi
+	- genel parametrelerdeki kdv durumu fatura ve fislere dogru yansimiyordu
+	- belge tasarimlarinda label align center olunca hata veriyordu
+	- fatura pesin oldugunda hem kapali konuma gecmiyordu hem de kasa yansimasi yapmiyordu
 	- firmadan firmaya veri transferindeki hata duzeltildi
 	- version.txt eklendi
 
 sürüm 1.0.2 - 27/12/2014
 	- başlatma ve durdurma scriptleri yenilendi (start ve stop scriptleri eklendi)
 	- farklı portları kullanarak birden fazla seyhan çalıştırabilmek için port bilgisi rahatlıkla düzenlenebilir hale getirildi (conf dizini altındaki init.bat ya da init.sh dosyasındaki http.port değeri)
-	- bildirilen bug lar giderildi
+	- bildirilen diğer küçük sorunlar giderildi
 
 sürüm 1.0.0 - 11/12/2014
-	- proje duyruldu
+	- proje duyuruldu
