@@ -68,10 +68,14 @@ public class RefModuleUtil {
 	}
 
 	public static String save(AbstractBaseTrans source, Module module) {
-		return save(source, module, null);
+		return save(source, module, null, false);
 	}
 
 	public static String save(AbstractBaseTrans source, Module module, Contact extraContact) {
+		return save(source, module, extraContact, false);
+	}
+
+	public static String save(AbstractBaseTrans source, Module module, Contact extraContact, boolean isTransactionNeeded) {
 		ContactTrans oldContactTrans = null;
 		SafeTrans oldSafeTrans = null;
 		BankTrans oldBankTrans = null;
@@ -104,7 +108,7 @@ public class RefModuleUtil {
 			}
 		}
 
-		Ebean.beginTransaction();
+		if (isTransactionNeeded) Ebean.beginTransaction();
 		try {
 			if (source.refModule != null) {
 				switch (source.refModule) {
@@ -265,10 +269,10 @@ public class RefModuleUtil {
 				}
 			}
 
-			Ebean.commitTransaction();
+			if (isTransactionNeeded) Ebean.commitTransaction();
 
 		} catch (Exception e) {
-			Ebean.rollbackTransaction();
+			if (isTransactionNeeded) Ebean.rollbackTransaction();
 			log.error(e.getMessage(), e);
 			if (e instanceof OptimisticLockException) {
 				return "exception.optimistic.lock";

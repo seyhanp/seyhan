@@ -51,6 +51,7 @@ import utils.CurrencyUtils;
 import utils.DateUtils;
 import utils.DocNoUtils;
 import utils.NumericUtils;
+import utils.RefModuleUtil;
 import utils.StringUtils;
 import views.html.waybills.trans_approval.form;
 
@@ -59,6 +60,7 @@ import com.avaje.ebean.SqlRow;
 
 import controllers.global.Profiles;
 import enums.DocNoIncType;
+import enums.Module;
 import enums.Right;
 import enums.RightLevel;
 import enums.TransApprovalType;
@@ -299,7 +301,7 @@ public class TransApprovals extends Controller {
 						else
 							detail.taxRate = stock.sellTax;
 
-						if (Profiles.chosen().irsl_hasPrices) {
+						if (detailRow.getDouble("base_price") != null && detailRow.getDouble("base_price").doubleValue() > 0) {
 							detail.basePrice = NumericUtils.round(detailRow.getDouble("base_price"));
 							detail.price = NumericUtils.round(detailRow.getDouble("price"));
 							detail.amount = NumericUtils.round(detailRow.getDouble("sumAmount"));
@@ -330,10 +332,11 @@ public class TransApprovals extends Controller {
 							} else {
 								detail.outTotal = detail.total;
 							}
-
-							subtotal += detail.excEquivalent;
-							taxTotal += detail.taxAmount;
 						}
+
+						if (detail.excEquivalent != null) subtotal += detail.excEquivalent.doubleValue();
+						if (detail.taxAmount != null) taxTotal += detail.taxAmount.doubleValue();
+
 						detail.netInput = detail.input;
 						detail.netInTotal = detail.inTotal;
 						detail.netOutput = detail.output;
@@ -402,7 +405,8 @@ public class TransApprovals extends Controller {
 
 					master.details = details;
 					master.relations = relations;
-					master.save();
+
+					RefModuleUtil.save(master, Module.invoice, master.contact, false);
 
 					Ebean.createSqlUpdate("update waybill_trans set status = :status, invoice_id = :invoice_id where id in (:id)")
 							.setParameter("id", entry.getValue())
@@ -539,44 +543,43 @@ public class TransApprovals extends Controller {
 				else
 					detail.taxRate = stock.sellTax;
 
-				if (Profiles.chosen().irsl_hasPrices) {
-					if (Profiles.chosen().irsl_hasPrices) {
-						detail.basePrice = det.basePrice;
-						detail.price = det.price;
-						detail.inTotal = det.inTotal;
-						detail.outTotal = det.outTotal;
-						detail.taxAmount = det.taxAmount;
-						detail.discountRate1 = det.discountRate1;
-						detail.discountRate2 = det.discountRate2;
-						detail.discountRate3 = det.discountRate3;
-						detail.discountAmount = det.discountAmount;
-						detail.amount = det.amount;
-						detail.total = det.total;
-						detail.excEquivalent = det.excEquivalent;
-						detail.plusFactorAmount = det.plusFactorAmount;
-						detail.minusFactorAmount = det.minusFactorAmount;
+				if (det.basePrice != null && det.basePrice.doubleValue() > 0) {
+					detail.basePrice = det.basePrice;
+					detail.price = det.price;
+					detail.inTotal = det.inTotal;
+					detail.outTotal = det.outTotal;
+					detail.taxAmount = det.taxAmount;
+					detail.discountRate1 = det.discountRate1;
+					detail.discountRate2 = det.discountRate2;
+					detail.discountRate3 = det.discountRate3;
+					detail.discountAmount = det.discountAmount;
+					detail.amount = det.amount;
+					detail.total = det.total;
+					detail.excEquivalent = det.excEquivalent;
+					detail.plusFactorAmount = det.plusFactorAmount;
+					detail.minusFactorAmount = det.minusFactorAmount;
+				} else {
+					detail.basePrice = Stock.findBasePrice(master.contact, stock, right.transType);
+					detail.price = Stock.findPriceByDetail(detail);
+					detail.amount = NumericUtils.round(detail.quantity * detail.price);
+					detail.taxAmount = NumericUtils.round((detail.amount * detail.taxRate) / 100);
+					if (master.isTaxInclude) {
+						detail.total = detail.amount + detail.taxAmount;
 					} else {
-						detail.basePrice = Stock.findBasePrice(master.contact, stock, right.transType);
-						detail.price = Stock.findPriceByDetail(detail);
-						detail.amount = NumericUtils.round(detail.quantity * detail.price);
-						detail.taxAmount = NumericUtils.round((detail.amount * detail.taxRate) / 100);
-						if (master.isTaxInclude) {
-							detail.total = detail.amount + detail.taxAmount;
-						} else {
-							detail.total = detail.amount;
-						}
-						CurrencyUtils.setDetailExchange(detail, stock, master);
+						detail.total = detail.amount;
+					}
+					CurrencyUtils.setDetailExchange(detail, stock, master);
 
-						if (right.transType.equals(TransType.Input)) {
-							detail.inTotal = detail.total;
-						} else {
-							detail.outTotal = detail.total;
-						}
-
-						subtotal += detail.excEquivalent;
-						taxTotal += detail.taxAmount;
+					if (right.transType.equals(TransType.Input)) {
+						detail.inTotal = detail.total;
+					} else {
+						detail.outTotal = detail.total;
 					}
 				}
+
+				if (detail.excEquivalent != null) subtotal += detail.excEquivalent.doubleValue();
+				if (detail.taxAmount != null) taxTotal += detail.taxAmount.doubleValue();
+
 				detail.netInput = detail.input;
 				detail.netInTotal = detail.inTotal;
 				detail.netOutput = detail.output;
@@ -639,7 +642,7 @@ public class TransApprovals extends Controller {
 		master.factors = factors;
 		master.relations = relations;
 
-		master.save();
+		RefModuleUtil.save(master, Module.invoice, master.contact, false);
 
 		Ebean.createSqlUpdate("update waybill_trans set status = :status, invoice_id = :invoice_id where id = :id")
 				.setParameter("id", sourceId)

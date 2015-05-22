@@ -77,14 +77,14 @@ public class AjaxServices extends Controller {
 		if (Profiles.chosen().cari_hasCategoryControls) {
 			categoryJoin  = " left join contact_category cc on cc.id = c.category_id ";
 			if (d != null && ! d.isEmpty()) {
-				categoryWhere = " and (cc.workingDir is null or cc.workingDir = '" + TransType.findType(d) + "') ";
+				categoryWhere = " and (cc.working_dir is null or cc.working_dir = '" + TransType.findType(d) + "') ";
 			}
 		}
 
-		String queryPart = " AND UPPER(name) like UPPER('" + q + "%') ";
+		String queryPart = " AND UPPER(c.name) like UPPER('" + q + "%') ";
 
 		if (choice.equals("code")) {
-			queryPart = " AND UPPER(code) like UPPER('%" + q + "%') ";
+			queryPart = " AND UPPER(c.code) like UPPER('%" + q + "%') ";
 		}
 
 		String sql = "SELECT c.id, c.code, c.name, c.tax_office, c.tax_number, c.address1, c.address2 "
