@@ -253,6 +253,7 @@ public class Transes extends Controller {
 			if (model.transType.equals(TransType.Input)) {
 				detail.input = detail.quantity.doubleValue() * detail.unitRatio.doubleValue();
 				detail.inTotal = detail.total;
+				
 			} else {
 				detail.output = detail.quantity.doubleValue() * detail.unitRatio.doubleValue();
 				detail.outTotal = detail.total;

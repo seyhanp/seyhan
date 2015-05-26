@@ -41,6 +41,7 @@ import reports.ReportService.ReportResult;
 import utils.AuthManager;
 import utils.CacheUtils;
 import utils.DateUtils;
+import utils.Format;
 import utils.InstantSQL;
 import utils.QueryUtils;
 import views.html.contacts.reports.trans_report;
@@ -205,9 +206,19 @@ public class TransReport extends Controller {
 			String label = "";
 			String type = "String";
 
+			String subqueryToFindTransferOriginal = "";
+			String subqueryToFindTransferAsTemplate1 = 
+					"select sum(st.debt - st.credit) from contact_trans st where #main_condition and st.trans_date < " + DateUtils.formatDateForDB(params.startDate)  + " and st.exc_code = t.exc_code";
+
+			String subqueryToFindTransferAsTemplate2 = 
+					"select sum(st.debt - st.credit) from contact_trans st where st.trans_date < " + DateUtils.formatDateForDB(params.startDate)  + " and st.exc_code = t.exc_code"
+							+ " inner join contact sc on sc.id = t.contact_id"
+							+ " inner join contact_category scc on scc.id = sc.category_id";
+			
 			if (params.reportType.equals("Category")) {
 				field = "cc.name";
 				label = Messages.get("category");
+				subqueryToFindTransferOriginal = subqueryToFindTransferAsTemplate2.replace("#main_condition", "st.trans_month = t.trans_month");
 			}
 			if (params.reportType.equals("Seller")) {
 				field = "s.name";
@@ -220,21 +231,25 @@ public class TransReport extends Controller {
 			if (params.reportType.equals("Monthly")) {
 				field = "t.trans_month";
 				label = Messages.get("trans.month");
+				subqueryToFindTransferOriginal = subqueryToFindTransferAsTemplate1.replace("#main_condition", "st.trans_month = t.trans_month");
 			}
 			if (params.reportType.equals("Yearly")) {
 				field = "t.trans_year";
 				label = Messages.get("trans.year");
 				type = "Integer";
+				subqueryToFindTransferOriginal = subqueryToFindTransferAsTemplate1.replace("#main_condition", "st.trans_year = t.trans_year");
 			}
 			if (params.reportType.equals("Daily")) {
 				field = "t.trans_date";
 				label = Messages.get("date");
 				type = "Date";
+				subqueryToFindTransferOriginal = subqueryToFindTransferAsTemplate1.replace("#main_condition", "st.trans_date = t.trans_date");
 			}
 			if (params.reportType.equals("Maturity")) {
 				field = "t.maturity";
 				label = Messages.get("maturity");
 				type = "Date";
+				subqueryToFindTransferOriginal = subqueryToFindTransferAsTemplate1.replace("#main_condition", "st.maturity = t.maturity");
 			}
 			if (params.reportType.equals("PrivateCode")) {
 				field = "pc.name";
@@ -248,6 +263,7 @@ public class TransReport extends Controller {
 				field = "t._right";
 				label = Messages.get("trans.type");
 				type = "Right";
+				subqueryToFindTransferOriginal = subqueryToFindTransferAsTemplate1.replace("#main_condition", "st._right = t._right");
 			}
 			if (params.reportType.equals("TransSource")) {
 				field = "ts.name";
@@ -268,6 +284,7 @@ public class TransReport extends Controller {
 			repPar.paramMap.put("GROUP_FIELD", field);
 			repPar.paramMap.put("GROUP_LABEL", label);
 			repPar.paramMap.put("GROUP_TYPE",  type);
+			repPar.paramMap.put("SUBQUERY_TO_FIND_TRANSFER", subqueryToFindTransferOriginal);
 
 			/*
 			 * Parametrik degerlerin gecisi
@@ -292,6 +309,8 @@ public class TransReport extends Controller {
 			String par2 = "(" + DateUtils.formatDateStandart(params.startDate) + " - " + DateUtils.formatDateStandart(params.endDate) +")";
 			repPar.paramMap.put("REPORT_INFO", par1 + " - " + par2);
 
+			repPar.paramMap.put("FIRST_DATE", params.startDate);
+			
 			ReportResult repRes = ReportService.generateReport(repPar, response());
 			if (repRes.error != null) {
 				flash("warning", repRes.error);

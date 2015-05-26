@@ -357,10 +357,18 @@ public class InvoiceTrans extends AbstractStockTrans {
 			stockDet.output = detail.output;
 			stockDet.inTotal = detail.inTotal;
 			stockDet.outTotal = detail.outTotal;
-			stockDet.netInput = detail.input;
-			stockDet.netOutput = detail.output;
-			stockDet.netInTotal = detail.inTotal;
-			stockDet.netOutTotal = detail.outTotal;
+
+			stockDet.netInput = detail.netInput;
+			stockDet.netOutput = detail.netOutput;
+			stockDet.netInTotal = detail.netInTotal;
+			stockDet.netOutTotal = detail.netOutTotal;
+			
+			stockDet.isReturn = detail.isReturn;
+			stockDet.retInput = detail.retInput;
+			stockDet.retOutput = detail.retOutput;
+			stockDet.retInTotal = detail.retInTotal;
+			stockDet.retOutTotal = detail.retOutTotal;
+			
 			stockDet.excCode = detail.excCode;
 			stockDet.excRate = detail.excRate;
 			stockDet.excEquivalent = detail.excEquivalent;
