@@ -32,7 +32,7 @@
 	<queryString>
 		<![CDATA[select c.name, c.phone, c.mobile_phone, t.exc_code, t.trans_date, t.receipt_no, t.trans_no, t.debt, t._right, t.credit, (t.debt - t.credit) as balance, t._right, t.description, (select sum(st.debt - st.credit) from contact_trans st where st.contact_id = t.contact_id and st.trans_date < $P{FIRST_DATE} and st.exc_code = t.exc_code) as transfer
 from contact_trans t
-left join contact c on c.id = t.contact_id and c.is_active = $P!{TRU}
+inner join contact c on c.id = t.contact_id and c.is_active = $P!{TRU}
 left join contact_category cc on cc.id = c.category_id and cc.is_active = $P!{TRU}
 left join contact_trans_source ts on ts.id = t.trans_source_id and ts.is_active = $P!{TRU}
 left join sale_seller s on s.id = c.seller_id and s.is_active = $P!{TRU}
@@ -228,6 +228,19 @@ order by c.name, t.exc_code, t.trans_date, ts.name]]>
 					</textElement>
 					<textFieldExpression><![CDATA[$R{description}]]></textFieldExpression>
 				</textField>
+				<textField pattern="" isBlankWhenNull="true">
+					<reportElement key="textField-5" x="372" y="1" width="72" height="14" isPrintWhenDetailOverflows="true" uuid="16448716-2767-4217-a6ac-09090a5946f7"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{transfer}]]></textFieldExpression>
+				</textField>
 				<textField pattern="#,##0.00 ;#,##0.00" isBlankWhenNull="false">
 					<reportElement key="textField-5" x="372" y="15" width="51" height="14" isPrintWhenDetailOverflows="true" uuid="08ef3792-14e8-476c-bb52-2f32ef3c6280"/>
 					<box>
@@ -242,32 +255,6 @@ order by c.name, t.exc_code, t.trans_date, ts.name]]>
 					<textFieldExpression><![CDATA[($F{transfer} != null ? $F{transfer} : 0d)]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement key="textField-2" x="423" y="15" width="21" height="14" uuid="6d7dd4f1-3ff7-4201-b636-91af37578c04"/>
-					<box>
-						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{exc_code}]]></textFieldExpression>
-				</textField>
-				<textField pattern="" isBlankWhenNull="true">
-					<reportElement key="textField-5" x="372" y="1" width="72" height="14" isPrintWhenDetailOverflows="true" uuid="16448716-2767-4217-a6ac-09090a5946f7"/>
-					<box>
-						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$R{transfer}]]></textFieldExpression>
-				</textField>
-				<textField isBlankWhenNull="true">
 					<reportElement key="textField-2" x="444" y="14" width="12" height="15" uuid="bc8995ad-eb13-417e-bf16-98791205fec4"/>
 					<box>
 						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -279,6 +266,19 @@ order by c.name, t.exc_code, t.trans_date, ts.name]]>
 						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[($F{transfer} != null && $F{transfer}.doubleValue() > 0d ? "BB" : ($F{transfer} != null && $F{transfer}.doubleValue() < 0d ? "AB" : ""))]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement key="textField-2" x="423" y="15" width="21" height="14" uuid="6d7dd4f1-3ff7-4201-b636-91af37578c04"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{exc_code}]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupHeader>

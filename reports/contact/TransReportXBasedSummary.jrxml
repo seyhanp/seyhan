@@ -41,7 +41,7 @@
 	<queryString>
 		<![CDATA[select $P!{GROUP_FIELD} as group_field, c.name as contact_name, c.phone, c.mobile_phone, t.exc_code, sum(t.debt) as sumDebt, sum(t.credit) as sumCredit, sum(t.debt-t.credit) as balance, ($P!{SUBQUERY_TO_FIND_TRANSFER}) as transfer
 from contact_trans t
-left join contact c on c.id = t.contact_id and c.is_active = $P!{TRU}
+inner join contact c on c.id = t.contact_id and c.is_active = $P!{TRU}
 left join contact_category cc on cc.id = c.category_id and cc.is_active = $P!{TRU}
 left join sale_seller s on s.id = c.seller_id and s.is_active = $P!{TRU}
 left join contact_trans_source ts on ts.id = t.trans_source_id and ts.is_active = $P!{TRU}
@@ -544,7 +544,6 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{balance}.doubleValue() + ($F{transfer} != null ? $F{transfer}.doubleValue() : 0d)]]></textFieldExpression>
 			</textField>

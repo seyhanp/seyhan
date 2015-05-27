@@ -24,7 +24,7 @@
 	<queryString>
 		<![CDATA[select c.name, cc.name as category, c.phone, c.mobile_phone, t.exc_code, SUM(t.debt) as debt_sum, SUM(t.credit) as credit_sum, SUM(t.debt-t.credit) as balance
 from contact_trans t
-	left join contact c on c.id = t.contact_id and c.is_active = $P!{TRU}
+	inner join contact c on c.id = t.contact_id and c.is_active = $P!{TRU}
 	left join contact_category cc on cc.id = c.category_id and cc.is_active = $P!{TRU}
 where 1=1
 $P!{QUERY_STRING}
