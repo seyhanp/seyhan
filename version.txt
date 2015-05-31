@@ -1,7 +1,6 @@
 ﻿sürüm 1.0.9 - 31/05/2015
-	- cari hareket raporuna Devir alanı ekleni
-	- kasa hareket raporuna Devir alanı ekleni
-	- banka hareket raporuna Devir alanı ekleni
+	- stok özet bilgi formundaki iade rakamları hatalıydı
+	- cari, kasa ve banka hareket raporuna Devir alanı eklendi
 	- tanımlanan cari ve stok ekstra alanları combobox'lara gelmiyordu
 	- tüm hareket işlemlerinde İşlem Tarihi alanı zorunlu hale getirildi
 
