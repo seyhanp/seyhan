@@ -35,7 +35,7 @@
 	<queryString>
 		<![CDATA[select $P!{GROUP_FIELD} as group_field, b.name as bank_name, t.exc_code, t.trans_date, t.receipt_no, t.trans_no, t.debt, t._right, t.credit, (t.debt - t.credit) as balance, t._right, t.description
 from bank_trans t
-left join bank b on b.id = t.bank_id and b.is_active = $P!{TRU}
+inner join bank b on b.id = t.bank_id and b.is_active = $P!{TRU}
 left join bank_trans_source ts on ts.id = t.trans_source_id and ts.is_active = $P!{TRU}
 $P!{TRANS_POINT_SQL}
 $P!{PRIVATE_CODE_SQL}

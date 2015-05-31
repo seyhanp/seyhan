@@ -39,7 +39,7 @@
 			)
 
 			@for(aef <- models.AdminExtraFields.listAll(enums.Module.stock.name())) {
-				@tools.dropdowns.stock_extra_field(_form, aef.id, aef.idno, aef.name, aef.isRequired, hasAddNewButton=false)
+				@tools.dropdowns.stock_extra_field(_form, aef.id, aef.idno, aef.name, aef.isRequired)
 			}
 
 			@if(global.Profiles.chosen().gnel_hasExchangeSupport) {

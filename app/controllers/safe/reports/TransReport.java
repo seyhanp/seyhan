@@ -210,6 +210,7 @@ public class TransReport extends Controller {
 				field = "s.name";
 				label = Messages.get("safe");
 				repPar.reportName = "TransReportSafeBasedDetailed";
+				repPar.paramMap.put("FIRST_DATE", params.startDate);
 			}
 
 			repPar.paramMap.put("GROUP_FIELD", field);

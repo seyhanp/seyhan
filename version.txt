@@ -1,4 +1,11 @@
-﻿sürüm 1.0.8 - 22/05/2015
+﻿sürüm 1.0.9 - 31/05/2015
+	- cari hareket raporuna Devir alanı ekleni
+	- kasa hareket raporuna Devir alanı ekleni
+	- banka hareket raporuna Devir alanı ekleni
+	- tanımlanan cari ve stok ekstra alanları combobox'lara gelmiyordu
+	- tüm hareket işlemlerinde İşlem Tarihi alanı zorunlu hale getirildi
+
+sürüm 1.0.8 - 22/05/2015
 	- iade fatura ve fişlerde fiyatlar ters (alış fiyatları satışta) geliyordu
 	- sipariş onaylama kısmında atlanılan workspace ataması yüzünden veritabanı hatası alınıyordu
 	- irsaliyeler faturalaştırılırken, (irsaliyenin) silinmeyen stok yansımaları yüzünden stoklara iki kez yansıma oluyordu

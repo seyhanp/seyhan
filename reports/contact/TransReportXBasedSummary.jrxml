@@ -35,11 +35,8 @@
 	<parameter name="REPORT_INFO" class="java.lang.String"/>
 	<parameter name="FOR_DOTMATRIX" class="java.lang.String"/>
 	<parameter name="TRU" class="java.lang.String"/>
-	<parameter name="SUBQUERY_TO_FIND_TRANSFER" class="java.lang.String">
-		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
-	</parameter>
 	<queryString>
-		<![CDATA[select $P!{GROUP_FIELD} as group_field, c.name as contact_name, c.phone, c.mobile_phone, t.exc_code, sum(t.debt) as sumDebt, sum(t.credit) as sumCredit, sum(t.debt-t.credit) as balance, ($P!{SUBQUERY_TO_FIND_TRANSFER}) as transfer
+		<![CDATA[select $P!{GROUP_FIELD} as group_field, c.name as contact_name, c.phone, c.mobile_phone, t.exc_code, sum(t.debt) as sumDebt, sum(t.credit) as sumCredit, sum(t.debt-t.credit) as balance
 from contact_trans t
 inner join contact c on c.id = t.contact_id and c.is_active = $P!{TRU}
 left join contact_category cc on cc.id = c.category_id and cc.is_active = $P!{TRU}
@@ -67,7 +64,6 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 	<field name="sumDebt" class="java.lang.Double"/>
 	<field name="sumCredit" class="java.lang.Double"/>
 	<field name="balance" class="java.lang.Double"/>
-	<field name="transfer" class="java.lang.Double"/>
 	<variable name="SUM_DEBT" class="java.lang.Double" resetType="Group" resetGroup="group_field" calculation="Sum">
 		<variableExpression><![CDATA[$F{sumDebt}]]></variableExpression>
 	</variable>
@@ -180,7 +176,7 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 					</graphicElement>
 				</line>
 				<textField pattern="" isBlankWhenNull="true">
-					<reportElement key="textField-5" x="449" y="1" width="84" height="14" isPrintWhenDetailOverflows="true" uuid="8eb675cc-5340-43e2-9233-7f6f2a7ad9d8"/>
+					<reportElement key="textField-5" x="449" y="15" width="84" height="14" isPrintWhenDetailOverflows="true" uuid="8eb675cc-5340-43e2-9233-7f6f2a7ad9d8"/>
 					<box>
 						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -191,45 +187,6 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 						<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$R{transfer}]]></textFieldExpression>
-				</textField>
-				<textField pattern="#,##0.00 ;#,##0.00" isBlankWhenNull="false">
-					<reportElement key="textField-5" x="449" y="15" width="50" height="14" isPrintWhenDetailOverflows="true" uuid="72086b77-7f80-42a0-a48b-ca340d8f7a44"/>
-					<box>
-						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					</box>
-					<textElement textAlignment="Right" verticalAlignment="Middle">
-						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[($F{transfer} != null ? $F{transfer} : 0d)]]></textFieldExpression>
-				</textField>
-				<textField isBlankWhenNull="true">
-					<reportElement key="textField-2" x="521" y="15" width="12" height="14" uuid="57c82d8d-828a-4a41-81c3-8faf7499bd8c"/>
-					<box>
-						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[($F{transfer} != null && $F{transfer}.doubleValue() > 0d ? "BB" : ($F{transfer} != null && $F{transfer}.doubleValue() < 0d ? "AB" : ""))]]></textFieldExpression>
-				</textField>
-				<textField isBlankWhenNull="true">
-					<reportElement key="textField-2" x="499" y="15" width="22" height="14" uuid="a3e84e8a-5bec-4d23-b236-3ef926f3e5e8"/>
-					<box>
-						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{exc_code}]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupHeader>
@@ -545,7 +502,7 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{balance}.doubleValue() + ($F{transfer} != null ? $F{transfer}.doubleValue() : 0d)]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{balance}.doubleValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement key="textField-2" x="499" y="0" width="22" height="15" uuid="5a880a3f-d985-49ae-912e-d9bfbde2de7c"/>

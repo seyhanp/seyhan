@@ -204,84 +204,66 @@ public class TransReport extends Controller {
 			String field = "";
 			String label = "";
 			String type = "String";
-
-			String subqueryToFindTransfer = "";
-			String subqueryToFindTransferTemp = 
-					"select sum(st.debt - st.credit) from contact_trans st where #main_condition and st.trans_date < " + DateUtils.formatDateForDB(params.startDate)  + " and st.exc_code = t.exc_code";
 			
 			if (params.reportType.equals("Monthly")) {
 				field = "t.trans_month";
 				label = Messages.get("trans.month");
-				subqueryToFindTransfer = subqueryToFindTransferTemp.replace("#main_condition", "st.trans_month = t.trans_month");
 			}
 			if (params.reportType.equals("Yearly")) {
 				field = "t.trans_year";
 				label = Messages.get("trans.year");
 				type = "Integer";
-				subqueryToFindTransfer = subqueryToFindTransferTemp.replace("#main_condition", "st.trans_year = t.trans_year");
 			}
 			if (params.reportType.equals("Daily")) {
 				field = "t.trans_date";
 				label = Messages.get("date");
 				type = "Date";
-				subqueryToFindTransfer = subqueryToFindTransferTemp.replace("#main_condition", "st.trans_date = t.trans_date");
 			}
 			if (params.reportType.equals("ReceiptType")) {
 				field = "t._right";
 				label = Messages.get("trans.type");
 				type = "Right";
-				subqueryToFindTransfer = subqueryToFindTransferTemp.replace("#main_condition", "st._right = t._right");
 			}
 			if (params.reportType.equals("Maturity")) {
 				field = "t.maturity";
 				label = Messages.get("maturity");
 				type = "Date";
-				subqueryToFindTransfer = subqueryToFindTransferTemp.replace("#main_condition", "st.maturity = t.maturity");
 			}
 			if (params.reportType.equals("PrivateCode")) {
 				field = "pc.name";
 				label = Messages.get("private_code");
-				subqueryToFindTransfer = subqueryToFindTransferTemp.replace("#main_condition", "st.private_code_id = t.private_code_id");
 			}
 			if (params.reportType.equals("TransPoint")) {
 				field = "tp.name";
 				label = Messages.get("trans.point");
-				subqueryToFindTransfer = subqueryToFindTransferTemp.replace("#main_condition", "st.trans_point_id = t.trans_point_id");
 			}
 			if (params.reportType.equals("TransSource")) {
 				field = "ts.name";
 				label = Messages.get("trans.source");
-				subqueryToFindTransfer = subqueryToFindTransferTemp.replace("#main_condition", "st.trans_source_id = t.trans_source_id");
 			}
 			if (params.reportType.equals("Category")) {
 				field = "cc.name";
 				label = Messages.get("category");
-				subqueryToFindTransfer = subqueryToFindTransferTemp.replace("#main_condition", "sc.category_id = c.category_id");
 			}
 			if (params.reportType.equals("Seller")) {
 				field = "s.name";
 				label = Messages.get("seller");
-				subqueryToFindTransfer = subqueryToFindTransferTemp.replace("#main_condition", "sc.seller_id = c.seller_id");
 			}
 			if (params.reportType.equals("City")) {
 				field = "c.city";
 				label = Messages.get("city");
-				subqueryToFindTransfer = subqueryToFindTransferTemp.replace("#main_condition", "sc.city = c.city");
 			}
 			if (params.reportType.startsWith("ExtraFields")) {
 				Integer extraFieldsId = Integer.parseInt(""+params.reportType.charAt(params.reportType.length()-1));
 				field = "ef"+extraFieldsId+".name";
 				AdminExtraFields aef = AdminExtraFields.findById(Module.contact.name(), extraFieldsId);
 				label = aef.name;
-				subqueryToFindTransfer = subqueryToFindTransferTemp.replace("#main_condition", "sc.extra_field"+extraFieldsId+"_id = c.extra_field"+extraFieldsId+"_id");
 			}
 			if (params.reportType.equals("Contact")) {
 				field = "c.name";
 				label = Messages.get("contact.name");
 				repPar.reportName = "TransReportContactBasedDetailed";
 				repPar.paramMap.put("FIRST_DATE", params.startDate);
-			} else {
-				repPar.paramMap.put("SUBQUERY_TO_FIND_TRANSFER", subqueryToFindTransfer);
 			}
 
 			repPar.paramMap.put("GROUP_FIELD", field);

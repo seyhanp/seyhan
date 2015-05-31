@@ -2,20 +2,14 @@
 * Generate dropdown info selector according twitter bootsrap rules *
 *******************************************************************@
 
-@(form: Form[_], options: Map[String, String], right: enums.Right, base: String, title: String, hasBlankOption: Boolean = true, hasAddNewButton:Boolean = true, additionIdForBase: String="", additionForCreate: String="")(content: Html)
+@(form: Form[_], options: Map[String, String], right: enums.Right, base: String, title: String, hasBlankOption: Boolean = true, hasAddNewButton:Boolean = true, additionIdForBase: String="")(content: Html)
 
 <script type="text/javascript">
 	function tidyUp_@(base+additionIdForBase)() {
-		var baseId = null;
-		@if(! additionForCreate.isEmpty) {baseId = @additionForCreate};
 		setSimpleControllerFor_@(base+additionIdForBase)();
-		if (baseId != null) {
-			simple_create(baseId);
-		} else {
-			simple_create();
-		}
+		simple_create(@additionIdForBase);
 		$('#simple\\-title').html('@Messages("definition.of", title)');
-		$('#simple\\-ajax\\-form').attr('action', '/@(right.module.name)s/@base');
+		$('#simple\\-ajax\\-form').attr('action', '/@(right.module.name)s/extra_fields');
 	}
 </script>
 	

@@ -210,6 +210,7 @@ public class TransReport extends Controller {
 				field = "b.name";
 				label = Messages.get("bank.account");
 				repPar.reportName = "TransReportAccountBasedDetailed";
+				repPar.paramMap.put("FIRST_DATE", params.startDate);
 			}
 
 			repPar.paramMap.put("GROUP_FIELD", field);
