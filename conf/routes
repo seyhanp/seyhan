@@ -91,6 +91,10 @@ POST    /contacts/report/contact_trans_list             controllers.contact.repo
 GET     /contacts/report/trans_report                   controllers.contact.reports.TransReport.index()
 POST    /contacts/report/trans_report                   controllers.contact.reports.TransReport.generate()
 
+# Analyze Report
+GET     /contacts/report/analyze_report                 controllers.contact.reports.AnalyzeReport.index()
+POST    /contacts/report/analyze_report                 controllers.contact.reports.AnalyzeReport.generate()
+
 # Last Transaction Report
 GET     /contacts/report/last_trans_report              controllers.contact.reports.LastTransReport.index()
 POST    /contacts/report/last_trans_report              controllers.contact.reports.LastTransReport.generate()

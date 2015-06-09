@@ -61,6 +61,10 @@ class ContactMenu extends AbstractMenu {
 			subReportMenu.add(new MenuItem(Messages.get(Right.CARI_HAREKET_RAPORU.key), 
 				controllers.contact.reports.routes.TransReport.index().url()));
 		}
+		if (AuthManager.hasPrivilege(Right.CARI_ANALIZ_RAPORU, RightLevel.Enable)) {
+			subReportMenu.add(new MenuItem(Messages.get(Right.CARI_ANALIZ_RAPORU.key), 
+				controllers.contact.reports.routes.AnalyzeReport.index().url()));
+		}
 
 		if (subReportMenu.size() > 0) subReportMenu.add(new MenuItem(MenuItemType.Divider));
 

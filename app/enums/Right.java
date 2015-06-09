@@ -64,6 +64,9 @@ public enum Right {
 
 	@EnumValue("CARI_DURUM_RAPORU")
 	CARI_DURUM_RAPORU(Module.contact, false, false, false),
+	
+	@EnumValue("CARI_ANALIZ_RAPORU")
+	CARI_ANALIZ_RAPORU(Module.contact, false, false, false),
 
 	@EnumValue("CARI_YASLANDIRMA_RAPORU")
 	CARI_YASLANDIRMA_RAPORU(Module.contact, false, false, false),

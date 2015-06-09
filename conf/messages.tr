@@ -746,6 +746,7 @@ enum.CARI_HESAP_LISTESI=Hesap Listesi
 enum.CARI_HAREKETSIZ_CARILER_LISTESI=Hareketsiz Cariler Listesi
 enum.CARI_ISLEM_LISTESI=İşlem Listesi
 enum.CARI_DURUM_RAPORU=Durum Raporu
+enum.CARI_ANALIZ_RAPORU=Detaylı Analiz Raporu
 enum.CARI_YASLANDIRMA_RAPORU=Yaşlandırma Raporu
 enum.CARI_HAREKET_RAPORU=Hareket Raporu
 enum.CARI_SON_ISLEM_RAPORU=Son İşlem Raporu

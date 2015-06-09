@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import meta.Balance;
 import models.BaseModel;
 import models.temporal.ExtraFieldsForContact;
 import models.temporal.ExtraFieldsForStock;
@@ -61,7 +62,7 @@ public class QueryUtils {
 	}
 
 	public static double findBalance(Module module, Integer modelId) {
-		String query = String.format("select sum(debt - credit) as balance from %s_trans where workspace = %d and %s_id = %d group by workspace", module.name(), CacheUtils.getWorkspaceId(), module.name(), modelId);
+		String query = String.format("select sum(debt - credit) as balance from %s_trans where workspace = %d and %s_id = %d", module.name(), CacheUtils.getWorkspaceId(), module.name(), modelId);
 		SqlRow row = Ebean.createSqlQuery(query).findUnique();
 
 		double balance = 0d;
@@ -69,6 +70,21 @@ public class QueryUtils {
 			balance = row.getDouble("balance");
 		}
 
+		return balance;
+	}
+	
+	public static Balance findBalance(Module module, Integer modelId, String excCode) {
+		String query = String.format("select sum(debt) as debt_sum, sum(credit) as credit_sum from %s_trans where workspace = %d and %s_id = %d and exc_code = '%s'", module.name(), CacheUtils.getWorkspaceId(), module.name(), modelId, excCode);
+		SqlRow row = Ebean.createSqlQuery(query).findUnique();
+		
+		Balance balance = new Balance();
+		if (row != null && ! row.isEmpty()) {
+			balance.setExcCode(row.getString("exc_code"));
+			balance.setDebt(row.getDouble("debt_sum"));
+			balance.setCredit(row.getDouble("credit_sum"));
+			balance.setBalance((row.getDouble("debt_sum") - row.getDouble("credit_sum")));
+		}
+		
 		return balance;
 	}
 

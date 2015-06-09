@@ -746,6 +746,7 @@ enum.CARI_HESAP_LISTESI=Contact List
 enum.CARI_HAREKETSIZ_CARILER_LISTESI=Inactive Contact List
 enum.CARI_ISLEM_LISTESI=Contact Trans List
 enum.CARI_DURUM_RAPORU=Balance Report
+enum.CARI_ANALIZ_RAPORU=Detailed Analyze Report
 enum.CARI_YASLANDIRMA_RAPORU=Aging Report
 enum.CARI_HAREKET_RAPORU=Transaction Report
 enum.CARI_SON_ISLEM_RAPORU=Last Trans Report
