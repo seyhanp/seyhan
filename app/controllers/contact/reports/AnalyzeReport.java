@@ -21,20 +21,14 @@ package controllers.contact.reports;
 import static play.data.Form.form;
 
 import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 
 import meta.Balance;
-import models.AdminExtraFields;
 import models.Contact;
-import models.ContactTransSource;
 import models.GlobalPrivateCode;
 import models.GlobalTransPoint;
-import models.temporal.ExtraFieldsForContact;
 import play.data.Form;
 import play.data.format.Formats.DateTime;
-import play.i18n.Messages;
+import play.data.validation.Constraints.Required;
 import play.mvc.Controller;
 import play.mvc.Result;
 import reports.ReportParams;
@@ -58,12 +52,15 @@ import enums.RightLevel;
 public class AnalyzeReport extends Controller {
 
 	private final static Right RIGHT_SCOPE = Right.CARI_ANALIZ_RAPORU;
-	private final static String REPORT_NAME = "ContactBasedDetailedAnalyze";
+	private final static String REPORT_NAME = "Analyze";
 
 	private final static Form<AnalyzeReport.Parameter> parameterForm = form(AnalyzeReport.Parameter.class);
 
-	public static class Parameter extends ExtraFieldsForContact {
+	public static class Parameter {
 
+		@Required
+		public Contact contact;
+		
 		public ReportUnit unit;
 
 		public GlobalTransPoint transPoint = Profiles.chosen().gnel_transPoint;
@@ -72,7 +69,10 @@ public class AnalyzeReport extends Controller {
 		public String excCode;
 
 		@DateTime(pattern = "dd/MM/yyyy")
-		public Date date = new Date();
+		public Date startDate = DateUtils.getFirstDayOfYear();
+		
+		@DateTime(pattern = "dd/MM/yyyy")
+		public Date endDate = new Date();
 
 	}
 
@@ -86,21 +86,14 @@ public class AnalyzeReport extends Controller {
 			queryBuilder.append(params.contact.id);
 		}
 
-		if (params.date != null) {
+		if (params.startDate != null) {
+			queryBuilder.append(" and t.trans_date >= ");
+			queryBuilder.append(DateUtils.formatDateForDB(params.startDate));
+		}
+		
+		if (params.endDate != null) {
 			queryBuilder.append(" and t.trans_date <= ");
-			queryBuilder.append(DateUtils.formatDateForDB(params.date));
-		}
-
-		if (params.category != null && params.category.id != null) {
-			queryBuilder.append(" and c.category_id = ");
-			queryBuilder.append(params.category.id);
-		}
-
-		QueryUtils.addExtraFieldsCriterias(params, queryBuilder, "c.");
-
-		if (params.seller != null && params.seller.id != null) {
-			queryBuilder.append(" and c.seller_id = ");
-			queryBuilder.append(params.seller.id);
+			queryBuilder.append(DateUtils.formatDateForDB(params.endDate));
 		}
 
 		if (params.excCode != null && ! params.excCode.isEmpty()) {
@@ -108,7 +101,7 @@ public class AnalyzeReport extends Controller {
 			queryBuilder.append(params.excCode);
 			queryBuilder.append("'");
 		}
-
+		
 		return queryBuilder.toString();
 	}
 
@@ -129,11 +122,8 @@ public class AnalyzeReport extends Controller {
 			repPar.reportName = REPORT_NAME;
 			repPar.reportUnit = params.unit;
 			repPar.query = getQueryString(params);
-
-			repPar.paramMap.put("REPORT_DATE", DateUtils.formatDateStandart(params.date));
 			
 			Contact contact = Contact.findById(params.contact.id);
-			repPar.paramMap.put("CONTACT_ID", contact.id);
 			repPar.paramMap.put("CONTACT_CODE", contact.code);
 			repPar.paramMap.put("CONTACT_NAME", contact.name);
 			repPar.paramMap.put("CONTACT_PHONE", contact.phone);
@@ -144,6 +134,7 @@ public class AnalyzeReport extends Controller {
 			repPar.paramMap.put("CONTACT_DEBT_SUM", balance.getDebt());
 			repPar.paramMap.put("CONTACT_CREDIT_SUM", balance.getCredit());
 			repPar.paramMap.put("CONTACT_BALANCE", balance.getBalance());
+			repPar.paramMap.put("CONTACT_EXC_CODE", params.excCode);
 
 			repPar.paramMap.put("TRANS_POINT_SQL", "");
 			if (params.transPoint != null && params.transPoint.id != null) {
@@ -155,6 +146,8 @@ public class AnalyzeReport extends Controller {
 				repPar.paramMap.put("PRIVATE_CODE_SQL", InstantSQL.buildPrivateCodeSQL(params.privateCode.id));
 			}
 
+			repPar.paramMap.put("REPORT_DATE", DateUtils.formatDateStandart(params.startDate) + " - " + DateUtils.formatDateStandart(params.endDate));
+			
 			ReportResult repRes = ReportService.generateReport(repPar, response());
 			if (repRes.error != null) {
 				flash("warning", repRes.error);

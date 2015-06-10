@@ -31,6 +31,7 @@ public class Balance {
 
 	public void setDebt(Double debt) {
 		this.debt = debt;
+		setBalance();
 	}
 
 	public Double getCredit() {
@@ -42,6 +43,7 @@ public class Balance {
 
 	public void setCredit(Double credit) {
 		this.credit = credit;
+		setBalance();
 	}
 
 	public Double getBalance() {
@@ -51,8 +53,13 @@ public class Balance {
 			return 0d;
 	}
 
-	public void setBalance(Double balance) {
-		this.balance = balance;
+	private void setBalance() {
+		double blnc = 0d;
+
+		if (this.debt != null) blnc = this.debt.doubleValue();
+		if (this.credit != null) blnc = blnc - this.credit.doubleValue();
+
+		this.balance = blnc;
 	}
 
 	public String getExcCode() {

@@ -82,7 +82,6 @@ public class QueryUtils {
 			balance.setExcCode(row.getString("exc_code"));
 			balance.setDebt(row.getDouble("debt_sum"));
 			balance.setCredit(row.getDouble("credit_sum"));
-			balance.setBalance((row.getDouble("debt_sum") - row.getDouble("credit_sum")));
 		}
 		
 		return balance;

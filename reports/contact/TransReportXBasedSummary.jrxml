@@ -88,7 +88,6 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 					</box>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-						<paragraph lineSpacing="Single"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$R{debt.sum}]]></textFieldExpression>
 				</textField>
@@ -102,7 +101,6 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 					</box>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-						<paragraph lineSpacing="Single"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$R{credit.sum}]]></textFieldExpression>
 				</textField>
@@ -116,7 +114,6 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 					</box>
 					<textElement verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-						<paragraph lineSpacing="Single"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$R{mobile_phone}]]></textFieldExpression>
 				</textField>
@@ -130,7 +127,6 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 					</box>
 					<textElement verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-						<paragraph lineSpacing="Single"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$R{phone}]]></textFieldExpression>
 				</textField>
@@ -144,7 +140,6 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 					</box>
 					<textElement verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-						<paragraph lineSpacing="Single"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$R{contact.name}]]></textFieldExpression>
 				</textField>
@@ -158,7 +153,6 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 					</box>
 					<textElement verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-						<paragraph lineSpacing="Single"/>
 					</textElement>
 					<textFieldExpression><![CDATA[($F{group_field} == null ? "" :
 ($P{GROUP_TYPE}.equals("Right")
@@ -208,7 +202,6 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 					</box>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-						<paragraph lineSpacing="Single"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{SUM_CREDIT}]]></textFieldExpression>
 				</textField>
@@ -222,7 +215,6 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 					</box>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-						<paragraph lineSpacing="Single"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{SUM_DEBT}]]></textFieldExpression>
 				</textField>
@@ -236,7 +228,6 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 					</box>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-						<paragraph lineSpacing="Single"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$R{totals}]]></textFieldExpression>
 				</textField>
@@ -250,7 +241,6 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 					</box>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-						<paragraph lineSpacing="Single"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{SUM_DEBT}.doubleValue() - $V{SUM_CREDIT}.doubleValue()]]></textFieldExpression>
 				</textField>
@@ -264,7 +254,6 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-						<paragraph lineSpacing="Single"/>
 					</textElement>
 					<textFieldExpression><![CDATA[($V{SUM_DEBT}.doubleValue() - $V{SUM_CREDIT}.doubleValue() > 0 ? "BB" :
     ($V{SUM_DEBT}.doubleValue() - $V{SUM_CREDIT}.doubleValue() < 0 ? "AB" : ""))]]></textFieldExpression>
@@ -279,7 +268,6 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 					</box>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="7" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-						<paragraph lineSpacing="Single"/>
 					</textElement>
 					<textFieldExpression><![CDATA[($F{group_field} == null ? "" :
 ($P{GROUP_TYPE}.equals("Right")
@@ -300,7 +288,6 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-						<paragraph lineSpacing="Single"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{exc_code}]]></textFieldExpression>
 				</textField>
@@ -325,7 +312,6 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{FOR_DOTMATRIX}]]></textFieldExpression>
 			</textField>
@@ -339,7 +325,6 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 				</box>
 				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="16" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$R{enum.CARI} + " " + $R{enum.CARI_HAREKET_RAPORU}]]></textFieldExpression>
 			</textField>
@@ -353,7 +338,6 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 				</box>
 				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{REPORT_INFO}]]></textFieldExpression>
 			</textField>
@@ -367,7 +351,6 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$R{reporter.company} + " : " + $P{COMPANY}]]></textFieldExpression>
 			</textField>
@@ -385,7 +368,6 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 				</box>
 				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{GROUP_LABEL}]]></textFieldExpression>
 			</textField>
@@ -399,7 +381,6 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 				</box>
 				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA["-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"]]></textFieldExpression>
 			</textField>
@@ -417,7 +398,6 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 				</box>
 				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{mobile_phone}]]></textFieldExpression>
 			</textField>
@@ -431,7 +411,6 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 				</box>
 				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{phone}]]></textFieldExpression>
 			</textField>
@@ -445,7 +424,6 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{sumDebt}]]></textFieldExpression>
 			</textField>
@@ -459,7 +437,6 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{sumCredit}]]></textFieldExpression>
 			</textField>
@@ -473,7 +450,6 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 				</box>
 				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{contact_name}]]></textFieldExpression>
 			</textField>
@@ -487,7 +463,6 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($V{balance}.doubleValue() > 0 ? "BB" : ($V{balance}.doubleValue() < 0 ? "AB" : ""))]]></textFieldExpression>
 			</textField>
@@ -514,7 +489,6 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{exc_code}]]></textFieldExpression>
 			</textField>
@@ -535,7 +509,6 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM, new Locale("tr")).format(new java.util.Date())]]></textFieldExpression>
 			</textField>
@@ -549,7 +522,6 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[" / " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
@@ -563,7 +535,6 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$R{reporter.page} + " : " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
@@ -577,7 +548,6 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
 				</box>
 				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA["-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"]]></textFieldExpression>
 			</textField>
