@@ -31,8 +31,9 @@
 	<parameter name="CONTACT_PHONE" class="java.lang.String"/>
 	<parameter name="CONTACT_MOBILE_PHONE" class="java.lang.String"/>
 	<parameter name="CONTACT_EXC_CODE" class="java.lang.String"/>
+	<parameter name="TRANS_ID_FOR_SUBREPORT" class="java.lang.Integer"/>
 	<queryString>
-		<![CDATA[select t.ref_id, t.trans_date, t.receipt_no, t.trans_no, t._right, t.debt, t.credit, t.description
+		<![CDATA[select t.ref_id, t.ref_module, t.trans_date, t.receipt_no, t.trans_no, t._right, t.debt, t.credit, t.description
 from contact_trans t
 $P!{TRANS_POINT_SQL}
 $P!{PRIVATE_CODE_SQL}
@@ -41,6 +42,9 @@ $P!{QUERY_STRING}
 order by t.trans_date]]>
 	</queryString>
 	<field name="ref_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ref_module" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="trans_date" class="java.sql.Date">
@@ -65,9 +69,9 @@ order by t.trans_date]]>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<title>
-		<band height="59">
+		<band height="81">
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="aac87d3c-3957-46e4-a1f0-89c7e45987a4" key="textField-2" x="242" y="0" width="249" height="14"/>
+				<reportElement uuid="aac87d3c-3957-46e4-a1f0-89c7e45987a4" key="textField-2" x="326" y="8" width="207" height="14"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -77,10 +81,10 @@ order by t.trans_date]]>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$R{reporter.company} + " : " + $P{COMPANY}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{COMPANY}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement uuid="8d084adc-fddd-4098-9d38-62555d20bd2f" key="textField-5" x="4" y="14" width="70" height="14" isPrintWhenDetailOverflows="true"/>
+				<reportElement uuid="8d084adc-fddd-4098-9d38-62555d20bd2f" key="textField-5" x="3" y="36" width="70" height="14" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -93,7 +97,7 @@ order by t.trans_date]]>
 				<textFieldExpression><![CDATA[$R{contact.name}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement uuid="36aee7e2-5d09-4771-a3c4-720ff159ef09" key="textField-5" x="4" y="0" width="70" height="14" isPrintWhenDetailOverflows="true"/>
+				<reportElement uuid="36aee7e2-5d09-4771-a3c4-720ff159ef09" key="textField-5" x="3" y="22" width="70" height="14" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -106,7 +110,7 @@ order by t.trans_date]]>
 				<textFieldExpression><![CDATA[$R{contact.code}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="b4b7c91e-b8c2-4a30-b1ef-de37b9b74884" key="textField-2" x="74" y="14" width="299" height="14"/>
+				<reportElement uuid="b4b7c91e-b8c2-4a30-b1ef-de37b9b74884" key="textField-2" x="73" y="36" width="299" height="14"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -119,7 +123,7 @@ order by t.trans_date]]>
 				<textFieldExpression><![CDATA[$P{CONTACT_NAME}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="0db971ed-8beb-4d68-993f-371dab6c4d22" key="textField-2" x="74" y="0" width="137" height="14"/>
+				<reportElement uuid="0db971ed-8beb-4d68-993f-371dab6c4d22" key="textField-2" x="73" y="22" width="137" height="14"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -132,7 +136,7 @@ order by t.trans_date]]>
 				<textFieldExpression><![CDATA[$P{CONTACT_CODE}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement uuid="4e6470a2-b8ff-4763-8223-013fb03f2e0d" key="textField-5" x="4" y="42" width="70" height="14" isPrintWhenDetailOverflows="true"/>
+				<reportElement uuid="4e6470a2-b8ff-4763-8223-013fb03f2e0d" key="textField-5" x="375" y="22" width="57" height="14" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -145,20 +149,20 @@ order by t.trans_date]]>
 				<textFieldExpression><![CDATA[$R{date.range}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="7dffc0df-acf0-4973-86ce-6cdeca999bff" key="textField-2" x="74" y="42" width="137" height="14"/>
+				<reportElement uuid="7dffc0df-acf0-4973-86ce-6cdeca999bff" key="textField-2" x="432" y="22" width="101" height="14"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement verticalAlignment="Middle">
-					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{REPORT_DATE}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement uuid="ddbf5d45-ff55-4a13-91ab-571598d51a32" key="textField-5" x="379" y="14" width="57" height="14" isPrintWhenDetailOverflows="true"/>
+				<reportElement uuid="ddbf5d45-ff55-4a13-91ab-571598d51a32" key="textField-5" x="375" y="36" width="57" height="14" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -171,7 +175,7 @@ order by t.trans_date]]>
 				<textFieldExpression><![CDATA[$R{debt.sum}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement uuid="532f77c8-1bda-4ade-81c0-637f42ff08c0" key="textField-2" x="436" y="14" width="55" height="14"/>
+				<reportElement uuid="532f77c8-1bda-4ade-81c0-637f42ff08c0" key="textField-2" x="432" y="36" width="55" height="14"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -184,7 +188,7 @@ order by t.trans_date]]>
 				<textFieldExpression><![CDATA[$P{CONTACT_DEBT_SUM}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement uuid="a9e27d8b-da10-4227-9b06-8bec5b0ec4dc" key="textField-5" x="379" y="28" width="57" height="14" isPrintWhenDetailOverflows="true"/>
+				<reportElement uuid="a9e27d8b-da10-4227-9b06-8bec5b0ec4dc" key="textField-5" x="375" y="50" width="57" height="14" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -197,7 +201,7 @@ order by t.trans_date]]>
 				<textFieldExpression><![CDATA[$R{credit.sum}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement uuid="8ee1a42f-42ef-41b2-b6c0-bafabe03fa19" key="textField-2" x="436" y="28" width="55" height="14"/>
+				<reportElement uuid="8ee1a42f-42ef-41b2-b6c0-bafabe03fa19" key="textField-2" x="432" y="50" width="55" height="14"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -210,7 +214,7 @@ order by t.trans_date]]>
 				<textFieldExpression><![CDATA[$P{CONTACT_CREDIT_SUM}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement uuid="7b7e4e4e-189b-404c-83a9-74c7059c35da" key="textField-2" x="436" y="42" width="55" height="14"/>
+				<reportElement uuid="7b7e4e4e-189b-404c-83a9-74c7059c35da" key="textField-2" x="432" y="64" width="55" height="14"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -223,7 +227,7 @@ order by t.trans_date]]>
 				<textFieldExpression><![CDATA[$P{CONTACT_BALANCE}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement uuid="ad1c9e56-155d-40f5-a9da-c91a3e0d6e02" key="textField-5" x="379" y="42" width="57" height="14" isPrintWhenDetailOverflows="true"/>
+				<reportElement uuid="ad1c9e56-155d-40f5-a9da-c91a3e0d6e02" key="textField-5" x="375" y="64" width="57" height="14" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -236,7 +240,7 @@ order by t.trans_date]]>
 				<textFieldExpression><![CDATA[$R{balance}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="c33a3637-e1ff-45af-bfcc-52a39902f8d9" key="textField-2" x="519" y="43" width="16" height="13"/>
+				<reportElement uuid="c33a3637-e1ff-45af-bfcc-52a39902f8d9" key="textField-2" x="506" y="65" width="16" height="13"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -249,7 +253,7 @@ order by t.trans_date]]>
 				<textFieldExpression><![CDATA[($P{CONTACT_DEBT_SUM}.doubleValue() > $P{CONTACT_CREDIT_SUM}.doubleValue() ? "BB" : ($P{CONTACT_DEBT_SUM}.doubleValue() > 0d ? "AB" : ""))]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="c38100d8-4214-48df-9889-9fd6e5f0edbf" key="textField-2" x="491" y="43" width="25" height="13"/>
+				<reportElement uuid="c38100d8-4214-48df-9889-9fd6e5f0edbf" key="textField-2" x="487" y="65" width="18" height="13"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -262,7 +266,7 @@ order by t.trans_date]]>
 				<textFieldExpression><![CDATA[$P{CONTACT_EXC_CODE}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="35658917-96f6-4d49-921b-625779a1bcf7" key="textField-3" x="74" y="28" width="86" height="14"/>
+				<reportElement uuid="35658917-96f6-4d49-921b-625779a1bcf7" key="textField-3" x="73" y="50" width="86" height="14"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -275,7 +279,7 @@ order by t.trans_date]]>
 				<textFieldExpression><![CDATA[$P{CONTACT_PHONE}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="39ed6286-fbf1-4800-835c-49676f32081b" key="textField-4" x="237" y="28" width="86" height="14"/>
+				<reportElement uuid="39ed6286-fbf1-4800-835c-49676f32081b" key="textField-4" x="73" y="64" width="86" height="14"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -288,7 +292,7 @@ order by t.trans_date]]>
 				<textFieldExpression><![CDATA[$P{CONTACT_MOBILE_PHONE}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement uuid="a1b28d0a-47c9-4130-bf4e-a3832e558e35" key="textField-5" x="4" y="28" width="70" height="14" isPrintWhenDetailOverflows="true"/>
+				<reportElement uuid="a1b28d0a-47c9-4130-bf4e-a3832e558e35" key="textField-5" x="3" y="50" width="70" height="14" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -300,8 +304,27 @@ order by t.trans_date]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$R{phone}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement uuid="16ac6b6e-2232-4e69-a700-96d32fbc5f10" x="2" y="79" width="529" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="3b0531e5-d194-4c10-8850-81a09f7bf794" key="textField-2" x="0" y="0" width="322" height="21"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="16" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{enum.CARI} + " " + $R{enum.CARI_ANALIZ_RAPORU}]]></textFieldExpression>
+			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement uuid="31ec02b1-81bf-4beb-b60d-109c37e6ac54" key="textField-5" x="167" y="28" width="70" height="14" isPrintWhenDetailOverflows="true"/>
+				<reportElement uuid="1add0b06-56d6-4f4e-99a9-3d6bd4e23957" key="textField-5" x="3" y="64" width="70" height="14" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -313,12 +336,6 @@ order by t.trans_date]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$R{mobile_phone}]]></textFieldExpression>
 			</textField>
-			<line>
-				<reportElement uuid="16ac6b6e-2232-4e69-a700-96d32fbc5f10" x="4" y="56" width="529" height="1"/>
-				<graphicElement>
-					<pen lineStyle="Solid"/>
-				</graphicElement>
-			</line>
 		</band>
 	</title>
 	<pageHeader>
@@ -423,7 +440,7 @@ order by t.trans_date]]>
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="17">
+		<band height="20">
 			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
 				<reportElement uuid="52838950-2894-4172-b638-435ca5cdd26e" key="textField-3" x="110" y="0" width="50" height="15"/>
 				<box>
@@ -519,7 +536,7 @@ order by t.trans_date]]>
 				<reportElement uuid="2ffa9df4-86b3-4aa3-8489-a5934bafcaa1" x="60" y="15" width="471" height="2">
 					<printWhenExpression><![CDATA[$F{_right}.startsWith("STOK")]]></printWhenExpression>
 				</reportElement>
-				<subreportParameter name="TRANS_ID_FOR_SR_STOCK">
+				<subreportParameter name="TRANS_ID_FOR_SUBREPORT">
 					<subreportParameterExpression><![CDATA[$F{ref_id}.intValue()]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="REPORT_RESOURCE_BUNDLE">
@@ -527,6 +544,19 @@ order by t.trans_date]]>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA["./reports/contact/Analyze_SR_Stock.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement uuid="badeace3-4ab2-457d-95c9-aab9215eeae7" x="86" y="17" width="445" height="2">
+					<printWhenExpression><![CDATA[$F{ref_module}.equals("cheque") || $F{ref_module}.equals("bill")]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="TRANS_ID_FOR_SUBREPORT">
+					<subreportParameterExpression><![CDATA[$F{ref_id}.intValue()]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="REPORT_RESOURCE_BUNDLE">
+					<subreportParameterExpression><![CDATA[$P{REPORT_RESOURCE_BUNDLE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["./reports/contact/Analyze_SR_Cheque.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>
@@ -565,14 +595,14 @@ order by t.trans_date]]>
 				</graphicElement>
 			</line>
 			<textField isBlankWhenNull="false">
-				<reportElement uuid="8fa4f672-a8f3-478b-87f0-f23ce520ae7a" key="textField-6" x="372" y="2" width="156" height="14"/>
+				<reportElement uuid="8fa4f672-a8f3-478b-87f0-f23ce520ae7a" key="textField-6" x="371" y="2" width="160" height="14"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM, new Locale("tr")).format(new java.util.Date())]]></textFieldExpression>

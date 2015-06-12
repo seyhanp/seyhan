@@ -21,6 +21,7 @@ package controllers.chqbll;
 import static play.data.Form.form;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -145,9 +146,13 @@ public class AjaxService extends Controller {
 
 		Right right = Right.findRight(rightStr);
 		ChqbllSort sort = (right.module.equals(Module.cheque) ? ChqbllSort.Cheque : ChqbllSort.Bill);
+		
+		ChqbllPayrollDetail detail = new ChqbllPayrollDetail();
+		detail.dueYear = 1;
+		detail.dueDate = new Date();
 
 		return ok(
-			sequential_form.render(seqForm.fill(new ChqbllPayrollDetail()), sort, ChqbllStep.isCustomer(right)).body()
+			sequential_form.render(seqForm.fill(detail), sort, ChqbllStep.isCustomer(right)).body()
 		);
 	}
 

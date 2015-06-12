@@ -106,6 +106,7 @@ function calculateFields(rowNo, datafield) {
 		excRate: parseDouble($(chqbllBaseId + 'excRate').val(), 0),
 		excEquivalent: 0
 	};
+	if (row.excCode == null) row.excCode = mainExcCode;
 	
 	if (datafield === 'excCode' || row.excRate <= 0 || row.excRate > 5) {
 		row.excRate = exchange_rates[row.excCode].buying;
@@ -228,6 +229,7 @@ function sequential_create() {
 						$(detailId + 'amount').val(formatMoney(data.amount));
 						$(detailId + 'owner').val(data.owner);
 						$(detailId + 'paymentPlace').val(data.paymentPlace);
+						if (data.excCode == null) data.excCode = mainExcCode;
 						$(detailId + 'excCode').val(data.excCode);
 						if (isCustomer) {
 							data.excRate = exchange_rates[data.excCode].selling;

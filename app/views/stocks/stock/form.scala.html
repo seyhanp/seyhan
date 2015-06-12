@@ -51,6 +51,10 @@
 				)
 			}
 
+			@if(! global.Profiles.chosen().gnel_hasExchangeSupport) {
+				<input type="hidden" name="excCode" id="excCode" value='@global.Profiles.chosen().gnel_excCode' />
+			}
+
 			<div class="row-fluid">
 				<div class="span5">
 					@inputText(_form("buyPrice"),

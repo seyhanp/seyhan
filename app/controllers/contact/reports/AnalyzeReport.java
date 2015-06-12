@@ -20,7 +20,9 @@ package controllers.contact.reports;
 
 import static play.data.Form.form;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import meta.Balance;
 import models.Contact;
@@ -29,6 +31,8 @@ import models.GlobalTransPoint;
 import play.data.Form;
 import play.data.format.Formats.DateTime;
 import play.data.validation.Constraints.Required;
+import play.data.validation.ValidationError;
+import play.i18n.Messages;
 import play.mvc.Controller;
 import play.mvc.Result;
 import reports.ReportParams;
@@ -66,11 +70,14 @@ public class AnalyzeReport extends Controller {
 		public GlobalTransPoint transPoint = Profiles.chosen().gnel_transPoint;
 		public GlobalPrivateCode privateCode = Profiles.chosen().gnel_privateCode;
 
+		@Required
 		public String excCode;
 
+		@Required
 		@DateTime(pattern = "dd/MM/yyyy")
 		public Date startDate = DateUtils.getFirstDayOfYear();
 		
+		@Required
 		@DateTime(pattern = "dd/MM/yyyy")
 		public Date endDate = new Date();
 
@@ -110,13 +117,20 @@ public class AnalyzeReport extends Controller {
 		if (hasProblem != null) return hasProblem;
 
 		Form<AnalyzeReport.Parameter> filledForm = parameterForm.bindFromRequest();
-
+		
 		if(filledForm.hasErrors()) {
 			return badRequest(analyze_report.render(filledForm));
 		} else {
 
 			Parameter params = filledForm.get();
 
+			if (params.contact.id == null) {
+				List<ValidationError> veList = new ArrayList<ValidationError>();
+				veList.add(new ValidationError("contact.name", Messages.get("is.not.null", Messages.get("contact"))));
+				filledForm.errors().put("contact.name", veList);
+				return badRequest(analyze_report.render(filledForm));
+			}
+			
 			ReportParams repPar = new ReportParams();
 			repPar.modul = RIGHT_SCOPE.module.name();
 			repPar.reportName = REPORT_NAME;

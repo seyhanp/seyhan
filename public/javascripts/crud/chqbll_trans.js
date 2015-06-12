@@ -164,6 +164,7 @@ function calculateFields(rowNo) {
 		excRate: parseDouble($(chqbllBaseId + 'excRate').val(), 0),
 		excEquivalent: 0
 	};
+	if (row.excCode == null) row.excCode = mainExcCode;
 	
 	if (row.excRate <= 0 || row.excRate > 5) {
 		row.excRate = exchange_rates[row.excCode].buying;

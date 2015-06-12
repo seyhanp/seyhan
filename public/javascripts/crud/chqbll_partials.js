@@ -48,6 +48,7 @@ function calculateFields(rowNo, datafield) {
 		excCode: $('#excCode').val(),
 		excEquivalent: 0
 	};
+	if (row.excCode == null) row.excCode = mainExcCode;
 
 	var excRate = 0;
 	

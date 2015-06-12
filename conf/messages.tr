@@ -151,6 +151,8 @@ insert_by=Ekleyen
 insert_at=Ekleme Zamanı
 update_by=Düzenleyen
 update_at=Düzenleme Zamanı
+detail.receipt=Fiş Detayı
+detail.payroll=Bordro Detayı
 
 # --- Tanım etiketleri
 info=Bilgi

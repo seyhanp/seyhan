@@ -39,6 +39,10 @@
 	)
 }
 
+@if(! global.Profiles.chosen().gnel_hasExchangeSupport) {
+	<input type="hidden" name="excCode" id="excCode" value='@global.Profiles.chosen().gnel_excCode' />
+}
+
 @inputText(_form("serialNo"),
 	'_label -> Messages("serial.no"),
 	'class -> "input-medium"

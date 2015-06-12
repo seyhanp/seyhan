@@ -151,6 +151,8 @@ insert_by=Insert By
 insert_at=Insert At
 update_by=Update By
 update_at=Update At
+detail.receipt=Receipt Detail
+detail.payroll=Payroll Detail
 
 # --- Infos
 info=Info

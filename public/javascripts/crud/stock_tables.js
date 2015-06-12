@@ -166,6 +166,7 @@ function calculateFieldsForStocks(stockRowNo, datafield) {
 		seller_id: null,
 		total: 0
 	};
+	if (row.excCode == null) row.excCode = mainExcCode;
 	
 	row.unitRatio = 1;
 	if (row.unit === row.unit2)
@@ -424,6 +425,7 @@ function findTotalsForStocks() {
 			plusFactorAmount: 0,
 			minusFactorAmount: 0
 		}
+		if (row.excCode == null) row.excCode = mainExcCode;
 		
 		/**
 		* Isi saglama almak icin her toplama isleminde faktor etkileri de hesaplanir

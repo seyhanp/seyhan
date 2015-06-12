@@ -44,6 +44,10 @@
 	)
 }
 
+@if(! global.Profiles.chosen().gnel_hasExchangeSupport) {
+	<input type="hidden" name="excCode" id="excCode" value='@global.Profiles.chosen().gnel_excCode' />
+}
+
 @select(_form("isActive"),
 	options(Options.yesno),
 	'class -> "input-small",
