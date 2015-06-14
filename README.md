@@ -27,16 +27,9 @@
 
 ###Proje durakları
 Proje hakkında daha detaylı bilgi için aşağıdaki bağlantıları kullanabilirsiniz
-
-[Ana sayfa : www.seyhanproject.com](www.seyhanproject.com)
-
-[Tartışma forumları : seyhanp](https://groups.google.com/forum/#!forum/seyhanp)
-
-[Blog sitesi : http://blog.seyhanproject.com](http://blog.seyhanproject.com)
-
-
-[Belgeler](http://www.seyhanproject.com/docs)
-
-[Son kullanıcılar için kurulum yönergeleri](http://www.seyhanproject.com/docs/#/others/install)
-
-[Programcılar ve tasarımcılar için kurulum yönergeleri](http://www.seyhanproject.com/docs/#/devzone/install)
+* Ana sayfa : http://www.seyhanproject.com
+* Tartışma forumları : [seyhanp] (https://groups.google.com/forum/#!forum/seyhanp)
+* Blog sitesi : http://blog.seyhanproject.com
+* Belgeler http://www.seyhanproject.com/docs
+* Son kullanıcılar için kurulum yönergeleri http://www.seyhanproject.com/docs/#/others/install
+* Programcılar ve tasarımcılar için kurulum yönergeleri http://www.seyhanproject.com/docs/#/devzone/install
