@@ -538,7 +538,11 @@ public class Transes extends Controller {
 				clone.refModule = null;
 			}
 
-			RefModuleUtil.save(clone, Module.invoice);
+			String res = RefModuleUtil.save(clone, Module.invoice, clone.contact);
+			if (res != null) {
+				flash("error", Messages.get(res));
+				return badRequest(trans_multiplier.render(filledForm, right));
+			}
 
 			return ok(Messages.get("saved", Messages.get(clone.right.key)));
 		}

@@ -1,4 +1,4 @@
-@(action: play.api.mvc.Call, right: enums.Right, alertNote : String = null)(fields: Html)
+@(action: play.api.mvc.Call, right: enums.Right, alertNote : String = null, dotMatrixSupport : Boolean = true)(fields: Html)
 
 @main() {
 
@@ -22,8 +22,15 @@
 				<label class="control-label" for="unit">@Messages("report_unit")</label>
 				<div class="controls inline">
 					<select name="unit" id="unit" class="input-small">
-						@for(unit <- enums.ReportUnit.values()) {
-							<option value="@unit" @(if(unit.equals(global.Profiles.chosen().gnel_reportUnit)) {"selected"})>@unit</option>
+						@if(dotMatrixSupport) {
+							@for(unit <- enums.ReportUnit.values()) {
+								<option value="@unit" @(if(unit.equals(global.Profiles.chosen().gnel_reportUnit)) {"selected"})>@unit</option>
+							}
+						}
+						@if(! dotMatrixSupport) {
+							@for(unit <- controllers.Options.getGraphicalReportUnits()) {
+								<option value="@unit" @(if(unit.equals(global.Profiles.chosen().gnel_reportUnit)) {"selected"})>@unit</option>
+							}
 						}
 					</select>
 				</div>

@@ -419,6 +419,7 @@ net_total=Net Total
 carrying_over=CARRYING OVER..: 
 
 general=General
+general_totals=Last Totals
 yes=Yes
 no=No
 nothing=No

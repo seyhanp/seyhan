@@ -18,6 +18,7 @@
 */
 package controllers;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +42,7 @@ import enums.ExchangeRatePeriod;
 import enums.ExchangeRateSource;
 import enums.Module;
 import enums.ReceiptNoRnwType;
+import enums.ReportUnit;
 import enums.Right;
 import enums.RightLevel;
 
@@ -429,4 +431,13 @@ public class Options extends Controller {
 		return options;
 	}
 
+	public static List<ReportUnit> getGraphicalReportUnits() {
+		List<ReportUnit> options = new ArrayList<ReportUnit>();
+		
+		options.add(ReportUnit.Html);
+		options.add(ReportUnit.Pdf);
+
+		return options;
+	}
+	
 }

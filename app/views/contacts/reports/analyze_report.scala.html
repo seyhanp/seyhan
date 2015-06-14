@@ -3,7 +3,7 @@
 @import helper._
 @implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
 
-@tools.templates.report_form(contact.reports.routes.AnalyzeReport.generate(),enums.Right.CARI_ANALIZ_RAPORU) {
+@tools.templates.report_form(contact.reports.routes.AnalyzeReport.generate(),enums.Right.CARI_ANALIZ_RAPORU, dotMatrixSupport=false) {
 
 	@tools.components.autocomplete_contact(_form)
 
