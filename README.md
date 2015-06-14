@@ -25,9 +25,12 @@
 * Genel
 * Admin 
 
-###Kurulumdan önce yapılması gerekenler
-1. Sisteminizde Java 6 SDK kurulu olması gerekiyor. Daha önceden kurmadıysanız [şu adresten](http://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase6-419409.html#jdk-6u45-oth-JPR) indirebilirsiniz.
+###Proje durakları
+Proje hakkında daha detaylı bilgi için aşağıdaki bağlantıları kullanabilirsiniz
+[Ana sayfa : www.seyhanproject.com](www.seyhanproject.com)
+[Tartışma forumları : seyhanp](https://groups.google.com/forum/#!forum/seyhanp)
+[Blog sitesi : http://blog.seyhanproject.com](http://blog.seyhanproject.com)
 
-2. Seyhan ilk olarak H2 veritabanı ile çalışacak şekilde ayarlanmıştır ve H2 db, daha çok demo ve test işlemlerinde kullanım için uygundur. Farklı bir veritabanı kullanmak istiyorsanız ve sisteminizde de yüklü değilse bu aşamada kurmanız gerekiyor. 
-
-3. Dağıtımlar zip halinde olduğu için sisteminizde Zip Açıcı (winzip, unzip...) olmalı. Sisteminizde yoksa, kullandığınız işletim sistemine uygun olan bir açıcı indirip kullanabilirsiniz.
+[Belgeler](http://www.seyhanproject.com/docs)
+[Son kullanıcılar için kurulum yönergeleri](http://www.seyhanproject.com/docs/#/others/install)
+[Programcılar ve tasarımcılar için kurulum yönergeleri](http://www.seyhanproject.com/docs/#/devzone/install)
