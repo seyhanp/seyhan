@@ -380,6 +380,7 @@ visibility.of.fields=Alanların Görünürlüğü
 vof.serialNo=Seri No
 vof.taxRate2=ÖTV
 vof.taxRate3=ÖİV
+vof.depot=Depo
 
 audit.right=İşlem :
 audit.name=Adı : 

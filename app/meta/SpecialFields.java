@@ -31,6 +31,7 @@ public class SpecialFields {
 
 	static {
 		stock = new LinkedHashMap<String, Boolean>();
+		stock.put("depot", Boolean.FALSE);
 		stock.put("serialNo", Boolean.FALSE);
 		stock.put("taxRate2", Boolean.FALSE);
 		stock.put("taxRate3", Boolean.FALSE);

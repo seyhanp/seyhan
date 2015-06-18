@@ -380,6 +380,7 @@ visibility.of.fields=Visibility of Fields
 vof.serialNo=Seri No
 vof.taxRate2=PCT
 vof.taxRate3=SCT
+vof.depot=Depot
 
 audit.right=Trans :
 audit.name=Name : 

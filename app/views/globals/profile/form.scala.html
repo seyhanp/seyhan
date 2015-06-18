@@ -81,7 +81,7 @@
 							@for((key, value) <- meta.SpecialFields.stock){
 								<div class="controls">
 									<input class="case" type="checkbox" name='stok_specialFields["@key"]'
-										@if(_form(("stok_specialFields[" + key + "]")).value.toString.equals("true")) { checked }><span style="margin-left: 5px">@Messages("vof." + key)</span>
+										@if(_form(("stok_specialFields[" + key + "]")).value != null && _form(("stok_specialFields[" + key + "]")).value.toString.equals("true")) { checked }><span style="margin-left: 5px">@Messages("vof." + key)</span>
 									</input>
 								</div>
 							}

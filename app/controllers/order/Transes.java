@@ -211,7 +211,6 @@ public class Transes extends Controller {
 			detail.trans = model;
 			detail.workspace = model.workspace;
 			detail.receiptNo = model.receiptNo;
-			detail.depot = model.depot;
 			detail.contact = model.contact;
 			detail.transPoint = model.transPoint;
 			detail.privateCode = model.privateCode;
@@ -221,6 +220,10 @@ public class Transes extends Controller {
 			detail.deliveryDate = model.deliveryDate;
 			detail.transType = model.transType;
 			detail.rowNo = ++rowNo;
+
+			if (detail.depot == null || detail.depot.id == null) {
+				detail.depot = model.depot;
+			}
 
 			if (detail.seller != null && detail.seller.id != null) {
 				SaleSeller seller = sellerMap.get(detail.seller.id);

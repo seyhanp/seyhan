@@ -123,8 +123,9 @@ width:calc(100% - 5px)
 									<th style="width:80px">@Messages("exc_equivalent")</th>
 								}
 								@if(global.Profiles.chosen().isFieldVisible(enums.Module.invoice, "serialNo")) {<th style="width:300px">@Messages("vof.serialNo")</th>}
-								<th style="width:300px">@Messages("description")</th>
+								@if(global.Profiles.chosen().isFieldVisible(enums.Module.stock, "depot")) {<th style="width:150px">@Messages("depot")</th>}
 								@if(isSelling) {<th style="width:150px">@Messages("seller")</th>}
+								<th style="width:300px">@Messages("description")</th>
 								<th style="width:35px"></th>
 							</tr>
 						</thead>

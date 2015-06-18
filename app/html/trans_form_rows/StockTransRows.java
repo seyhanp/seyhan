@@ -23,6 +23,7 @@ import java.util.Map;
 
 import models.GlobalCurrency;
 import models.SaleSeller;
+import models.StockDepot;
 import models.StockTrans;
 import models.StockTransDetail;
 import play.i18n.Messages;
@@ -159,10 +160,17 @@ public class StockTransRows {
 							row.append("<input type='text' id='details["+i+"]_serialNo' name='details["+i+"].serialNo' value='"+detail.serialNo+"' style='width:calc(100% - 5px);' />");
 						row.append("</td>");
 					}
-					row.append("<td>");
-						row.append("<input type='text' id='details["+i+"]_description' name='details["+i+"].description' value='"+detail.description+"' style='width:calc(100% - 5px);' />");
-					row.append("</td>");
-
+					if (Profiles.chosen().isFieldVisible(enums.Module.stock, "depot")) {
+						row.append("<td>");
+							row.append("<select id='details["+i+"]_depot_id' name='details["+i+"].depot.id' style='width:100%;'>");
+								for (Map.Entry<String, String> entry: StockDepot.options().entrySet()) {
+									row.append("<option value='"+entry.getKey()+"' " + (detail.depot != null && detail.depot.id != null && detail.depot.id.toString().equals(entry.getKey()) ? "selected>" : ">"));
+										row.append(entry.getValue());
+									row.append("</option>");
+								}
+							row.append("</select>");
+						row.append("</td>");
+					}
 					if (Right.STOK_CIKIS_FISI.equals(stockTrans.right)) {
 						row.append("<td>");
 						row.append("<select id='details["+i+"]_seller_id' name='details["+i+"].seller.id' style='width:100%;'>");
@@ -176,6 +184,9 @@ public class StockTransRows {
 						row.append("</td>");
 					}
 				}
+				row.append("<td>");
+					row.append("<input type='text' id='details["+i+"]_description' name='details["+i+"].description' value='"+detail.description+"' style='width:calc(100% - 5px);' />");
+				row.append("</td>");
 				row.append("<td>");
 					row.append("<a class='btn btn-mini delRow' title='"+Messages.get("remove") + "'>");
 						row.append("<i class='icon-remove' style='margin-top:1px'></i>");

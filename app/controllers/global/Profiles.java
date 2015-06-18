@@ -159,10 +159,7 @@ public class Profiles extends Controller {
 			if (CacheUtils.getProfile().equals(model.name)) CacheUtils.setProfile(model.name);
 
 			flash("success", Messages.get("saved", model.name));
-			if (Profiles.chosen().gnel_continuouslyRecording)
-				return create();
-			else
-				return GO_HOME;
+			return GO_HOME;
 		}
 
 	}
@@ -352,7 +349,7 @@ public class Profiles extends Controller {
 	public static void setChoosen(String name) {
 		GlobalProfile profile = null;
 
-		if (name != null && ! name.equals("default")) {
+		if (name != null) {
 			profile = GlobalProfile.findByName(name);
 		}
 

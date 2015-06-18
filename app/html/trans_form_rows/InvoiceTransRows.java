@@ -25,6 +25,7 @@ import models.GlobalCurrency;
 import models.SaleSeller;
 import models.InvoiceTrans;
 import models.InvoiceTransDetail;
+import models.StockDepot;
 import play.i18n.Messages;
 import controllers.global.Profiles;
 import enums.Right;
@@ -158,10 +159,17 @@ public class InvoiceTransRows {
 						row.append("<input type='text' id='details["+i+"]_serialNo' name='details["+i+"].serialNo' value='"+detail.serialNo+"' style='width:calc(100% - 5px);' />");
 					row.append("</td>");
 				}
-				row.append("<td>");
-					row.append("<input type='text' id='details["+i+"]_description' name='details["+i+"].description' value='"+detail.description+"' style='width:calc(100% - 5px);' />");
-				row.append("</td>");
-
+				if (Profiles.chosen().isFieldVisible(enums.Module.stock, "depot")) {
+					row.append("<td>");
+						row.append("<select id='details["+i+"]_depot_id' name='details["+i+"].depot.id' style='width:100%;'>");
+							for (Map.Entry<String, String> entry: StockDepot.options().entrySet()) {
+								row.append("<option value='"+entry.getKey()+"' " + (detail.depot != null && detail.depot.id != null && detail.depot.id.toString().equals(entry.getKey()) ? "selected>" : ">"));
+									row.append(entry.getValue());
+								row.append("</option>");
+							}
+						row.append("</select>");
+					row.append("</td>");
+				}
 				if (Right.FATR_SATIS_FATURASI.equals(invoiceTrans.right)) {
 					row.append("<td>");
 						row.append("<select id='details["+i+"]_seller_id' name='details["+i+"].seller.id' style='width:100%;'>");
@@ -174,6 +182,9 @@ public class InvoiceTransRows {
 						row.append("</select>");
 					row.append("</td>");
 				}
+				row.append("<td>");
+					row.append("<input type='text' id='details["+i+"]_description' name='details["+i+"].description' value='"+detail.description+"' style='width:calc(100% - 5px);' />");
+				row.append("</td>");
 
 				row.append("<td>");
 					row.append("<a class='btn btn-mini delRow' title='"+Messages.get("remove") + "'>");

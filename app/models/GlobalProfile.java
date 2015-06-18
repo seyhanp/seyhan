@@ -74,7 +74,7 @@ public class GlobalProfile extends Model {
 	}
 
 	public static List<String> getNames() {
-		List<String> result = CacheUtils.get(true, Right.GNEL_PROFIL_TANITIMI.name() + CacheKeys.LIST_ALL.value);
+		List<String> result = CacheUtils.get(true, Right.GNEL_PROFIL_TANITIMI.name() + CacheKeys.LIST_ALL.value + "-names");
 
 		if (result == null) {
 			List<GlobalProfile> modelList = find.select("name")
@@ -90,7 +90,7 @@ public class GlobalProfile extends Model {
 				result.add("default");
 				CacheUtils.setProfile("default");
 			}
-			CacheUtils.set(true, Right.GNEL_PROFIL_TANITIMI.name() + CacheKeys.LIST_ALL.value, result);
+			CacheUtils.set(true, Right.GNEL_PROFIL_TANITIMI.name() + CacheKeys.LIST_ALL.value + "-names", result);
 		}
 
 		return result;
