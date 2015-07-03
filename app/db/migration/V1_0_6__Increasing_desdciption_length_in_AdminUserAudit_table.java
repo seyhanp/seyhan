@@ -32,7 +32,7 @@ public class V1_0_6__Increasing_desdciption_length_in_AdminUserAudit_table imple
 			
 			if (GlobalCons.dbVendor.equals("mysql")) {
 				sta.executeUpdate("alter table admin_user_audit change descr description varchar(255)");
-			} else if (GlobalCons.dbVendor.equals("mssql")) {
+			} else if (GlobalCons.dbVendor.equals("sqlserver")) {
 				sta.executeUpdate("EXEC sp_rename 'admin_user_audit.descr', 'description', 'COLUMN';");
 			} else if (GlobalCons.dbVendor.equals("h2")) {
 				sta.executeUpdate("alter table admin_user_audit alter column descr rename to description");
