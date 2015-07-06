@@ -61,6 +61,7 @@ import utils.Format;
 import utils.NumericUtils;
 import utils.QueryUtils;
 import utils.RefModuleUtil;
+import utils.TransStatusHistoryUtils;
 import views.html.invoices.transaction.form;
 import views.html.invoices.transaction.list;
 import views.html.tools.components.trans_multiplier;
@@ -338,11 +339,17 @@ public class Transes extends Controller {
 				model.details.get(i).rowNo = i + 1;
 			}
 		}
+		
+		boolean isNew = (model.id == null);
 
 		String res = RefModuleUtil.save(model, Module.invoice, model.contact);
 		if (res != null) {
 			flash("error", Messages.get(res));
 			return badRequest(form.render(filledForm, rightBind, InvoiceTransRows.build(model)));
+		}
+
+		if (isNew && model.status != null) {
+			TransStatusHistoryUtils.goForward(Module.invoice, model.id, model.status.id, Messages.get("first.init"));
 		}
 
 		flash("success", Messages.get("saved", Messages.get(rightBind.value.key)));
@@ -450,6 +457,7 @@ public class Transes extends Controller {
 					}
 					try {
 						RefModuleUtil.remove(model);
+						TransStatusHistoryUtils.deleteAllHistory(Module.invoice, model.id);
 						flash("success", Messages.get("deleted", Messages.get(rightBind.value.key)));
 					} catch (PersistenceException pe) {
 						log.error(pe.getMessage());

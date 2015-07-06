@@ -215,15 +215,21 @@ public class TransStatuses extends Controller {
 			} else {
 				String editingConstraintError = model.checkEditingConstraints();
 				if (editingConstraintError != null) return badRequest(editingConstraintError);
+
+				Ebean.beginTransaction();
 				try {
-					Ebean.createSqlUpdate("update invoice_trans_status set parent_id = :new_parent_id where parent_id = :parent_id")
-									.setParameter("parent_id", model.id)
-									.setParameter("new_parent_id", model.parent.id)
-								.execute();
+					if (model.parent != null && model.parent.id != null) {
+						Ebean.createSqlUpdate("update invoice_trans_status set parent_id = :new_parent_id where parent_id = :parent_id")
+										.setParameter("parent_id", model.id)
+										.setParameter("new_parent_id", model.parent.id)
+									.execute();
+					}
 					model.delete();
 					flash("success", Messages.get("deleted", model.name));
+					Ebean.commitTransaction();
 					return ok();
 				} catch (PersistenceException pe) {
+					Ebean.rollbackTransaction();
 					flash("error", Messages.get("delete.violation", model.name));
 					log.error("ERROR", pe);
 					return badRequest(Messages.get("delete.violation", model.name));

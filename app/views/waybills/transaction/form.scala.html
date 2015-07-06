@@ -65,10 +65,11 @@ width:calc(100% - 5px)
 
 				<div class="span6">
 					@select(_form("status.id"),
-						options(WaybillTransStatus.options(true)),
+						options(WaybillTransStatus.options(if(_form("id").value == null || _form("id").value.isEmpty()) true else false)),
 						'class -> "input-medium",
 						'_label -> Messages("status"),
-						'_default -> Messages("choose")
+						'_default -> Messages("choose"),
+						(if(_form("id").value != null && ! _form("id").value.isEmpty()) 'disabled -> "" else '_a -> "a")
 					)
 
 					@tools.dropdowns.waybill_trans_source(_form)

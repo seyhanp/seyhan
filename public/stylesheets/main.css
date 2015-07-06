@@ -97,6 +97,7 @@ input[type="text"], input[type="password"], .ui-autocomplete-input, textarea, .u
 input[disabled], select[disabled], textarea[disabled], input[readonly], select[readonly], textarea[readonly] {
     background-color: #E6F8E0;
     cursor: not-allowed;
+    pointer-events: none;
 }
 
 .input-medium-plus {

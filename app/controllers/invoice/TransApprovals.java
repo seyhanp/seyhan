@@ -23,7 +23,6 @@ import static play.data.Form.form;
 import java.util.ArrayList;
 
 import models.InvoiceTrans;
-import models.InvoiceTransStatusHistory;
 import models.search.OrderTransSearchParam;
 import models.temporal.ReceiptListModel;
 
@@ -35,10 +34,12 @@ import play.i18n.Messages;
 import play.mvc.Controller;
 import play.mvc.Result;
 import utils.AuthManager;
+import utils.TransStatusHistoryUtils;
 import views.html.invoices.trans_approval.form;
 
 import com.avaje.ebean.Ebean;
 
+import enums.Module;
 import enums.Right;
 import enums.RightLevel;
 
@@ -83,7 +84,7 @@ public class TransApprovals extends Controller {
 			    			int transCount = 0;
 		    				for (ReceiptListModel rlm : model.details) {
 								if (rlm.isSelected) {
-									InvoiceTransStatusHistory.goForward(InvoiceTrans.findById(rlm.id), model.invoiceTransStatus, model.description);
+									TransStatusHistoryUtils.goForward(Module.invoice, rlm.id, model.invoiceTransStatus.id, model.description);
 									transCount++;
 								}
 							}

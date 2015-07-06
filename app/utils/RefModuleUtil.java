@@ -33,9 +33,12 @@ import models.ChqbllPayroll;
 import models.Contact;
 import models.ContactTrans;
 import models.ContactTransSource;
+import models.InvoiceTrans;
+import models.OrderTrans;
 import models.Safe;
 import models.SafeTrans;
 import models.SafeTransSource;
+import models.WaybillTrans;
 import models.temporal.Pair;
 
 import org.slf4j.Logger;
@@ -268,7 +271,7 @@ public class RefModuleUtil {
 					}
 				}
 			}
-
+			
 			if (isTransactionNeeded) Ebean.commitTransaction();
 
 		} catch (Exception e) {
@@ -301,6 +304,19 @@ public class RefModuleUtil {
 					}
 				}
 			}
+			
+			/*
+			 * Siparis, Irsaliye ve Fatura kayitlari ekstra olarak durum tarihcesi (xxx_trans_status_history) tutarlar, bu kisimda tutulan bu tarihçenin tamamı silinir 
+			 */
+			String prefixForTransTable = null;
+			if (trans instanceof OrderTrans) prefixForTransTable = "order";
+			if (trans instanceof WaybillTrans) prefixForTransTable = "waybill";
+			if (trans instanceof InvoiceTrans) prefixForTransTable = "invoice";
+			if (prefixForTransTable != null) {
+				Ebean.createSqlUpdate("delete from " + prefixForTransTable + "_trans_status_history where trans_id = :trans_id")
+										.setParameter("trans_id", trans.id)
+									.execute();
+			}
 
 			/*
 			 * Kasa, Banka ve Cari disindaki moduller ekstra Cari Hareket yansimasi yapmis olabilirler
@@ -314,6 +330,7 @@ public class RefModuleUtil {
 			}
 
 			trans.singleDelete();
+
 			Ebean.commitTransaction();
 
 		} catch (Exception e) {

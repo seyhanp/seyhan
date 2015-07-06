@@ -19,16 +19,12 @@
 package models;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import play.db.ebean.Model;
-import utils.CacheUtils;
-
-import com.avaje.ebean.Ebean;
 
 @Entity
 /**
@@ -50,48 +46,5 @@ public class WaybillTransStatusHistory extends Model {
 	public String username;
 	public String description;
 	public Date transTime;
-
-	/*------------------------------------------------------------------------------------*/
-
-	private static Model.Finder<Integer, WaybillTransStatusHistory> find = new Model.Finder<Integer, WaybillTransStatusHistory>(Integer.class, WaybillTransStatusHistory.class);
-
-	public static void goForward(WaybillTrans trans, WaybillTransStatus newStatus, String description) {
-		WaybillTransStatusHistory history = new WaybillTransStatusHistory();
-		history.trans = trans;
-		history.status = newStatus;
-		history.username = CacheUtils.getUser().username;
-		history.transTime = new Date();
-		history.description = description;
-		history.save();
-
-		setTransStatus(trans.id, newStatus.id);
-	}
-
-	public static void goBack(WaybillTrans trans) {
-		List<WaybillTransStatusHistory> historyList = find
-														.where().eq("trans", trans)
-														.order("id desc")
-														.setMaxRows(2)
-													.findList();
-		if (historyList != null) {
-			historyList.get(0).delete();
-			
-			Integer status_id = null;
-			if (historyList.size() > 1) status_id = historyList.get(1).id;
-			setTransStatus(trans.id, status_id);
-		}
-	}
-
-	private static void setTransStatus(int trans_id, int status_id) {
-		Ebean.createSqlUpdate("update waybill_trans set status_id = :status_id where id in = :id)")
-				.setParameter("id", trans_id)
-				.setParameter("status_id", status_id)
-			.execute();
-		
-		Ebean.createSqlUpdate("update waybill_trans_detail set status_id = :status_id where id trans_id = :trans_id)")
-				.setParameter("trans_id", trans_id)
-				.setParameter("status_id", status_id)
-			.execute();
-	}
 
 }

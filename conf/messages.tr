@@ -95,6 +95,7 @@ cancel=Vazgeç
 previous=Önceki
 previous.status=Bir Önceki Durum
 first.status=İlk Durum
+first.init=Oluşturma
 next=Sonraki
 all=Tümü
 choose=-- Seçiniz --

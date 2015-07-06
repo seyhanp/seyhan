@@ -56,6 +56,7 @@ import utils.DocNoUtils;
 import utils.Format;
 import utils.NumericUtils;
 import utils.QueryUtils;
+import utils.TransStatusHistoryUtils;
 import views.html.orders.transaction.form;
 import views.html.orders.transaction.list;
 import views.html.tools.components.trans_multiplier;
@@ -66,6 +67,7 @@ import com.avaje.ebean.Page;
 import controllers.Application;
 import controllers.global.Profiles;
 import enums.DocNoIncType;
+import enums.Module;
 import enums.Right;
 import enums.RightLevel;
 import enums.TransType;
@@ -305,6 +307,9 @@ public class Transes extends Controller {
 
 		if (model.id == null) {
 			model.save();
+			if (model.status != null) {
+				TransStatusHistoryUtils.goForward(Module.order, model.id, model.status.id, Messages.get("first.init"));
+			}
 		} else {
 			model.update();
 		}
@@ -410,6 +415,7 @@ public class Transes extends Controller {
 					}
 					try {
 						model.delete();
+						TransStatusHistoryUtils.deleteAllHistory(Module.order, model.id);
 						flash("success", Messages.get("deleted", Messages.get(rightBind.value.key)));
 					} catch (PersistenceException pe) {
 						log.error(pe.getMessage());
