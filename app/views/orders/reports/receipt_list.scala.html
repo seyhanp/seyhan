@@ -6,7 +6,7 @@
 @tools.templates.report_form(order.reports.routes.ReceiptList.generate(),enums.Right.SPRS_FIS_LISTESI) {
 
 	@select(_form("status"),
-		options(enums.TransStatus.options),
+		options(OrderTransStatus.options(false)),
 		'class -> "input-medium",
 		'_label -> Messages("status"),
 		'_default -> Messages("choose")

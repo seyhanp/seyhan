@@ -1,0 +1,7 @@
+@(currentPage: meta.PageExtend[OrderTransStatus])
+
+@tools.templates.ajax_list(
+	currentPage = currentPage,
+	label = Messages("order.trans.status"),
+	right = enums.Right.SPRS_SIPARIS_DURUMLARI
+)

@@ -1,0 +1,7 @@
+@(currentPage: meta.PageExtend[WaybillTransStatus])
+
+@tools.templates.ajax_list(
+	currentPage = currentPage,
+	label = Messages("waybill.trans.status"),
+	right = enums.Right.IRSL_IRSALIYE_DURUMLARI
+)

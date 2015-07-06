@@ -31,8 +31,11 @@ import javax.persistence.PersistenceException;
 import meta.GridHeader;
 import meta.PageExtend;
 import models.GlobalProfile;
+import models.InvoiceTransStatus;
+import models.OrderTransStatus;
 import models.Safe;
 import models.StockDepot;
+import models.WaybillTransStatus;
 import models.temporal.InfoMultiplier;
 import models.temporal.ProfileData;
 import play.data.Form;
@@ -134,7 +137,7 @@ public class Profiles extends Controller {
 			model.description = modelData.description;
 			model.isActive = modelData.isActive;
 			model.version = modelData.version;
-
+			
 			model.jsonData = StringUtils.toJson(modelData);
 
 			Result hasProblem = AuthManager.hasProblem(RIGHT_SCOPE, (model.id == null ? RightLevel.Insert : RightLevel.Update));
@@ -170,7 +173,7 @@ public class Profiles extends Controller {
 	public static Result create() {
 		Result hasProblem = AuthManager.hasProblem(RIGHT_SCOPE, RightLevel.Insert);
 		if (hasProblem != null) return hasProblem;
-
+		
 		return ok(form.render(dataForm.fill(fakePD)));
 	}
 
@@ -191,12 +194,12 @@ public class Profiles extends Controller {
 				flash("error", Messages.get("not.found", Messages.get("profile")));
 			} else {
 				ProfileData modelData = StringUtils.fromJson(model.jsonData, ProfileData.class);
-
 				modelData.id = model.id;
 				modelData.name = model.name;
 				modelData.description = model.description;
 				modelData.version = model.version;
 				modelData.isActive = model.isActive;
+
 				return ok(form.render(dataForm.fill(modelData)));
 			}
 		}
@@ -327,6 +330,9 @@ public class Profiles extends Controller {
 		if (result != null) {
 			if (result.gnel_safe == null) result.gnel_safe = Safe.findById(1);
 			if (result.stok_depot == null) result.stok_depot = StockDepot.findById(1);
+			if (result.sprs_status != null) result.sprs_status = OrderTransStatus.findById(result.sprs_status.id);
+			if (result.irsl_status != null) result.irsl_status = WaybillTransStatus.findById(result.irsl_status.id);
+			if (result.fatr_status != null) result.fatr_status = InvoiceTransStatus.findById(result.fatr_status.id);
 			return result;
 		} else {
 			fakePD.gnel_safe = Safe.findById(1);

@@ -6,7 +6,7 @@
 @tools.templates.report_form(invoice.reports.routes.InvoiceList.generate(),enums.Right.FATR_FATURA_LISTESI) {
 
 	@select(_form("status"),
-		options(enums.TransStatus.optionsWithoutCancelled),
+		options(InvoiceTransStatus.options(false)),
 		'class -> "input-medium",
 		'_label -> Messages("status"),
 		'_default -> Messages("choose")

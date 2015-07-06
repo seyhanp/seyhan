@@ -34,7 +34,7 @@ public class FieldExcluderForGson implements ExclusionStrategy {
 
     @Override
     public boolean shouldSkipField(FieldAttributes f) {
-        return (f.getName().equals("id") || f.getName().startsWith("_") || f.getAnnotation(ManyToOne.class) != null);
+        return (f.getName().startsWith("_") || f.getAnnotation(ManyToOne.class) != null);
     }
 
 }

@@ -21,9 +21,9 @@ package controllers.invoice;
 import static play.data.Form.form;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import models.InvoiceTrans;
+import models.InvoiceTransStatusHistory;
 import models.search.OrderTransSearchParam;
 import models.temporal.ReceiptListModel;
 
@@ -41,7 +41,6 @@ import com.avaje.ebean.Ebean;
 
 import enums.Right;
 import enums.RightLevel;
-import enums.TransStatus;
 
 /**
  * @author mdpinar
@@ -50,17 +49,14 @@ public class TransApprovals extends Controller {
 
 	private final static Logger log = LoggerFactory.getLogger(TransApprovals.class);
 
-	private final static Right RIGHT = Right.FATR_KAPAMA_ISLEMI;
+	private final static Right RIGHT = Right.FATR_ONAYLAMA_ADIMLARI;
 	private final static Form<OrderTransSearchParam> dataForm = form(OrderTransSearchParam.class);
-
-	private static int sourceCount;
 
 	public static Result index() {
 		Result hasProblem = AuthManager.hasProblem(RIGHT, RightLevel.Enable);
 		if (hasProblem != null) return hasProblem;
 
 		OrderTransSearchParam sp = new OrderTransSearchParam();
-		sp.status = TransStatus.Waiting;
 		sp.transType = Right.FATR_SATIS_FATURASI;
 
 		return ok(form.render(dataForm.fill(sp), new ArrayList<ReceiptListModel>()));
@@ -69,8 +65,6 @@ public class TransApprovals extends Controller {
 	public static Result submit() {
 		Result hasProblem = AuthManager.hasProblem(RIGHT, RightLevel.Enable);
 		if (hasProblem != null) return hasProblem;
-
-		sourceCount = 0;
 
 		Form<OrderTransSearchParam> filledForm = dataForm.bindFromRequest();
 
@@ -86,22 +80,18 @@ public class TransApprovals extends Controller {
 			    
 			    		Ebean.beginTransaction();
 			    		try {
-			    			List<Integer> closedIdList = new ArrayList<Integer>();
+			    			int transCount = 0;
 		    				for (ReceiptListModel rlm : model.details) {
-								if (rlm.isSelected && ! TransStatus.Completed.equals(rlm.status)) {
-									closedIdList.add(rlm.id);
+								if (rlm.isSelected) {
+									InvoiceTransStatusHistory.goForward(InvoiceTrans.findById(rlm.id), model.invoiceTransStatus, model.description);
+									transCount++;
 								}
 							}
-				    		if (closedIdList.size() > 0) {
-				    			closed(closedIdList);
-				    			if (sourceCount == closedIdList.size()) {
-				    				flash("success", Messages.get("has.been.closed", sourceCount, Messages.get(model.transType.key)));
-				    			} else {
-				    				flash("error", Messages.get("has.not.been.closed"));
-				    			}
-				    		} else {
-				    			flash("error", Messages.get("has.not.been.closed"));
-				    		}
+				    		if (transCount > 0) {
+			    				flash("success", Messages.get("has.been.closed", transCount, Messages.get(model.transType.key)));
+			    			} else {
+			    				flash("error", Messages.get("has.not.been.closed"));
+			    			}
 				    		Ebean.commitTransaction();
 				    
 			    		} catch (Exception e) {
@@ -125,20 +115,6 @@ public class TransApprovals extends Controller {
 
 	private static Result search(Form<OrderTransSearchParam> filledForm) {
 		return ok(form.render(filledForm, InvoiceTrans.findReceiptList(filledForm.get())));
-	}
-
-	private static void closed(List<Integer> closedIdList) {
-		sourceCount = closedIdList.size();
-
-		Ebean.createSqlUpdate("update invoice_trans set status = :status where id in (:idList)")
-				.setParameter("idList", closedIdList)
-				.setParameter("status", TransStatus.Completed)
-			.execute();
-
-		Ebean.createSqlUpdate("update invoice_trans_detail set status = :status where trans_id in (:idList)")
-				.setParameter("idList", closedIdList)
-				.setParameter("status", TransStatus.Completed)
-			.execute();
 	}
 
 }

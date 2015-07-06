@@ -23,7 +23,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.Statement;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,25 +58,29 @@ public class V1_0_0__Create_Tables implements JdbcMigration {
 	
 			String line = null;
 			StringBuilder queries = new StringBuilder();
-			PreparedStatement statement = null;
+			Statement sta = con.createStatement();
 	
 			while ((line = br.readLine()) != null) {
 				if (! line.trim().isEmpty() && ! line.startsWith("--")) {
 					if (queries.length() == 0) log.info("  " + line + (line.endsWith(";") ? "" : " ..."));
 					queries.append(line.replace("\\n", ""));
 					if (line.indexOf(";") > 0) {
-						statement = con.prepareStatement(queries.toString());
-						try {
-							statement.execute();
-						} catch (Exception e) {
-							log.error("ERROR", e);
-						} finally {
-							statement.close();
-						}
+						sta.addBatch(queries.toString());
 						queries.setLength(0);
 					}
 				}
 			}
+			
+			log.info("All queries are executed, please wait...");
+
+			try {
+				sta.executeBatch();
+			} catch (Exception e) {
+				log.error("ERROR", e);
+			} finally {
+				sta.close();
+			}
+			
 			br.close();
 
 			log.info("DB migrations have executed for : " + fileName);

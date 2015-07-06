@@ -42,7 +42,6 @@ import com.avaje.ebean.Page;
 import controllers.global.Profiles;
 import enums.Module;
 import enums.Right;
-import enums.TransStatus;
 
 @Entity
 /**
@@ -52,11 +51,13 @@ public class InvoiceTrans extends AbstractStockTrans {
 
 	private static final long serialVersionUID = 1L;
 
-	public TransStatus status = TransStatus.Waiting;
 	public Boolean isCash = Profiles.chosen().fatr_isCash;
 	
 	public Double withholdingRate = Profiles.chosen().fatr_withholding;
 	public Double withholdingAmount = 0d;
+
+	@ManyToOne
+	public InvoiceTransStatus status = Profiles.chosen().fatr_status;
 
 	@ManyToOne
 	public InvoiceTransSource transSource;
@@ -90,9 +91,6 @@ public class InvoiceTrans extends AbstractStockTrans {
 					)
 			);
 		} else {
-			if (searchParam.status != null) {
-				expList.eq("status", searchParam.status);
-			}
 			if (searchParam.isCash != null) {
 				expList.eq("isCash", searchParam.isCash);
 			}
@@ -127,6 +125,9 @@ public class InvoiceTrans extends AbstractStockTrans {
 			if (searchParam.transSource != null && searchParam.transSource.id != null) {
 				expList.eq("transSource", searchParam.transSource);
 			}
+			if (searchParam.invoiceTransStatus != null && searchParam.invoiceTransStatus.id != null) {
+				expList.eq("status", searchParam.invoiceTransStatus);
+			}
 		}
 
 		return ModelHelper.getPage(right, expList, searchParam);
@@ -138,9 +139,6 @@ public class InvoiceTrans extends AbstractStockTrans {
 		expList.eq("workspace", CacheUtils.getWorkspaceId());
 		expList.eq("right", searchParam.transType);
 
-		if (searchParam.status != null) {
-			expList.eq("status", searchParam.status);
-		}
 		if (searchParam.receiptNo != null && searchParam.receiptNo.intValue() > 0) {
 			expList.eq("receiptNo", searchParam.receiptNo);
 		}
@@ -172,6 +170,9 @@ public class InvoiceTrans extends AbstractStockTrans {
 		if (searchParam.transSource != null && searchParam.transSource.id != null) {
 			expList.eq("transSource", searchParam.transSource);
 		}
+		if (searchParam.invoiceTransStatus != null && searchParam.invoiceTransStatus.id != null) {
+			expList.eq("status", searchParam.invoiceTransStatus);
+		}
 
 		List<InvoiceTrans> modelList = expList
 										.order("contact, transDate")
@@ -184,7 +185,6 @@ public class InvoiceTrans extends AbstractStockTrans {
 			ReceiptListModel receipt = new ReceiptListModel();
 			receipt.id = trans.id;
 			receipt.right = trans.right;
-			receipt.status = trans.status;
 			receipt.receiptNo = trans.receiptNo;
 			receipt.contactName = trans.contactName;
 			receipt.date = DateUtils.formatDateStandart(trans.transDate);
@@ -195,6 +195,9 @@ public class InvoiceTrans extends AbstractStockTrans {
 
 			if (trans.contact != null) {
 				receipt.contactId = trans.contact.id;
+			}
+			if (trans.status != null) {
+				receipt.statusId = trans.status.id;
 			}
 
 			result.add(receipt);

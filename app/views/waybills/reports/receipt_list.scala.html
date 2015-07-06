@@ -6,7 +6,7 @@
 @tools.templates.report_form(waybill.reports.routes.ReceiptList.generate(),enums.Right.IRSL_FIS_LISTESI) {
 
 	@select(_form("status"),
-		options(enums.TransStatus.optionsWithoutCancelled),
+		options(WaybillTransStatus.options(false)),
 		'class -> "input-medium",
 		'_label -> Messages("status"),
 		'_default -> Messages("choose")

@@ -38,9 +38,9 @@ import com.avaje.ebean.Expr;
 import com.avaje.ebean.ExpressionList;
 import com.avaje.ebean.Page;
 
+import controllers.global.Profiles;
 import enums.Module;
 import enums.Right;
-import enums.TransStatus;
 
 @Entity
 /**
@@ -50,7 +50,8 @@ public class OrderTrans extends AbstractStockTrans {
 
 	private static final long serialVersionUID = 1L;
 
-	public TransStatus status = TransStatus.Waiting;
+	@ManyToOne
+	public OrderTransStatus status = Profiles.chosen().sprs_status;
 
 	@ManyToOne
 	public OrderTransSource transSource;
@@ -83,9 +84,6 @@ public class OrderTrans extends AbstractStockTrans {
 					)
 			);
 		} else {
-			if (searchParam.status != null) {
-				expList.eq("status", searchParam.status);
-			}
 			if (searchParam.receiptNo != null && searchParam.receiptNo.intValue() > 0) {
 				expList.eq("receiptNo", searchParam.receiptNo);
 			}
@@ -116,6 +114,9 @@ public class OrderTrans extends AbstractStockTrans {
 			if (searchParam.transSource != null && searchParam.transSource.id != null) {
 				expList.eq("transSource", searchParam.transSource);
 			}
+			if (searchParam.orderTransStatus != null && searchParam.orderTransStatus.id != null) {
+				expList.eq("status", searchParam.orderTransStatus);
+			}
 		}
 
 		return ModelHelper.getPage(right, expList, searchParam);
@@ -127,9 +128,6 @@ public class OrderTrans extends AbstractStockTrans {
 		expList.eq("workspace", CacheUtils.getWorkspaceId());
 		expList.eq("right", searchParam.transType);
 
-		if (searchParam.status != null) {
-			expList.eq("status", searchParam.status);
-		}
 		if (searchParam.receiptNo != null && searchParam.receiptNo.intValue() > 0) {
 			expList.eq("receiptNo", searchParam.receiptNo);
 		}
@@ -157,6 +155,9 @@ public class OrderTrans extends AbstractStockTrans {
 		if (searchParam.transSource != null && searchParam.transSource.id != null) {
 			expList.eq("transSource", searchParam.transSource);
 		}
+		if (searchParam.orderTransStatus != null && searchParam.orderTransStatus.id != null) {
+			expList.eq("status", searchParam.orderTransStatus);
+		}
 
 		List<OrderTrans> modelList = expList
 										.order("contact, transDate")
@@ -169,7 +170,6 @@ public class OrderTrans extends AbstractStockTrans {
 			ReceiptListModel receipt = new ReceiptListModel();
 			receipt.id = trans.id;
 			receipt.right = trans.right;
-			receipt.status = trans.status;
 			receipt.receiptNo = trans.receiptNo;
 			receipt.contactName = trans.contactName;
 			receipt.date = DateUtils.formatDateStandart(trans.transDate);
@@ -181,6 +181,9 @@ public class OrderTrans extends AbstractStockTrans {
 
 			if (trans.contact != null) {
 				receipt.contactId = trans.contact.id;
+			}
+			if (trans.status != null) {
+				receipt.statusId = trans.status.id;
 			}
 
 			result.add(receipt);
@@ -203,7 +206,8 @@ public class OrderTrans extends AbstractStockTrans {
 		ExpressionList<OrderTrans> expList = ModelHelper.getExpressionList(Module.order);
 
 		expList.eq("workspace", sourceWS);
-		expList.eq("status", TransStatus.Waiting);
+		//TODO: ilk konumdaki siparisleri bulmak icin status alani null ya da profil tanimlarindaki degere esit olanlar icin kriter eklenecek
+		//expList.eq("status", TransStatus.Waiting);
 		return expList
 					.order("receiptNo")
 					.fetch("details")

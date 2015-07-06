@@ -1,0 +1,24 @@
+@(_form: Form[OrderTransStatus])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.imports.base_hidden_fields(_form)
+
+@inputText(_form("name"),
+	'_label -> Messages("name"),
+	'class -> "input-xlarge",
+	'maxlength -> "30"
+)
+
+@select(_form("parent.id"),
+	options(OrderTransStatus.options(if(_form("id").value != null && ! _form("id").value.isEmpty()) _form("id").value.toInt else -1)),
+	'_label -> Messages("previous.status"),
+	'_default -> Messages("choose")
+)
+
+@select(_form("isActive"),
+	options(Options.yesno),
+	'class -> "input-small",
+	'_label -> Messages("is_active")
+)

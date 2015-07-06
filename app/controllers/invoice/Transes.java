@@ -73,7 +73,6 @@ import enums.DocNoIncType;
 import enums.Module;
 import enums.Right;
 import enums.RightLevel;
-import enums.TransStatus;
 import enums.TransType;
 
 /**
@@ -126,7 +125,7 @@ public class Transes extends Controller {
 				dataMap.put(i++, model.id.toString());
 				dataMap.put(i++, model.transNo);
 				if (! right.isReturn) {
-					dataMap.put(i++, Messages.get(model.status.key));
+					dataMap.put(i++, (model.status != null ? model.status.name : ""));
 				}
 				dataMap.put(i++, DateUtils.formatDateStandart(model.transDate));
 				dataMap.put(i++, (model.contact != null ? model.contact.name : ""));
@@ -181,6 +180,11 @@ public class Transes extends Controller {
 			flash("error", editingConstraintError);
 			return badRequest(form.render(filledForm, rightBind, InvoiceTransRows.build(model)));
 		}
+		
+		if (model.isCompleted != null && model.isCompleted ) {
+			flash("error", Messages.get("edit.striction.for_controller"));
+			return badRequest(form.render(filledForm, rightBind, InvoiceTransRows.build(model)));
+		}
 
 		model.workspace = CacheUtils.getWorkspaceId();
 		model.right = rightBind.value;
@@ -195,7 +199,6 @@ public class Transes extends Controller {
 			model.refExcCode = model.excCode;
 			model.refExcRate = model.excRate;
 			model.refExcEquivalent = model.excEquivalent;
-			model.status = TransStatus.Completed;
 		}
 
 		/*
@@ -221,6 +224,7 @@ public class Transes extends Controller {
 			detail.transPoint = model.transPoint;
 			detail.privateCode = model.privateCode;
 			detail.transSource = model.transSource;
+			detail.status = model.status;
 			detail.right = model.right;
 			detail.transDate = model.transDate;
 			detail.deliveryDate = model.deliveryDate;
@@ -435,18 +439,23 @@ public class Transes extends Controller {
 			if (model == null) {
 				flash("error", Messages.get("not.found", Messages.get("transaction")));
 			} else {
-				String editingConstraintError = model.checkEditingConstraints();
-				if (editingConstraintError != null) {
-					flash("error", editingConstraintError);
+				if (model.isCompleted != null && model.isCompleted) {
+					flash("error", Messages.get("edit.striction.for_controller"));
 					return badRequest(form.render(dataForm.fill(model), rightBind, InvoiceTransRows.build(model)));
-				}
-				try {
-					RefModuleUtil.remove(model);
-					flash("success", Messages.get("deleted", Messages.get(rightBind.value.key)));
-				} catch (PersistenceException pe) {
-					log.error(pe.getMessage());
-					flash("error", Messages.get("delete.violation", Messages.get(rightBind.value.key)));
-					return badRequest(form.render(dataForm.fill(model), rightBind, InvoiceTransRows.build(model)));
+				} else {
+					String editingConstraintError = model.checkEditingConstraints();
+					if (editingConstraintError != null) {
+						flash("error", editingConstraintError);
+						return badRequest(form.render(dataForm.fill(model), rightBind, InvoiceTransRows.build(model)));
+					}
+					try {
+						RefModuleUtil.remove(model);
+						flash("success", Messages.get("deleted", Messages.get(rightBind.value.key)));
+					} catch (PersistenceException pe) {
+						log.error(pe.getMessage());
+						flash("error", Messages.get("delete.violation", Messages.get(rightBind.value.key)));
+						return badRequest(form.render(dataForm.fill(model), rightBind, InvoiceTransRows.build(model)));
+					}
 				}
 			}
 		}
@@ -509,7 +518,6 @@ public class Transes extends Controller {
 			clone.transYear = DateUtils.getYear(stm.transDate);
 			clone.deliveryDate = invoiceTrans.deliveryDate;
 			clone.transNo = stm.transNo;
-			clone.status = TransStatus.Waiting;
 			clone.depot = stm.depot;
 			clone.seller = stm.seller;
 			clone.description = stm.description;

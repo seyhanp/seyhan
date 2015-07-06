@@ -26,9 +26,12 @@ import javax.persistence.Transient;
 import meta.SpecialFields;
 import models.GlobalPrivateCode;
 import models.GlobalTransPoint;
+import models.InvoiceTransStatus;
+import models.OrderTransStatus;
 import models.Safe;
 import models.StockDepot;
 import models.StockUnit;
+import models.WaybillTransStatus;
 import play.data.validation.Constraints;
 import utils.GlobalCons;
 import enums.DocNoIncType;
@@ -85,6 +88,7 @@ public class ProfileData {
 	 */
 	public Boolean sprs_isSearchFormShowed;
 	public Boolean sprs_hasPrices;
+	public OrderTransStatus sprs_status;
 	public TransApprovalType sprs_approvalType;
 
 	/**
@@ -92,11 +96,13 @@ public class ProfileData {
 	 */
 	public Boolean irsl_isSearchFormShowed;
 	public Boolean irsl_hasPrices;
+	public WaybillTransStatus irsl_status;
 	public TransApprovalType irsl_approvalType;
 
 	/**
 	 * Invoice Tab
 	 */
+	public InvoiceTransStatus fatr_status;
 	public Boolean fatr_isSearchFormShowed;
 	public Boolean fatr_isCash;
 	public Double fatr_withholding; //tevkifat orani 0, .2, .5, .7, .9

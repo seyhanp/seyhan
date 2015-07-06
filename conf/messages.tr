@@ -93,6 +93,8 @@ create=Oluştur
 ok=Tamam
 cancel=Vazgeç
 previous=Önceki
+previous.status=Bir Önceki Durum
+first.status=İlk Durum
 next=Sonraki
 all=Tümü
 choose=-- Seçiniz --
@@ -474,16 +476,18 @@ ref.currency=Yansı ParaB.
 # --- Siparis
 order=Sipariş
 orders=Siparişler
+order.trans.status=Sipariş Durumları
 
 # --- İrsaliye
 waybill=İrsaliye
 waybills=İrsaliyeler
+waybill.trans.status=İrsaliye Durumları
 
 # --- Fatura
 invoice=Fatura
 invoices=Faturalar
 invoice.trans.source=Fatura Kaynağı
-invoice.close=Seçilen Faturaları Kapat
+invoice.trans.status=Fatura Durumları
 
 # --- Çek/Senet
 chqbll=Çek/Senet
@@ -716,6 +720,7 @@ enum.SPRS=Sipariş
 enum.SPRS_FIS_KAYNAKLARI=Sipariş Fiş Kaynakları
 enum.SPRS_ALINAN_SIPARIS_FISI=Alınan Sipariş Fişi
 enum.SPRS_VERILEN_SIPARIS_FISI=Verilen Sipariş Fişi
+enum.SPRS_SIPARIS_DURUMLARI=Sipariş Durumları
 enum.SPRS_ONAYLAMA_ADIMLARI=Sipariş Onaylama Adımları
 enum.SPRS_FIS_LISTESI=Sipariş Listesi
 enum.SPRS_DAGILIM_RAPORU=Dağılım Raporu
@@ -724,6 +729,7 @@ enum.IRSL=İrsaliye
 enum.IRSL_IRSALIYE_KAYNAKLARI=İrsaliye Kaynakları
 enum.IRSL_ALIS_IRSALIYESI=Alış İrsaliyesi
 enum.IRSL_SATIS_IRSALIYESI=Satış İrsaliyesi
+enum.IRSL_IRSALIYE_DURUMLARI=İrsaliye Durumları
 enum.IRSL_ONAYLAMA_ADIMLARI=İrsaliye Onaylama Adımları
 enum.IRSL_FIS_LISTESI=İrsaliye Listesi
 enum.IRSL_DAGILIM_RAPORU=Dağılım Raporu
@@ -734,7 +740,8 @@ enum.FATR_ALIS_FATURASI=Alış Faturası
 enum.FATR_SATIS_FATURASI=Satış Faturası
 enum.FATR_ALIS_IADE_FATURASI=Alış İade Faturası
 enum.FATR_SATIS_IADE_FATURASI=Satış İade Faturası
-enum.FATR_KAPAMA_ISLEMI=Fatura Kapama İşlemi
+enum.FATR_FATURA_DURUMLARI=Fatura Durumları
+enum.FATR_ONAYLAMA_ADIMLARI=Fatura Onaylama Adımları
 enum.FATR_FATURA_LISTESI=Fatura Listesi
 enum.FATR_DAGILIM_RAPORU=Dağılım Raporu
 
@@ -1067,10 +1074,13 @@ helpers.stock.isTaxInclude=Stoklu girişlerde KDV durumu alanı için hazır ola
 helpers.contact.checkLimits=Bu denetim aktif hale getirilirse (ek kontroller nedeni ile) yavaşlamalar olabilir!
 helpers.order.approval.contact=Sipariş onaylama formunda fişlerin nasıl oluşacağı buradan belirlenir.
 helpers.order.hasPrices=Sipariş fişlerinde fiyat alanlarının çıkıp-çıkmayacağı bu değere göre belirlenir.
+helpers.order.firstStatus=Yeni Sipariş girişi yapılırken hazır gelecek Durum bilgisidir.
 helpers.waybill.approval.contact=İrsaliye onaylama formunda fişlerin nasıl oluşacağı buradan belirlenir.
 helpers.waybill.hasPrices=İrsaliye fişlerinde fiyat alanlarının çıkıp-çıkmayacağı bu değere göre belirlenir.
+helpers.waybill.firstStatus=Yeni İrsaliye girişi yapılırken hazır gelecek Durum bilgisidir.
 helpers.invoice.isCash=Faturaların peşin olup-olmayacağı bu değere göre belirlenir.
 helpers.invoice.withholding=Faturalarda tevkifat olup-olmayacağı bu değere göre belirlenir.
+helpers.invoice.firstStatus=Yeni Fatura girişi yapılırken hazır gelecek Durum bilgisidir.
 helpers.chqbll.suretyFields=Senet girişlerinde Kefil Bilgileri de girilecekse bu değer EVET yapılmalıdır.
 helpers.general.exchange.source=Döviz kurlarının çekileceği kaynak. 
 helpers.general.rowNumber=Tanıtım/İşlem liste formlarında gösterilecek satır sayısı. 

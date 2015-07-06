@@ -29,7 +29,8 @@ import models.GlobalPrivateCode;
 import models.GlobalTransPoint;
 import models.SaleSeller;
 import models.StockDepot;
-import models.StockTransSource;
+import models.WaybillTransSource;
+import models.WaybillTransStatus;
 import play.data.Form;
 import play.data.format.Formats.DateTime;
 import play.i18n.Messages;
@@ -47,7 +48,6 @@ import controllers.global.Profiles;
 import enums.ReportUnit;
 import enums.Right;
 import enums.RightLevel;
-import enums.TransStatus;
 
 /**
  * @author mdpinar
@@ -69,10 +69,10 @@ public class ReceiptList extends Controller {
 		public GlobalTransPoint transPoint = Profiles.chosen().gnel_transPoint;
 		public GlobalPrivateCode privateCode = Profiles.chosen().gnel_privateCode;
 
-		public TransStatus status;
 		public Right transType;
 		public String transNo;
-		public StockTransSource transSource;
+		public WaybillTransSource transSource;
+		public WaybillTransStatus status;
 
 		@DateTime(pattern = "dd/MM/yyyy")
 		public Date startDate = DateUtils.getFirstDayOfMonth();
@@ -144,12 +144,6 @@ public class ReceiptList extends Controller {
 			queryBuilder.append(params.seller.id);
 		}
 
-		if (params.status != null) {
-			queryBuilder.append(" and t.status = '");
-			queryBuilder.append(params.status);
-			queryBuilder.append("'");
-		}
-
 		if (params.transType != null) {
 			queryBuilder.append(" and t._right = '");
 			queryBuilder.append(params.transType);
@@ -165,6 +159,11 @@ public class ReceiptList extends Controller {
 		if (params.transSource != null && params.transSource.id != null) {
 			queryBuilder.append(" and t.trans_source_id = ");
 			queryBuilder.append(params.transSource.id);
+		}
+
+		if (params.status != null && params.status.id != null) {
+			queryBuilder.append(" and t.status_id = ");
+			queryBuilder.append(params.status.id);
 		}
 
 		return queryBuilder.toString();

@@ -39,9 +39,9 @@ import com.avaje.ebean.Expr;
 import com.avaje.ebean.ExpressionList;
 import com.avaje.ebean.Page;
 
+import controllers.global.Profiles;
 import enums.Module;
 import enums.Right;
-import enums.TransStatus;
 
 @Entity
 /**
@@ -51,7 +51,8 @@ public class WaybillTrans extends AbstractStockTrans {
 
 	private static final long serialVersionUID = 1L;
 
-	public TransStatus status = TransStatus.Waiting;
+	@ManyToOne
+	public WaybillTransStatus status = Profiles.chosen().irsl_status;
 
 	@ManyToOne
 	public WaybillTransSource transSource;
@@ -86,9 +87,6 @@ public class WaybillTrans extends AbstractStockTrans {
 					)
 			);
 		} else {
-			if (searchParam.status != null) {
-				expList.eq("status", searchParam.status);
-			}
 			if (searchParam.receiptNo != null && searchParam.receiptNo.intValue() > 0) {
 				expList.eq("receiptNo", searchParam.receiptNo);
 			}
@@ -119,6 +117,9 @@ public class WaybillTrans extends AbstractStockTrans {
 			if (searchParam.transSource != null && searchParam.transSource.id != null) {
 				expList.eq("transSource", searchParam.transSource);
 			}
+			if (searchParam.waybillTransStatus != null && searchParam.waybillTransStatus.id != null) {
+				expList.eq("status", searchParam.waybillTransStatus);
+			}
 		}
 
 		return ModelHelper.getPage(right, expList, searchParam);
@@ -130,9 +131,6 @@ public class WaybillTrans extends AbstractStockTrans {
 		expList.eq("workspace", CacheUtils.getWorkspaceId());
 		expList.eq("right", searchParam.transType);
 
-		if (searchParam.status != null) {
-			expList.eq("status", searchParam.status);
-		}
 		if (searchParam.receiptNo != null && searchParam.receiptNo.intValue() > 0) {
 			expList.eq("receiptNo", searchParam.receiptNo);
 		}
@@ -160,6 +158,9 @@ public class WaybillTrans extends AbstractStockTrans {
 		if (searchParam.transSource != null && searchParam.transSource.id != null) {
 			expList.eq("transSource", searchParam.transSource);
 		}
+		if (searchParam.waybillTransStatus != null && searchParam.waybillTransStatus.id != null) {
+			expList.eq("status", searchParam.waybillTransStatus);
+		}
 
 		List<WaybillTrans> modelList = expList
 										.order("contact, transDate")
@@ -172,7 +173,6 @@ public class WaybillTrans extends AbstractStockTrans {
 			ReceiptListModel receipt = new ReceiptListModel();
 			receipt.id = trans.id;
 			receipt.right = trans.right;
-			receipt.status = trans.status;
 			receipt.receiptNo = trans.receiptNo;
 			receipt.contactName = trans.contactName;
 			receipt.date = DateUtils.formatDateStandart(trans.transDate);
@@ -183,6 +183,9 @@ public class WaybillTrans extends AbstractStockTrans {
 
 			if (trans.contact != null) {
 				receipt.contactId = trans.contact.id;
+			}
+			if (trans.status != null) {
+				receipt.statusId = trans.status.id;
 			}
 
 			result.add(receipt);
@@ -226,7 +229,8 @@ public class WaybillTrans extends AbstractStockTrans {
 		ExpressionList<WaybillTrans> expList = ModelHelper.getExpressionList(Module.waybill);
 
 		expList.eq("workspace", sourceWS);
-		expList.eq("status", TransStatus.Waiting);
+		//TODO: ilk konumdaki irsaliyeleri bulmak icin status alani null ya da profil tanimlarindaki degere esit olanlar icin kriter eklenecek
+		//expList.eq("status", TransStatus.Waiting);
 		return expList
 					.order("receiptNo")
 					.fetch("details")

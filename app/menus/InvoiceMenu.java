@@ -67,12 +67,19 @@ class InvoiceMenu extends AbstractMenu {
 			subMenu.add(new MenuItem(Messages.get(Right.FATR_ALIS_IADE_FATURASI.key), 
 				controllers.invoice.routes.Transes.list(new RightBind(Right.FATR_ALIS_IADE_FATURASI)).url()));
 		}
-
-		if (AuthManager.hasPrivilege(Right.FATR_KAPAMA_ISLEMI, RightLevel.Enable)) {
-			subMenu.add(new MenuItem(Messages.get(Right.FATR_KAPAMA_ISLEMI.key), 
-					controllers.invoice.routes.TransApprovals.index().url()));
+		
+		if (subMenu.size() > 0) subMenu.add(new MenuItem(MenuItemType.Divider));
+		
+		if (AuthManager.hasPrivilege(Right.FATR_FATURA_DURUMLARI, RightLevel.Enable)) {
+			subMenu.add(new MenuItem(Messages.get(Right.FATR_FATURA_DURUMLARI.key), 
+					controllers.invoice.routes.TransStatuses.index().url()));
 		}
 
+		if (AuthManager.hasPrivilege(Right.FATR_ONAYLAMA_ADIMLARI, RightLevel.Enable)) {
+			subMenu.add(new MenuItem(Messages.get(Right.FATR_ONAYLAMA_ADIMLARI.key), 
+					controllers.invoice.routes.TransApprovals.index().url()));
+		}
+		
 		if (subMenu.size() > 0) subMenu.add(new MenuItem(MenuItemType.Divider));
 
 		if (AuthManager.hasPrivilege(Right.FATR_FATURA_KAYNAKLARI, RightLevel.Enable)) {

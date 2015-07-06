@@ -1,0 +1,65 @@
+05-30 22:09:32 jdbc[37]: exception
+org.h2.jdbc.JdbcSQLException: Column "SC.EXTRA_FIELD0_ID" not found; SQL statement:
+select ef0.name as group_field, c.name as contact_name, c.phone, c.mobile_phone, t.exc_code, sum(t.debt) as sumDebt, sum(t.credit) as sumCredit, sum(t.debt-t.credit) as balance, (select sum(st.debt - st.credit) from contact_trans st where sc.extra_field0_id = c.extra_field0_id and st.trans_date < '2015-04-01' and st.exc_code = t.exc_code) as transfer
+from contact_trans t
+inner join contact c on c.id = t.contact_id and c.is_active = true
+left join contact_category cc on cc.id = c.category_id and cc.is_active = true
+left join sale_seller s on s.id = c.seller_id and s.is_active = true
+left join contact_trans_source ts on ts.id = t.trans_source_id and ts.is_active = true
+ left join contact_extra_fields ef0 on ef0.id = c.extra_field0_id  left join contact_extra_fields ef1 on ef1.id = c.extra_field1_id  left join contact_extra_fields ef2 on ef2.id = c.extra_field2_id  left join contact_extra_fields ef3 on ef3.id = c.extra_field3_id  left join contact_extra_fields ef4 on ef4.id = c.extra_field4_id  left join contact_extra_fields ef5 on ef5.id = c.extra_field5_id  left join contact_extra_fields ef6 on ef6.id = c.extra_field6_id  left join contact_extra_fields ef7 on ef7.id = c.extra_field7_id  left join contact_extra_fields ef8 on ef8.id = c.extra_field8_id  left join contact_extra_fields ef9 on ef9.id = c.extra_field9_id 
+
+
+where 1=1
+ and t.workspace = 1 and t.trans_date >= '2015-04-01' and t.trans_date <= '2015-05-30'
+group by ef0.name, c.name, c.phone, c.mobile_phone, t.exc_code
+order by ef0.name, c.name, c.phone, c.mobile_phone, t.exc_code [42122-172]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:144)
+	at org.h2.expression.Comparison.optimize(Comparison.java:161)
+	at org.h2.expression.ConditionAndOr.optimize(ConditionAndOr.java:131)
+	at org.h2.expression.ConditionAndOr.optimize(ConditionAndOr.java:131)
+	at org.h2.command.dml.Select.prepare(Select.java:811)
+	at org.h2.expression.Subquery.optimize(Subquery.java:73)
+	at org.h2.expression.Alias.optimize(Alias.java:52)
+	at org.h2.command.dml.Select.prepare(Select.java:808)
+	at org.h2.command.Parser.prepareCommand(Parser.java:219)
+	at org.h2.engine.Session.prepareLocal(Session.java:425)
+	at org.h2.engine.Session.prepareCommand(Session.java:374)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1138)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:70)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:267)
+	at com.jolbox.bonecp.ConnectionHandle.prepareStatement(ConnectionHandle.java:1024)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createStatement(JRJdbcQueryExecuter.java:298)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:220)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:1129)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:696)
+	at net.sf.jasperreports.engine.fill.BaseReportFiller.setParameters(BaseReportFiller.java:434)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:519)
+	at net.sf.jasperreports.engine.fill.BaseReportFiller.fill(BaseReportFiller.java:393)
+	at net.sf.jasperreports.engine.fill.JRFiller.fill(JRFiller.java:91)
+	at net.sf.jasperreports.engine.JasperFillManager.fill(JasperFillManager.java:456)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:863)
+	at reports.ReportService.generateReport(ReportService.java:106)
+	at controllers.contact.reports.TransReport.generate(TransReport.java:314)
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$58$$anonfun$apply$58.apply(routes_routing.scala:2431)
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$58$$anonfun$apply$58.apply(routes_routing.scala:2431)
+	at play.core.Router$HandlerInvoker$$anon$7$$anon$2.invocation(Router.scala:183)
+	at play.core.Router$Routes$$anon$1.invocation(Router.scala:377)
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:56)
+	at play.GlobalSettings$1.call(GlobalSettings.java:64)
+	at play.core.j.JavaAction$$anon$3.apply(JavaAction.scala:91)
+	at play.core.j.JavaAction$$anon$3.apply(JavaAction.scala:90)
+	at play.core.j.FPromiseHelper$$anonfun$flatMap$1.apply(FPromiseHelper.scala:82)
+	at play.core.j.FPromiseHelper$$anonfun$flatMap$1.apply(FPromiseHelper.scala:82)
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:251)
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:249)
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32)
+	at play.core.j.HttpExecutionContext$$anon$2.run(HttpExecutionContext.scala:37)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:42)
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:386)
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)

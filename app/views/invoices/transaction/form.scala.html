@@ -21,8 +21,7 @@ width:calc(100% - 5px)
 		_form("id").value,
 		rightBind.value,
 		invoice.routes.Transes.remove(if(_form("id").value != null && ! _form("id").value.isEmpty()) _form("id").value.toInt else -1, rightBind),
-		hasRemoveButton = (_form("isCash").value || _form("status").value != "Completed"),
-		subTitle = Messages("trans_status." + _form("status").value)
+		hasRemoveButton = (_form("isCompleted").value.equals("false"))
 	)
 
 	@helper.form(action = invoice.routes.Transes.save(rightBind),'class-> "form-horizontal zell", 'id -> "mainFieldsForm") {
@@ -53,7 +52,13 @@ width:calc(100% - 5px)
 				</div>
 
 				<div class="span6">
-					@tools.dropdowns.stock_depot(_form, false)
+					@select(_form("status.id"),
+						options(InvoiceTransStatus.options(true)),
+						'class -> "input-medium",
+						'_label -> Messages("status"),
+						'_default -> Messages("choose")
+					)
+
 					@tools.dropdowns.invoice_trans_source(_form, rightBind)
 
 					@inputText(_form("totalDiscountRate"),
@@ -313,6 +318,8 @@ width:calc(100% - 5px)
 							)
 						</div>
 						<div class="span4">
+							@tools.dropdowns.stock_depot(_form, false)
+
 							@select(_form("isTaxInclude"),
 								options(Options.taxStatus),
 								'class -> "input-small",
@@ -351,7 +358,7 @@ width:calc(100% - 5px)
 			</div>
 		</div>
 
-		@tools.templates.form_footer_bar(rightBind.value, _form("id").value, _form("isCash").value || _form("status").value != "Completed")
+		@tools.templates.form_footer_bar(rightBind.value, _form("id").value, _form("isCompleted").value.equals("false"))
 
 	}
 

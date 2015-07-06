@@ -94,6 +94,10 @@
 					<td colspan="3" class="row_title"><h4>@Messages("order")</h4></td>
 				</tr>
 				<tr>
+					<td>@select(_form("sprs_status.id"), options(OrderTransStatus.options(true)), '_label -> Messages("first.status"), '_default -> Messages("choose"))</td>
+					<td>@Messages("helpers.order.firstStatus")</td>
+				</tr>
+				<tr>
 					<td>@select(_form("sprs_hasPrices"), options(Options.yesno), '_label -> Messages("has_prices"))</td>
 					<td>@Messages("helpers.order.hasPrices")</td>
 				</tr>
@@ -110,6 +114,10 @@
 					<td colspan="3" class="row_title"><h4>@Messages("waybill")</h4></td>
 				</tr>
 				<tr>
+					<td>@select(_form("irsl_status.id"), options(WaybillTransStatus.options(true)), '_label -> Messages("first.status"), '_default -> Messages("choose"))</td>
+					<td>@Messages("helpers.waybill.firstStatus")</td>
+				</tr>
+				<tr>
 					<td>@select(_form("irsl_hasPrices"), options(Options.yesno), '_label -> Messages("has_prices"))</td>
 					<td>@Messages("helpers.waybill.hasPrices")</td>
 				</tr>
@@ -124,6 +132,10 @@
 
 				<tr>
 					<td colspan="3" class="row_title"><h4>@Messages("invoice")</h4></td>
+				</tr>
+				<tr>
+					<td>@select(_form("fatr_status.id"), options(InvoiceTransStatus.options(true)), '_label -> Messages("first.status"), '_default -> Messages("choose"))</td>
+					<td>@Messages("helpers.invoice.firstStatus")</td>
 				</tr>
 				<tr>
 					<td>@select(_form("fatr_isCash"), options(Options.yesno), '_label -> Messages("is_cash"))</td>
@@ -144,7 +156,7 @@
 							@for((key, value) <- meta.SpecialFields.invoice){
 								<div class="controls">
 									<input class="case" type="checkbox" name='fatr_specialFields["@key"]' 
-										@if(_form(("fatr_specialFields[" + key + "]")).value.toString.equals("true")) { checked }><span style="margin-left: 5px">@Messages("vof." + key)</span>
+										@if(_form(("fatr_specialFields[" + key + "]")).value != null && _form(("fatr_specialFields[" + key + "]")).value.toString.equals("true")) { checked }><span style="margin-left: 5px">@Messages("vof." + key)</span>
 									</input>
 								</div>
 							}

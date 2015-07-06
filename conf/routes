@@ -373,6 +373,14 @@ GET     /orders/trans_source/:id                        controllers.order.TransS
 POST    /orders/trans_source/:id/delete                 controllers.order.TransSources.remove(id:Integer)
 GET     /orders/trans_source/get/options                controllers.order.TransSources.options(right:String)
 
+# Trans Statuses
+GET     /orders/trans_status                            controllers.order.TransStatuses.index()
+GET     /orders/trans_statuses                          controllers.order.TransStatuses.list()
+POST    /orders/trans_status                            controllers.order.TransStatuses.save()
+GET     /orders/trans_status/new                        controllers.order.TransStatuses.create()
+GET     /orders/trans_status/:id                        controllers.order.TransStatuses.edit(id:Integer)
+POST    /orders/trans_status/:id/delete                 controllers.order.TransStatuses.remove(id:Integer)
+
 # Trans Approvals
 GET     /orders/trans_approvals                         controllers.order.TransApprovals.index()
 POST    /orders/trans_approvals                         controllers.order.TransApprovals.submit()
@@ -406,6 +414,14 @@ GET     /waybills/trans_source/:id                      controllers.waybill.Tran
 POST    /waybills/trans_source/:id/delete               controllers.waybill.TransSources.remove(id:Integer)
 GET     /waybills/trans_source/get/options              controllers.waybill.TransSources.options(right:String)
 
+# Waybill Statuses
+GET     /waybills/trans_status                          controllers.waybill.TransStatuses.index()
+GET     /waybills/trans_statuses                        controllers.waybill.TransStatuses.list()
+POST    /waybills/trans_status                          controllers.waybill.TransStatuses.save()
+GET     /waybills/trans_status/new                      controllers.waybill.TransStatuses.create()
+GET     /waybills/trans_status/:id                      controllers.waybill.TransStatuses.edit(id:Integer)
+POST    /waybills/trans_status/:id/delete               controllers.waybill.TransStatuses.remove(id:Integer)
+
 # Waybill Approvals
 GET     /waybills/trans_approvals                       controllers.waybill.TransApprovals.index()
 POST    /waybills/trans_approvals                       controllers.waybill.TransApprovals.submit()
@@ -438,6 +454,14 @@ GET     /invoices/trans_source/new                      controllers.invoice.Tran
 GET     /invoices/trans_source/:id                      controllers.invoice.TransSources.edit(id:Integer)
 POST    /invoices/trans_source/:id/delete               controllers.invoice.TransSources.remove(id:Integer)
 GET     /invoices/trans_source/get/options              controllers.invoice.TransSources.options(right:String)
+
+# Invoice Statuses
+GET     /invoices/trans_status                          controllers.invoice.TransStatuses.index()
+GET     /invoices/trans_statuses                        controllers.invoice.TransStatuses.list()
+POST    /invoices/trans_status                          controllers.invoice.TransStatuses.save()
+GET     /invoices/trans_status/new                      controllers.invoice.TransStatuses.create()
+GET     /invoices/trans_status/:id                      controllers.invoice.TransStatuses.edit(id:Integer)
+POST    /invoices/trans_status/:id/delete               controllers.invoice.TransStatuses.remove(id:Integer)
 
 # Trans Approvals
 GET     /invoices/trans_approvals                       controllers.invoice.TransApprovals.index()

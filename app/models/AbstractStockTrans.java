@@ -42,6 +42,8 @@ public abstract class AbstractStockTrans extends AbstractBaseTrans {
 	@ManyToOne
 	public Contact contact;
 
+	public Boolean isCompleted = Boolean.FALSE;
+
 	public Boolean isTaxInclude = Profiles.chosen().stok_isTaxInclude;
 
 	@ManyToOne

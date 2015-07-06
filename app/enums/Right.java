@@ -287,6 +287,9 @@ public enum Right {
 	@EnumValue("SPRS_FIS_KAYNAKLARI")
 	SPRS_FIS_KAYNAKLARI(Module.order, false, true, false),
 
+	@EnumValue("SPRS_SIPARIS_DURUMLARI")
+	SPRS_SIPARIS_DURUMLARI(Module.order, false, true, false),
+
 	@EnumValue("SPRS_ONAYLAMA_ADIMLARI")
 	SPRS_ONAYLAMA_ADIMLARI(Module.order, false, false, false),
 
@@ -314,6 +317,9 @@ public enum Right {
 
 	@EnumValue("IRSL_IRSALIYE_KAYNAKLARI")
 	IRSL_IRSALIYE_KAYNAKLARI(Module.waybill, false, true, false),
+
+	@EnumValue("IRSL_FATURA_DURUMLARI")
+	IRSL_IRSALIYE_DURUMLARI(Module.waybill, false, true, false),
 
 	@EnumValue("IRSL_ONAYLAMA_ADIMLARI")
 	IRSL_ONAYLAMA_ADIMLARI(Module.waybill, false, false, false),
@@ -343,8 +349,11 @@ public enum Right {
 	@EnumValue("FATR_FATURA_KAYNAKLARI")
 	FATR_FATURA_KAYNAKLARI(Module.invoice, false, true, false),
 
-	@EnumValue("FATR_KAPAMA_ISLEMI")
-	FATR_KAPAMA_ISLEMI(Module.invoice, false, false, false),
+	@EnumValue("FATR_FATURA_DURUMLARI")
+	FATR_FATURA_DURUMLARI(Module.invoice, false, true, false),
+
+	@EnumValue("FATR_ONAYLAMA_ADIMLARI")
+	FATR_ONAYLAMA_ADIMLARI(Module.invoice, false, true, false),
 	// -----------------------------------------------------------------
 
 	@EnumValue("FATR_ALIS_FATURASI")

@@ -63,6 +63,11 @@ class OrderMenu extends AbstractMenu {
 		}
 
 		if (subMenu.size() > 0) subMenu.add(new MenuItem(MenuItemType.Divider));
+		
+		if (AuthManager.hasPrivilege(Right.SPRS_SIPARIS_DURUMLARI, RightLevel.Enable)) {
+			subMenu.add(new MenuItem(Messages.get(Right.SPRS_SIPARIS_DURUMLARI.key), 
+					controllers.order.routes.TransStatuses.index().url()));
+		}
 
 		if (AuthManager.hasPrivilege(Right.SPRS_ONAYLAMA_ADIMLARI, RightLevel.Enable)) {
 			subMenu.add(new MenuItem(Messages.get(Right.SPRS_ONAYLAMA_ADIMLARI.key), 

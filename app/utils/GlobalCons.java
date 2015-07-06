@@ -58,7 +58,7 @@ public class GlobalCons {
 		defaultLang = conf.getString("seyhan.default.lang");
 		defaultExcCode = conf.getString("seyhan.default.currency");
 
-		if (dbVendor.equals("sqlserver")) {
+		if (dbVendor.equals("mysql") || dbVendor.equals("sqlserver")) {
 			TRUE = "1";
 			FALSE = "0";
 		} else {

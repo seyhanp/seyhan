@@ -35,15 +35,17 @@ import models.ChqbllPayrollSource;
 import models.ChqbllTrans;
 import models.ChqbllType;
 import models.Contact;
-import models.ContactExtraFields;
 import models.ContactCategory;
+import models.ContactExtraFields;
 import models.ContactTrans;
 import models.ContactTransSource;
 import models.GlobalProfile;
 import models.InvoiceTrans;
 import models.InvoiceTransSource;
+import models.InvoiceTransStatus;
 import models.OrderTrans;
 import models.OrderTransSource;
+import models.OrderTransStatus;
 import models.Safe;
 import models.SafeExpense;
 import models.SafeTrans;
@@ -62,6 +64,7 @@ import models.StockTransSource;
 import models.StockUnit;
 import models.WaybillTrans;
 import models.WaybillTransSource;
+import models.WaybillTransStatus;
 import models.search.AbstractSearchParam;
 import models.temporal.Pair;
 import play.db.ebean.Model;
@@ -152,7 +155,7 @@ public class ModelHelper {
 	public static <T extends BaseModel> List<T> page(Right right, String fieldName) {
 		return page(right, fieldName, null);
 	}
-	
+
 	public static <T extends BaseModel> List<T> page(Right right, String fieldName, Expression exp) {
 		ExpressionList<T> elList = finderMap.get(right)
 											.where()
@@ -162,6 +165,16 @@ public class ModelHelper {
 		Pair sortInfo = CookieUtils.getSortInfo(right, fieldName);
 		return elList
 					.orderBy(sortInfo.key + " " + sortInfo.value)
+				.findList();
+	}
+
+	public static <T extends BaseModel> List<T> orderedPage(Right right, String orderBy) {
+		ExpressionList<T> elList = finderMap.get(right)
+											.where()
+												.eq("workspace", CacheUtils.getWorkspaceId());
+
+		return elList
+					.orderBy(orderBy)
 				.findList();
 	}
 
@@ -425,12 +438,15 @@ public class ModelHelper {
 		finderByNameMap.put(CHBL_PAYROLL_SOURCE, new Model.Finder<Integer, ChqbllPayrollSource>(Integer.class, ChqbllPayrollSource.class));
 
 		finderMap.put(Right.SPRS_FIS_KAYNAKLARI, new Model.Finder<Integer, OrderTransSource>(Integer.class, OrderTransSource.class));
+		finderMap.put(Right.SPRS_SIPARIS_DURUMLARI, new Model.Finder<Integer, OrderTransStatus>(Integer.class, OrderTransStatus.class));
 		finderForTransMap.put(Module.order, new Model.Finder<Integer, OrderTrans>(Integer.class, OrderTrans.class));
 
 		finderMap.put(Right.IRSL_IRSALIYE_KAYNAKLARI, new Model.Finder<Integer, WaybillTransSource>(Integer.class, WaybillTransSource.class));
+		finderMap.put(Right.IRSL_IRSALIYE_DURUMLARI, new Model.Finder<Integer, WaybillTransStatus>(Integer.class, WaybillTransStatus.class));
 		finderForTransMap.put(Module.waybill, new Model.Finder<Integer, WaybillTrans>(Integer.class, WaybillTrans.class));
 
 		finderMap.put(Right.FATR_FATURA_KAYNAKLARI, new Model.Finder<Integer, InvoiceTransSource>(Integer.class, InvoiceTransSource.class));
+		finderMap.put(Right.FATR_FATURA_DURUMLARI, new Model.Finder<Integer, InvoiceTransStatus>(Integer.class, InvoiceTransStatus.class));
 		finderForTransMap.put(Module.invoice, new Model.Finder<Integer, InvoiceTrans>(Integer.class, InvoiceTrans.class));
 
 		finderMap.put(Right.SATS_SATICI_TANITIMI, new Model.Finder<Integer, SaleSeller>(Integer.class, SaleSeller.class));

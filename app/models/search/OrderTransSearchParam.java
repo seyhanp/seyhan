@@ -25,15 +25,18 @@ import java.util.List;
 import models.GlobalPrivateCode;
 import models.GlobalTransPoint;
 import models.InvoiceTransSource;
+import models.InvoiceTransStatus;
+import models.OrderTransSource;
+import models.OrderTransStatus;
 import models.SaleSeller;
 import models.StockDepot;
 import models.WaybillTransSource;
+import models.WaybillTransStatus;
 import models.temporal.ReceiptListModel;
 import play.data.format.Formats.DateTime;
 import controllers.global.Profiles;
 import enums.Right;
 import enums.TransApprovalType;
-import enums.TransStatus;
 
 /**
  * @author mdpinar
@@ -44,8 +47,6 @@ public class OrderTransSearchParam extends StockTransSearchParam {
 	 * Arama kismi icin gereken alanlar
 	 */
 	public Right transType;
-
-	public TransStatus status;
 
 	@DateTime(pattern = "dd/MM/yyyy")
 	public Date startDate;
@@ -66,12 +67,21 @@ public class OrderTransSearchParam extends StockTransSearchParam {
 	 * Onaylama sartlari
 	 */
 	public String formAction;
+	public String description;
+	
 	public TransApprovalType approvalType = Profiles.chosen().sprs_approvalType;
-	public WaybillTransSource waybillTransSource;
-	public InvoiceTransSource invoiceTransSource;
 	public GlobalTransPoint submitTransPoint = Profiles.chosen().gnel_transPoint;
 	public GlobalPrivateCode submitPrivateCode = Profiles.chosen().gnel_privateCode;
 	public SaleSeller seller;
 	public StockDepot depot = Profiles.chosen().stok_depot;
 
+	public OrderTransSource orderTransSource;
+	public OrderTransStatus orderTransStatus;
+
+	public WaybillTransSource waybillTransSource;
+	public WaybillTransStatus waybillTransStatus;
+
+	public InvoiceTransSource invoiceTransSource;
+	public InvoiceTransStatus invoiceTransStatus;
+	
 }

@@ -112,7 +112,10 @@ public class ChqbllDetailHistory extends Model {
 	}
 
 	public static void setStep(Integer detailId, ChqbllStep step) {
-		Ebean.createSqlUpdate("update chqbll_detail_history set step = :step").setParameter("step", step).execute();
+		Ebean.createSqlUpdate("update chqbll_detail_history set step = :step where detail_id = :id")
+								.setParameter("id", detailId)
+								.setParameter("step", step)
+							.execute();
 	}
 
 	public static List<ChqbllDetailHistory> findHistoryList(ChqbllPayrollDetail det, int maxRows) {

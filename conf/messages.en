@@ -93,6 +93,8 @@ create=Create
 ok=OK
 cancel=Cancel
 previous=Prev
+previous.status=Previous Status
+first.status=First Status
 next=Next
 all=All
 choose=-- Choose --
@@ -474,16 +476,18 @@ ref.currency=Ref.Currency
 # --- Order
 order=Order
 orders=Orders
+order.trans.status=Order Status
 
 # --- Waybill
 waybill=Waybill
 waybills=Waybills
+waybill.trans.status=Waybill Status
 
 # --- Invoice
 invoice=Invoice
 invoices=Invoices
 invoice.trans.source=Invoice Source
-invoice.close=Close selected Invoices
+invoice.trans.status=Invoice Status
 
 # --- Çek/Senet
 chqbll=Cheque/Bill
@@ -716,6 +720,7 @@ enum.SPRS=Order
 enum.SPRS_FIS_KAYNAKLARI=Order Receipt Sources
 enum.SPRS_ALINAN_SIPARIS_FISI=Purchase Order
 enum.SPRS_VERILEN_SIPARIS_FISI=Sale Order
+enum.SPRS_SIPARIS_DURUMLARI=Order Statuses
 enum.SPRS_ONAYLAMA_ADIMLARI=Order Approvals
 enum.SPRS_FIS_LISTESI=Order List
 enum.SPRS_DAGILIM_RAPORU=Distribution Report
@@ -724,6 +729,7 @@ enum.IRSL=Waybill
 enum.IRSL_IRSALIYE_KAYNAKLARI=Waybill Sources
 enum.IRSL_ALIS_IRSALIYESI=Purchase Waybill
 enum.IRSL_SATIS_IRSALIYESI=Sale Waybill
+enum.IRSL_IRSALIYE_DURUMLARI=Waybill Statuses
 enum.IRSL_ONAYLAMA_ADIMLARI=Waybill Approvals
 enum.IRSL_FIS_LISTESI=Waybill List
 enum.IRSL_DAGILIM_RAPORU=Distribution Report
@@ -734,7 +740,8 @@ enum.FATR_ALIS_FATURASI=Purchase Invoice
 enum.FATR_SATIS_FATURASI=Sale Invoice
 enum.FATR_ALIS_IADE_FATURASI=Return of Purchase Invoice 
 enum.FATR_SATIS_IADE_FATURASI=Return of Sale Invoice
-enum.FATR_KAPAMA_ISLEMI=Invoice Closing
+enum.FATR_FATURA_DURUMLARI=Invoice Statuses
+enum.FATR_ONAYLAMA_ADIMLARI=Invoice Approvals
 enum.FATR_FATURA_LISTESI=Invoice List
 enum.FATR_DAGILIM_RAPORU=Distribution Report
 
@@ -1067,10 +1074,13 @@ helpers.stock.isTaxInclude=For Tax Status field in form of stock table, this val
 helpers.contact.checkLimits= If this control is selected, (due to additional controls) may be some delay!
 helpers.order.approval.contact=How will consist of the form of order approval is determined from here.
 helpers.order.hasPrices=In order receipts, price fields is displayed or not according to this value.
+helpers.order.firstStatus=Default Status value for new Order receipts.
 helpers.waybill.approval.contact=How will consist of the form of waybill approval is determined from here.
 helpers.waybill.hasPrices=In waybill receipts, price fields is displayed or not according to this value.
+helpers.waybill.firstStatus=Default Status value for new Waybill receipts.
 helpers.invoice.isCash=Payment way of invoices is cash or not according to this value.
 helpers.invoice.withholding=In invoice receipts, they has withholding or not.
+helpers.invoice.firstStatus=Default Status value for new Invoice receipts.
 helpers.chqbll.suretyFields=if you want to enter the Surety Info, this value must be YES. 
 helpers.general.exchange.source=Source of the exchange rates.
 helpers.general.rowNumber=Number of rows to be displayed in definition/transaction list forms.

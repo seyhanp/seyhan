@@ -22,7 +22,7 @@
 						)
 					
 						@select(_form("status"),
-							options(enums.TransStatus.options),
+							options(OrderTransStatus.options(false)),
 							'class -> "input-medium",
 							'_label -> Messages("status")
 						)
@@ -92,8 +92,6 @@
 			<p class="pull-right" style="margin-top: 10px">
 				<a id="appsubWaybill" class="btn btn-small btn-primary mact" disabled="disabled">@Messages("make.waybill")</a>
 				<a id="appsubInvoice" class="btn btn-small btn-success mact" disabled="disabled">@Messages("make.invoice")</a>
-				@if(_form("status").value != "Cancelled") {
-					<a id="appsubCancelled" class="btn btn-small btn-danger mact" disabled="disabled">@Messages("trans_status.Cancelled")</a>}
 			</p>
 		</div>
 
@@ -120,16 +118,12 @@
 						<tr>
 							<input type="hidden" id="details[@index]_id" name="details[@index].id" value="@detail.id" />
 							<input type="hidden" id="details[@index]_right" name="details[@index].right" value="@detail.right" />
-							<input type="hidden" id="details[@index]_status" name="details[@index].status" value="@detail.status" />
+							<input type="hidden" id="details[@index]_statusId" name="details[@index].statusId" value="@detail.statusId" />
 							<input type="hidden" id="details[@index]_contactId" name="details[@index].contactId" value="@detail.contactId" />
 		
-							@if(! detail.status.name.equals("Completed")) {
-								<td style="text-align: center;"><input class="case" type="checkbox" id="details[@index]_isSelected" name="details[@index].isSelected" /></td>
-							} else {<td/>}
+							<td style="text-align: center;"><input class="case" type="checkbox" id="details[@index]_isSelected" name="details[@index].isSelected" /></td>
 							<td style="text-align: right;">@detail.receiptNo</td>
-							@if(! detail.status.name.equals("Completed")) {
-								<td><a class="contactRowChooser" href="#" data-index="@index">@detail.contactName</a></td>
-							} else {<td>@detail.contactName</td>}
+							<td><a class="contactRowChooser" href="#" data-index="@index">@detail.contactName</a></td>
 							<td style="text-align: center">@detail.date</td>
 							<td style="text-align: center">@detail.deliveryDate</td>
 							@if(global.Profiles.chosen().sprs_hasPrices) {

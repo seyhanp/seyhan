@@ -17,30 +17,30 @@ width: calc(100% - 5px);
 
 @tools.templates.trans_form(ScriptBlock) {
 
-	@if(_form("status").value == "Completed") {
-		<div class="alert alert-error">
-			<strong>@Messages("alert"): </strong> @Messages("edit.striction.for_view")
-			@if(_form("waybillId").value != null) {
-				 @Html(utils.StringUtils.buildLinkForApprovals(rightBind.value, "waybills", _form("waybillId").value))
-			} else {
-				 @Html(utils.StringUtils.buildLinkForApprovals(rightBind.value, "invoices", _form("invoiceId").value))
-			}
-		</div>
-	}
+@***********************************************************************************************************************
+*	@if(_form("status").value == "Completed") {
+*		<div class="alert alert-error">
+*			<strong>@Messages("alert"): </strong> @Messages("edit.striction.for_view")
+*			@if(_form("waybillId").value != null) {
+*				 @Html(utils.StringUtils.buildLinkForApprovals(rightBind.value, "waybills", _form("waybillId").value))
+*			} else {
+*				 @Html(utils.StringUtils.buildLinkForApprovals(rightBind.value, "invoices", _form("invoiceId").value))
+*			}
+*		</div>
+*	}
+***********************************************************************************************************************@
 
 	@tools.imports.forms_header(
 		_form("id").value,
 		rightBind.value,
 		order.routes.Transes.remove(if(_form("id").value != null && ! _form("id").value.isEmpty()) _form("id").value.toInt else -1, rightBind),
-		hasRemoveButton = (_form("status").value != "Completed"),
-		subTitle = Messages("trans_status." + _form("status").value)
+		hasRemoveButton = (_form("isCompleted").value.equals("false"))
 	)
 
 	@helper.form(action = order.routes.Transes.save(rightBind),'class-> "form-horizontal zell", 'id -> "mainFieldsForm") {
 
 		@tools.imports.base_hidden_fields(_form, rightBind.value)
 		<input type="hidden" id="excCode" name="excCode" value='@_form("excCode").value' />
-		<input type="hidden" id="status" name="status" value='@_form("status").value' />
 		
 		<fieldset>
 			<div class="row-fluid">
@@ -58,12 +58,23 @@ width: calc(100% - 5px);
 						'_label -> Messages("date"),
 						'class -> "input-small date"
 					)
+					@inputText(_form("deliveryDate"),
+						'_label -> Messages("date.delivery"),
+						'class -> "input-small date"
+					)
 
 					@tools.components.autocomplete_contact(_form, direction=rightBind.value.transType.toString(), hasExtraData=true, hasSummaryButton=true)
 
 				</div>
 
 				<div class="span6">
+					@select(_form("status.id"),
+						options(OrderTransStatus.options(true)),
+						'class -> "input-medium",
+						'_label -> Messages("status"),
+						'_default -> Messages("choose")
+					)
+
 					@tools.dropdowns.order_trans_source(_form)
 
 					@inputText(_form("totalDiscountRate"),
@@ -79,10 +90,6 @@ width: calc(100% - 5px);
 						'maxlength -> "100"
 					)
 					@if(isSelling) {@tools.dropdowns.sale_seller(_form)}
-					@inputText(_form("deliveryDate"),
-						'_label -> Messages("date.delivery"),
-						'class -> "input-small date"
-					)
 				</div>
 			</div>
 
@@ -321,6 +328,8 @@ width: calc(100% - 5px);
 						</div>
 						<div class="span4">
 							<div style="display: @(if(global.Profiles.chosen().sprs_hasPrices) "block" else "none")">
+								@tools.dropdowns.stock_depot(_form, false)
+
 								@select(_form("isTaxInclude"),
 									options(Options.taxStatus),
 									'class -> "input-small",
@@ -335,7 +344,6 @@ width: calc(100% - 5px);
 									'onchange -> "findTotalsForStocks()",
 									'_default -> Messages("choose")
 								)
-								@tools.dropdowns.stock_depot(_form, false)
 							</div>
 						</div>
 					</fieldset>
@@ -343,7 +351,7 @@ width: calc(100% - 5px);
 			</div>
 		</div>
 
-		@tools.templates.form_footer_bar(rightBind.value, _form("id").value, _form("status").value != "Completed")
+		@tools.templates.form_footer_bar(rightBind.value, _form("id").value, _form("isCompleted").value.equals("false"))
 
 	}
 

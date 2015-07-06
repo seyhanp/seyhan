@@ -1,0 +1,21 @@
+@(currentPage: meta.PageExtend[InvoiceTransStatus])
+
+@Controller = {
+	<script type="text/javascript">
+		var controller = jsRoutes.controllers.invoice.TransStatuses;
+	</script>
+}
+
+@tools.templates.ajax_index(Controller) {
+
+	@tools.templates.ajax_form(
+		right = enums.Right.FATR_FATURA_DURUMLARI,
+		saveAction = invoice.routes.TransStatuses.save
+	)
+
+	<div id=list>
+		@list(currentPage)
+	</div>
+
+}
+	

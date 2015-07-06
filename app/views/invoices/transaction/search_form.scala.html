@@ -8,7 +8,7 @@
 	<input type="hidden" name="rightBind" id="rightBind" value='@rightBind' />
 
 	@select(_form("status"),
-		options(enums.TransStatus.optionsWithoutCancelled),
+		options(InvoiceTransStatus.options(false)),
 		'class -> "input-medium",
 		'_label -> Messages("status"),
 		'_default -> Messages("choose")

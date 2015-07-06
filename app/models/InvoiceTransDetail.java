@@ -22,7 +22,6 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 import play.data.validation.Constraints;
-import enums.TransStatus;
 
 @Entity
 /**
@@ -32,10 +31,11 @@ public class InvoiceTransDetail extends AbstractStockTransDetail {
 
 	private static final long serialVersionUID = 1L;
 
-	public TransStatus status = TransStatus.Waiting;
-
 	@ManyToOne
 	public InvoiceTrans trans;
+	
+	@ManyToOne
+	public InvoiceTransStatus status;
 
 	@ManyToOne
 	public InvoiceTransSource transSource;

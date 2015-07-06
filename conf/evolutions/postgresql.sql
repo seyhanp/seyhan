@@ -711,8 +711,8 @@ create table invoice_trans (
   id                        serial not null,
   receipt_no                integer not null,
   _right                    varchar(50) not null,
-  status                    varchar(10) not null default 'Waiting',
   is_cash                   boolean default true,
+  is_completed              boolean default false,
   trans_date                date not null,
   real_date                 timestamp,
   delivery_date             timestamp,
@@ -759,18 +759,18 @@ create table invoice_trans (
   depot_id                  integer,
   ref_module                varchar(10),
   ref_id                    integer,
+  status_id                 integer,
   workspace                 integer not null,
   version                   integer default 0,
   primary key (id)
 );
-create index invoice_trans_ix1 on invoice_trans (workspace, _right, trans_date, status);
+create index invoice_trans_ix1 on invoice_trans (workspace, _right, trans_date);
 create sequence invoice_trans_seq;
 
 create table invoice_trans_detail (
   id                        serial not null,
   receipt_no                integer not null,
   _right                    varchar(50) not null,
-  status                    varchar(10) not null default 'Waiting',
   trans_date                date not null,
   delivery_date             date,
   trans_type                varchar(6) not null,
@@ -829,6 +829,7 @@ create table invoice_trans_detail (
   private_code_id           integer,
   parent_id                 integer,
   parent_right              varchar(30),
+  status_id                 integer,
   workspace                 integer not null,
   primary key (id)
 );
@@ -882,10 +883,11 @@ create table invoice_trans_status (
   update_by                 varchar(20),
   update_at                 timestamp,
   is_active                 boolean default true,
+  workspace                 integer not null,
   version                   integer default 0,
   primary key (id)
 );
-create index invoice_trans_status_ix1 on invoice_trans_status (workspace, name);
+create index invoice_trans_status_ix1 on invoice_trans_status (name);
 create sequence invoice_trans_status_seq;
 
 create table invoice_trans_status_history (
@@ -894,6 +896,7 @@ create table invoice_trans_status_history (
   trans_id                  integer not null,
   status_id                 integer not null,
   username                  varchar(20),
+  description               varchar(150),
   primary key (id)
 );
 create sequence invoice_trans_status_history_seq;
@@ -921,7 +924,7 @@ create table order_trans (
   id                        serial not null,
   receipt_no                integer not null,
   _right                    varchar(50) not null,
-  status                    varchar(10) not null default 'Waiting',
+  is_completed              boolean default false,
   trans_date                date not null,
   real_date                 timestamp,
   delivery_date             timestamp,
@@ -967,18 +970,18 @@ create table order_trans (
   invoice_id                integer,
   ref_module                varchar(10),
   ref_id                    integer,
+  status_id                 integer,
   workspace                 integer not null,
   version                   integer default 0,
   primary key (id)
 );
-create index order_trans_ix1 on order_trans (workspace, _right, trans_date, status);
+create index order_trans_ix1 on order_trans (workspace, _right, trans_date);
 create sequence order_trans_seq;
 
 create table order_trans_detail (
   id                        serial not null,
   receipt_no                integer not null,
   _right                    varchar(50) not null,
-  status                    varchar(10) not null default 'Waiting',
   trans_date                date not null,
   delivery_date             date,
   trans_type                varchar(6) not null,
@@ -1029,6 +1032,7 @@ create table order_trans_detail (
   trans_source_id           integer,
   trans_point_id            integer,
   private_code_id           integer,
+  status_id                 integer,
   workspace                 integer not null,
   primary key (id)
 );
@@ -1073,7 +1077,7 @@ create table order_trans_status (
   version                   integer default 0,
   primary key (id)
 );
-create index order_trans_status_ix1 on order_trans_status (workspace, name);
+create index order_trans_status_ix1 on order_trans_status (name);
 create sequence order_trans_status_seq;
 
 create table order_trans_status_history (
@@ -1082,6 +1086,7 @@ create table order_trans_status_history (
   trans_id                  integer not null,
   status_id                 integer not null,
   username                  varchar(20),
+  description               varchar(150),
   primary key (id)
 );
 create sequence order_trans_status_history_seq;
@@ -1494,6 +1499,7 @@ create table stock_trans (
   id                        serial not null,
   receipt_no                integer not null,
   _right                    varchar(50) not null,
+  is_completed              boolean default false,
   trans_date                date not null,
   real_date                 timestamp,
   delivery_date             timestamp,
@@ -1677,7 +1683,7 @@ create table waybill_trans (
   id                        serial not null,
   receipt_no                integer not null,
   _right                    varchar(50) not null,
-  status                    varchar(10) not null default 'Waiting',
+  is_completed              boolean default false,
   trans_date                date not null,
   real_date                 timestamp,
   delivery_date             timestamp,
@@ -1722,18 +1728,18 @@ create table waybill_trans (
   invoice_id                integer,
   ref_module                varchar(10),
   ref_id                    integer,
+  status_id                 integer,
   workspace                 integer not null,
   version                   integer default 0,
   primary key (id)
 );
-create index waybill_trans_ix1 on waybill_trans (workspace, _right, trans_date, status);
+create index waybill_trans_ix1 on waybill_trans (workspace, _right, trans_date);
 create sequence waybill_trans_seq;
 
 create table waybill_trans_detail (
   id                        serial not null,
   receipt_no                integer not null,
   _right                    varchar(50) not null,
-  status                    varchar(10) not null default 'Waiting',
   trans_date                date not null,
   delivery_date             date,
   trans_type                varchar(6) not null,
@@ -1784,6 +1790,7 @@ create table waybill_trans_detail (
   trans_source_id           integer,
   trans_point_id            integer,
   private_code_id           integer,
+  status_id                 integer,
   workspace                 integer not null,
   primary key (id)
 );
@@ -1835,10 +1842,11 @@ create table waybill_trans_status (
   update_by                 varchar(20),
   update_at                 timestamp,
   is_active                 boolean default true,
+  workspace                 integer not null,
   version                   integer default 0,
   primary key (id)
 );
-create index waybill_trans_status_ix1 on waybill_trans_status (workspace, name);
+create index waybill_trans_status_ix1 on waybill_trans_status (name);
 create sequence waybill_trans_status_seq;
 
 create table waybill_trans_status_history (
@@ -1847,6 +1855,7 @@ create table waybill_trans_status_history (
   trans_id                  integer not null,
   status_id                 integer not null,
   username                  varchar(20),
+  description               varchar(150),
   primary key (id)
 );
 create sequence waybill_trans_status_history_seq;
@@ -1943,6 +1952,7 @@ alter table invoice_trans add foreign key (trans_source_id) references invoice_t
 alter table invoice_trans add foreign key (trans_point_id) references global_trans_point (id);
 alter table invoice_trans add foreign key (seller_id) references sale_seller (id);
 alter table invoice_trans add foreign key (private_code_id) references global_private_code (id);
+alter table invoice_trans add foreign key (status_id) references invoice_trans_status (id);
 
 alter table invoice_trans_detail add foreign key (trans_id) references invoice_trans (id);
 alter table invoice_trans_detail add foreign key (stock_id) references stock (id);
@@ -1952,6 +1962,7 @@ alter table invoice_trans_detail add foreign key (seller_id) references sale_sel
 alter table invoice_trans_detail add foreign key (trans_source_id) references invoice_trans_source (id);
 alter table invoice_trans_detail add foreign key (trans_point_id) references global_trans_point (id);
 alter table invoice_trans_detail add foreign key (private_code_id) references global_private_code (id);
+alter table invoice_trans_detail add foreign key (status_id) references invoice_trans_status (id);
 
 alter table invoice_trans_factor add foreign key (trans_id) references invoice_trans (id);
 alter table invoice_trans_factor add foreign key (factor_id) references stock_cost_factor (id);
@@ -1967,6 +1978,7 @@ alter table order_trans add foreign key (trans_source_id) references order_trans
 alter table order_trans add foreign key (trans_point_id) references global_trans_point (id);
 alter table order_trans add foreign key (seller_id) references sale_seller (id);
 alter table order_trans add foreign key (private_code_id) references global_private_code (id);
+alter table order_trans add foreign key (status_id) references order_trans_status (id);
 
 alter table order_trans_detail add foreign key (trans_id) references order_trans (id);
 alter table order_trans_detail add foreign key (stock_id) references stock (id);
@@ -1976,6 +1988,7 @@ alter table order_trans_detail add foreign key (seller_id) references sale_selle
 alter table order_trans_detail add foreign key (trans_source_id) references order_trans_source (id);
 alter table order_trans_detail add foreign key (trans_point_id) references global_trans_point (id);
 alter table order_trans_detail add foreign key (private_code_id) references global_private_code (id);
+alter table order_trans_detail add foreign key (status_id) references order_trans_status (id);
 
 alter table order_trans_factor add foreign key (trans_id) references order_trans (id);
 alter table order_trans_factor add foreign key (factor_id) references stock_cost_factor (id);
@@ -2036,6 +2049,7 @@ alter table waybill_trans add foreign key (trans_source_id) references waybill_t
 alter table waybill_trans add foreign key (trans_point_id) references global_trans_point (id);
 alter table waybill_trans add foreign key (seller_id) references sale_seller (id);
 alter table waybill_trans add foreign key (private_code_id) references global_private_code (id);
+alter table waybill_trans add foreign key (status_id) references waybill_trans_status (id);
 
 alter table waybill_trans_detail add foreign key (trans_id) references waybill_trans (id);
 alter table waybill_trans_detail add foreign key (stock_id) references stock (id);
@@ -2045,6 +2059,7 @@ alter table waybill_trans_detail add foreign key (seller_id) references sale_sel
 alter table waybill_trans_detail add foreign key (trans_source_id) references waybill_trans_source (id);
 alter table waybill_trans_detail add foreign key (trans_point_id) references global_trans_point (id);
 alter table waybill_trans_detail add foreign key (private_code_id) references global_private_code (id);
+alter table waybill_trans_detail add foreign key (status_id) references waybill_trans_status (id);
 
 alter table waybill_trans_factor add foreign key (trans_id) references waybill_trans (id);
 alter table waybill_trans_factor add foreign key (factor_id) references stock_cost_factor (id);
@@ -2215,12 +2230,5 @@ insert into admin_extra_fields (id, idno, distinction, name, is_required, is_act
 insert into admin_extra_fields (id, idno, distinction, name, is_required, is_active) values (18, 7, 'stock', 'ek_alan7', false, false);
 insert into admin_extra_fields (id, idno, distinction, name, is_required, is_active) values (19, 8, 'stock', 'ek_alan8', false, false);
 insert into admin_extra_fields (id, idno, distinction, name, is_required, is_active) values (20, 9, 'stock', 'ek_alan9', false, false);
-
-insert into invoice_trans_status (id, name) values (1, 'Beklemede');
-insert into order_trans_status (id, name) values (1, 'Beklemede');
-insert into waybill_trans_status (id, name) values (1, 'Beklemede');
-insert into invoice_trans_status (id, name, parent_id) values (2, 'Kapandı', 1);
-insert into order_trans_status (id, name, parent_id) values (2, 'Kapandı', 1);
-insert into waybill_trans_status (id, name, parent_id) values (2, 'Kapandı', 1);
 
 COMMIT;

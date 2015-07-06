@@ -63,6 +63,11 @@ class WaybillMenu extends AbstractMenu {
 		}
 
 		if (subMenu.size() > 0) subMenu.add(new MenuItem(MenuItemType.Divider));
+		
+		if (AuthManager.hasPrivilege(Right.IRSL_IRSALIYE_DURUMLARI, RightLevel.Enable)) {
+			subMenu.add(new MenuItem(Messages.get(Right.IRSL_IRSALIYE_DURUMLARI.key), 
+					controllers.waybill.routes.TransStatuses.index().url()));
+		}
 
 		if (AuthManager.hasPrivilege(Right.IRSL_ONAYLAMA_ADIMLARI, RightLevel.Enable)) {
 			subMenu.add(new MenuItem(Messages.get(Right.IRSL_ONAYLAMA_ADIMLARI.key), 

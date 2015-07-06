@@ -68,7 +68,6 @@ import controllers.global.Profiles;
 import enums.DocNoIncType;
 import enums.Right;
 import enums.RightLevel;
-import enums.TransStatus;
 import enums.TransType;
 
 /**
@@ -125,7 +124,7 @@ public class Transes extends Controller {
 				int i = -1;
 				dataMap.put(i++, model.id.toString());
 				dataMap.put(i++, model.transNo);
-				dataMap.put(i++, Messages.get(model.status.key));
+				dataMap.put(i++, (model.status != null ? model.status.name : ""));
 				dataMap.put(i++, (model.contact != null ? model.contact.name : ""));
 				dataMap.put(i++, DateUtils.formatDateStandart(model.transDate));
 				dataMap.put(i++, (model.deliveryDate != null ? DateUtils.formatDateStandart(model.deliveryDate) : ""));
@@ -177,7 +176,7 @@ public class Transes extends Controller {
 			return badRequest(form.render(filledForm, rightBind, OrderTransRows.build(model)));
 		}
 
-		if (TransStatus.Completed.equals(model.status)) {
+		if (model.isCompleted != null && model.isCompleted ) {
 			flash("error", Messages.get("edit.striction.for_controller"));
 			return badRequest(form.render(filledForm, rightBind, OrderTransRows.build(model)));
 		}
@@ -215,6 +214,7 @@ public class Transes extends Controller {
 			detail.transPoint = model.transPoint;
 			detail.privateCode = model.privateCode;
 			detail.transSource = model.transSource;
+			detail.status = model.status;
 			detail.right = model.right;
 			detail.transDate = model.transDate;
 			detail.deliveryDate = model.deliveryDate;
@@ -399,7 +399,7 @@ public class Transes extends Controller {
 			if (model == null) {
 				flash("error", Messages.get("not.found", Messages.get("transaction")));
 			} else {
-				if (TransStatus.Completed.equals(model.status)) {
+				if (model.isCompleted != null && model.isCompleted) {
 					flash("error", Messages.get("edit.striction.for_controller"));
 					return badRequest(form.render(dataForm.fill(model), rightBind, OrderTransRows.build(model)));
 				} else {
@@ -466,7 +466,6 @@ public class Transes extends Controller {
 			OrderTrans orderTrans = OrderTrans.findById(stm.id);
 
 			OrderTrans clone = CloneUtils.cloneTransaction(orderTrans);
-			clone.status = TransStatus.Waiting;
 			clone.waybillId = null;
 			clone.invoiceId = null;
 			clone.transDate = stm.transDate;
@@ -485,7 +484,6 @@ public class Transes extends Controller {
 			
 			for (OrderTransDetail std : clone.details) {
 				std.id = null;
-				std.status = TransStatus.Waiting;
 				std.receiptNo = clone.receiptNo;
 				std.trans = clone;
 				std.contact = clone.contact;

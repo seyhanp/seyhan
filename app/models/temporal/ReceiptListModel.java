@@ -19,7 +19,6 @@
 package models.temporal;
 
 import enums.Right;
-import enums.TransStatus;
 
 /**
  * @author mdpinar
@@ -27,7 +26,6 @@ import enums.TransStatus;
 public class ReceiptListModel {
 
 	public Integer id;
-	public TransStatus status;
 	public Right right;
 	public Boolean isSelected = Boolean.FALSE;
 	public Integer receiptNo;
@@ -39,5 +37,7 @@ public class ReceiptListModel {
 	public String amount;
 	public String excCode;
 	public String description;
+
+	public Integer statusId;
 
 }

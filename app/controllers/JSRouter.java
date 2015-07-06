@@ -66,6 +66,12 @@ public class JSRouter extends Controller {
 				controllers.order.routes.javascript.TransSources.remove(),
 				controllers.order.routes.javascript.TransSources.options(),
 
+				controllers.order.routes.javascript.TransStatuses.list(),
+				controllers.order.routes.javascript.TransStatuses.save(),
+				controllers.order.routes.javascript.TransStatuses.create(),
+				controllers.order.routes.javascript.TransStatuses.edit(),
+				controllers.order.routes.javascript.TransStatuses.remove(),
+
 				controllers.waybill.routes.javascript.TransSources.list(),
 				controllers.waybill.routes.javascript.TransSources.save(),
 				controllers.waybill.routes.javascript.TransSources.create(),
@@ -73,12 +79,24 @@ public class JSRouter extends Controller {
 				controllers.waybill.routes.javascript.TransSources.remove(),
 				controllers.waybill.routes.javascript.TransSources.options(),
 
+				controllers.waybill.routes.javascript.TransStatuses.list(),
+				controllers.waybill.routes.javascript.TransStatuses.save(),
+				controllers.waybill.routes.javascript.TransStatuses.create(),
+				controllers.waybill.routes.javascript.TransStatuses.edit(),
+				controllers.waybill.routes.javascript.TransStatuses.remove(),
+
 				controllers.invoice.routes.javascript.TransSources.list(),
 				controllers.invoice.routes.javascript.TransSources.save(),
 				controllers.invoice.routes.javascript.TransSources.create(),
 				controllers.invoice.routes.javascript.TransSources.edit(),
 				controllers.invoice.routes.javascript.TransSources.remove(),
 				controllers.invoice.routes.javascript.TransSources.options(),
+
+				controllers.invoice.routes.javascript.TransStatuses.list(),
+				controllers.invoice.routes.javascript.TransStatuses.save(),
+				controllers.invoice.routes.javascript.TransStatuses.create(),
+				controllers.invoice.routes.javascript.TransStatuses.edit(),
+				controllers.invoice.routes.javascript.TransStatuses.remove(),
 
 				controllers.contact.routes.javascript.TransSources.list(),
 				controllers.contact.routes.javascript.TransSources.save(),
