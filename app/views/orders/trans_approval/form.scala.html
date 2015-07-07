@@ -1,4 +1,4 @@
-@(_form: Form[models.search.OrderTransSearchParam], details: List[models.temporal.ReceiptListModel])
+@(_form: Form[models.search.TransSearchParam], details: List[models.temporal.ReceiptListModel])
 
 @import helper._
 @implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
@@ -7,6 +7,7 @@
 	@helper.form(action = order.routes.TransApprovals.submit, 'class-> "form-horizontal zell", 'id -> "orderApprovalForm") {
 
 		<input type="hidden" id="formAction" name="formAction" />
+		<input type="hidden" id="redoTransId" name="redoTransId" />
 
 		<div id="criteriaSection">
 
@@ -21,10 +22,11 @@
 							'_label -> Messages("trans.type")
 						)
 					
-						@select(_form("status.id"),
+						@select(_form("orderTransStatus.id"),
 							options(OrderTransStatus.options(false)),
 							'class -> "input-medium",
-							'_label -> Messages("status")
+							'_label -> Messages("status"),
+							'_default -> Messages("choose")
 						)
 					
 						@tools.components.autocomplete_contact(_form, name="refContact")
@@ -111,6 +113,7 @@
 						}
 					}
 					<th style="width:25%">@Messages("description")</th>
+					<th style="width:5%"></th
 				</tr>
 			</thead>
 			<tbody>
@@ -121,10 +124,13 @@
 							<input type="hidden" id="details[@index]_right" name="details[@index].right" value="@detail.right" />
 							<input type="hidden" id="details[@index]_statusId" name="details[@index].statusId" value="@detail.statusId" />
 							<input type="hidden" id="details[@index]_contactId" name="details[@index].contactId" value="@detail.contactId" />
+							<input type="hidden" id="details[@index]_isCompleted" name="details[@index].isCompleted" value="@detail.isCompleted" />
 		
-							<td style="text-align: center;"><input class="case" type="checkbox" id="details[@index]_isSelected" name="details[@index].isSelected" /></td>
+							<td style="text-align: center;">@if(! detail.isCompleted) {<input class="case" type="checkbox" id="details[@index]_isSelected" name="details[@index].isSelected" />}</td>
 							<td style="text-align: right;">@detail.receiptNo</td>
-							<td><a class="contactRowChooser" href="#" data-index="@index">@detail.contactName</a></td>
+							<td>
+								@if(! detail.isCompleted) {<a class="contactRowChooser" href="#" data-index="@index">@detail.contactName</a>} else {@detail.contactName}
+							</td>
 							<td style="text-align: center">@detail.date</td>
 							<td style="text-align: center">@detail.deliveryDate</td>
 							@if(global.Profiles.chosen().sprs_hasPrices) {
@@ -134,6 +140,14 @@
 								}
 							}
 							<td>@detail.description</td>
+							<td>
+								@if(detail.statusId != null && ! detail.isCompleted) {
+									<a class="btn btn-success btn-mini" onclick="redo(@detail.id);" title="@Messages("redo")">
+										<i class="icon-repeat icon-white" style="margin-top:1px"></i> @Messages("redo")
+									</a>}
+								@if(detail.isCompleted) {
+									<a class="btn btn-mini disabled">@Messages("trans_status.Completed")</a>}
+							</td>
 						</tr>
 					}
 				}
@@ -184,9 +198,8 @@
 			
 		</div>
 	
+		@orders.trans_approval.change_status_modal(if(_form("orderTransStatus.id").value != null && ! _form("orderTransStatus.id").value.isEmpty()) _form("orderTransStatus.id").value.toInt else -1)
 	}
-
-	@orders.trans_approval.change_status_modal(1)
 
 }
 
@@ -250,8 +263,10 @@
 		var status_controller = jsRoutes.controllers.order.TransApprovals;
 
 		function change_status_form_open() {
-			var oldStatusId = $('#status_id').val();
-			status_controller.changeStatusForm(oldStatusId).ajax({
+			var oldStatusId = $('#orderTransStatus_id').val();
+			if (oldStatusId == null || ! isNumber(oldStatusId)) oldStatusId = -1;
+
+			status_controller.getChangeStatusForm(oldStatusId).ajax({
 				cache: false,
 				success: function(data, status, xhr) {
 					$("#change_status_form_fields").html(data);
@@ -261,7 +276,14 @@
 		}
 
 		function change_status_apply() {
+			$('#formAction').val("change-status");
 			$('#modal\\-change\\-status').modal('hide');
+		}
+
+		function redo(transId) {
+			$('#formAction').val("redo");
+			$('#redoTransId').val(transId);
+			$('#orderApprovalForm').submit();
 		}
 	</script>
 }

@@ -43,9 +43,6 @@ public class V1_0_11__Changing_Status_data_type_in_Stock_Trans_tables implements
 				log.info("  -- creating status tables' indexes and relations for " + table);
 				executeScripts_ToCreateIndexesAndRelations(sta, table);
 
-				log.info("  -- adding new status definitions for " + table);
-				executeScripts_ToAddNewStatus(sta, table);
-
 				log.info("  -- modifying old trans table indexes for " + table);
 				executeScripts_ToModifyTransIndex(sta, table);
 
@@ -202,16 +199,6 @@ public class V1_0_11__Changing_Status_data_type_in_Stock_Trans_tables implements
 		sta.addBatch(sb.toString());
 	}
 
-	private void executeScripts_ToAddNewStatus(Statement sta, String table) throws Exception {
-		if (GlobalCons.dbVendor.equals("sqlserver")) {
-			sta.addBatch("insert into " + table + "_trans_status (name) values ('Beklemede'); ");
-			sta.addBatch("insert into " + table + "_trans_status (name, parent_id) values ('Kapandı', (select id from " + table + "_trans_status where name = 'Beklemede')); ");
-		} else {
-			sta.addBatch("insert into " + table + "_trans_status (id, name) values (1, 'Beklemede'); ");
-			sta.addBatch("insert into " + table + "_trans_status (id, name, parent_id) values (2, 'Kapandı', 1); ");
-		}
-	}
-
 	private void executeScripts_ToModifyTransIndex(Statement sta, String table) throws Exception {
 		if (GlobalCons.dbVendor.equals("mysql")) {
 			sta.addBatch("drop index " + table + "_trans_ix1 on " + table + "_trans; ");
@@ -233,32 +220,10 @@ public class V1_0_11__Changing_Status_data_type_in_Stock_Trans_tables implements
 	
 	private void executeScripts_ToChangeStatusColumnType(Statement sta, String table) throws Exception {
 
-		sta.addBatch("alter table " + table + "_trans add column temp_status_id integer; ");
-		sta.addBatch("alter table " + table + "_trans_detail add column temp_status_id integer; ");
-
-		sta.addBatch("update " + table + "_trans set temp_status_id = 1 where status <> 'Kapandı'; ");
-		sta.addBatch("update " + table + "_trans_detail set temp_status_id = 1 where status <> 'Kapandı'; ");
-
-		sta.addBatch("update " + table + "_trans set temp_status_id = 2 where status = 'Kapandı'; ");
-		sta.addBatch("update " + table + "_trans_detail set temp_status_id = 2 where status = 'Kapandı'; ");
-
 		sta.addBatch("alter table " + table + "_trans drop column status; ");
 		sta.addBatch("alter table " + table + "_trans_detail drop column status; ");
-
-		if (GlobalCons.dbVendor.equals("mysql")) {
-			sta.addBatch("alter table " + table + "_trans change temp_status_id status_id int; ");
-			sta.addBatch("alter table " + table + "_trans_detail change temp_status_id status_id int; ");
-		} else if (GlobalCons.dbVendor.equals("sqlserver")) {
-			sta.addBatch("EXEC sp_rename " + table + "'_trans.temp_status_id', 'status_id', 'COLUMN'; ");
-			sta.addBatch("EXEC sp_rename " + table + "'_trans_detail.temp_status_id', 'status_id', 'COLUMN'; ");
-		} else if (GlobalCons.dbVendor.equals("h2")) {
-			sta.addBatch("alter table " + table + "_trans alter column temp_status_id rename to status_id; ");
-			sta.addBatch("alter table " + table + "_trans_detail alter column temp_status_id rename to status_id; ");
-		} else {
-			sta.addBatch("alter table " + table + "_trans rename column temp_status_id to status_id; ");
-			sta.addBatch("alter table " + table + "_trans_detail rename column temp_status_id to status_id; ");
-		}
-
+		sta.addBatch("alter table " + table + "_trans add column status_id integer; ");
+		sta.addBatch("alter table " + table + "_trans_detail add column status_id integer; ");
 		sta.addBatch("alter table " + table + "_trans add foreign key (status_id) references " + table + "_trans_status (id); ");
 		sta.addBatch("alter table " + table + "_trans_detail add foreign key (status_id) references " + table + "_trans_status (id); ");
 	}

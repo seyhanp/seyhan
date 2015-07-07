@@ -27,7 +27,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
-import models.search.OrderTransSearchParam;
+import models.search.TransSearchParam;
 import models.temporal.ReceiptListModel;
 import utils.CacheUtils;
 import utils.DateUtils;
@@ -77,7 +77,7 @@ public class InvoiceTrans extends AbstractStockTrans {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy ="trans", orphanRemoval = true)
 	public List<InvoiceTransRelation> relations;
 
-	public static Page<InvoiceTrans> page(OrderTransSearchParam searchParam, Right right) {
+	public static Page<InvoiceTrans> page(TransSearchParam searchParam, Right right) {
 		ExpressionList<InvoiceTrans> expList = ModelHelper.getExpressionList(right.module);
 
 		expList.eq("right", right);
@@ -133,7 +133,7 @@ public class InvoiceTrans extends AbstractStockTrans {
 		return ModelHelper.getPage(right, expList, searchParam);
 	}
 
-	public static List<ReceiptListModel> findReceiptList(OrderTransSearchParam searchParam) {
+	public static List<ReceiptListModel> findReceiptList(TransSearchParam searchParam) {
 		ExpressionList<InvoiceTrans> expList = ModelHelper.getExpressionList(Module.invoice);
 
 		expList.eq("workspace", CacheUtils.getWorkspaceId());
@@ -172,6 +172,8 @@ public class InvoiceTrans extends AbstractStockTrans {
 		}
 		if (searchParam.invoiceTransStatus != null && searchParam.invoiceTransStatus.id != null) {
 			expList.eq("status", searchParam.invoiceTransStatus);
+		} else {
+			expList.isNull("status");
 		}
 
 		List<InvoiceTrans> modelList = expList
@@ -192,6 +194,7 @@ public class InvoiceTrans extends AbstractStockTrans {
 			receipt.amount = Format.asMoney(trans.netTotal);
 			receipt.excCode = trans.excCode;
 			receipt.description = trans.description;
+			receipt.isCompleted = trans.isCompleted;
 
 			if (trans.contact != null) {
 				receipt.contactId = trans.contact.id;
@@ -256,13 +259,14 @@ public class InvoiceTrans extends AbstractStockTrans {
 					}
 				}
 
-				Ebean.createSqlUpdate("update " + tablePrefix + "_trans_detail set status = 'Waiting', completed = 0, cancelled = 0 where trans_id in (:idList) and workspace = :workspace;")
+				Ebean.createSqlUpdate("update " + tablePrefix + "_trans_detail set completed = 0, cancelled = 0 where trans_id in (:idList) and workspace = :workspace;")
 						.setParameter("workspace", CacheUtils.getWorkspaceId())
 						.setParameter("idList", idList)
 					.execute();
-				Ebean.createSqlUpdate("update " + tablePrefix + "_trans set status = 'Waiting', invoice_id = null where id in (:idList) and workspace = :workspace;")
+				Ebean.createSqlUpdate("update " + tablePrefix + "_trans set is_completed = :is_completed, invoice_id = null where id in (:idList) and workspace = :workspace;")
 						.setParameter("workspace", CacheUtils.getWorkspaceId())
 						.setParameter("idList", idList)
+						.setParameter("is_completed", Boolean.FALSE)
 					.execute();
 			}
 		}

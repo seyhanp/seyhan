@@ -3,7 +3,7 @@
 @import helper._
 @implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
 
-@select(_form("status.id"),
+@select(_form("newWaybillTransStatus.id"),
 	options(WaybillTransStatus.childOptions(oldStatusId)),
 	'class -> "input-medium",
 	'_label -> Messages("status")

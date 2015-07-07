@@ -35,9 +35,9 @@ import models.Stock;
 import models.StockTrans;
 import models.WaybillTrans;
 import models.WaybillTransFactor;
-import models.search.OrderTransSearchParam;
-import models.temporal.OrderTransStatusForm;
+import models.search.TransSearchParam;
 import models.temporal.ReceiptListModel;
+import models.temporal.WaybillTransStatusForm;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,8 +55,9 @@ import utils.GlobalCons;
 import utils.NumericUtils;
 import utils.RefModuleUtil;
 import utils.StringUtils;
-import views.html.waybills.trans_approval.form;
+import utils.TransStatusHistoryUtils;
 import views.html.waybills.trans_approval.change_status;
+import views.html.waybills.trans_approval.form;
 
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.SqlRow;
@@ -77,7 +78,8 @@ public class TransApprovals extends Controller {
 	private final static Logger log = LoggerFactory.getLogger(TransApprovals.class);
 
 	private final static Right RIGHT = Right.IRSL_ONAYLAMA_ADIMLARI;
-	private final static Form<OrderTransSearchParam> dataForm = form(OrderTransSearchParam.class);
+	private final static Form<TransSearchParam> dataForm = form(TransSearchParam.class);
+	private final static Form<WaybillTransStatusForm> statusForm = form(WaybillTransStatusForm.class);
 
 	private static int sourceCount;
 	private static int targetCount;
@@ -87,7 +89,7 @@ public class TransApprovals extends Controller {
 		Result hasProblem = AuthManager.hasProblem(RIGHT, RightLevel.Enable);
 		if (hasProblem != null) return hasProblem;
 
-		OrderTransSearchParam sp = new OrderTransSearchParam();
+		TransSearchParam sp = new TransSearchParam();
 		sp.transType = Right.IRSL_SATIS_IRSALIYESI;
 
 		return ok(form.render(dataForm.fill(sp), new ArrayList<ReceiptListModel>()));
@@ -101,12 +103,12 @@ public class TransApprovals extends Controller {
 		targetCount = 0;
 		receiptType = "";
 
-		Form<OrderTransSearchParam> filledForm = dataForm.bindFromRequest();
+		Form<TransSearchParam> filledForm = dataForm.bindFromRequest();
 
 		if(filledForm.hasErrors()) {
 			return badRequest();
 		} else {
-			OrderTransSearchParam model = filledForm.get();
+			TransSearchParam model = filledForm.get();
 			if (model.formAction != null) {
 			    if ("search".equals(model.formAction)) {
 			    	return search(filledForm);
@@ -115,24 +117,40 @@ public class TransApprovals extends Controller {
 
 			    		Ebean.beginTransaction();
 			    		try {
-			    			if (TransApprovalType.Contact.equals(model.approvalType) && ! "cancelled".equals(model.formAction)) { //ContactBased
-			    				if ("invoice".equals(model.formAction)) {
-									makeContactBasedInvoice(model);
-								}
-			    			} else { //ReceiptBased
-			    				for (ReceiptListModel rlm : model.details) {
-									if (rlm.isSelected) {
-										if ("invoice".equals(model.formAction)) {
-											makeReceiptBasedInvoice(rlm.id, model);
+			    			boolean isStatusChange = true;
+		    				if ("change-status".equals(model.formAction)) {
+		    					changeStatus(model);
+		    				} else if ("redo".equals(model.formAction)) {
+		    					redo(model.redoTransId);
+		    				} else {
+		    					isStatusChange = false;
+				    			if (TransApprovalType.Contact.equals(model.approvalType) && ! "cancelled".equals(model.formAction)) { //ContactBased
+				    				if ("invoice".equals(model.formAction)) {
+										makeContactBasedInvoice(model);
+									}
+				    			} else { //ReceiptBased
+				    				for (ReceiptListModel rlm : model.details) {
+										if (rlm.isSelected && ! rlm.isCompleted) {
+											if ("invoice".equals(model.formAction)) {
+												makeReceiptBasedInvoice(rlm.id, model);
+											}
 										}
 									}
-								}
-			    			}
-			    			if (targetCount > 0) {
-			    				flash("success", Messages.get("has.been.approved", sourceCount, Messages.get(model.transType.key), targetCount, Messages.get(receiptType)));
-			    			} else {
-			    				flash("error", Messages.get("has.not.been.created"));
-			    			}
+				    			}
+		    				}
+		    				if (isStatusChange) {
+					    		if (targetCount > 0) {
+				    				flash("success", Messages.get("has.been.changed", targetCount));
+				    			} else {
+				    				flash("error", Messages.get("has.not.been.changed"));
+				    			}
+		    				} else {
+				    			if (targetCount > 0) {
+				    				flash("success", Messages.get("has.been.approved", sourceCount, Messages.get(model.transType.key), targetCount, Messages.get(receiptType)));
+				    			} else {
+				    				flash("error", Messages.get("has.not.been.created"));
+				    			}
+		    				}
 				    		Ebean.commitTransaction();
 				    
 			    		} catch (Exception e) {
@@ -154,11 +172,11 @@ public class TransApprovals extends Controller {
 
 	}
 
-	private static Result search(Form<OrderTransSearchParam> filledForm) {
+	private static Result search(Form<TransSearchParam> filledForm) {
 		return ok(form.render(filledForm, WaybillTrans.findReceiptList(filledForm.get())));
 	}
 
-	private static void makeContactBasedInvoice(OrderTransSearchParam approvalModel) {
+	private static void makeContactBasedInvoice(TransSearchParam approvalModel) {
 
 		Right right = null;
 		if (Right.IRSL_ALIS_IRSALIYESI.equals(approvalModel.transType)) {
@@ -172,7 +190,7 @@ public class TransApprovals extends Controller {
 		 */
 		Map<Integer, List<Integer>> transMap = new HashMap<Integer, List<Integer>>();
 		for (ReceiptListModel rlm : approvalModel.details) {
-			if (rlm.isSelected) {
+			if (rlm.isSelected && ! rlm.isCompleted) {
 				Integer contactId = -1;
 				if (rlm.contactId != null) contactId = rlm.contactId;
 				List<Integer> transIdList = transMap.get(contactId);
@@ -397,15 +415,14 @@ public class TransApprovals extends Controller {
 
 					RefModuleUtil.save(master, Module.invoice, master.contact, false);
 
-					Ebean.createSqlUpdate("update waybill_trans set status = :status, invoice_id = :invoice_id where id in (:id)")
+					Ebean.createSqlUpdate("update waybill_trans set invoice_id = :invoice_id, is_completed = :is_completed where id in (:id)")
 							.setParameter("id", entry.getValue())
 							.setParameter("invoice_id", master.id)
 							.setParameter("is_completed", GlobalCons.TRUE)
 						.execute();
 
-					Ebean.createSqlUpdate("update waybill_trans_detail set status = :status, completed = (net_input+net_output), cancelled = 0 where trans_id in (:transId)")
+					Ebean.createSqlUpdate("update waybill_trans_detail set completed = (net_input+net_output), cancelled = 0 where trans_id in (:transId)")
 							.setParameter("transId", entry.getValue())
-							.setParameter("is_completed", GlobalCons.TRUE)
 						.execute();
 
 				}
@@ -422,7 +439,7 @@ public class TransApprovals extends Controller {
 
 	}
 
-	private static void makeReceiptBasedInvoice(Integer sourceId, OrderTransSearchParam approvalModel) {
+	private static void makeReceiptBasedInvoice(Integer sourceId, TransSearchParam approvalModel) {
 		WaybillTrans source = WaybillTrans.findById(sourceId);
 
 		Right right = null;
@@ -633,15 +650,14 @@ public class TransApprovals extends Controller {
 
 		RefModuleUtil.save(master, Module.invoice, master.contact, false);
 
-		Ebean.createSqlUpdate("update waybill_trans set status = :status, invoice_id = :invoice_id where id = :id")
+		Ebean.createSqlUpdate("update waybill_trans set invoice_id = :invoice_id, is_completed = :is_completed where id = :id")
 				.setParameter("id", sourceId)
 				.setParameter("invoice_id", master.id)
 				.setParameter("is_completed", GlobalCons.TRUE)
 			.execute();
 
-		Ebean.createSqlUpdate("update waybill_trans_detail set status = :status, completed = (net_input+net_output), cancelled = 0 where trans_id = :trans_id")
+		Ebean.createSqlUpdate("update waybill_trans_detail set completed = (net_input+net_output), cancelled = 0 where trans_id = :trans_id")
 				.setParameter("trans_id", sourceId)
-				.setParameter("is_completed", GlobalCons.TRUE)
 			.execute();
 
 		/*
@@ -657,8 +673,24 @@ public class TransApprovals extends Controller {
 		}
 		
 		return ok(
-			change_status.render(new WaybillTransStatusForm(), oldStatusId).body()
+			change_status.render(statusForm.fill(new WaybillTransStatusForm()), oldStatusId).body()
 		);
+	}
+
+	private static void changeStatus(TransSearchParam model) {
+		for (ReceiptListModel detail : model.details) {
+			if (detail.isSelected && ! detail.isCompleted) {
+				TransStatusHistoryUtils.goForward(Module.waybill, detail.id, model.newWaybillTransStatus.id, model.description);
+				targetCount++;
+			}
+		}
+	}
+
+	private static void redo(Integer transId) {
+		if (transId != null) {
+			TransStatusHistoryUtils.goBack(Module.waybill, transId);
+			targetCount++;
+		}
 	}
 
 }

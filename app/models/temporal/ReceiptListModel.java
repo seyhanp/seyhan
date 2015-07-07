@@ -28,6 +28,7 @@ public class ReceiptListModel {
 	public Integer id;
 	public Right right;
 	public Boolean isSelected = Boolean.FALSE;
+	public Boolean isCompleted;
 	public Integer receiptNo;
 	public Integer contactId;
 	public String contactName;

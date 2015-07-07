@@ -18,14 +18,14 @@
 */
 package models.temporal;
 
-import models.InvoiceTransStatus;
+import models.OrderTransStatus;
 
 /**
  * @author mdpinar
 */
 public class OrderTransStatusForm {
 
-	public InvoiceTransStatus newStatus;
+	public OrderTransStatus status;
 	public String description;
 
 }

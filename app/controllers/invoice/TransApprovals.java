@@ -23,7 +23,7 @@ import static play.data.Form.form;
 import java.util.ArrayList;
 
 import models.InvoiceTrans;
-import models.search.OrderTransSearchParam;
+import models.search.TransSearchParam;
 import models.temporal.InvoiceTransStatusForm;
 import models.temporal.ReceiptListModel;
 
@@ -37,8 +37,8 @@ import play.mvc.Result;
 import utils.AuthManager;
 import utils.CacheUtils;
 import utils.TransStatusHistoryUtils;
-import views.html.invoices.trans_approval.form;
 import views.html.invoices.trans_approval.change_status;
+import views.html.invoices.trans_approval.form;
 
 import com.avaje.ebean.Ebean;
 
@@ -54,13 +54,16 @@ public class TransApprovals extends Controller {
 	private final static Logger log = LoggerFactory.getLogger(TransApprovals.class);
 
 	private final static Right RIGHT = Right.FATR_ONAYLAMA_ADIMLARI;
-	private final static Form<OrderTransSearchParam> dataForm = form(OrderTransSearchParam.class);
+	private final static Form<TransSearchParam> dataForm = form(TransSearchParam.class);
+	private final static Form<InvoiceTransStatusForm> statusForm = form(InvoiceTransStatusForm.class);
 
+	private static int targetCount;
+	
 	public static Result index() {
 		Result hasProblem = AuthManager.hasProblem(RIGHT, RightLevel.Enable);
 		if (hasProblem != null) return hasProblem;
 
-		OrderTransSearchParam sp = new OrderTransSearchParam();
+		TransSearchParam sp = new TransSearchParam();
 		sp.transType = Right.FATR_SATIS_FATURASI;
 
 		return ok(form.render(dataForm.fill(sp), new ArrayList<ReceiptListModel>()));
@@ -70,12 +73,14 @@ public class TransApprovals extends Controller {
 		Result hasProblem = AuthManager.hasProblem(RIGHT, RightLevel.Enable);
 		if (hasProblem != null) return hasProblem;
 
-		Form<OrderTransSearchParam> filledForm = dataForm.bindFromRequest();
+		targetCount = 0;
+
+		Form<TransSearchParam> filledForm = dataForm.bindFromRequest();
 
 		if(filledForm.hasErrors()) {
 			return badRequest();
 		} else {
-			OrderTransSearchParam model = filledForm.get();
+			TransSearchParam model = filledForm.get();
 			if (model.formAction != null) {
 			    if ("search".equals(model.formAction)) {
 			    	return search(filledForm);
@@ -84,18 +89,33 @@ public class TransApprovals extends Controller {
 			    
 			    		Ebean.beginTransaction();
 			    		try {
-			    			int transCount = 0;
-		    				for (ReceiptListModel rlm : model.details) {
-								if (rlm.isSelected) {
-									TransStatusHistoryUtils.goForward(Module.invoice, rlm.id, model.invoiceTransStatus.id, model.description);
-									transCount++;
+			    			boolean isStatusChange = true;
+		    				if ("change-status".equals(model.formAction)) {
+		    					changeStatus(model);
+		    				} else if ("redo".equals(model.formAction)) {
+		    					redo(model.redoTransId);
+		    				} else {
+		    					isStatusChange = false;
+			    				for (ReceiptListModel rlm : model.details) {
+									if (rlm.isSelected && ! rlm.isCompleted) {
+										TransStatusHistoryUtils.goForward(Module.invoice, rlm.id, model.invoiceTransStatus.id, model.description);
+										targetCount++;
+									}
 								}
-							}
-				    		if (transCount > 0) {
-			    				flash("success", Messages.get("has.been.closed", transCount, Messages.get(model.transType.key)));
-			    			} else {
-			    				flash("error", Messages.get("has.not.been.closed"));
-			    			}
+		    				}
+		    				if (isStatusChange) {
+					    		if (targetCount > 0) {
+				    				flash("success", Messages.get("has.been.changed", targetCount));
+				    			} else {
+				    				flash("error", Messages.get("has.not.been.changed"));
+				    			}
+		    				} else {
+					    		if (targetCount > 0) {
+				    				flash("success", Messages.get("has.been.closed", targetCount, Messages.get(model.transType.key)));
+				    			} else {
+				    				flash("error", Messages.get("has.not.been.closed"));
+				    			}
+		    				}
 				    		Ebean.commitTransaction();
 				    
 			    		} catch (Exception e) {
@@ -117,7 +137,7 @@ public class TransApprovals extends Controller {
 
 	}
 
-	private static Result search(Form<OrderTransSearchParam> filledForm) {
+	private static Result search(Form<TransSearchParam> filledForm) {
 		return ok(form.render(filledForm, InvoiceTrans.findReceiptList(filledForm.get())));
 	}
 
@@ -125,10 +145,26 @@ public class TransApprovals extends Controller {
 		if (! CacheUtils.isLoggedIn()) {
 			return badRequest(Messages.get("not.authorized.or.disconnect"));
 		}
-		
+
 		return ok(
-			change_status.render(new InvoiceTransStatusForm(), oldStatusId).body()
+			change_status.render(statusForm.fill(new InvoiceTransStatusForm()), oldStatusId).body()
 		);
+	}
+
+	private static void changeStatus(TransSearchParam model) {
+		for (ReceiptListModel detail : model.details) {
+			if (detail.isSelected && ! detail.isCompleted) {
+				TransStatusHistoryUtils.goForward(Module.invoice, detail.id, model.newInvoiceTransStatus.id, model.description);
+				targetCount++;
+			}
+		}
+	}
+
+	private static void redo(Integer transId) {
+		if (transId != null) {
+			TransStatusHistoryUtils.goBack(Module.invoice, transId);
+			targetCount++;
+		}
 	}
 
 }

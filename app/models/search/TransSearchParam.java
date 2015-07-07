@@ -41,7 +41,7 @@ import enums.TransApprovalType;
 /**
  * @author mdpinar
 */
-public class OrderTransSearchParam extends StockTransSearchParam {
+public class TransSearchParam extends StockTransSearchParam {
 
 	/*
 	 * Arama kismi icin gereken alanlar
@@ -68,6 +68,7 @@ public class OrderTransSearchParam extends StockTransSearchParam {
 	 */
 	public String formAction;
 	public String description;
+	public Integer redoTransId;
 	
 	public TransApprovalType approvalType = Profiles.chosen().sprs_approvalType;
 	public GlobalTransPoint submitTransPoint = Profiles.chosen().gnel_transPoint;
@@ -77,11 +78,14 @@ public class OrderTransSearchParam extends StockTransSearchParam {
 
 	public OrderTransSource orderTransSource;
 	public OrderTransStatus orderTransStatus;
+	public OrderTransStatus newOrderTransStatus;
 
 	public WaybillTransSource waybillTransSource;
 	public WaybillTransStatus waybillTransStatus;
+	public WaybillTransStatus newWaybillTransStatus;
 
 	public InvoiceTransSource invoiceTransSource;
 	public InvoiceTransStatus invoiceTransStatus;
+	public InvoiceTransStatus newInvoiceTransStatus;
 	
 }

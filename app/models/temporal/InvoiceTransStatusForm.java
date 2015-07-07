@@ -25,7 +25,7 @@ import models.InvoiceTransStatus;
 */
 public class InvoiceTransStatusForm {
 
-	public InvoiceTransStatus newStatus;
+	public InvoiceTransStatus status;
 	public String description;
 
 }

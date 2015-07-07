@@ -27,7 +27,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
-import models.search.OrderTransSearchParam;
+import models.search.TransSearchParam;
 import models.temporal.ReceiptListModel;
 import utils.CacheUtils;
 import utils.DateUtils;
@@ -70,7 +70,7 @@ public class OrderTrans extends AbstractStockTrans {
 	public Integer waybillId;
 	public Integer invoiceId;
 
-	public static Page<OrderTrans> page(OrderTransSearchParam searchParam, Right right) {
+	public static Page<OrderTrans> page(TransSearchParam searchParam, Right right) {
 		ExpressionList<OrderTrans> expList = ModelHelper.getExpressionList(Module.order);
 
 		expList.eq("right", right);
@@ -122,7 +122,7 @@ public class OrderTrans extends AbstractStockTrans {
 		return ModelHelper.getPage(right, expList, searchParam);
 	}
 
-	public static List<ReceiptListModel> findReceiptList(OrderTransSearchParam searchParam) {
+	public static List<ReceiptListModel> findReceiptList(TransSearchParam searchParam) {
 		ExpressionList<OrderTrans> expList = ModelHelper.getExpressionList(Module.order);
 
 		expList.eq("workspace", CacheUtils.getWorkspaceId());
@@ -157,6 +157,8 @@ public class OrderTrans extends AbstractStockTrans {
 		}
 		if (searchParam.orderTransStatus != null && searchParam.orderTransStatus.id != null) {
 			expList.eq("status", searchParam.orderTransStatus);
+		} else {
+			expList.isNull("status");
 		}
 
 		List<OrderTrans> modelList = expList
@@ -178,6 +180,7 @@ public class OrderTrans extends AbstractStockTrans {
 			receipt.amount = Format.asMoney(trans.netTotal);
 			receipt.excCode = trans.excCode;
 			receipt.description = trans.description;
+			receipt.isCompleted = trans.isCompleted;
 
 			if (trans.contact != null) {
 				receipt.contactId = trans.contact.id;

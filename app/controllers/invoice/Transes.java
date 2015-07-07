@@ -41,7 +41,7 @@ import models.InvoiceTransTax;
 import models.Safe;
 import models.SaleSeller;
 import models.Stock;
-import models.search.OrderTransSearchParam;
+import models.search.TransSearchParam;
 import models.temporal.TransMultiplier;
 
 import org.slf4j.Logger;
@@ -90,7 +90,7 @@ public class Transes extends Controller {
 
 	private final static Logger log = LoggerFactory.getLogger(Transes.class);
 	private final static Form<InvoiceTrans> dataForm = form(InvoiceTrans.class);
-	private final static Form<OrderTransSearchParam> paramForm = form(OrderTransSearchParam.class);
+	private final static Form<TransSearchParam> paramForm = form(TransSearchParam.class);
 
 	private static List<GridHeader> getHeaderList(Right right) {
 		List<GridHeader> headerList = new ArrayList<GridHeader>();
@@ -114,7 +114,7 @@ public class Transes extends Controller {
 	 * 
 	 * @return PageExtend
 	 */
-	private static PageExtend<InvoiceTrans> buildPage(OrderTransSearchParam searchParam, Right right) {
+	private static PageExtend<InvoiceTrans> buildPage(TransSearchParam searchParam, Right right) {
 		List<Map<Integer, String>> dataList = new ArrayList<Map<Integer, String>>();
 
 		Page<InvoiceTrans> page = InvoiceTrans.page(searchParam, right);
@@ -153,7 +153,7 @@ public class Transes extends Controller {
 		Result hasProblem = AuthManager.hasProblem(rightBind.value, RightLevel.Enable, ACCEPTABLE_RIGHTS);
 		if (hasProblem != null) return hasProblem;
 
-		Form<OrderTransSearchParam> filledParamForm = paramForm.bindFromRequest();
+		Form<TransSearchParam> filledParamForm = paramForm.bindFromRequest();
 
 		return ok(
 			list.render(

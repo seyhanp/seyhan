@@ -27,7 +27,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
-import models.search.OrderTransSearchParam;
+import models.search.TransSearchParam;
 import models.temporal.ReceiptListModel;
 import utils.CacheUtils;
 import utils.DateUtils;
@@ -73,7 +73,7 @@ public class WaybillTrans extends AbstractStockTrans {
 	 */
 	public Boolean isTransfer = Boolean.FALSE;
 
-	public static Page<WaybillTrans> page(OrderTransSearchParam searchParam, Right right) {
+	public static Page<WaybillTrans> page(TransSearchParam searchParam, Right right) {
 		ExpressionList<WaybillTrans> expList = ModelHelper.getExpressionList(right.module);
 
 		expList.eq("right", right);
@@ -125,7 +125,7 @@ public class WaybillTrans extends AbstractStockTrans {
 		return ModelHelper.getPage(right, expList, searchParam);
 	}
 
-	public static List<ReceiptListModel> findReceiptList(OrderTransSearchParam searchParam) {
+	public static List<ReceiptListModel> findReceiptList(TransSearchParam searchParam) {
 		ExpressionList<WaybillTrans> expList = ModelHelper.getExpressionList(Module.waybill);
 
 		expList.eq("workspace", CacheUtils.getWorkspaceId());
@@ -160,6 +160,8 @@ public class WaybillTrans extends AbstractStockTrans {
 		}
 		if (searchParam.waybillTransStatus != null && searchParam.waybillTransStatus.id != null) {
 			expList.eq("status", searchParam.waybillTransStatus);
+		} else {
+			expList.isNull("status");
 		}
 
 		List<WaybillTrans> modelList = expList
@@ -180,6 +182,7 @@ public class WaybillTrans extends AbstractStockTrans {
 			receipt.amount = Format.asMoney(trans.netTotal);
 			receipt.excCode = trans.excCode;
 			receipt.description = trans.description;
+			receipt.isCompleted = trans.isCompleted;
 
 			if (trans.contact != null) {
 				receipt.contactId = trans.contact.id;
@@ -247,13 +250,14 @@ public class WaybillTrans extends AbstractStockTrans {
 				for (WaybillTransRelation rel : relations) {
 					idList.add(rel.relId);
 				}
-				Ebean.createSqlUpdate("update order_trans_detail set status = 'Waiting', completed = 0, cancelled = 0 where trans_id in (:idList) and workspace = :workspace;")
+				Ebean.createSqlUpdate("update order_trans_detail set completed = 0, cancelled = 0 where trans_id in (:idList) and workspace = :workspace;")
 						.setParameter("workspace", CacheUtils.getWorkspaceId())
 						.setParameter("idList", idList)
 					.execute();
-				Ebean.createSqlUpdate("update order_trans set status = 'Waiting', waybill_id = null, invoice_id = null where id in (:idList) and workspace = :workspace;")
+				Ebean.createSqlUpdate("update order_trans set is_completed = :is_completed, waybill_id = null, invoice_id = null where id in (:idList) and workspace = :workspace;")
 						.setParameter("workspace", CacheUtils.getWorkspaceId())
 						.setParameter("idList", idList)
+						.setParameter("is_completed", Boolean.FALSE)
 					.execute();
 			}
 		}

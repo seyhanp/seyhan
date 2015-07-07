@@ -64,10 +64,7 @@ public class WaybillTransStatus extends BaseModel {
 	}
 
 	public static Map<String, String> childOptions(Integer oldStatusId) {
-		if (oldStatusId != null && oldStatusId.intValue() > 0) {
-			return ModelHelper.expOptions(RIGHT, Expr.eq("parent.id", oldStatusId), ORDERING);
-		}
-		return null;
+		return ModelHelper.expOptions(RIGHT, Expr.eq("parent.id", (oldStatusId != null && oldStatusId.intValue() > 0 ? oldStatusId : null)), ORDERING);
 	}
 
 	public static Map<String, String> options(boolean isFirstStep) {

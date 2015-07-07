@@ -37,7 +37,7 @@ import models.OrderTransDetail;
 import models.OrderTransFactor;
 import models.SaleSeller;
 import models.Stock;
-import models.search.OrderTransSearchParam;
+import models.search.TransSearchParam;
 import models.temporal.TransMultiplier;
 
 import org.slf4j.Logger;
@@ -84,7 +84,7 @@ public class Transes extends Controller {
 
 	private final static Logger log = LoggerFactory.getLogger(Transes.class);
 	private final static Form<OrderTrans> dataForm = form(OrderTrans.class);
-	private final static Form<OrderTransSearchParam> paramForm = form(OrderTransSearchParam.class);
+	private final static Form<TransSearchParam> paramForm = form(TransSearchParam.class);
 
 	/**
 	 * Liste formu basliklarini doner
@@ -115,7 +115,7 @@ public class Transes extends Controller {
 	 * 
 	 * @return PageExtend
 	 */
-	private static PageExtend<OrderTrans> buildPage(OrderTransSearchParam searchParam, Right right) {
+	private static PageExtend<OrderTrans> buildPage(TransSearchParam searchParam, Right right) {
 		List<Map<Integer, String>> dataList = new ArrayList<Map<Integer, String>>();
 
 		Page<OrderTrans> page = OrderTrans.page(searchParam, right);
@@ -155,7 +155,7 @@ public class Transes extends Controller {
 		Result hasProblem = AuthManager.hasProblem(rightBind.value, RightLevel.Enable, ACCEPTABLE_RIGHTS);
 		if (hasProblem != null) return hasProblem;
 
-		Form<OrderTransSearchParam> filledParamForm = paramForm.bindFromRequest();
+		Form<TransSearchParam> filledParamForm = paramForm.bindFromRequest();
 
 		return ok(
 			list.render(
