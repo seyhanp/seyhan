@@ -114,9 +114,9 @@ public class StockCosting extends BaseStockExtraFieldsModel {
 
 	private static Map<String, String> options(List<CostingType> typeList) {
 		if (typeList == null) {
-			return ModelHelper.expOptions(RIGHT, null);
+			return ModelHelper.expOptions(RIGHT, null, "name");
 		} else {
-			return ModelHelper.expOptions(RIGHT, Expr.in("costingType", typeList));
+			return ModelHelper.expOptions(RIGHT, Expr.in("costingType", typeList), "name");
 		}
 	}
 

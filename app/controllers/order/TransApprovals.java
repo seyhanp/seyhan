@@ -39,6 +39,7 @@ import models.WaybillTransDetail;
 import models.WaybillTransFactor;
 import models.WaybillTransRelation;
 import models.search.OrderTransSearchParam;
+import models.temporal.OrderTransStatusForm;
 import models.temporal.ReceiptListModel;
 
 import org.slf4j.Logger;
@@ -58,6 +59,7 @@ import utils.NumericUtils;
 import utils.RefModuleUtil;
 import utils.StringUtils;
 import views.html.orders.trans_approval.form;
+import views.html.orders.trans_approval.change_status;
 
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.SqlRow;
@@ -1118,6 +1120,16 @@ public class TransApprovals extends Controller {
 				.setParameter("trans_id", sourceId)
 				.setParameter("is_completed", GlobalCons.TRUE)
 			.execute();
+	}
+
+	public static Result getChangeStatusForm(Integer oldStatusId) {
+		if (! CacheUtils.isLoggedIn()) {
+			return badRequest(Messages.get("not.authorized.or.disconnect"));
+		}
+		
+		return ok(
+			change_status.render(new OrderTransStatusForm(), oldStatusId).body()
+		);
 	}
 
 }

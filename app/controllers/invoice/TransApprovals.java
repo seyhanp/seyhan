@@ -24,6 +24,7 @@ import java.util.ArrayList;
 
 import models.InvoiceTrans;
 import models.search.OrderTransSearchParam;
+import models.temporal.InvoiceTransStatusForm;
 import models.temporal.ReceiptListModel;
 
 import org.slf4j.Logger;
@@ -34,8 +35,10 @@ import play.i18n.Messages;
 import play.mvc.Controller;
 import play.mvc.Result;
 import utils.AuthManager;
+import utils.CacheUtils;
 import utils.TransStatusHistoryUtils;
 import views.html.invoices.trans_approval.form;
+import views.html.invoices.trans_approval.change_status;
 
 import com.avaje.ebean.Ebean;
 
@@ -116,6 +119,16 @@ public class TransApprovals extends Controller {
 
 	private static Result search(Form<OrderTransSearchParam> filledForm) {
 		return ok(form.render(filledForm, InvoiceTrans.findReceiptList(filledForm.get())));
+	}
+
+	public static Result getChangeStatusForm(Integer oldStatusId) {
+		if (! CacheUtils.isLoggedIn()) {
+			return badRequest(Messages.get("not.authorized.or.disconnect"));
+		}
+		
+		return ok(
+			change_status.render(new InvoiceTransStatusForm(), oldStatusId).body()
+		);
 	}
 
 }

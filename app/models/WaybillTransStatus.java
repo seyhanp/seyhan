@@ -41,6 +41,7 @@ public class WaybillTransStatus extends BaseModel {
 
 	private static final long serialVersionUID = 1L;
 	private static final Right RIGHT = Right.IRSL_IRSALIYE_DURUMLARI;
+	private static final String ORDERING = "ordering, parent, name";
 
 	@Constraints.Required
 	@Constraints.MinLength(3)
@@ -50,6 +51,8 @@ public class WaybillTransStatus extends BaseModel {
 	@ManyToOne
 	public WaybillTransStatus parent;
 
+	public Integer ordering = 0;
+
 	public Boolean isActive = Boolean.TRUE;
 
 	public static Map<String, String> options(Integer ownId) {
@@ -57,15 +60,22 @@ public class WaybillTransStatus extends BaseModel {
 		if (ownId != null && ownId.intValue() > 0) {
 			expr = Expr.or(Expr.isNull("parent.id"), Expr.and(Expr.ne("id", ownId), Expr.ne("parent.id", ownId)));
 		}
-		return ModelHelper.expOptions(RIGHT, expr);
+		return ModelHelper.expOptions(RIGHT, expr, ORDERING);
+	}
+
+	public static Map<String, String> childOptions(Integer oldStatusId) {
+		if (oldStatusId != null && oldStatusId.intValue() > 0) {
+			return ModelHelper.expOptions(RIGHT, Expr.eq("parent.id", oldStatusId), ORDERING);
+		}
+		return null;
 	}
 
 	public static Map<String, String> options(boolean isFirstStep) {
-		return ModelHelper.expOptions(RIGHT, (isFirstStep ? Expr.isNull("parent") : null));
+		return ModelHelper.expOptions(RIGHT, (isFirstStep ? Expr.isNull("parent") : null), ORDERING);
 	}
 
 	public static List<WaybillTransStatus> page() {
-		return ModelHelper.orderedPage(RIGHT, "parent, name");
+		return ModelHelper.orderedPage(RIGHT, ORDERING);
 	}
 
 	public static WaybillTransStatus findById(Integer id) {

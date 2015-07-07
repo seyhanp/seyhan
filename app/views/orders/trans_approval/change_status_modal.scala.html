@@ -1,0 +1,23 @@
+@(oldStatusId: Int)
+
+<div id="modal-change-status" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true" tabindex="-1">×</button>
+		<div id="modal-title">
+			<h4>@Messages("change.status")</h4>
+		</div>
+	</div>
+
+	<div class="modal-body">
+		@helper.form(action = order.routes.TransApprovals.getChangeStatusForm(oldStatusId), 'class-> "form-horizontal", 'id -> "changeStatusForm") {
+			<div id="change_status_form_fields"></div>
+		}
+	</div>
+
+	<div class="modal-footer">
+		<button class="btn btn-primary" aria-hidden="true" onclick="change_status_apply()">@Messages("apply")</button>
+		<button class="btn" data-dismiss="modal" aria-hidden="true">@Messages("close")</button>
+	</div>
+	
+</div>

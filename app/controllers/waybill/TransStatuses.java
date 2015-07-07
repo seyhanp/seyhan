@@ -70,6 +70,7 @@ public class TransStatuses extends Controller {
 		List<GridHeader> headerList = new ArrayList<GridHeader>();
 		headerList.add(new GridHeader(Messages.get("name"), true));
 		headerList.add(new GridHeader(Messages.get("previous.status"), true));
+		headerList.add(new GridHeader(Messages.get("orderby"), "5%", "right", "green"));
 		headerList.add(new GridHeader(Messages.get("is_active"), "7%", true));
 
 		return headerList;
@@ -91,6 +92,7 @@ public class TransStatuses extends Controller {
 				dataMap.put(i++, model.id.toString());
 				dataMap.put(i++, model.name);
 				dataMap.put(i++, (model.parent != null ? model.parent.name : "--"));
+				dataMap.put(i++, (model.ordering != null ? model.ordering.toString() : ""));
 				dataMap.put(i++, model.isActive.toString());
 
 				dataList.add(dataMap);

@@ -17,17 +17,14 @@ width:calc(100% - 5px)
 
 @tools.templates.trans_form(ScriptBlock) {
 
-@***********************************************************************************************************************
-*	@if(_form("status").value == "Completed") {
-*		<div class="alert alert-error">
-*			<strong>@Messages("alert"): </strong> @Messages("edit.striction.for_view")
-*			@if(_form("invoiceId").value != null) {
-*				 @Html(utils.StringUtils.buildLinkForApprovals(rightBind.value, "invoices", _form("invoiceId").value))
-*			}
-*		</div>
-*	}
-*	}
-***********************************************************************************************************************@
+	@if(_form("isCompleted").value != null && _form("isCompleted").value.equals("true")) {
+		<div class="alert alert-error">
+			<strong>@Messages("alert"): </strong> @Messages("edit.striction.for_view")
+			@if(_form("invoiceId").value != null) {
+				 @Html(utils.StringUtils.buildLinkForApprovals(rightBind.value, "invoices", _form("invoiceId").value))
+			}
+		</div>
+	}
 
 	@tools.imports.forms_header(
 		_form("id").value,

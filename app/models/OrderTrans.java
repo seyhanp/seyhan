@@ -206,8 +206,7 @@ public class OrderTrans extends AbstractStockTrans {
 		ExpressionList<OrderTrans> expList = ModelHelper.getExpressionList(Module.order);
 
 		expList.eq("workspace", sourceWS);
-		//TODO: ilk konumdaki siparisleri bulmak icin status alani null ya da profil tanimlarindaki degere esit olanlar icin kriter eklenecek
-		//expList.eq("status", TransStatus.Waiting);
+		expList.eq("isCompleted", Boolean.FALSE);
 		return expList
 					.order("receiptNo")
 					.fetch("details")

@@ -72,6 +72,8 @@ public class JSRouter extends Controller {
 				controllers.order.routes.javascript.TransStatuses.edit(),
 				controllers.order.routes.javascript.TransStatuses.remove(),
 
+				controllers.order.routes.javascript.TransApprovals.getChangeStatusForm(),
+				
 				controllers.waybill.routes.javascript.TransSources.list(),
 				controllers.waybill.routes.javascript.TransSources.save(),
 				controllers.waybill.routes.javascript.TransSources.create(),
@@ -85,6 +87,8 @@ public class JSRouter extends Controller {
 				controllers.waybill.routes.javascript.TransStatuses.edit(),
 				controllers.waybill.routes.javascript.TransStatuses.remove(),
 
+				controllers.waybill.routes.javascript.TransApprovals.getChangeStatusForm(),
+				
 				controllers.invoice.routes.javascript.TransSources.list(),
 				controllers.invoice.routes.javascript.TransSources.save(),
 				controllers.invoice.routes.javascript.TransSources.create(),
@@ -98,6 +102,8 @@ public class JSRouter extends Controller {
 				controllers.invoice.routes.javascript.TransStatuses.edit(),
 				controllers.invoice.routes.javascript.TransStatuses.remove(),
 
+				controllers.invoice.routes.javascript.TransApprovals.getChangeStatusForm(),
+				
 				controllers.contact.routes.javascript.TransSources.list(),
 				controllers.contact.routes.javascript.TransSources.save(),
 				controllers.contact.routes.javascript.TransSources.create(),

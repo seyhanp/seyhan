@@ -56,7 +56,7 @@ public class ContactExtraFields extends BaseModel {
 	}
 
 	public static Map<String, String> options(Integer extraFieldsId) {
-		return ModelHelper.expOptions(RIGHT, Expr.eq("extraFields.id", extraFieldsId));
+		return ModelHelper.expOptions(RIGHT, Expr.eq("extraFields.id", extraFieldsId), "name");
 	}
 
 	public static List<ContactExtraFields> page(AdminExtraFields extraFields) {

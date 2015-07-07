@@ -194,10 +194,10 @@ public class ModelHelper {
 	}
 
 	public static <T extends BaseModel> Map<String, String> options(Right right) {
-		return expOptions(right, null);
+		return expOptions(right, null, "name");
 	}
 
-	public static <T extends BaseModel> Map<String, String> expOptions(Right right, Expression exp) {
+	public static <T extends BaseModel> Map<String, String> expOptions(Right right, Expression exp, String orderBy) {
 		LinkedHashMap<String, String> result = CacheUtils.get(true, right.name() + CacheKeys.OPTIONS.value + (exp != null ? exp.toString() : ""));
 
 		if (result == null) {
@@ -210,7 +210,7 @@ public class ModelHelper {
 			if (exp != null) elList.add(exp);
 	
 			List<T> modelList = elList
-									.orderBy("name")
+									.orderBy(orderBy)
 								.findList();
 			for(T model: modelList) {
 				result.put(model.id.toString(), model.toString());

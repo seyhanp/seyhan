@@ -1,0 +1,16 @@
+@(_form: Form[models.temporal.InvoiceTransStatusForm], oldStatusId: Integer)
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@select(_form("status.id"),
+	options(InvoiceTransStatus.childOptions(oldStatusId)),
+	'class -> "input-medium",
+	'_label -> Messages("status")
+)
+
+@inputText(_form("description"),
+	'_label -> Messages("description"),
+	'class -> "input-xlarge",
+	'maxlength -> "150"
+)

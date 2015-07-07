@@ -229,8 +229,7 @@ public class WaybillTrans extends AbstractStockTrans {
 		ExpressionList<WaybillTrans> expList = ModelHelper.getExpressionList(Module.waybill);
 
 		expList.eq("workspace", sourceWS);
-		//TODO: ilk konumdaki irsaliyeleri bulmak icin status alani null ya da profil tanimlarindaki degere esit olanlar icin kriter eklenecek
-		//expList.eq("status", TransStatus.Waiting);
+		expList.eq("isCompleted", Boolean.FALSE);
 		return expList
 					.order("receiptNo")
 					.fetch("details")

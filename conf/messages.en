@@ -95,6 +95,7 @@ cancel=Cancel
 previous=Prev
 previous.status=Previous Status
 first.status=First Status
+change.status=Change Status
 first.init=First Init
 next=Next
 all=All

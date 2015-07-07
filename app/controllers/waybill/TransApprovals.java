@@ -36,6 +36,7 @@ import models.StockTrans;
 import models.WaybillTrans;
 import models.WaybillTransFactor;
 import models.search.OrderTransSearchParam;
+import models.temporal.OrderTransStatusForm;
 import models.temporal.ReceiptListModel;
 
 import org.slf4j.Logger;
@@ -55,6 +56,7 @@ import utils.NumericUtils;
 import utils.RefModuleUtil;
 import utils.StringUtils;
 import views.html.waybills.trans_approval.form;
+import views.html.waybills.trans_approval.change_status;
 
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.SqlRow;
@@ -647,6 +649,16 @@ public class TransApprovals extends Controller {
 		 */
 		StockTrans trans = StockTrans.findByRefIdAndModule(source.id, source.right);
 		if (trans != null) trans.delete();
+	}
+
+	public static Result getChangeStatusForm(Integer oldStatusId) {
+		if (! CacheUtils.isLoggedIn()) {
+			return badRequest(Messages.get("not.authorized.or.disconnect"));
+		}
+		
+		return ok(
+			change_status.render(new WaybillTransStatusForm(), oldStatusId).body()
+		);
 	}
 
 }

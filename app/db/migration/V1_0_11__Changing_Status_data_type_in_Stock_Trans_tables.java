@@ -71,6 +71,7 @@ public class V1_0_11__Changing_Status_data_type_in_Stock_Trans_tables implements
 		sb.append("  id                        int auto_increment not null,");
 		sb.append("  parent_id                 int,");
 		sb.append("  name                      varchar(30) not null,");
+		sb.append("  ordering                  int default 0,");
 		sb.append("  insert_by                 varchar(20),");
 		sb.append("  insert_at                 datetime,");
 		sb.append("  update_by                 varchar(20),");
@@ -106,6 +107,7 @@ public class V1_0_11__Changing_Status_data_type_in_Stock_Trans_tables implements
 		sb.append("  id                        int auto_increment not null,");
 		sb.append("  parent_id                 int,");
 		sb.append("  name                      varchar(30) not null,");
+		sb.append("  ordering                  int default 0,");
 		sb.append("  insert_by                 varchar(20),");
 		sb.append("  insert_at                 datetime,");
 		sb.append("  update_by                 varchar(20),");
@@ -139,6 +141,7 @@ public class V1_0_11__Changing_Status_data_type_in_Stock_Trans_tables implements
 		sb.append("  id                        serial not null,");
 		sb.append("  parent_id                 integer,");
 		sb.append("  name                      varchar(30) not null,");
+		sb.append("  ordering                  integer default 0,");
 		sb.append("  insert_by                 varchar(20),");
 		sb.append("  insert_at                 timestamp,");
 		sb.append("  update_by                 varchar(20),");
@@ -174,6 +177,7 @@ public class V1_0_11__Changing_Status_data_type_in_Stock_Trans_tables implements
 		sb.append("  id                        integer identity(1,1) primary key,");
 		sb.append("  parent_id                 integer,");
 		sb.append("  name                      varchar(30) not null,");
+		sb.append("  ordering                  integer default 0,");
 		sb.append("  insert_by                 varchar(20),");
 		sb.append("  insert_at                 datetime,");
 		sb.append("  update_by                 varchar(20),");

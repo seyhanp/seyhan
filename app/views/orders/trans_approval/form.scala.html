@@ -21,7 +21,7 @@
 							'_label -> Messages("trans.type")
 						)
 					
-						@select(_form("status"),
+						@select(_form("status.id"),
 							options(OrderTransStatus.options(false)),
 							'class -> "input-medium",
 							'_label -> Messages("status")
@@ -92,6 +92,7 @@
 			<p class="pull-right" style="margin-top: 10px">
 				<a id="appsubWaybill" class="btn btn-small btn-primary mact" disabled="disabled">@Messages("make.waybill")</a>
 				<a id="appsubInvoice" class="btn btn-small btn-success mact" disabled="disabled">@Messages("make.invoice")</a>
+				<a id="appsubChangeStatus" class="btn btn-small mact" style="margin-left:30px" disabled="disabled" onclick="change_status_form_open();">@Messages("change.status")</a>
 			</p>
 		</div>
 
@@ -185,6 +186,8 @@
 	
 	}
 
+	@orders.trans_approval.change_status_modal(1)
+
 }
 
 @ScriptBlock = {
@@ -240,5 +243,25 @@
 			}
 		});
 
+		/*************************************************************************
+		         CHANGE STATUS SECTION
+		***************************************************************************/
+
+		var status_controller = jsRoutes.controllers.order.TransApprovals;
+
+		function change_status_form_open() {
+			var oldStatusId = $('#status_id').val();
+			status_controller.changeStatusForm(oldStatusId).ajax({
+				cache: false,
+				success: function(data, status, xhr) {
+					$("#change_status_form_fields").html(data);
+					$('#modal\\-change\\-status').modal('show');
+				}
+			});
+		}
+
+		function change_status_apply() {
+			$('#modal\\-change\\-status').modal('hide');
+		}
 	</script>
 }

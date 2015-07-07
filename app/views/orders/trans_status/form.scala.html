@@ -17,6 +17,12 @@
 	'_default -> Messages("choose")
 )
 
+@inputText(_form("ordering"),
+	'_label -> Messages("orderby"),
+	'class -> "input-small number",
+	'maxlength -> "2"
+)
+
 @select(_form("isActive"),
 	options(Options.yesno),
 	'class -> "input-small",

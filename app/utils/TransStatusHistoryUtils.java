@@ -81,12 +81,12 @@ public class TransStatusHistoryUtils {
 	 * @param statusId
 	 */
 	private static void setTransStatus(Module module, Integer transId, Integer statusId) {
-		Ebean.createSqlUpdate("update " + module.name() + "_trans set status_id = :status_id where id in = :id)")
+		Ebean.createSqlUpdate("update " + module.name() + "_trans set status_id = :status_id where id = :id")
 				.setParameter("id", transId)
 				.setParameter("status_id", statusId)
 			.execute();
 		
-		Ebean.createSqlUpdate("update " + module.name() + "_trans_detail set status_id = :status_id where id trans_id = :trans_id)")
+		Ebean.createSqlUpdate("update " + module.name() + "_trans_detail set status_id = :status_id where trans_id = :trans_id")
 				.setParameter("trans_id", transId)
 				.setParameter("status_id", statusId)
 			.execute();
