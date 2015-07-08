@@ -93,7 +93,7 @@
 			<h4 class="pull-left">@Messages("results")</h4>
 	
 			<p class="pull-right" style="margin-top: 10px">
-				<button type="submit" class="btn btn-small btn-success mact" disabled="disabled">@Messages("invoice.close")</button>
+				<a id="appsubChangeStatus" class="btn btn-small mact" style="margin-left:30px" disabled="disabled" onclick="change_status_form_open();">@Messages("change.status")</a>
 			</p>
 		</div>
 
@@ -180,14 +180,6 @@
 		$('#appsubSearch').click(function(e) {
 			$('#formAction').val("search");
 			$('#invoiceApprovalForm').submit();
-		});
-
-		$('#appsubCancelled').click(function(e) {
-			$('#errorPanel').html('');
-			if (getSelectedRowCount() > 0) {
-				$('#formAction').val("cancelled");
-				$('#invoiceApprovalForm').submit();
-			}
 		});
 
 		/*************************************************************************

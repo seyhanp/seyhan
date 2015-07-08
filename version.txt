@@ -1,4 +1,10 @@
-﻿sürüm 1.0.10 - 14/06/2015
+﻿sürüm 1.0.11 - 08/07/2015
+	-  sipariş, irsaliye ve fatura belgeleri için;
+		a- hareket tablolarında bulunan enum tipindeki status alanının yapısı değiştirilerek tanımlanabilir hale getirildi
+		b- onaylama adımları yeni status yapısını kullanacak şekilde düzenlendi 
+		c- yeni status yapısına göre raporlar düzenlendi
+
+sürüm 1.0.10 - 14/06/2015
 	- cari raporlar kısmına cari analiz raporu eklendi
 	- stok ve fatura belgeleri çoğaltılırken, cari hesaba yansıma yapılmıyordu
 	- dövizsiz çalışma seçeneğinde, formlardaki para birimi alanına bağlı hesaplamalarda hatalar oluyordu

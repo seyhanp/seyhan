@@ -232,14 +232,6 @@
 			$('#orderApprovalForm').submit();
 		});
 
-		$('#appsubCancelled').click(function(e) {
-			$('#errorPanel').html('');
-			if (getSelectedRowCount() > 0) {
-				$('#formAction').val("cancelled");
-				$('#orderApprovalForm').submit();
-			}
-		});
-
 		$('#appsubWaybill, #appsubInvoice').click(function(e) {
 			$('#errorPanel').html('');
 			if (getSelectedRowCount() > 0) {

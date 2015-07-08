@@ -311,7 +311,7 @@ public class Transes extends Controller {
 			try {
 				if (model.id == null) {
 					model.save();
-					if (model.status != null) {
+					if (model.status != null && model.status.id != null) {
 						TransStatusHistoryUtils.goForward(Module.waybill, model.id, model.status.id, Messages.get("first.init"));
 					}
 				} else {

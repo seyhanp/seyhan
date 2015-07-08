@@ -93,6 +93,7 @@
 	
 			<p class="pull-right" style="margin-top: 10px">
 				<a id="appsubInvoice" class="btn btn-small btn-success mact" disabled="disabled">@Messages("make.invoice")</a>
+				<a id="appsubChangeStatus" class="btn btn-small mact" style="margin-left:30px" disabled="disabled" onclick="change_status_form_open();">@Messages("change.status")</a>
 			</p>
 		</div>
 
@@ -217,14 +218,6 @@
 		$('#appsubSearch').click(function(e) {
 			$('#formAction').val("search");
 			$('#waybillApprovalForm').submit();
-		});
-
-		$('#appsubCancelled').click(function(e) {
-			$('#errorPanel').html('');
-			if (getSelectedRowCount() > 0) {
-				$('#formAction').val("cancelled");
-				$('#waybillApprovalForm').submit();
-			}
 		});
 
 		$('#appsubInvoice').click(function(e) {

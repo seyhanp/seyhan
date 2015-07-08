@@ -348,7 +348,7 @@ public class Transes extends Controller {
 			return badRequest(form.render(filledForm, rightBind, InvoiceTransRows.build(model)));
 		}
 
-		if (isNew && model.status != null) {
+		if (isNew && model.status != null && model.status.id != null) {
 			TransStatusHistoryUtils.goForward(Module.invoice, model.id, model.status.id, Messages.get("first.init"));
 		}
 
