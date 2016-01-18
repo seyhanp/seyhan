@@ -132,7 +132,7 @@ ORDER BY t.id]]>
 						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
-					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 					</textElement>
 					<textFieldExpression class="java.lang.String"><![CDATA[$R{amount}]]></textFieldExpression>
@@ -145,7 +145,7 @@ ORDER BY t.id]]>
 						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
-					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 					</textElement>
 					<textFieldExpression class="java.lang.String"><![CDATA[$R{portfolio.no}]]></textFieldExpression>
@@ -158,7 +158,7 @@ ORDER BY t.id]]>
 						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
-					<textElement textAlignment="Left" verticalAlignment="Middle" lineSpacing="Single">
+					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 					</textElement>
 					<textFieldExpression class="java.lang.String"><![CDATA[$R{serial.no}]]></textFieldExpression>
@@ -171,7 +171,7 @@ ORDER BY t.id]]>
 						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
-					<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<textElement verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 					</textElement>
 					<textFieldExpression class="java.lang.String"><![CDATA[$R{maturity}]]></textFieldExpression>
@@ -184,7 +184,7 @@ ORDER BY t.id]]>
 						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
-					<textElement textAlignment="Left" verticalAlignment="Middle" lineSpacing="Single">
+					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 					</textElement>
 					<textFieldExpression class="java.lang.String"><![CDATA[$R{last_status}]]></textFieldExpression>
@@ -197,7 +197,7 @@ ORDER BY t.id]]>
 						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
-					<textElement textAlignment="Left" verticalAlignment="Middle" lineSpacing="Single">
+					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 					</textElement>
 					<textFieldExpression class="java.lang.String"><![CDATA[$R{type}]]></textFieldExpression>
@@ -210,7 +210,7 @@ ORDER BY t.id]]>
 						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
-					<textElement textAlignment="Left" verticalAlignment="Middle" lineSpacing="Single">
+					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 					</textElement>
 					<textFieldExpression class="java.lang.String"><![CDATA[$R{description}]]></textFieldExpression>
@@ -223,7 +223,7 @@ ORDER BY t.id]]>
 						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 					</textElement>
 					<textFieldExpression class="java.lang.String"><![CDATA[$F{exc_code}]]></textFieldExpression>
@@ -236,7 +236,7 @@ ORDER BY t.id]]>
 						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
-					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 					</textElement>
 					<textFieldExpression class="java.lang.Double"><![CDATA[$F{total}]]></textFieldExpression>
@@ -249,7 +249,7 @@ ORDER BY t.id]]>
 						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
-					<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<textElement verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 					</textElement>
 					<textFieldExpression class="java.lang.String"><![CDATA[($F{b_name} != null
@@ -270,7 +270,7 @@ ORDER BY t.id]]>
 						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
-					<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<textElement verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 					</textElement>
 					<textFieldExpression class="java.lang.String"><![CDATA[$F{trans_source}]]></textFieldExpression>
@@ -283,7 +283,7 @@ ORDER BY t.id]]>
 						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
-					<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<textElement verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 					</textElement>
 					<textFieldExpression class="java.lang.String"><![CDATA[$F{description}]]></textFieldExpression>
@@ -296,7 +296,7 @@ ORDER BY t.id]]>
 						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
-					<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<textElement verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 					</textElement>
 					<textFieldExpression class="java.lang.String"><![CDATA[str("enum.cqbl.step." + $F{to_step}).toUpperCase()]]></textFieldExpression>
@@ -309,7 +309,7 @@ ORDER BY t.id]]>
 						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
-					<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<textElement verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 					</textElement>
 					<textFieldExpression class="java.util.Date"><![CDATA[$F{avarage_date}]]></textFieldExpression>
@@ -322,7 +322,7 @@ ORDER BY t.id]]>
 						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
-					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 					</textElement>
 					<textFieldExpression class="java.lang.Integer"><![CDATA[$F{receipt_no}]]></textFieldExpression>
@@ -335,7 +335,7 @@ ORDER BY t.id]]>
 						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
-					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 					</textElement>
 					<textFieldExpression class="java.lang.Integer"><![CDATA[$F{row_count}]]></textFieldExpression>
@@ -348,7 +348,7 @@ ORDER BY t.id]]>
 						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
-					<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<textElement verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 					</textElement>
 					<textFieldExpression class="java.util.Date"><![CDATA[$F{trans_date}]]></textFieldExpression>
@@ -361,7 +361,7 @@ ORDER BY t.id]]>
 						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
-					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 					</textElement>
 					<textFieldExpression class="java.lang.Integer"><![CDATA[$F{adat}]]></textFieldExpression>
@@ -374,7 +374,7 @@ ORDER BY t.id]]>
 						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
-					<textElement textAlignment="Left" verticalAlignment="Middle" lineSpacing="Single">
+					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 					</textElement>
 					<textFieldExpression class="java.lang.String"><![CDATA[$R{payment_place}]]></textFieldExpression>
@@ -387,7 +387,7 @@ ORDER BY t.id]]>
 						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
-					<textElement textAlignment="Left" verticalAlignment="Middle" lineSpacing="Single">
+					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 					</textElement>
 					<textFieldExpression class="java.lang.String"><![CDATA[($F{sort}.equals("Cheque")
@@ -427,7 +427,7 @@ ORDER BY t.id]]>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{FOR_DOTMATRIX}]]></textFieldExpression>
@@ -440,7 +440,7 @@ ORDER BY t.id]]>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement verticalAlignment="Middle" lineSpacing="Single">
+				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="16" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{enum.CEK_HAREKET_BORDRO_LISTESI} + " (-- " + str("report.show.detail") + "--)"]]></textFieldExpression>
@@ -453,7 +453,7 @@ ORDER BY t.id]]>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{reporter.company} + " : " + $P{COMPANY}]]></textFieldExpression>
@@ -466,7 +466,7 @@ ORDER BY t.id]]>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement verticalAlignment="Middle" lineSpacing="Single">
+				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{REPORT_INFO}]]></textFieldExpression>
@@ -483,7 +483,7 @@ ORDER BY t.id]]>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement verticalAlignment="Middle" lineSpacing="Single">
+				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA["---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"]]></textFieldExpression>
@@ -496,7 +496,7 @@ ORDER BY t.id]]>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement verticalAlignment="Middle" lineSpacing="Single">
+				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{name}]]></textFieldExpression>
@@ -509,7 +509,7 @@ ORDER BY t.id]]>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{row_count}]]></textFieldExpression>
@@ -522,7 +522,7 @@ ORDER BY t.id]]>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement verticalAlignment="Middle" lineSpacing="Single">
+				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{date}]]></textFieldExpression>
@@ -535,7 +535,7 @@ ORDER BY t.id]]>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement verticalAlignment="Middle" lineSpacing="Single">
+				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{to.where}]]></textFieldExpression>
@@ -548,7 +548,7 @@ ORDER BY t.id]]>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{total}]]></textFieldExpression>
@@ -561,7 +561,7 @@ ORDER BY t.id]]>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement verticalAlignment="Middle" lineSpacing="Single">
+				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{trans.source}]]></textFieldExpression>
@@ -574,7 +574,7 @@ ORDER BY t.id]]>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{receipt_no}]]></textFieldExpression>
@@ -587,7 +587,7 @@ ORDER BY t.id]]>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement verticalAlignment="Middle" lineSpacing="Single">
+				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{description}]]></textFieldExpression>
@@ -600,7 +600,7 @@ ORDER BY t.id]]>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement verticalAlignment="Middle" lineSpacing="Single">
+				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{date.avarage}]]></textFieldExpression>
@@ -613,7 +613,7 @@ ORDER BY t.id]]>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA["Adat"]]></textFieldExpression>
@@ -630,7 +630,7 @@ ORDER BY t.id]]>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{amount}]]></textFieldExpression>
@@ -643,7 +643,7 @@ ORDER BY t.id]]>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{portfolio_no}]]></textFieldExpression>
@@ -656,7 +656,7 @@ ORDER BY t.id]]>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Left" verticalAlignment="Middle" lineSpacing="Single">
+				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{serial_no}]]></textFieldExpression>
@@ -669,7 +669,7 @@ ORDER BY t.id]]>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement verticalAlignment="Middle" lineSpacing="Single">
+				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{due_date}]]></textFieldExpression>
@@ -682,7 +682,7 @@ ORDER BY t.id]]>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Left" verticalAlignment="Middle" lineSpacing="Single">
+				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[str("enum.cqbl.step." + $F{last_step}).toUpperCase()]]></textFieldExpression>
@@ -695,7 +695,7 @@ ORDER BY t.id]]>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Left" verticalAlignment="Middle" lineSpacing="Single">
+				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{type_name}]]></textFieldExpression>
@@ -708,7 +708,7 @@ ORDER BY t.id]]>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement verticalAlignment="Middle" lineSpacing="Single">
+				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{ddescription}]]></textFieldExpression>
@@ -721,7 +721,7 @@ ORDER BY t.id]]>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Left" verticalAlignment="Middle" lineSpacing="Single">
+				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{payment_place}]]></textFieldExpression>
@@ -734,7 +734,7 @@ ORDER BY t.id]]>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Left" verticalAlignment="Middle" lineSpacing="Single">
+				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[($F{sort}.equals("Cheque")
@@ -760,7 +760,7 @@ ORDER BY t.id]]>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Left" verticalAlignment="Middle" lineSpacing="Single">
+				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM, new Locale("tr")).format(new java.util.Date())]]></textFieldExpression>
@@ -773,7 +773,7 @@ ORDER BY t.id]]>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement verticalAlignment="Middle" lineSpacing="Single">
+				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA["---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"]]></textFieldExpression>
@@ -786,7 +786,7 @@ ORDER BY t.id]]>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Left" verticalAlignment="Middle" lineSpacing="Single">
+				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[" / " + $V{PAGE_NUMBER}]]></textFieldExpression>
@@ -799,7 +799,7 @@ ORDER BY t.id]]>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{reporter.page} + " : " + $V{PAGE_NUMBER}]]></textFieldExpression>

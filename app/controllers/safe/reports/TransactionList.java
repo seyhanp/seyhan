@@ -134,7 +134,7 @@ public class TransactionList extends Controller {
 		}
 
 		if (params.excCode != null && ! params.excCode.isEmpty()) {
-			queryBuilder.append(" and exc_code = '");
+			queryBuilder.append(" and t.exc_code = '");
 			queryBuilder.append(params.excCode);
 			queryBuilder.append("'");
 		}
@@ -159,7 +159,7 @@ public class TransactionList extends Controller {
 			repPar.reportName = REPORT_NAME;
 			repPar.reportUnit = params.unit;
 			repPar.query = getQueryString(params);
-			repPar.orderBy = params.orderBy;
+			repPar.orderBy = params.orderBy + ", t.trans_dir";
 
 			/*
 			 * Parametrik degerlerin gecisi

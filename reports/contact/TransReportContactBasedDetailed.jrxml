@@ -39,7 +39,7 @@ $P!{TRANS_POINT_SQL}
 $P!{PRIVATE_CODE_SQL}
 where 1=1
 $P!{QUERY_STRING}
-order by c.name, t.exc_code, t.trans_date, ts.name]]>
+order by c.name, t.exc_code, t.trans_date, t.trans_dir, ts.name]]>
 	</queryString>
 	<field name="name" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>

@@ -547,6 +547,9 @@ public enum Right {
 	@EnumValue("BANK_VIRMAN")
 	BANK_VIRMAN(Module.bank, true),
 
+	@EnumValue("BANK_MASRAF")
+	BANK_MASRAF(Module.bank, true),
+
 	@EnumValue("ADMIN")
 	ADMIN(Module.admin, true);
 

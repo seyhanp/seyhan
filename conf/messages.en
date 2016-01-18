@@ -841,6 +841,7 @@ enum.GNEL_PROFIL_TANITIMI=Profiles
 enum.CARI_VIRMAN=Ref. From Contact
 enum.KASA_VIRMAN=Ref. From Safe
 enum.BANK_VIRMAN=Ref. From Bank
+enum.BANK_MASRAF=Ref. via Expense
 
 enum.Login=Login
 enum.Logout=Logout

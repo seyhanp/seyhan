@@ -126,7 +126,7 @@ ORDER BY t.id]]>
 					</box>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-						<paragraph lineSpacing="Single"/>
+						<paragraph/>
 					</textElement>
 					<textFieldExpression><![CDATA[$R{amount}]]></textFieldExpression>
 				</textField>
@@ -140,7 +140,7 @@ ORDER BY t.id]]>
 					</box>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-						<paragraph lineSpacing="Single"/>
+						<paragraph/>
 					</textElement>
 					<textFieldExpression><![CDATA[$R{portfolio.no}]]></textFieldExpression>
 				</textField>
@@ -154,7 +154,7 @@ ORDER BY t.id]]>
 					</box>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-						<paragraph lineSpacing="Single"/>
+						<paragraph/>
 					</textElement>
 					<textFieldExpression><![CDATA[$R{serial.no}]]></textFieldExpression>
 				</textField>
@@ -168,7 +168,7 @@ ORDER BY t.id]]>
 					</box>
 					<textElement verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-						<paragraph lineSpacing="Single"/>
+						<paragraph/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{contact_name}]]></textFieldExpression>
 				</textField>
@@ -182,7 +182,7 @@ ORDER BY t.id]]>
 					</box>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-						<paragraph lineSpacing="Single"/>
+						<paragraph/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{receipt_no}]]></textFieldExpression>
 				</textField>
@@ -196,7 +196,7 @@ ORDER BY t.id]]>
 					</box>
 					<textElement verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-						<paragraph lineSpacing="Single"/>
+						<paragraph/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{trans_date}]]></textFieldExpression>
 				</textField>
@@ -210,7 +210,7 @@ ORDER BY t.id]]>
 					</box>
 					<textElement verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-						<paragraph lineSpacing="Single"/>
+						<paragraph/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{trans_source}]]></textFieldExpression>
 				</textField>
@@ -224,7 +224,7 @@ ORDER BY t.id]]>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-						<paragraph lineSpacing="Single"/>
+						<paragraph/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{exc_code}]]></textFieldExpression>
 				</textField>
@@ -238,7 +238,7 @@ ORDER BY t.id]]>
 					</box>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-						<paragraph lineSpacing="Single"/>
+						<paragraph/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{adat}]]></textFieldExpression>
 				</textField>
@@ -252,7 +252,7 @@ ORDER BY t.id]]>
 					</box>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-						<paragraph lineSpacing="Single"/>
+						<paragraph/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
 				</textField>
@@ -266,7 +266,7 @@ ORDER BY t.id]]>
 					</box>
 					<textElement verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-						<paragraph lineSpacing="Single"/>
+						<paragraph/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
 				</textField>
@@ -280,7 +280,7 @@ ORDER BY t.id]]>
 					</box>
 					<textElement verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-						<paragraph lineSpacing="Single"/>
+						<paragraph/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{avarage_date}]]></textFieldExpression>
 				</textField>
@@ -294,7 +294,7 @@ ORDER BY t.id]]>
 					</box>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-						<paragraph lineSpacing="Single"/>
+						<paragraph/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{row_count}]]></textFieldExpression>
 				</textField>
@@ -308,7 +308,7 @@ ORDER BY t.id]]>
 					</box>
 					<textElement verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-						<paragraph lineSpacing="Single"/>
+						<paragraph/>
 					</textElement>
 					<textFieldExpression><![CDATA[$R{maturity}]]></textFieldExpression>
 				</textField>
@@ -322,7 +322,7 @@ ORDER BY t.id]]>
 					</box>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-						<paragraph lineSpacing="Single"/>
+						<paragraph/>
 					</textElement>
 					<textFieldExpression><![CDATA[$R{payment_place}]]></textFieldExpression>
 				</textField>
@@ -336,7 +336,7 @@ ORDER BY t.id]]>
 					</box>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-						<paragraph lineSpacing="Single"/>
+						<paragraph/>
 					</textElement>
 					<textFieldExpression><![CDATA[($F{sort}.equals("Cheque")
     ? $R{bank}
@@ -356,7 +356,7 @@ ORDER BY t.id]]>
 					</box>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-						<paragraph lineSpacing="Single"/>
+						<paragraph/>
 					</textElement>
 					<textFieldExpression><![CDATA[$R{type}]]></textFieldExpression>
 				</textField>
@@ -370,7 +370,7 @@ ORDER BY t.id]]>
 					</box>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-						<paragraph lineSpacing="Single"/>
+						<paragraph/>
 					</textElement>
 					<textFieldExpression><![CDATA[$R{description}]]></textFieldExpression>
 				</textField>
@@ -384,7 +384,7 @@ ORDER BY t.id]]>
 					</box>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-						<paragraph lineSpacing="Single"/>
+						<paragraph/>
 					</textElement>
 					<textFieldExpression><![CDATA[$R{last_status}]]></textFieldExpression>
 				</textField>
@@ -419,7 +419,7 @@ ORDER BY t.id]]>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{FOR_DOTMATRIX}]]></textFieldExpression>
 			</textField>
@@ -433,7 +433,7 @@ ORDER BY t.id]]>
 				</box>
 				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="16" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[$R{enum.CEK_ISLEM_BORDRO_LISTESI} + " (-- " + str("report.show.detail") + "--)"]]></textFieldExpression>
 			</textField>
@@ -447,7 +447,7 @@ ORDER BY t.id]]>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[$R{reporter.company} + " : " + $P{COMPANY}]]></textFieldExpression>
 			</textField>
@@ -461,7 +461,7 @@ ORDER BY t.id]]>
 				</box>
 				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{REPORT_INFO}]]></textFieldExpression>
 			</textField>
@@ -479,7 +479,7 @@ ORDER BY t.id]]>
 				</box>
 				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA["---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"]]></textFieldExpression>
 			</textField>
@@ -493,7 +493,7 @@ ORDER BY t.id]]>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[$R{receipt_no}]]></textFieldExpression>
 			</textField>
@@ -507,7 +507,7 @@ ORDER BY t.id]]>
 				</box>
 				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[$R{description}]]></textFieldExpression>
 			</textField>
@@ -521,7 +521,7 @@ ORDER BY t.id]]>
 				</box>
 				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[$R{trans.source}]]></textFieldExpression>
 			</textField>
@@ -535,7 +535,7 @@ ORDER BY t.id]]>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[$R{row_count}]]></textFieldExpression>
 			</textField>
@@ -549,7 +549,7 @@ ORDER BY t.id]]>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA["Adat"]]></textFieldExpression>
 			</textField>
@@ -563,7 +563,7 @@ ORDER BY t.id]]>
 				</box>
 				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[$R{date.avarage}]]></textFieldExpression>
 			</textField>
@@ -577,7 +577,7 @@ ORDER BY t.id]]>
 				</box>
 				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[$R{date}]]></textFieldExpression>
 			</textField>
@@ -591,7 +591,7 @@ ORDER BY t.id]]>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[$R{total}]]></textFieldExpression>
 			</textField>
@@ -605,7 +605,7 @@ ORDER BY t.id]]>
 				</box>
 				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[$R{contact.name}]]></textFieldExpression>
 			</textField>
@@ -623,7 +623,7 @@ ORDER BY t.id]]>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
 			</textField>
@@ -637,7 +637,7 @@ ORDER BY t.id]]>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{portfolio_no}]]></textFieldExpression>
 			</textField>
@@ -651,7 +651,7 @@ ORDER BY t.id]]>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{serial_no}]]></textFieldExpression>
 			</textField>
@@ -665,7 +665,7 @@ ORDER BY t.id]]>
 				</box>
 				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{due_date}]]></textFieldExpression>
 			</textField>
@@ -679,7 +679,7 @@ ORDER BY t.id]]>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{sort}.equals("Cheque")
     ? $F{bank_name}
@@ -699,7 +699,7 @@ ORDER BY t.id]]>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{type_name}]]></textFieldExpression>
 			</textField>
@@ -713,7 +713,7 @@ ORDER BY t.id]]>
 				</box>
 				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{ddescription}]]></textFieldExpression>
 			</textField>
@@ -727,7 +727,7 @@ ORDER BY t.id]]>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[str("enum.cqbl.step." + $F{last_step}).toUpperCase()]]></textFieldExpression>
 			</textField>
@@ -741,7 +741,7 @@ ORDER BY t.id]]>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{payment_place}]]></textFieldExpression>
 			</textField>
@@ -762,7 +762,7 @@ ORDER BY t.id]]>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM, new Locale("tr")).format(new java.util.Date())]]></textFieldExpression>
 			</textField>
@@ -776,7 +776,7 @@ ORDER BY t.id]]>
 				</box>
 				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA["---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"]]></textFieldExpression>
 			</textField>
@@ -790,7 +790,7 @@ ORDER BY t.id]]>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[" / " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
@@ -804,7 +804,7 @@ ORDER BY t.id]]>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[$R{reporter.page} + " : " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>

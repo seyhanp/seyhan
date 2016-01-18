@@ -58,7 +58,7 @@ order by due_date]]>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="6" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{sort}.equals("Cheque")
     ? $R{bank}
@@ -78,7 +78,7 @@ order by due_date]]>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="6" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[$R{payment_place}]]></textFieldExpression>
 			</textField>
@@ -92,7 +92,7 @@ order by due_date]]>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="6" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[$R{last_status}]]></textFieldExpression>
 			</textField>
@@ -106,7 +106,7 @@ order by due_date]]>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="6" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[$R{maturity}]]></textFieldExpression>
 			</textField>
@@ -120,7 +120,7 @@ order by due_date]]>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="6" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[$R{amount}]]></textFieldExpression>
 			</textField>
@@ -134,7 +134,7 @@ order by due_date]]>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="6" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[$R{portfolio.no}]]></textFieldExpression>
 			</textField>
@@ -152,7 +152,7 @@ order by due_date]]>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="6" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{payment_place}]]></textFieldExpression>
 			</textField>
@@ -166,7 +166,7 @@ order by due_date]]>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="6" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{portfolio_no}]]></textFieldExpression>
 			</textField>
@@ -180,7 +180,7 @@ order by due_date]]>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="6" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{due_date}]]></textFieldExpression>
 			</textField>
@@ -194,7 +194,7 @@ order by due_date]]>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="6" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[str("enum.cqbl.step." + $F{last_step}).toUpperCase()]]></textFieldExpression>
 			</textField>
@@ -208,7 +208,7 @@ order by due_date]]>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="6" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
 			</textField>
@@ -222,7 +222,7 @@ order by due_date]]>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="6" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-					<paragraph lineSpacing="Single"/>
+					<paragraph/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{sort}.equals("Cheque")
     ? $F{bank_name}

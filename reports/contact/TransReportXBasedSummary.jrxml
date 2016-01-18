@@ -48,7 +48,7 @@ $P!{PRIVATE_CODE_SQL}
 where 1=1
 $P!{QUERY_STRING}
 group by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code
-order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code]]>
+order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code, t.trans_dir]]>
 	</queryString>
 	<field name="group_field" class="java.lang.Object"/>
 	<field name="contact_name" class="java.lang.String"/>

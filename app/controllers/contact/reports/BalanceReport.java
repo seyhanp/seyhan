@@ -94,14 +94,14 @@ public class BalanceReport extends Controller {
 		}
 
 		if (params.seller != null && params.seller.id != null) {
-			queryBuilder.append(" and seller_id = ");
+			queryBuilder.append(" and t.seller_id = ");
 			queryBuilder.append(params.seller.id);
 		}
 
 		QueryUtils.addExtraFieldsCriterias(params, queryBuilder);
 
 		if (params.excCode != null && ! params.excCode.isEmpty()) {
-			queryBuilder.append(" and exc_code = '");
+			queryBuilder.append(" and t.exc_code = '");
 			queryBuilder.append(params.excCode);
 			queryBuilder.append("'");
 		}

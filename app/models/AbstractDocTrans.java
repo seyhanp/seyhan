@@ -35,6 +35,8 @@ public abstract class AbstractDocTrans extends AbstractBaseTrans {
 	public Double amount = 0d;
 	public Double debt = 0d;
 	public Double credit = 0d;
+	
+	public Integer transDir = 0; // 0: DEBT, 1: CREDIT
 
 	public AbstractDocTrans(Right right) {
 		super(right);

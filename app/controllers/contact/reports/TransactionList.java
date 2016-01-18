@@ -82,8 +82,8 @@ public class TransactionList extends Controller {
 
 		public static Map<String, String> options() {
 			LinkedHashMap<String, String> options = new LinkedHashMap<String, String>();
-			options.put("t.trans_date, c.name", Messages.get("date"));
-			options.put("c.name, t.trans_date", Messages.get("name"));
+			options.put("t.trans_date, t.trans_dir, c.name", Messages.get("date"));
+			options.put("c.name, t.trans_date, t.trans_dir", Messages.get("name"));
 			options.put("t.maturity", Messages.get("date.maturity") + " " + Messages.get("ascending"));
 			options.put("t.maturity desc", Messages.get("date.maturity") + " " + Messages.get("descending"));
 
@@ -147,7 +147,7 @@ public class TransactionList extends Controller {
 		}
 
 		if (params.excCode != null && ! params.excCode.isEmpty()) {
-			queryBuilder.append(" and exc_code = '");
+			queryBuilder.append(" and t.exc_code = '");
 			queryBuilder.append(params.excCode);
 			queryBuilder.append("'");
 		}

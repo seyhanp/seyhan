@@ -89,7 +89,7 @@ public class BalanceReport extends Controller {
 		}
 
 		if (params.excCode != null && ! params.excCode.isEmpty()) {
-			queryBuilder.append(" and exc_code = '");
+			queryBuilder.append(" and t.exc_code = '");
 			queryBuilder.append(params.excCode);
 			queryBuilder.append("'");
 		}

@@ -145,6 +145,10 @@ public class RefModuleUtil {
 				}
 			}
 
+			if (source instanceof AbstractDocTrans) {
+				((AbstractDocTrans)source).transDir = (((AbstractDocTrans)source).debt.doubleValue() > 0 ? 0 : 1);
+			}
+
 			source.transYear = DateUtils.getYear(source.transDate);
 			source.transMonth = DateUtils.getYearMonth(source.transDate);
 			if (source.id == null) {
@@ -197,9 +201,10 @@ public class RefModuleUtil {
 
 				newTrans.transDate = source.transDate;
 				newTrans.transNo = source.transNo;
-				newTrans.description = source.description;
+				newTrans.transDir = (newTrans.debt.doubleValue() > 0 ? 0 : 1);
 				newTrans.transYear = source.transYear;
 				newTrans.transMonth = source.transMonth;
+				newTrans.description = source.description;
 
 				if (newTrans.id == null) {
 					if (Profiles.chosen().gnel_docNoIncType.equals(DocNoIncType.Full_Automatic)) newTrans.transNo = DocNoUtils.findLastTransNo(newTrans.right);
@@ -257,9 +262,10 @@ public class RefModuleUtil {
 					extraTrans.excEquivalent = source.excEquivalent;
 					extraTrans.transDate = source.transDate;
 					extraTrans.transNo = source.transNo;
-					extraTrans.description = source.description;
+					extraTrans.transDir = (extraTrans.debt.doubleValue() > 0 ? 0 : 1);
 					extraTrans.transYear = source.transYear;
 					extraTrans.transMonth = source.transMonth;
+					extraTrans.description = source.description;
 
 					extraTrans.refId = source.id;
 					extraTrans.refModule = source.right.module;
@@ -268,6 +274,50 @@ public class RefModuleUtil {
 						extraTrans.singleSave();
 					} else {
 						extraTrans.singleUpdate();
+					}
+				}
+			}
+
+			/*
+			 * Sadece Banka modulu masraf bilgisi varsa ekstra bir hareket yansimasi yapabilir
+			 */
+			if (source instanceof BankTrans) {
+				BankTrans asABankTrans = (BankTrans) source;
+				BankTrans expenseTrans = BankTrans.findByRefIdAndRight(source.id, Right.BANK_MASRAF);
+
+				boolean hasExpense = (asABankTrans.expenseAmount != null && asABankTrans.expenseAmount.doubleValue() > 0);
+
+				//Eski yansima var ve yeni yansima olmayacaksa eski yanisma silinir!
+				if (expenseTrans != null && ! hasExpense) {
+					expenseTrans.singleDelete();
+				// Yansima olacaksa; eski yanisma varsa update edilir, yoksa yeni bir tane olusturulur!
+				} else if (hasExpense) {
+					if (expenseTrans == null) expenseTrans = new BankTrans(Right.BANK_MASRAF);
+
+					expenseTrans.workspace = source.workspace;
+					expenseTrans.bank = asABankTrans.bank;
+					expenseTrans.receiptNo = source.receiptNo;
+					expenseTrans.transType = TransType.Credit;
+					expenseTrans.amount = asABankTrans.expenseAmount;
+					expenseTrans.debt = 0d;
+					expenseTrans.credit = expenseTrans.amount;
+					expenseTrans.excCode = source.excCode;
+					expenseTrans.excRate = source.excRate;
+					expenseTrans.excEquivalent = expenseTrans.amount;
+					expenseTrans.transDate = source.transDate;
+					expenseTrans.transNo = source.transNo;
+					expenseTrans.transDir = (expenseTrans.debt.doubleValue() > 0 ? 0 : 1);
+					expenseTrans.transYear = source.transYear;
+					expenseTrans.transMonth = source.transMonth;
+					expenseTrans.description = "MASRAF YOLUYLA YANSIYAN TUTAR (FİŞ NO : " + asABankTrans.receiptNo +")";
+
+					expenseTrans.refId = source.id;
+					expenseTrans.refModule = Module.bank;
+
+					if (expenseTrans.id == null) {
+						expenseTrans.singleSave();
+					} else {
+						expenseTrans.singleUpdate();
 					}
 				}
 			}
@@ -327,6 +377,15 @@ public class RefModuleUtil {
 			if (! BASE_MODULE_LIST.contains(trans.right.module)) {
 				ContactTrans oldExtraTrans = ContactTrans.findByRefIdAndRight(trans.id, trans.right);
 				if (oldExtraTrans != null) oldExtraTrans.singleDelete();
+			}
+
+			/*
+			 * Sadece Banka modulu masraf bilgisi varsa ekstra bir hareket yansimasi yapmistir
+			 * bu kayit silinmeli
+			 */
+			if (trans instanceof BankTrans) {
+				BankTrans expenseTrans = BankTrans.findByRefIdAndRight(trans.id, Right.BANK_MASRAF);
+				if (expenseTrans != null) expenseTrans.singleDelete();
 			}
 
 			trans.singleDelete();
