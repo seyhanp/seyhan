@@ -40,7 +40,6 @@ public class Ws2WsTransferModel {
 	@Constraints.Required
 	public AdminWorkspace targetWS;
 	
-	@Constraints.Required
 	@DateTime(pattern = "dd/MM/yyyy")
 	public Date transDate = new Date();
 

@@ -28,7 +28,6 @@ import javax.persistence.Transient;
 import org.joda.time.Days;
 
 import play.data.format.Formats.DateTime;
-import play.data.validation.Constraints;
 import play.i18n.Messages;
 import utils.CacheUtils;
 import utils.DocNoUtils;
@@ -56,7 +55,6 @@ public abstract class AbstractBaseTrans extends BaseModel {
 	@Column(name = "_right")
 	public Right right;
 
-	@Constraints.Required
 	@DateTime(pattern = "dd/MM/yyyy")
 	public Date transDate = new Date();
 

@@ -415,25 +415,38 @@ public class RefModuleUtil {
 
 			case contact: {
 				refTrans = ContactTrans.findById(trans.refId);
-				refContact = ((ContactTrans) refTrans).contact;
-				refContactTransSource = ((ContactTrans) refTrans).transSource;
+				if (refTrans != null) {
+					refContact = ((ContactTrans) refTrans).contact;
+					refContactTransSource = ((ContactTrans) refTrans).transSource;
+				}
 				break;
 			}
 			case safe: {
 				refTrans = SafeTrans.findById(trans.refId);
-				refSafe = ((SafeTrans) refTrans).safe;
-				refSafeTransSource = ((SafeTrans) refTrans).transSource;
+				if (refTrans != null) {
+					refSafe = ((SafeTrans) refTrans).safe;
+					refSafeTransSource = ((SafeTrans) refTrans).transSource;
+				}
 				break;
 			}
 			case bank: {
 				refTrans = BankTrans.findById(trans.refId);
-				refBank = ((BankTrans) refTrans).bank;
-				refBankTransSource = ((BankTrans) refTrans).transSource;
+				if (refTrans != null) {
+					refBank = ((BankTrans) refTrans).bank;
+					refBankTransSource = ((BankTrans) refTrans).transSource;
+				}
 				break;
 			}
 			default: {
 				refTrans = ContactTrans.findByRefIdAndRight(trans.id, trans.right);
 			}
+		}
+		
+		if (refTrans == null) {
+			trans.refModule = null;
+			log.warn("Trans has a reflection link but there is no the same reflection at other side!");
+			log.warn("---> Right : " + trans.right + " Id : " + trans.id + " Reflection Module : " + trans.refModule);
+			return;
 		}
 
 		trans.refOldModule = trans.refModule;

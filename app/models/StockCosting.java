@@ -59,7 +59,6 @@ public class StockCosting extends BaseStockExtraFieldsModel {
 	@DateTime(pattern = "dd/MM/yyyy HH:mm")
 	public Date execDate;
 
-	@Constraints.Required
 	@DateTime(pattern = "dd/MM/yyyy")
 	public Date calcDate = new Date();
 

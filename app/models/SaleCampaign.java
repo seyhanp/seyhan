@@ -55,11 +55,9 @@ public class SaleCampaign extends BaseStockExtraFieldsModel {
 	@Constraints.MaxLength(30)
 	public String name;
 
-	@Constraints.Required
 	@DateTime(pattern = "dd/MM/yyyy")
 	public Date startDate;
 
-	@Constraints.Required
 	@DateTime(pattern = "dd/MM/yyyy")
 	public Date endDate;
 

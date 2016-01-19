@@ -1,4 +1,10 @@
-﻿sürüm 1.0.11 - 08/07/2015
+﻿sürüm 1.0.12 - 19/01/2016
+	- kasa, cari ve banka hareket raporlarında sıralama önceliği hareket yönüne verildi, aynı gün içerisindeki borç hareketleri önce sıralanıyor
+	- cari, kasa ve banka durum raporlarında bulunan para birimi alanı birden fazla referansa sahipti, hareket tablosundan gelecek şekilde düzeltildi
+	- banka hareketlerindeki masraf tutarı herhangi bir hesaba yansımıyordu, düzenleme ile aynı hesaba alacak kaydı olarak yansıtılıyor
+	- raporların tamamında eski rapor üretecine ait etiketler vardı, kaldırıldı
+
+sürüm 1.0.11 - 08/07/2015
 	-  sipariş, irsaliye ve fatura belgeleri için;
 		a- hareket tablolarında bulunan enum tipindeki status alanının yapısı değiştirilerek tanımlanabilir hale getirildi
 		b- onaylama adımları yeni status yapısını kullanacak şekilde düzenlendi 

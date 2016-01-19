@@ -55,7 +55,6 @@ public abstract class AbstractStockTransDetail extends Model {
 	@ManyToOne
 	public Stock stock;
 
-	@Constraints.Required
 	@DateTime(pattern = "dd/MM/yyyy")
 	public Date transDate = new Date();
 

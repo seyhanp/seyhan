@@ -101,7 +101,6 @@ public class ChqbllPayrollDetail extends Model {
 	@Constraints.MaxLength(30)
 	public String correspondentBranch;
 
-	@Constraints.Required
 	@DateTime(pattern = "dd/MM/yyyy")
 	public Date dueDate;
 

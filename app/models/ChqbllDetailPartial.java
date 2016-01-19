@@ -54,7 +54,6 @@ public class ChqbllDetailPartial extends Model {
 	@ManyToOne(cascade = CascadeType.ALL)
 	public SafeTrans trans;
 
-	@Constraints.Required
 	@DateTime(pattern = "dd/MM/yyyy")
 	public Date transDate = new Date();
 
