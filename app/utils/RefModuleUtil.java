@@ -487,7 +487,7 @@ public class RefModuleUtil {
 		if (model.refModule != null) {
 			switch (model.refModule) {
 				case contact: {
-					if (model.refContact.id == null) {
+					if (model.refContact == null || model.refContact.id == null) {
 						result.key = "refContact.name";
 						result.value = Messages.get("is.not.null", Messages.get("ref.contact"));
 					} else {
@@ -508,7 +508,7 @@ public class RefModuleUtil {
 					break;
 				}
 				case safe: {
-					if (model.refSafe.id == null) {
+					if (model.refSafe == null || model.refSafe.id == null) {
 						result.key = "refSafe.id";
 						result.value = Messages.get("is.not.null", Messages.get("ref.safe"));
 					} else {
@@ -529,7 +529,7 @@ public class RefModuleUtil {
 					break;
 				}
 				case bank: {
-					if (model.refBank.id == null) {
+					if (model.refBank == null || model.refBank.id == null) {
 						result.key = "refBank.id";
 						result.value = Messages.get("is.not.null", Messages.get("ref.bank"));
 					} else {

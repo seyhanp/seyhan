@@ -42,6 +42,7 @@ import models.Safe;
 import models.SaleSeller;
 import models.Stock;
 import models.search.TransSearchParam;
+import models.temporal.Pair;
 import models.temporal.TransMultiplier;
 
 import org.slf4j.Logger;
@@ -666,20 +667,29 @@ public class Transes extends Controller {
 			filledForm.errors().put("stocks", veList);
 		}
 
+		Pair pair = RefModuleUtil.checkForRefAccounts(model);
+		if (pair.key != null) {
+			filledForm.reject(pair.key, pair.value);
+			log.error(pair.key + "---" + pair.value);
+		} else {
+			log.error("ref module : " + model.refModule + " safe : " + model.refSafe);
+		}
+
+		/*
 		switch (model.refModule) {
 			case safe: {
-				if (model.refSafe.id == null) {
+				if (model.refSafe == null || model.refSafe.id == null) {
 					filledForm.reject("refSafe.id", Messages.get("is.not.null", Messages.get("ref.safe")));
 				}
 				break;
 			}
 			case bank: {
-				if (model.refBank.id == null) {
+				if (model.refBank == null || model.refBank.id == null) {
 					filledForm.reject("refBank.id", Messages.get("is.not.null", Messages.get("ref.bank")));
 				}
 				break;
 			}
-		}
+		}*/
 	}
 
 }

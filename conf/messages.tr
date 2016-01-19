@@ -18,6 +18,7 @@ ref.accounts.same=Ana hesap ile yansı hesap aynı olamaz!
 depots.same=Transfer depoları aynı olamaz!
 workspaces.same=Transfer firmaları aynı olamaz!
 delete.violation={0} başka bir kayıt ile bağlantısı var, silinemez!
+delete.violation.for.default.safe=Ön tanımlı kasa silinemez!
 edit.striction.for_controller=Bu kayıt onaylandığı için düzenlenemez!
 edit.striction.for_view=Bu kayıt onaylandığı için düzenlenemez! Düzenlemek istiyorsanız bağlandığı fişi silip F5 tuşuna basmalısınız : 
 edit.striction.for_chqbll=Bordroda bulunan bazı {0}ler başka hareket kaydına sahip oldukları için bu bordroyu düzenleyemezsiniz! 

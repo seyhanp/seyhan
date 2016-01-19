@@ -176,6 +176,7 @@ public class Safes extends Controller {
 				if (model.id == null) {
 					model.save();
 				} else {
+					if (model.id.equals(Profiles.chosen().gnel_safe.id) && ! model.isActive) model.isActive = Boolean.TRUE;
 					model.update();
 				}
 			} catch (OptimisticLockException e) {
@@ -238,6 +239,9 @@ public class Safes extends Controller {
 			Safe model = Safe.findById(id);
 			if (model == null) {
 				return badRequest(Messages.get("not.found", Messages.get("safe")));
+			} else if (model.id.equals(Profiles.chosen().gnel_safe.id)) {
+				flash("error", Messages.get("delete.violation.for.default.safe"));
+				return badRequest(Messages.get("delete.violation.for.default.safe"));
 			} else {
 				String editingConstraintError = model.checkEditingConstraints();
 				if (editingConstraintError != null) return badRequest(editingConstraintError);

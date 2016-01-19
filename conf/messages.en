@@ -18,6 +18,7 @@ ref.accounts.same=Reflection accounts are same!
 depots.same=Transfer depots cannot be same to each other!
 workspaces.same=Transfer workspaces cannot be same to each other!
 delete.violation={0} has a relation with another record, cannot be delete!
+delete.violation.for.default.safe=Default safe cannot deleted!
 edit.striction.for_controller=Because this record was approved, cannot be edited!
 edit.striction.for_view=Because this record was approved, cannot be edited! If you want to edit it, first you need to delete related receipt and then press F5 :
 edit.striction.for_chqbll=Some of {0}s, are placed in this payroll, has movement. This payroll cannot be edited! 
