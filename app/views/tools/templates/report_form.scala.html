@@ -16,6 +16,25 @@
 				</div>
 			</div>
 		}
+
+		@if(flash.containsKey("success")) {
+			<div id="successPanel">
+				<div class="alert alert-success">
+					<a class="close" data-dismiss="alert" onclick="$('#successPanel').html('')">x</a>
+					<strong>@Messages("info"): </strong> @flash.get("success")
+				</div>
+			</div>
+		}
+	
+		@if(flash.containsKey("error")) {
+			<div id="errorPanel">
+				<div class="alert alert-error">
+					<a class="close" data-dismiss="alert" onclick="$('#errorPanel').html('')">x</a>
+					<strong>@Messages("error"): </strong> @flash.get("error")
+				</div>
+			</div>
+		}
+
 		<fieldset>
 			@fields
 			<div class="control-group inline">
@@ -58,6 +77,8 @@
 					$('#reportForm').removeAttr('target');
 				}
 			});
+
+			$('#successPanel').delay(2000).fadeOut();
 		});
 	</script>
 

@@ -247,6 +247,12 @@ public class TransList extends Controller {
 			repPar.paramMap.put("REPORT_INFO", par1 + " - " + par2);
 
 			ReportResult repRes = ReportService.generateReport(repPar, response());
+			if (repRes.error != null) {
+				flash("warning", repRes.error);
+				return ok(trans_list.render(filledForm, sort));
+			} else if (ReportService.isToDotMatrix(repPar)) {
+				flash("success", Messages.get("printed.success"));
+			}
 			return ReportService.sendReport(repPar, repRes, trans_list.render(filledForm, sort));
 		}
 

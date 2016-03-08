@@ -140,6 +140,12 @@ public class StockPriceList extends Controller {
 			}
 			
 			ReportResult repRes = ReportService.generateReport(repPar, response());
+			if (repRes.error != null) {
+				flash("warning", repRes.error);
+				return ok(stock_price_list.render(filledForm));
+			} else if (ReportService.isToDotMatrix(repPar)) {
+				flash("success", Messages.get("printed.success"));
+			}
 			return ReportService.sendReport(repPar, repRes, stock_price_list.render(filledForm));
 		}
 

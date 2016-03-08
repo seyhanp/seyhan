@@ -19,15 +19,14 @@
 package reports;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.Normalizer;
@@ -63,7 +62,6 @@ import play.i18n.Messages;
 import play.mvc.Controller;
 import play.mvc.Http.Response;
 import play.mvc.Results;
-import utils.AuthManager;
 import utils.GlobalCons;
 import utils.StringUtils;
 import controllers.Application;
@@ -144,7 +142,6 @@ public class ReportService {
 				exporter.setParameter(JRHtmlExporterParameter.BETWEEN_PAGES_HTML, "");
 				exporter.setParameter(JRHtmlExporterParameter.IGNORE_PAGE_MARGINS, Boolean.TRUE);
 				exporter.setParameter(JRHtmlExporterParameter.HTML_HEADER, StringUtils.getHtmHeaderForReport());
-//				exporter.setParameter(JRHtmlExporterParameter.HTML_FOOTER, StringUtils.getHtmFooterForReport());
 
 			} else if (params.reportUnit.equals(ReportUnit.Pdf)) {
 				res.setContentType("application/pdf");
@@ -161,8 +158,10 @@ public class ReportService {
 				exporter.setParameter(JRXlsExporterParameter.CHARACTER_ENCODING, "UTF-8");
 
 			} else if (params.reportUnit.equals(ReportUnit.Text) || params.reportUnit.equals(ReportUnit.DotMatrix)) {
-				res.setContentType("plain/text");
-				res.setHeader("Content-Disposition", "inline; filename=" + convertedReportName + ".txt");
+				if (! isToDotMatrix(params)) {
+					res.setContentType("plain/text");
+					res.setHeader("Content-Disposition", "inline; filename=" + convertedReportName + ".txt");
+				}
 				exporter = new JRTextExporter();
 				exporter.setParameter(JRTextExporterParameter.CHARACTER_ENCODING, "UTF-8");
 				exporter.setParameter(JRTextExporterParameter.CHARACTER_WIDTH, 5f);
@@ -202,37 +201,34 @@ public class ReportService {
 		}
 
 		AdminDocumentTarget target = Settings.getGlobal().dotMatrixReportsPath;
-		boolean isToDotMatrix = (repPar.reportUnit.equals(ReportUnit.DotMatrix) && target != null && target.id != null && target.path != null && target.isActive && ! target.path.isEmpty());
-		
-		if (isToDotMatrix) {
+		if (isToDotMatrix(repPar)) {
 			try {
+				PrintWriter writer = new PrintWriter(target.path, "UTF-8");
 				BufferedReader br = null;
-				StringBuilder sb = new StringBuilder();
-				String line = null;
-
 				br = new BufferedReader(new InputStreamReader(repRes.stream));
+				String line = null;
 				while ((line = br.readLine()) != null) {
-					sb.append(line);
+					String newline = Normalizer.normalize(line, Normalizer.Form.NFD).replaceAll("\\p{Mn}", "");
+					newline = newline.replace('ı', 'i');
+					writer.println(newline);
 				}
-				
-				String report = Normalizer.normalize(sb.toString(), Normalizer.Form.NFD).replaceAll("\\p{Mn}", "");
-				report = report.replace('ı', 'i');
+				writer.flush();
+				writer.close();
 
-				BufferedWriter output = null;
-				File file = new File(target.path);
-				output = new BufferedWriter(new FileWriter(file));
-				output.write(report);
-				output.flush();
-				output.close();
-
-				Controller.flash("success", Messages.get("printed.success"));
-				return Results.ok(html);
+				repRes.stream = null;
 			} catch (IOException e) {
 				;
 			}
+		} else {
+			return Results.ok(repRes.stream);
 		}
 
-		return Results.ok(repRes.stream);
+		return Results.ok(html);
+	}
+
+	public static boolean isToDotMatrix(ReportParams repPar) {
+		AdminDocumentTarget target = Settings.getGlobal().dotMatrixReportsPath;
+		return (repPar.reportUnit.equals(ReportUnit.DotMatrix) && target != null && target.id != null && target.path != null && target.isActive && ! target.path.isEmpty());
 	}
 
 	public static class ReportResult {

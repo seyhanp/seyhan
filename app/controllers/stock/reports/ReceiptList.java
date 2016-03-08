@@ -195,6 +195,12 @@ public class ReceiptList extends Controller {
 			repPar.paramMap.put("REPORT_INFO", Messages.get("report.info.date_range", DateUtils.formatDateStandart(params.startDate), DateUtils.formatDateStandart(params.endDate)));
 
 			ReportResult repRes = ReportService.generateReport(repPar, response());
+			if (repRes.error != null) {
+				flash("warning", repRes.error);
+				return ok(receipt_list.render(filledForm));
+			} else if (ReportService.isToDotMatrix(repPar)) {
+				flash("success", Messages.get("printed.success"));
+			}
 			return ReportService.sendReport(repPar, repRes, receipt_list.render(filledForm));
 		}
 

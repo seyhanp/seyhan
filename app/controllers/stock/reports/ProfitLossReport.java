@@ -146,6 +146,12 @@ public class ProfitLossReport extends Controller {
 			repPar.paramMap.put("REPORT_INFO", costing.properties);
 
 			ReportResult repRes = ReportService.generateReport(repPar, response());
+			if (repRes.error != null) {
+				flash("warning", repRes.error);
+				return ok(profit_loss_report.render(filledForm));
+			} else if (ReportService.isToDotMatrix(repPar)) {
+				flash("success", Messages.get("printed.success"));
+			}
 			return ReportService.sendReport(repPar, repRes, profit_loss_report.render(filledForm));
 		}
 

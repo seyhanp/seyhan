@@ -161,6 +161,12 @@ public class TopNReport extends Controller {
 			repPar.paramMap.put("REPORT_INFO", par1 + " - " + par2);
 
 			ReportResult repRes = ReportService.generateReport(repPar, response());
+			if (repRes.error != null) {
+				flash("warning", repRes.error);
+				return ok(topn_report.render(filledForm));
+			} else if (ReportService.isToDotMatrix(repPar)) {
+				flash("success", Messages.get("printed.success"));
+			}
 			return ReportService.sendReport(repPar, repRes, topn_report.render(filledForm));
 		}
 
