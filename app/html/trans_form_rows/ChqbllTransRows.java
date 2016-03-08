@@ -65,7 +65,7 @@ public class ChqbllTransRows {
 					row.append("<input type='text' readonly id='virtuals["+i+"]_dueDate' name='virtuals["+i+"].dueDate' value='"+Format.asDate(virtual.dueDate)+"' style='width:calc(100% - 5px);' />");
 				row.append("</td>");
 				row.append("<td>");
-					row.append("<input type='text' readonly  id='virtuals["+i+"]_amount' name='virtuals["+i+"].amount' value='"+virtual.amount+"' style='width:calc(100% - 5px);text-align:right' />");
+					row.append("<input type='text' readonly  id='virtuals["+i+"]_amount' name='virtuals["+i+"].amount' value='"+ Format.asMoney(virtual.amount)+"' style='width:calc(100% - 5px);text-align:right' />");
 				row.append("</td>");
 
 				if(Profiles.chosen().gnel_hasExchangeSupport) {

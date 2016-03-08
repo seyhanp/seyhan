@@ -279,14 +279,14 @@ function selection_transfer() {
 			$("#chqbllTable").btnManuelAddRow(
 				function(rowIndex) {
 					var virtualId = '#virtuals\\['+rowIndex+'\\]\\_';
-					var subdetailId = '#subDetails\\['+index+'\\]\\_';
+					var subdetailId = '#subDetails\\['+selectedId+'\\]\\_';
 	
 					$(virtualId + 'id').val($(subdetailId + 'id').val());
 					$(virtualId + 'lastStep').val($('#fromStep').val());
 					$(virtualId + 'portfolioNo').val($(subdetailId + 'portfolioNo').val());
 					$(virtualId + 'serialNo').val($(subdetailId + 'serialNo').val());
 					$(virtualId + 'dueDate').val($(subdetailId + 'dueDate').val());
-					$(virtualId + 'amount').val($(subdetailId + 'amount').val());
+					$(virtualId + 'amount').val(formatMoney(parseFloat($(subdetailId + 'amount').val())));
 					$(virtualId + 'owner').val($(subdetailId + 'owner').val());
 					$(virtualId + 'paymentPlace').val($(subdetailId + 'paymentPlace').val());
 					$(virtualId + 'excCode').val($(subdetailId + 'excCode').val());

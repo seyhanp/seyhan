@@ -52,7 +52,7 @@ width:calc(100% - 5px)
 			<td><input type="text" readonly id="subDetails[@index]_serialNo" name="subDetails[@index].serialNo" value="@subDetail.serialNo" style="@colWidth"/></td>
 			<td><input type="text" readonly id="subDetails[@index]_contactName" name="subDetails[@index].contactName" value="@subDetail.contactName" style="@colWidth;"/></td>
 			<td><input type="text" readonly id="subDetails[@index]_dueDate" name="subDetails[@index].dueDate" value="@utils.Format.asDate(subDetail.dueDate)" style="@colWidth;"/></td>
-			<td><input type="text" readonly id="subDetails[@index]_amount" name="subDetails[@index].amount" value="@subDetail.amount" style="@colWidth;text-align:right"/></td>
+			<td><input type="text" readonly id="subDetails[@index]_amount" name="subDetails[@index].amount" value="@utils.Format.asMoney(subDetail.amount)" style="@colWidth;text-align:right"/></td>
 			@if(global.Profiles.chosen().gnel_hasExchangeSupport) {
 				<td><input type="text" readonly id="subDetails[@index]_excCode" name="subDetails[@index].excCode" value="@subDetail.excCode" style="@colWidth"/></td>
 			} else {
