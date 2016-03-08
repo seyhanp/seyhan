@@ -57,9 +57,16 @@
 				'_help -> Messages("helpers.general.diffRate.selling")
 			)
 
+			@select(_form("dotMatrixReportsPath.id"),
+				options(AdminDocumentTarget.options(enums.DocTargetType.DOT_MATRIX)),
+				'_label -> Messages("printer.path"),
+				'class -> "input-xlarge",
+				'_help -> Messages("helpers.dotmatrix.printer.path")
+			)
+
 		</fieldset>
 
-		@tools.templates.form_footer_bar(enums.Right.GENEL_AYARLAR, "1")
+		@tools.templates.form_footer_bar(enums.Right.GENEL_AYARLAR, "1", hasGoBackButton = false)
 
 	}
 

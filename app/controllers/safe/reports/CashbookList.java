@@ -112,12 +112,7 @@ public class CashbookList extends Controller {
 			repPar.paramMap.put("REPORT_INFO", Messages.get("report.info.date", DateUtils.formatDateStandart(params.date)));
 
 			ReportResult repRes = ReportService.generateReport(repPar, response());
-			if (repRes.error != null) {
-				flash("warning", repRes.error);
-				return ok(cashbook_list.render(filledForm));
-			} else {
-				return ok(repRes.stream);
-			}
+			return ReportService.sendReport(repPar, repRes, cashbook_list.render(filledForm));
 		}
 
 	}

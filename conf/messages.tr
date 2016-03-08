@@ -359,6 +359,7 @@ tableof.exchange1=Döviz Kuru Tablosu 1
 tableof.currency1=Döviz Dağılım Tablosu 1
 tableof.factor1=Faktörler Tablosu 1
 with_writing=Yazı İle - {0}
+printer.path=Yazıcı Yolu
 
 statusOf=Durumu : {0}
 typesOf={0} Türleri
@@ -1103,6 +1104,7 @@ helpers.general.pennyDigitNumber=Parasal alanlarda bulunacak kuruş hane sayıs�
 helpers.general.excCode=Para birimi seçilen yerlerde ön tanımlı olarak bu değer gelir.
 helpers.general.vof=Bu alanlar ilk kullanımla beraber kapalı olarak gelirler. Kullanmak istediğiniz alanı seçmelisiniz.
 helpers.you.should.search.before=Lütfen Dikkat: İşlem yapmadan önce arama yapmalısınız!
+helpers.dotmatrix.printer.path=Nokta Vuruşlu yazıcılara çıkacak Raporlar için yazıcı yolu!
 
 dialogs.workspace.selection.tableTitle=Firma seçim tablosu
 dialogs.workspace.selection.tableDesc=Aşağıdaki tabloda kullanabileceğiniz firmaları görüyorsunuz.

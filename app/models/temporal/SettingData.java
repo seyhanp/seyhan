@@ -18,6 +18,7 @@
 */
 package models.temporal;
 
+import models.AdminDocumentTarget;
 import play.data.validation.Constraints;
 import enums.ExchangeRatePeriod;
 import enums.ExchangeRateSource;
@@ -46,7 +47,9 @@ public class SettingData {
 	public ExchangeRateSource exchangeSource = ExchangeRateSource.TCMB_Exchange;
 	public Double exchangeDiffRateForBuying = 0d;
 	public Double exchangeDiffRateForSelling = 0d;
+	
+	public AdminDocumentTarget dotMatrixReportsPath;
 
 	public Integer version;
-
+	
 }

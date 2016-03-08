@@ -225,12 +225,7 @@ public class PayrollList extends Controller {
 			repPar.paramMap.put("REPORT_INFO", par1 + " - " + par2);
 
 			ReportResult repRes = ReportService.generateReport(repPar, response());
-			if (repRes.error != null) {
-				flash("warning", repRes.error);
-				return ok(payroll_list.render(filledForm, sort));
-			} else {
-				return ok(repRes.stream);
-			}
+			return ReportService.sendReport(repPar, repRes, payroll_list.render(filledForm, sort));
 		}
 
 	}

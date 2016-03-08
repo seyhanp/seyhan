@@ -315,12 +315,7 @@ public class DistReport extends Controller {
 			repPar.paramMap.put("REPORT_INFO", par1 + " - " + par2);
 
 			ReportResult repRes = ReportService.generateReport(repPar, response());
-			if (repRes.error != null) {
-				flash("warning", repRes.error);
-				return ok(dist_report.render(filledForm));
-			} else {
-				return ok(repRes.stream);
-			}
+			return ReportService.sendReport(repPar, repRes, dist_report.render(filledForm));
 		}
 
 	}

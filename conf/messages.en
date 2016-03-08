@@ -359,6 +359,7 @@ tableof.exchange1=Exchange Table 1
 tableof.currency1=Currency Dist. Table 1
 tableof.factor1=Factors Table 1
 with_writing=With Writing - {0}
+printer.path=Printer Path
 
 statusOf=Status : {0}
 typesOf=Types of {0}
@@ -1102,7 +1103,8 @@ helpers.general.docNoIncType=Determined "How to increase of Document No in trans
 helpers.general.pennyDigitNumber=For currency fields, this value is used as penny digit number.
 helpers.general.excCode=In transaction forms, this value is used as chosen exchange code.
 helpers.general.vof=These fields are closed for first usage. You need to select what you want to use from them.
-helpers.you.should.search.before=Yap Attention: You shuold search before approval!
+helpers.you.should.search.before=Attention: You shuold search before approval!
+helpers.dotmatrix.printer.path=The Printer Path used for Dot Matrix reports!
 
 dialogs.workspace.selection.tableTitle=Table of workspace choice
 dialogs.workspace.selection.tableDesc=In following table you see the workspaces that you be able to use.

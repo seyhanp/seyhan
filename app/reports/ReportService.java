@@ -18,16 +18,23 @@
 */
 package reports;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.Normalizer;
 import java.util.HashMap;
 import java.util.Map;
 
+import models.AdminDocumentTarget;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporter;
 import net.sf.jasperreports.engine.JRExporterParameter;
@@ -50,9 +57,13 @@ import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import play.api.templates.Html;
 import play.db.DB;
 import play.i18n.Messages;
+import play.mvc.Controller;
 import play.mvc.Http.Response;
+import play.mvc.Results;
+import utils.AuthManager;
 import utils.GlobalCons;
 import utils.StringUtils;
 import controllers.Application;
@@ -182,6 +193,46 @@ public class ReportService {
 				new ByteArrayInputStream(
 					((ByteArrayOutputStream) stream).toByteArray())
 			);
+	}
+
+	public static Results.Status sendReport(ReportParams repPar, ReportResult repRes, Html html) {
+		if (repRes.error != null) {
+			Controller.flash("warning", repRes.error);
+			return Results.ok(html);
+		}
+
+		AdminDocumentTarget target = Settings.getGlobal().dotMatrixReportsPath;
+		boolean isToDotMatrix = (repPar.reportUnit.equals(ReportUnit.DotMatrix) && target != null && target.id != null && target.path != null && target.isActive && ! target.path.isEmpty());
+		
+		if (isToDotMatrix) {
+			try {
+				BufferedReader br = null;
+				StringBuilder sb = new StringBuilder();
+				String line = null;
+
+				br = new BufferedReader(new InputStreamReader(repRes.stream));
+				while ((line = br.readLine()) != null) {
+					sb.append(line);
+				}
+				
+				String report = Normalizer.normalize(sb.toString(), Normalizer.Form.NFD).replaceAll("\\p{Mn}", "");
+				report = report.replace('ı', 'i');
+
+				BufferedWriter output = null;
+				File file = new File(target.path);
+				output = new BufferedWriter(new FileWriter(file));
+				output.write(report);
+				output.flush();
+				output.close();
+
+				Controller.flash("success", Messages.get("printed.success"));
+				return Results.ok(html);
+			} catch (IOException e) {
+				;
+			}
+		}
+
+		return Results.ok(repRes.stream);
 	}
 
 	public static class ReportResult {

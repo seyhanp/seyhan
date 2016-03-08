@@ -29,6 +29,7 @@ import javax.persistence.Version;
 import models.temporal.Pair;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
+import play.i18n.Messages;
 import utils.CacheUtils;
 import utils.CookieUtils;
 
@@ -98,6 +99,27 @@ public class AdminDocumentTarget extends Model {
 			result.put(sb.toString(), gd.toString());
 		}
 		CacheUtils.set(true, Right.BELGE_HEDEFLERI.name() + CacheKeys.OPTIONS.value, result);
+
+		return result;
+	}
+
+	public static Map<String, String> options(DocTargetType targetType) {
+		Map<String, String> result = CacheUtils.get(true, Right.BELGE_HEDEFLERI.name() + ".type_based" + CacheKeys.OPTIONS.value);
+		
+		if (result == null) {
+			result = new LinkedHashMap<String, String>();
+		}
+
+		List<AdminDocumentTarget> modelList = find.where()
+												.eq("isActive", Boolean.TRUE)
+												.eq("targetType", targetType)
+											.orderBy("path")
+										.findList();
+		result.put("", Messages.get("choose"));
+		for (AdminDocumentTarget dt : modelList) {
+			result.put(dt.id.toString(), dt.path);
+		}
+		CacheUtils.set(true, Right.BELGE_HEDEFLERI.name() + ".type_based" + CacheKeys.OPTIONS.value, result);
 
 		return result;
 	}

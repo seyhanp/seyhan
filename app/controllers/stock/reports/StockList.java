@@ -118,12 +118,7 @@ public class StockList extends Controller {
 			}
 
 			ReportResult repRes = ReportService.generateReport(repPar, response());
-			if (repRes.error != null) {
-				flash("warning", repRes.error);
-				return ok(stock_list.render(filledForm));
-			} else {
-				return ok(repRes.stream);
-			}
+			return ReportService.sendReport(repPar, repRes, stock_list.render(filledForm));
 		}
 
 	}

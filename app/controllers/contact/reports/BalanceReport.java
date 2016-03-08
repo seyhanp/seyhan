@@ -131,12 +131,7 @@ public class BalanceReport extends Controller {
 			repPar.paramMap.put("REPORT_INFO", Messages.get("report.info.date", DateUtils.formatDateStandart(params.date)));
 
 			ReportResult repRes = ReportService.generateReport(repPar, response());
-			if (repRes.error != null) {
-				flash("warning", repRes.error);
-				return ok(balance_report.render(filledForm));
-			} else {
-				return ok(repRes.stream);
-			}
+			return ReportService.sendReport(repPar, repRes, balance_report.render(filledForm));
 		}
 
 	}

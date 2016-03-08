@@ -156,18 +156,12 @@ public class TopNReport extends Controller {
 				repPar.paramMap.put("CATEGORY_SQL", InstantSQL.buildCategorySQL(params.category.id));
 			}
 
-
 			String par1 = Parameter.orderFieldOptions().get(params.orderField) + " " + Parameter.orderDirOptions().get(params.orderDir) + " " + Messages.get("ordered");
 			String par2 = "(" + DateUtils.formatDateStandart(params.startDate) + " - " + DateUtils.formatDateStandart(params.endDate) +")";
 			repPar.paramMap.put("REPORT_INFO", par1 + " - " + par2);
 
 			ReportResult repRes = ReportService.generateReport(repPar, response());
-			if (repRes.error != null) {
-				flash("warning", repRes.error);
-				return ok(topn_report.render(filledForm));
-			} else {
-				return ok(repRes.stream);
-			}
+			return ReportService.sendReport(repPar, repRes, topn_report.render(filledForm));
 		}
 
 	}

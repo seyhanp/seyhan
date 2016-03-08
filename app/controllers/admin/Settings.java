@@ -22,6 +22,7 @@ import static play.data.Form.form;
 
 import javax.persistence.OptimisticLockException;
 
+import models.AdminDocumentTarget;
 import models.AdminSetting;
 import models.temporal.SettingData;
 import play.data.Form;
@@ -40,7 +41,7 @@ public class Settings extends Controller {
 
 	private static SettingData global;
 	private final static Form<SettingData> dataForm = form(SettingData.class);
-
+	
 	/**
 	 * Kayit formundaki bilgileri kaydeder
 	 */
@@ -52,9 +53,9 @@ public class Settings extends Controller {
 		if(filledForm.hasErrors()) {
 			return badRequest(form.render(filledForm));
 		} else {
-
+			
 			SettingData modelData = filledForm.get();
-
+			
 			AdminSetting model = new AdminSetting();
 			model.id = modelData.id;
 			model.code = modelData.code;
@@ -75,8 +76,9 @@ public class Settings extends Controller {
 			}
 			global = null;
 
+			modelData.version = model.version;
 			flash("success", Messages.get("saved", model.description));
-			return ok(form.render(filledForm));
+			return ok(form.render(dataForm.fill(modelData)));
 		}
 
 	}
@@ -109,6 +111,9 @@ public class Settings extends Controller {
 			} else {
 				global = StringUtils.fromJson(setting.jsonData, SettingData.class);
 				global.id = setting.id;
+				if (global.dotMatrixReportsPath != null && global.dotMatrixReportsPath.id != null) {
+					global.dotMatrixReportsPath = AdminDocumentTarget.findById(global.dotMatrixReportsPath.id);
+				}
 			}
 			global.version = setting.version;
 		}

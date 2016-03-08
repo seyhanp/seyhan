@@ -304,12 +304,7 @@ public class ChqbllList extends Controller {
 			repPar.paramMap.put("REPORT_INFO", par1 + " - " + par2);
 
 			ReportResult repRes = ReportService.generateReport(repPar, response());
-			if (repRes.error != null) {
-				flash("warning", repRes.error);
-				return ok(chqbll_list.render(filledForm, sort));
-			} else {
-				return ok(repRes.stream);
-			}
+			return ReportService.sendReport(repPar, repRes, chqbll_list.render(filledForm, sort));
 		}
 
 	}
