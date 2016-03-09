@@ -1,6 +1,6 @@
 ﻿sürüm 1.0.13 - 09/03/2016
 	- nokta vuruşlu yazıcılara çıkacak raporlar için genel ayarlar kısmına yazıcı yolu seçeneği eklendi
-	- çek hareket bordrosundaki çekler işlenirken, başka sıradaki çekler seçili olmasına rağmen, her zaman ilk sıradaki çekleri işliyordu, düzeltildi.
+	- çek hareket bordrosundaki çekler işlenirken, (başka sıradaki çekler seçili olmasına rağmen), her zaman ilk sıradaki çekleri işliyordu, düzeltildi.
 
 sürüm 1.0.12 - 19/01/2016
 	- kasa, cari ve banka hareket raporlarında sıralama önceliği hareket yönüne verildi, aynı gün içerisindeki borç hareketleri önce sıralanıyor
