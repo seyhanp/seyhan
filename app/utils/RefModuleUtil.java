@@ -276,6 +276,48 @@ public class RefModuleUtil {
 						extraTrans.singleUpdate();
 					}
 				}
+
+				/*
+				 * Fatura islemi ve pesin ise hesap kapama islemi icin bir hareket kaydi daha olusturulur
+				 */
+				if (source instanceof InvoiceTrans && extraTrans != null) {
+					InvoiceTrans asAnInvoiceTrans = (InvoiceTrans) source;
+					ContactTrans closingTrans = ContactTrans.findByRefIdAndRight(source.id, Right.CARI_ISLEM_KAPAMA);
+
+					//Eski kapama var ve fatura pesin degilse eski kapama islemi silinir!
+					if (closingTrans != null && ! asAnInvoiceTrans.isCash) {
+						closingTrans.singleDelete();
+					// Kapama olacaksa; eski kapama islemi varsa update edilir, yoksa yeni bir tane olusturulur!
+					} else if (asAnInvoiceTrans.isCash) {
+						if (closingTrans == null) closingTrans = new ContactTrans(Right.CARI_ISLEM_KAPAMA);
+
+						closingTrans.workspace = extraTrans.workspace;
+						closingTrans.contact = extraTrans.contact;
+						closingTrans.receiptNo = extraTrans.receiptNo;
+						closingTrans.transType = (extraTrans.transType.equals(TransType.Debt) ? TransType.Credit : TransType.Debt);
+						closingTrans.amount = extraTrans.amount;
+						closingTrans.debt = extraTrans.credit;
+						closingTrans.credit = extraTrans.debt;
+						closingTrans.excCode = extraTrans.excCode;
+						closingTrans.excRate = extraTrans.excRate;
+						closingTrans.excEquivalent = extraTrans.excEquivalent;
+						closingTrans.transDate = extraTrans.transDate;
+						closingTrans.transNo = extraTrans.transNo;
+						closingTrans.transDir = (extraTrans.debt.doubleValue() > 0 ? 1 : 0);
+						closingTrans.transYear = source.transYear;
+						closingTrans.transMonth = source.transMonth;
+						closingTrans.description = "PEŞİN FATURA İŞLEM KAPAMA (FATURA NO : " + asAnInvoiceTrans.transNo +")";
+
+						closingTrans.refId = source.id;
+						closingTrans.refModule = Module.invoice;
+
+						if (closingTrans.id == null) {
+							closingTrans.singleSave();
+						} else {
+							closingTrans.singleUpdate();
+						}
+					}
+				}
 			}
 
 			/*
@@ -376,7 +418,23 @@ public class RefModuleUtil {
 			 */
 			if (! BASE_MODULE_LIST.contains(trans.right.module)) {
 				ContactTrans oldExtraTrans = ContactTrans.findByRefIdAndRight(trans.id, trans.right);
-				if (oldExtraTrans != null) oldExtraTrans.singleDelete();
+				if (oldExtraTrans != null) {
+					oldExtraTrans.singleDelete();
+					
+					/*
+					 * Pesin faturalar kapama islemi yansitirlar, varsa eger bu kapama hareketi de silinir
+					 */
+					if (trans instanceof InvoiceTrans) {
+						InvoiceTrans asAnInvoiceTrans = (InvoiceTrans) trans;
+						if (asAnInvoiceTrans.isCash) {
+							ContactTrans closingTrans = ContactTrans.findByRefIdAndRight(trans.id, Right.CARI_ISLEM_KAPAMA);
+							if (closingTrans != null) {
+								closingTrans.singleDelete();
+							}
+						}
+					}
+					
+				}
 			}
 
 			/*

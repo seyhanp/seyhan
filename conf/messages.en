@@ -844,6 +844,7 @@ enum.CARI_VIRMAN=Ref. From Contact
 enum.KASA_VIRMAN=Ref. From Safe
 enum.BANK_VIRMAN=Ref. From Bank
 enum.BANK_MASRAF=Ref. via Expense
+enum.CARI_ISLEM_KAPAMA=Closing Trans of Contact
 
 enum.Login=Login
 enum.Logout=Logout

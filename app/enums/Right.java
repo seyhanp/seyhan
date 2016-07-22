@@ -538,6 +538,9 @@ public enum Right {
 	@EnumValue("BELGE_HEDEFLERI")
 	BELGE_HEDEFLERI(Module.admin, false, true, true),
 
+	@EnumValue("CARI_ISLEM_KAPAMA")
+	CARI_ISLEM_KAPAMA(Module.contact, true),
+
 	@EnumValue("CARI_VIRMAN")
 	CARI_VIRMAN(Module.contact, true),
 

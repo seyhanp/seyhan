@@ -844,6 +844,7 @@ enum.CARI_VIRMAN=Cariden Yansıyan
 enum.KASA_VIRMAN=Kasadan Yansıyan
 enum.BANK_VIRMAN=Bankadan Yansıyan
 enum.BANK_MASRAF=Masrafla Yansıyan
+enum.CARI_ISLEM_KAPAMA=Cari İşlem Kapama
 
 enum.Login=Giriş
 enum.Logout=Çıkış
