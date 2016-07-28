@@ -110,7 +110,7 @@ public class TransApprovals extends Controller {
 		} else {
 			TransSearchParam model = filledForm.get();
 			if (model.formAction != null) {
-			    if ("search".equals(model.formAction)) {
+				if ("search".equals(model.formAction)) {
 			    	return search(filledForm);
 			    } else {
 			    	if (model.details != null && model.details.size() > 0) {
@@ -166,7 +166,7 @@ public class TransApprovals extends Controller {
 			    }
 			}
 
-			flash("error", Messages.get("not.found", "action"));
+			flash("error", Messages.get("not.found", Messages.get("action")));
 			return search(filledForm);
 		}
 
@@ -412,6 +412,14 @@ public class TransApprovals extends Controller {
 
 					master.details = details;
 					master.relations = relations;
+
+					/*
+					 * if there is only one waybill, we can set the real date of the invoice from that waybill
+					 */
+					if (entry.getValue().size() == 1) {
+						WaybillTrans trans = WaybillTrans.findById(new Integer(entry.getValue().get(0)));
+						master.realDate = (trans.realDate != null ? trans.realDate : trans.transDate);
+					}
 
 					RefModuleUtil.save(master, Module.invoice, master.contact, false);
 
@@ -678,6 +686,7 @@ public class TransApprovals extends Controller {
 	}
 
 	private static void changeStatus(TransSearchParam model) {
+		if (model.newWaybillTransStatus == null) return;
 		for (ReceiptListModel detail : model.details) {
 			if (detail.isSelected && ! detail.isCompleted) {
 				TransStatusHistoryUtils.goForward(Module.waybill, detail.id, model.newWaybillTransStatus.id, model.description);

@@ -111,6 +111,7 @@
 						}
 					}
 					<th style="width:25%">@Messages("description")</th>
+					<th style="width:15%">@Messages("status")</th>
 					<th style="width:5%"></th
 				</tr>
 			</thead>
@@ -137,6 +138,7 @@
 								}
 							}
 							<td>@detail.description</td>
+							<td>@detail.statusName</td>
 							<td>
 								@if(detail.statusId != null && ! detail.isCompleted) {
 									<a class="btn btn-success btn-mini" onclick="redo(@detail.id);" title="@Messages("redo")">
@@ -162,7 +164,7 @@
 		
 			<div class="modal-body">
 				@select(_form("invoiceTransSource.id"),
-					options(Options.transSources(enums.Module.invoice, false)),
+					options(InvoiceTransSource.options(null)),
 					'_label -> Messages("trans.source"),
 					'_default -> Messages("choose")
 				)

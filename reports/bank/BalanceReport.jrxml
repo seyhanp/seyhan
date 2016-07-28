@@ -28,7 +28,8 @@ from bank_trans t
 where 1=1
 $P!{QUERY_STRING}
 GROUP BY s.account_no, s.name, t.exc_code
-$P!{HAVING_STRING}]]>
+$P!{HAVING_STRING}
+ORDER BY s.name]]>
 	</queryString>
 	<field name="account_no" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>

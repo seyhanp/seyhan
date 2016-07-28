@@ -19,6 +19,7 @@
 package external;
 
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -55,8 +56,11 @@ public class TCMBExchanges {
 			dbf.setIgnoringElementContentWhitespace(true);
 		   
 			DocumentBuilder builder = dbf.newDocumentBuilder();
-			URL u = new URL("http://www.tcmb.gov.tr/kurlar/today.xml");
-			Document doc = builder.parse(u.openStream());
+			URL url = new URL("http://www.tcmb.gov.tr/kurlar/today.xml");
+			URLConnection con = url.openConnection();
+			con.setConnectTimeout(4000); // 4 seconds			
+
+			Document doc = builder.parse(con.getInputStream());
 
 			NodeList nodesForFirstDate = doc.getElementsByTagName("Tarih_Date");
 			Element elementForFirstDate = (Element) nodesForFirstDate.item(0);

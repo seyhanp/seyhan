@@ -487,6 +487,8 @@ public class Transes extends Controller {
 			WaybillTrans waybillTrans = WaybillTrans.findById(stm.id);
 
 			WaybillTrans clone = CloneUtils.cloneTransaction(waybillTrans);
+			clone.isCompleted = Boolean.FALSE;
+			clone.status = Profiles.chosen().irsl_status;
 			clone.invoiceId = null;
 			clone.transDate = stm.transDate;
 			clone.transMonth = DateUtils.getYearMonth(stm.transDate);

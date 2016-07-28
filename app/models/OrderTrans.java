@@ -157,8 +157,6 @@ public class OrderTrans extends AbstractStockTrans {
 		}
 		if (searchParam.orderTransStatus != null && searchParam.orderTransStatus.id != null) {
 			expList.eq("status", searchParam.orderTransStatus);
-		} else {
-			expList.isNull("status");
 		}
 
 		List<OrderTrans> modelList = expList
@@ -187,6 +185,7 @@ public class OrderTrans extends AbstractStockTrans {
 			}
 			if (trans.status != null) {
 				receipt.statusId = trans.status.id;
+				receipt.statusName = trans.status.name;
 			}
 
 			result.add(receipt);

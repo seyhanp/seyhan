@@ -11,7 +11,7 @@
 	<parameter name="QUERY_STRING" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
-	<parameter name="ORDER_BY" class="java.lang.String" isForPrompting="false">
+	<parameter name="ORDER_BY" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="HAVING_STRING" class="java.lang.String" isForPrompting="false"/>
@@ -29,7 +29,8 @@ from contact_trans t
 where 1=1
 $P!{QUERY_STRING}
 GROUP BY c.name, cc.name, c.phone, c.mobile_phone, t.exc_code
-$P!{HAVING_STRING}]]>
+$P!{HAVING_STRING}
+ORDER BY c.name, cc.name]]>
 	</queryString>
 	<field name="name" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>

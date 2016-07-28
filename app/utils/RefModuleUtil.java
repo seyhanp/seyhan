@@ -152,7 +152,8 @@ public class RefModuleUtil {
 			source.transYear = DateUtils.getYear(source.transDate);
 			source.transMonth = DateUtils.getYearMonth(source.transDate);
 			if (source.id == null) {
-				if (Profiles.chosen().gnel_docNoIncType.equals(DocNoIncType.Full_Automatic)) source.transNo = DocNoUtils.findLastTransNo(source.right);
+				if ((source.transNo == null || source.transNo.isEmpty())
+					&& Profiles.chosen().gnel_docNoIncType.equals(DocNoIncType.Full_Automatic)) source.transNo = DocNoUtils.findLastTransNo(source.right);
 				source.receiptNo = DocNoUtils.findLastReceiptNo(source.right);
 			}
 

@@ -504,6 +504,7 @@ public class Transes extends Controller {
 			StockTrans stockTrans = StockTrans.findById(stm.id);
 
 			StockTrans clone = CloneUtils.cloneTransaction(stockTrans);
+			clone.isCompleted = Boolean.FALSE;
 			clone.transDate = stm.transDate;
 			clone.transMonth = DateUtils.getYearMonth(stm.transDate);
 			clone.transYear = DateUtils.getYear(stm.transDate);

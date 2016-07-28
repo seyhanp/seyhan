@@ -82,14 +82,14 @@ public class TransApprovals extends Controller {
 		} else {
 			TransSearchParam model = filledForm.get();
 			if (model.formAction != null) {
-			    if ("search".equals(model.formAction)) {
+				if ("search".equals(model.formAction)) {
 			    	return search(filledForm);
 			    } else {
 			    	if (model.details != null && model.details.size() > 0) {
 			    
 			    		Ebean.beginTransaction();
 			    		try {
-			    			boolean isStatusChange = true;
+			    			boolean isStatusChange = false;
 		    				if ("change-status".equals(model.formAction)) {
 		    					changeStatus(model);
 		    				} else if ("redo".equals(model.formAction)) {
@@ -131,7 +131,7 @@ public class TransApprovals extends Controller {
 			    }
 			}
 
-			flash("error", Messages.get("not.found", "action"));
+			flash("error", Messages.get("not.found", Messages.get("action")));
 			return search(filledForm);
 		}
 
@@ -152,6 +152,7 @@ public class TransApprovals extends Controller {
 	}
 
 	private static void changeStatus(TransSearchParam model) {
+		if (model.newInvoiceTransStatus == null) return;
 		for (ReceiptListModel detail : model.details) {
 			if (detail.isSelected && ! detail.isCompleted) {
 				TransStatusHistoryUtils.goForward(Module.invoice, detail.id, model.newInvoiceTransStatus.id, model.description);

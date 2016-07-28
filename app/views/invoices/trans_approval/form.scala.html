@@ -110,6 +110,7 @@
 						<th style="width: 5%">@Messages("currency")</th>
 					}
 					<th style="width:25%">@Messages("description")</th>
+					<th style="width:15%">@Messages("status")</th>
 					<th style="width:5%"></th
 				</tr>
 			</thead>
@@ -134,6 +135,7 @@
 							@if(global.Profiles.chosen().gnel_hasExchangeSupport) {
 								<td style="text-align: center">@detail.excCode</td>}
 							<td>@detail.description</td>
+							<td>@detail.statusName</td>
 							<td>
 								@if(detail.statusId != null && ! detail.isCompleted) {
 									<a class="btn btn-success btn-mini" onclick="redo(@detail.id);" title="@Messages("redo")">

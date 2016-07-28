@@ -71,11 +71,9 @@ width:calc(100% - 5px)
 
 					@tools.dropdowns.waybill_trans_source(_form)
 
-					@inputText(_form("totalDiscountRate"),
-						'_label -> Messages("total_discount_rate"),
-						'class -> "input-mini rate",
-						'maxlength -> "5",
-						'onkeyup -> "calculateAllFieldsForStocks()"
+					@inputText(_form("realDate"),
+						'_label -> Messages("date.real"),
+						'class -> "input-medium"
 					)
 
 					@inputText(_form("description"),
@@ -339,11 +337,14 @@ width:calc(100% - 5px)
 								)
 							</div>
 							@tools.dropdowns.stock_depot(_form, false)
-		
-							@inputText(_form("deliveryDate"),
-								'_label -> Messages("date.delivery"),
-								'class -> "input-small date"
+
+							@inputText(_form("totalDiscountRate"),
+								'_label -> Messages("total_discount_rate"),
+								'class -> "input-mini rate",
+								'maxlength -> "5",
+								'onkeyup -> "calculateAllFieldsForStocks()"
 							)
+		
 						</div>
 					</fieldset>
 				</div>

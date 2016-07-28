@@ -109,11 +109,11 @@ public class TransApprovals extends Controller {
 		Form<TransSearchParam> filledForm = dataForm.bindFromRequest();
 
 		if(filledForm.hasErrors()) {
-			return badRequest();
+			return badRequest(filledForm.errorsAsJson());
 		} else {
 			TransSearchParam model = filledForm.get();
 			if (model.formAction != null) {
-			    if ("search".equals(model.formAction)) {
+				if ("search".equals(model.formAction)) {
 			    	return search(filledForm);
 			    } else {
 			    	if (model.details != null && model.details.size() > 0) {
@@ -173,7 +173,7 @@ public class TransApprovals extends Controller {
 			    }
 			}
 
-			flash("error", Messages.get("not.found", "action"));
+			flash("error", Messages.get("not.found", Messages.get("action")));
 			return search(filledForm);
 		}
 
@@ -674,6 +674,14 @@ public class TransApprovals extends Controller {
 					master.details = details;
 					master.relations = relations;
 
+					/*
+					 * if there is only one order, we can set the real date of the invoice from that order
+					 */
+					if (entry.getValue().size() == 1) {
+						OrderTrans trans = OrderTrans.findById(new Integer(entry.getValue().get(0)));
+						master.realDate = (trans.realDate != null ? trans.realDate : trans.transDate);
+					}
+
 					RefModuleUtil.save(master, Module.invoice, master.contact, false);
 
 					Ebean.createSqlUpdate("update order_trans set waybill_id = null, invoice_id = :invoice_id, is_completed = :is_completed where id in (:ids)")
@@ -1147,6 +1155,7 @@ public class TransApprovals extends Controller {
 	}
 
 	private static void changeStatus(TransSearchParam model) {
+		if (model.newOrderTransStatus == null) return;
 		for (ReceiptListModel detail : model.details) {
 			if (detail.isSelected && ! detail.isCompleted) {
 				TransStatusHistoryUtils.goForward(Module.order, detail.id, model.newOrderTransStatus.id, model.description);

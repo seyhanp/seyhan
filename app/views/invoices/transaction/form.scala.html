@@ -60,7 +60,10 @@ width:calc(100% - 5px)
 						(if(_form("id").value != null && ! _form("id").value.isEmpty()) 'disabled -> "" else '_a -> "a")
 					)
 
-					@tools.dropdowns.invoice_trans_source(_form, rightBind)
+					@inputText(_form("realDate"),
+						'_label -> Messages("date.real"),
+						'class -> "input-medium"
+					)
 
 					@inputText(_form("totalDiscountRate"),
 						'_label -> Messages("total_discount_rate"),
@@ -321,6 +324,8 @@ width:calc(100% - 5px)
 						<div class="span4">
 							@tools.dropdowns.stock_depot(_form, false)
 
+							@tools.dropdowns.invoice_trans_source(_form, rightBind)
+
 							@select(_form("isTaxInclude"),
 								options(Options.taxStatus),
 								'class -> "input-small",
@@ -338,11 +343,6 @@ width:calc(100% - 5px)
 
 							@if(isSelling) {@tools.dropdowns.sale_seller(_form)}
 
-							@inputText(_form("deliveryDate"),
-								'_label -> Messages("date.delivery"),
-								'class -> "input-small date"
-							)
-	
 							@tools.components.trans_point_select(_form)
 							@tools.components.private_code_select(_form)
 

@@ -160,8 +160,6 @@ public class WaybillTrans extends AbstractStockTrans {
 		}
 		if (searchParam.waybillTransStatus != null && searchParam.waybillTransStatus.id != null) {
 			expList.eq("status", searchParam.waybillTransStatus);
-		} else {
-			expList.isNull("status");
 		}
 
 		List<WaybillTrans> modelList = expList
@@ -189,6 +187,7 @@ public class WaybillTrans extends AbstractStockTrans {
 			}
 			if (trans.status != null) {
 				receipt.statusId = trans.status.id;
+				receipt.statusName = trans.status.name;
 			}
 
 			result.add(receipt);

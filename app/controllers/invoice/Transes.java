@@ -522,6 +522,8 @@ public class Transes extends Controller {
 			InvoiceTrans invoiceTrans = InvoiceTrans.findById(stm.id);
 
 			InvoiceTrans clone = CloneUtils.cloneTransaction(invoiceTrans);
+			clone.isCompleted = Boolean.FALSE;
+			clone.status = Profiles.chosen().fatr_status;
 			clone.transDate = stm.transDate;
 			clone.transMonth = DateUtils.getYearMonth(stm.transDate);
 			clone.transYear = DateUtils.getYear(stm.transDate);

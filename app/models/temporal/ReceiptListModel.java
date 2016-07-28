@@ -40,5 +40,6 @@ public class ReceiptListModel {
 	public String description;
 
 	public Integer statusId;
+	public String statusName;
 
 }

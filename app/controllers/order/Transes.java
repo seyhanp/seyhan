@@ -472,6 +472,8 @@ public class Transes extends Controller {
 			OrderTrans orderTrans = OrderTrans.findById(stm.id);
 
 			OrderTrans clone = CloneUtils.cloneTransaction(orderTrans);
+			clone.isCompleted = Boolean.FALSE; 
+			clone.status = Profiles.chosen().sprs_status;
 			clone.waybillId = null;
 			clone.invoiceId = null;
 			clone.transDate = stm.transDate;

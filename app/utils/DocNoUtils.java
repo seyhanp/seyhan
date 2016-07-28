@@ -29,6 +29,7 @@ import controllers.global.Profiles;
 import enums.ChqbllSort;
 import enums.Module;
 import enums.Right;
+import enums.TransType;
 
 /**
  * @author mdpinar
@@ -53,14 +54,20 @@ public class DocNoUtils {
 			return lastNo;
 		}
 	}
-
+	
 	public static String findLastTransNo(Right right) {
 		String tableName = right.module.name() + "_trans ";
 
-		if (right.module.equals(Module.cheque) || right.module.equals(Module.bill)) tableName = "chqbll_trans ";
+		if (right.module.equals(Module.cheque) || right.module.equals(Module.bill)) {
+			tableName = "chqbll_trans ";
+		} else {
+			if (right.transType == null || right.transType.equals(TransType.Input) || right.transType.equals(TransType.Credit)) return "";
+		}
 
 		if (right.equals(Right.CEK_GIRIS_BORDROSU) || right.equals(Right.SENET_GIRIS_BORDROSU)
-		||  right.equals(Right.CEK_CIKIS_BORDROSU) || right.equals(Right.SENET_CIKIS_BORDROSU)) tableName = "chqbll_payroll ";
+		||  right.equals(Right.CEK_CIKIS_BORDROSU) || right.equals(Right.SENET_CIKIS_BORDROSU)) {
+			tableName = "chqbll_payroll ";
+		}
 
 		String query = "select max(trans_no) as lastNo from " + tableName + " where workspace = " + CacheUtils.getWorkspaceId() + " and _right ='" + right.name() + "'";
 		SqlRow row = Ebean.createSqlQuery(query).findUnique();

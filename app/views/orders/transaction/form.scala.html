@@ -56,10 +56,6 @@ width: calc(100% - 5px);
 						'_label -> Messages("date"),
 						'class -> "input-small date"
 					)
-					@inputText(_form("deliveryDate"),
-						'_label -> Messages("date.delivery"),
-						'class -> "input-small date"
-					)
 
 					@tools.components.autocomplete_contact(_form, direction=rightBind.value.transType.toString(), hasExtraData=true, hasSummaryButton=true)
 
@@ -74,13 +70,11 @@ width: calc(100% - 5px);
 						(if(_form("id").value != null && ! _form("id").value.isEmpty()) 'disabled -> "" else '_a -> "a")
 					)
 
-					@tools.dropdowns.order_trans_source(_form)
+					@if(isSelling) {@tools.dropdowns.sale_seller(_form)}
 
-					@inputText(_form("totalDiscountRate"),
-						'_label -> Messages("total_discount_rate"),
-						'class -> "input-mini rate",
-						'maxlength -> "5",
-						'onkeyup -> "calculateAllFieldsForStocks()"
+					@inputText(_form("realDate"),
+						'_label -> Messages("date.real"),
+						'class -> "input-medium"
 					)
 
 					@inputText(_form("description"),
@@ -88,7 +82,6 @@ width: calc(100% - 5px);
 						'class -> "input-xlarge",
 						'maxlength -> "100"
 					)
-					@if(isSelling) {@tools.dropdowns.sale_seller(_form)}
 				</div>
 			</div>
 
@@ -324,6 +317,8 @@ width: calc(100% - 5px);
 								'class -> "input-xlarge",
 								'maxlength -> "50"
 							)
+
+							@tools.dropdowns.order_trans_source(_form)
 						</div>
 						<div class="span4">
 							<div style="display: @(if(global.Profiles.chosen().sprs_hasPrices) "block" else "none")">
@@ -342,6 +337,13 @@ width: calc(100% - 5px);
 									'_label -> Messages("rounding_digits"),
 									'onchange -> "findTotalsForStocks()",
 									'_default -> Messages("choose")
+								)
+
+								@inputText(_form("totalDiscountRate"),
+									'_label -> Messages("total_discount_rate"),
+									'class -> "input-mini rate",
+									'maxlength -> "5",
+									'onkeyup -> "calculateAllFieldsForStocks()"
 								)
 							</div>
 						</div>

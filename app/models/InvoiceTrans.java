@@ -172,8 +172,6 @@ public class InvoiceTrans extends AbstractStockTrans {
 		}
 		if (searchParam.invoiceTransStatus != null && searchParam.invoiceTransStatus.id != null) {
 			expList.eq("status", searchParam.invoiceTransStatus);
-		} else {
-			expList.isNull("status");
 		}
 
 		List<InvoiceTrans> modelList = expList
@@ -201,6 +199,7 @@ public class InvoiceTrans extends AbstractStockTrans {
 			}
 			if (trans.status != null) {
 				receipt.statusId = trans.status.id;
+				receipt.statusName = trans.status.name;
 			}
 
 			result.add(receipt);
