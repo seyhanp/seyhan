@@ -72,6 +72,7 @@ has.exchange.support=Has exchange support?
 has.continuously.recording=Is continuously recording mode on?
 will.costing.executed=Will costing executed after saving?
 print.attitude.info=How will be pressed transaction documents!
+find.last.stock.price=Last Selling Price
 
 # --- Special messages
 category.sibling.alert=As a category, sub-category of their own cannot be copied!  
@@ -1106,6 +1107,7 @@ helpers.general.excCode=In transaction forms, this value is used as chosen excha
 helpers.general.vof=These fields are closed for first usage. You need to select what you want to use from them.
 helpers.you.should.search.before=Attention: You shuold search before approval!
 helpers.dotmatrix.printer.path=The Printer Path used for Dot Matrix reports!
+helpers.stock.findLastSellingPrice=Finds the stock price from last selling receipt of the related client.
 
 dialogs.workspace.selection.tableTitle=Table of workspace choice
 dialogs.workspace.selection.tableDesc=In following table you see the workspaces that you be able to use.

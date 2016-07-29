@@ -76,6 +76,7 @@ public class ProfileData {
 	public Boolean stok_hasLimitControls;
 	public Integer stok_roundingDigits;
 	public Map<String, Boolean> stok_specialFields;
+	public Boolean stok_findLastSellingPrice;
 
 	/**
 	 * Contact Tab
@@ -138,6 +139,7 @@ public class ProfileData {
 	public ProfileData() {
 		this.name = "default";
 		this.isActive = Boolean.TRUE;
+
 		this.stok_unit = new StockUnit("");
 		this.stok_isTaxInclude = Boolean.FALSE;
 		this.stok_taxRate = 18d;
@@ -145,6 +147,7 @@ public class ProfileData {
 		this.stok_specialFields = SpecialFields.stock;
 		this.stok_isSearchFormShowed = Boolean.TRUE;
 		this.stok_isRowCombining = Boolean.TRUE;
+		this.stok_findLastSellingPrice = Boolean.FALSE;
 
 		this.cari_hasCategoryControls = Boolean.FALSE;
 		this.cari_isSearchFormShowed = Boolean.TRUE;

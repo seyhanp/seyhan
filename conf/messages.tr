@@ -72,6 +72,7 @@ has.exchange.support=Dövizli işlem desteği olsun mu?
 has.continuously.recording=Sürekli Kayıt modu, açık olsun mu?
 will.costing.executed=Kaydettikten sonra maliyetlendirme yapılacak mı?
 print.attitude.info=Hareket işlemlerinin belge tasarımları nasıl bastırılacak!
+find.last.stock.price=Son Satış Fiyatı
 
 # --- Özel mesajlar
 category.sibling.alert=Bir kategori kendi alt kategorisi olarak kopyalanamaz! 
@@ -1106,6 +1107,7 @@ helpers.general.excCode=Para birimi seçilen yerlerde ön tanımlı olarak bu de
 helpers.general.vof=Bu alanlar ilk kullanımla beraber kapalı olarak gelirler. Kullanmak istediğiniz alanı seçmelisiniz.
 helpers.you.should.search.before=Lütfen Dikkat: İşlem yapmadan önce arama yapmalısınız!
 helpers.dotmatrix.printer.path=Nokta Vuruşlu yazıcılara çıkacak Raporlar için yazıcı yolu!
+helpers.stock.findLastSellingPrice=Satış işlemlerinde kullanılacak ürün fiyatını, müşteriye yapılan son satış işleminden bulur.
 
 dialogs.workspace.selection.tableTitle=Firma seçim tablosu
 dialogs.workspace.selection.tableDesc=Aşağıdaki tabloda kullanabileceğiniz firmaları görüyorsunuz.

@@ -78,7 +78,7 @@ public class TransApprovals extends Controller {
 		Form<TransSearchParam> filledForm = dataForm.bindFromRequest();
 
 		if(filledForm.hasErrors()) {
-			return badRequest();
+			return badRequest(filledForm.errorsAsJson());
 		} else {
 			TransSearchParam model = filledForm.get();
 			if (model.formAction != null) {

@@ -32,6 +32,7 @@ import models.Stock;
 import models.StockCategory;
 import models.StockPriceList;
 import models.temporal.ContactModel;
+import models.temporal.FindLastStockPriceModel;
 import models.temporal.StockCostFactorModel;
 import models.temporal.StockModel;
 import play.i18n.Messages;
@@ -55,6 +56,7 @@ import controllers.global.Profiles;
 import enums.EffectDirection;
 import enums.EffectType;
 import enums.Module;
+import enums.Right;
 import enums.TransType;
 
 /**
@@ -134,7 +136,11 @@ public class AjaxServices extends Controller {
 		
 		if (modelList != null && modelList.size() > 0) {
 			setDiscounts(modelList);
-			setPriceByList(modelList, c);
+			if (Profiles.chosen().stok_findLastSellingPrice) {
+				findLastSellingPrice(modelList, c);
+			} else {
+				setPriceByList(modelList, c);
+			}
 			return ok(Json.toJson(modelList));
 		} else {
 			return ok();
@@ -166,13 +172,48 @@ public class AjaxServices extends Controller {
 		}
 		if (result != null) {
 			setDiscounts(result);
-			setPriceByList(result, contactId);
+			if (Profiles.chosen().stok_findLastSellingPrice) {
+				findLastSellingPrice(result, contactId);
+			} else {
+				setPriceByList(result, contactId);
+			}
 			return ok(Json.toJson(result));
 		} else {
 			return ok();
 		}
 	}
+	
+	public static void findLastSellingPrice(List<StockModel> stockModelList, Integer contactId) {
+		for (StockModel stockModel : stockModelList) {
+			findLastSellingPrice(stockModel, contactId);
+		}
+	}
 
+	public static void findLastSellingPrice(StockModel stockModel, Integer contactId) {
+		if (stockModel == null || contactId == null || contactId.intValue() == 0) return;
+
+		String sql = "SELECT base_price "
+				   + "FROM stock_trans_detail "
+				   + "WHERE workspace = " + CacheUtils.getWorkspaceId()
+				   + "  AND contact_id = :contact_id "
+				   + "  AND stock_id = :stock_id "
+				   + "  AND _right IN ('" + Right.STOK_CIKIS_FISI.name() + "', '" + Right.FATR_SATIS_FATURASI.name() + "') "
+				   + "ORDER BY trans_date DESC, _right ASC";
+
+		RawSql rawSql = RawSqlBuilder.parse(sql).create();
+		Query<FindLastStockPriceModel> query = Ebean.find(FindLastStockPriceModel.class);
+		query.setRawSql(rawSql);
+		query.setMaxRows(1);
+		query.setParameter("contact_id", contactId);
+		query.setParameter("stock_id", stockModel.id);
+
+		FindLastStockPriceModel result = query.findUnique();
+		if (result != null) {
+			stockModel.sellPrice = result.basePrice;
+		} else {
+			return;
+		}
+	}
 
 	private static void setDiscounts(StockModel stockModel) {
 		List<StockModel> modelList = new ArrayList<StockModel>();
@@ -335,7 +376,7 @@ public class AjaxServices extends Controller {
 			return ok();
 		}
 	}
-	
+
 	public static Result checkUserForPService(String username, String password) {
 		return ok(AuthManager.simpleAuthenticate(username, password));
 	}

@@ -99,7 +99,7 @@ public class Application extends Controller {
 		if (isLocalRequest()) { 
 			Play.stop();
 			System.exit(0);
-			return ok("seyhan uygulamasi durduruldu!");
+			return ok("seyhan application has been stopped!");
 		} else {
 			return badRequest();
 		}

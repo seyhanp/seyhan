@@ -75,6 +75,10 @@
 					<td>@Messages("helpers.stock.checkLimits")</td>
 				</tr>
 				<tr>
+					<td>@select(_form("stok_findLastSellingPrice"), options(Options.yesno), '_label -> Messages("find.last.stock.price"))</td>
+					<td>@Messages("helpers.stock.findLastSellingPrice")</td>
+				</tr>
+				<tr>
 					<td>
 						<div class="control-group ">
 							<label class="control-label">@Messages("visibility.of.fields")</label>
