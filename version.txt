@@ -1,3 +1,14 @@
+﻿sürüm 1.0.14 - 29/07/2016
+	- satış işlemlerinde stok fiyatının ilgili cari hesaba yapılan son satıştan gelmesi için Profil Tanıtımı kısmı Stok bölümüne "Son Satış Fiyatı Kullanılsın" seçeneği eklendi
+	  	bu parametre ile kullanıcılar, stoğun cari hesaba kesilmiş son Satış Faturası (bulamazsa Stok Çıkış Fişi) üzerindeki satış fiyatını bulabilecekler.
+	- döviz bilgilerini getiren kısımda hata oluştuğunda, seyhan sonsuz bekleme durumunda kalıyordu bunu düzeltmek için timeout değeri verildi
+	- peşin fatura girişlerinde kasa ve cari hesaba yansıma olduğu için cari hesap açık kalıyordu, ters kapama kaydı yapısı eklendi
+	- cari durum raporu adından sıralı gelecek şekilde düzenlendi
+	- otomatik belge numarası artışları sadece çıkış yönlü (Stok Çıkış Fişi, Satış Faturası.. gibi) belgelerde çalışacak hale getirildi
+	- kapatılmış durumda kopyalanan stok, sipariş, irsaliye ve fatura belgelerinde is_completed alani true kalıyordu düzeltildi
+	- sipariş ve irsaliye onaylama adımları kısmında, onaylanan belge için işlem kaynağı hatalı kısımdan elde ediliyordu (bu da hataya neden oluyordu) düzeltildi
+	- sipariş ve irsaliyelerden onaylanan belgeler için sevk tarihi hatalı geliyordu düzeltildi
+
 ﻿sürüm 1.0.13 - 09/03/2016
 	- nokta vuruşlu yazıcılara çıkacak raporlar için genel ayarlar kısmına yazıcı yolu seçeneği eklendi
 	- çek hareket bordrosundaki çekler işlenirken, (başka sıradaki çekler seçili olmasına rağmen), her zaman ilk sıradaki çekleri işliyordu, düzeltildi.
