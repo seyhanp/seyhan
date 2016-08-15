@@ -1,40 +1,41 @@
-#**welcome to the seyhan project** 
+#**Welcome to the seyhan project** 
 
-####seyhan is an erp (Enterprise Resource Planning or Accountancy) project targeting small and middle sized businesses with the feature of multi user, database, browser and operating system independency.
+####seyhan is an erp (Enterprise Resource Planning or Accounting) project targeting small and middle sized businesses with the feature of multi user, database, browser and operating system independency.
 
-###- has the following features
-* open sourced
-* has multi-user support
+###- It has the following features
+* Open sourced
+* Multi tenant
+* has multi-user support 
 * has multi-language support (Turkish and English are supported for now)
-* operating system independent (linux, windows, mac)
-* database independent (h2, mysql, postgresql, ms-sqlserver)
-* browser independent (firefox, ie, chrome, safari)
+* Operating system independent (linux, windows, mac)
+* Database independent (h2, mysql, postgresql, ms-sqlserver)
+* Browser independent (firefox, ie, chrome, safari)
 * can work on both local computers and remote servers
 
-###- has the following modules
-* contact
-* stock
-* order
-* waybill
-* imnvoice
-* cheque
-* bill
-* cash
-* bank
-* selling
-* general
-* admin
+###- It has the following modules
+* Contact (sellers, customers and employers)
+* Stock
+* Order
+* Waybill
+* Invoice
+* Cheque
+* Bills
+* Cash
+* Bank
+* Selling
+* General
+* Admin
 
-###- the project stations
-you may visit the following sites to get more information about the project
-* main page : http://www.seyhanproject.com (in Turkish, can be changed into English if any request)
-* discussion forums : [seyhanp] (https://groups.google.com/forum/#!forum/seyhanp)
-* the blog : http://blog.seyhanproject.com
-* the documents : http://www.seyhanproject.com/docs (in Turkish, can be changed into English if any request)
-* the setup instructions for the last users : http://www.seyhanproject.com/docs/#/others/install
-* the setup instructions for developers and designers : http://www.seyhanproject.com/docs/#/devzone/install
+###- The project stations
+You may visit the following sites to get more information about the project
+* Main page : http://www.seyhanproject.com (in Turkish, can be changed into English if any request)
+* Discussion forums : [seyhanp] (https://groups.google.com/forum/#!forum/seyhanp)
+* The blog : http://blog.seyhanproject.com
+* The documents : http://www.seyhanproject.com/docs (in Turkish, can be changed into English if any request)
+* The setup instructions for the last users : http://www.seyhanproject.com/docs/#/others/install
+* The setup instructions for developers and designers : http://www.seyhanproject.com/docs/#/devzone/install
 
-###- seyhan uses the following tools
+###- It uses the following tools
 | Tools             | Versions | Purpose                                        |
 |-------------------|:--------:|------------------------------------------------|
 | Java              |   1.6    | Backend development platform                   |
@@ -49,5 +50,5 @@ you may visit the following sites to get more information about the project
 | jQuery            |   1.9    | Base Javascript framework for front-end        |
 | Eclipse           |  Kepler  | Integrated development platform for Java       |
 
-###- please note
-even though seyhan has Turkish documentations (because it was firstly designed for Turkey's market), we can prepare and provide all the documents in English if any request or you can edit them directly by using git.
+###- Please note
+Even though seyhan has Turkish documentations (because it was firstly designed for Turkey's market), we can prepare and provide all the documents in English if any request or you can edit them directly by using git.
