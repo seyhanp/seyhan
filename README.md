@@ -2,7 +2,7 @@
 
 ####seyhan is an erp (Enterprise Resource Planning or Accountancy) project targeting small and middle sized businesses with the feature of multi user, database, browser and operating system independency.
 
-###has the following features
+###- has the following features
 * open sourced
 * has multi-user support
 * has multi-language support (Turkish and English are supported for now)
@@ -11,7 +11,7 @@
 * browser independent (firefox, ie, chrome, safari)
 * can work on both local computers and remote servers
 
-###has the following modules
+###- has the following modules
 * contact
 * stock
 * order
@@ -25,7 +25,7 @@
 * general
 * admin
 
-###the project stations
+###- the project stations
 you may visit the following sites to get more information about the project
 * main page : http://www.seyhanproject.com (in Turkish, can be changed into English if any request)
 * discussion forums : [seyhanp] (https://groups.google.com/forum/#!forum/seyhanp)
@@ -34,7 +34,7 @@ you may visit the following sites to get more information about the project
 * the setup instructions for the last users : http://www.seyhanproject.com/docs/#/others/install
 * the setup instructions for developers and designers : http://www.seyhanproject.com/docs/#/devzone/install
 
-###seyhan uses the following tools
+###- seyhan uses the following tools
 | Tools             | Versions | Purpose                                        |
 |-------------------|:--------:|------------------------------------------------|
 | Java              |   1.6    | Backend development platform                   |
@@ -49,5 +49,5 @@ you may visit the following sites to get more information about the project
 | jQuery            |   1.9    | Base Javascript framework for front-end        |
 | Eclipse           |  Kepler  | Integrated development platform for Java       |
 
-###note
-even though seyhan has Turkish documentations (because it firstly designed for Turkey's market), we can prepare and provide all the documents in English if any request or you can edit them directly by using git.
+###- please note
+even though seyhan has Turkish documentations (because it was firstly designed for Turkey's market), we can prepare and provide all the documents in English if any request or you can edit them directly by using git.
