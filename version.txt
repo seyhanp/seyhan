@@ -1,4 +1,10 @@
-﻿sürüm 1.0.14 - 29/07/2016
+﻿sürüm 1.0.15 - 19/09/2016
+	- raporlardaki BB ve AB ibareleri dil dosyalarından gelecek hale getirildi
+	- stok tanıtımında unit2ratio ve unit3ratio alanları null kaydedilebiliyordu, düzeltildi
+	- cari, kasa ve banka dekont girişlerinde, yansı hesap banka seçildiğinde masraf tutarı da girilebilir hale getirildi
+	- cari analiz raporunun ana başlık kısmına devir bilgisi eklendi
+	
+sürüm 1.0.14 - 29/07/2016
 	- satış işlemlerinde stok fiyatının ilgili cari hesaba yapılan son satıştan gelmesi için Profil Tanıtımı kısmı Stok bölümüne "Son Satış Fiyatı Kullanılsın" seçeneği eklendi
 	  	bu parametre ile kullanıcılar, stoğun cari hesaba kesilmiş son Satış Faturası (bulamazsa Stok Çıkış Fişi) üzerindeki satış fiyatını bulabilecekler.
 	- döviz bilgilerini getiren kısımda hata oluştuğunda, seyhan sonsuz bekleme durumunda kalıyordu bunu düzeltmek için timeout değeri verildi
