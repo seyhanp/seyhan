@@ -2,24 +2,38 @@ package meta;
 
 public class Balance {
 	
+	private Double transfer;
 	private Double debt;
 	private Double credit;
 	private Double balance;
 	private String excCode;
 	
 	public Balance() {
+		this.transfer = 0d;
 		this.debt = 0d;
 		this.credit = 0d;
 		this.balance = 0d;
 		this.excCode = "TL";
 	}
 
-	public Balance(Double debt, Double credit, Double balance, String excCode) {
+	public Balance(Double transfer, Double debt, Double credit, Double balance, String excCode) {
 		super();
+		this.transfer = transfer;
 		this.debt = debt;
 		this.credit = credit;
 		this.balance = balance;
 		this.excCode = excCode;
+	}
+
+	public Double getTransfer() {
+		if (transfer != null)
+			return transfer;
+		else
+			return 0d;
+	}
+
+	public void setTransfer(Double transfer) {
+		this.transfer = transfer;
 	}
 
 	public Double getDebt() {

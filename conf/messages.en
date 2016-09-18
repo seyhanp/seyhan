@@ -1158,6 +1158,9 @@ formats.date=dd/MM/yyyy
 formats.time=HH:mm:ss
 formats.balance=#,##0.00 DB;#,##0.00 CR
 
+symbol.debit=D
+symbol.credit=C
+
 LINE=Line
 STATIC_TEXT=Label
 SYS_DATE=System Date

@@ -237,7 +237,7 @@ abstract class BaseTransfer implements ITransfer {
 	Safe findAccordingToSourceWS(Integer id, int targetWS) {
 		if (id == null) return null;
 
-		SqlRow row = Ebean.createSqlQuery("select id from safe where workspace = :workspace and code = (select code from safe where id = :id )")
+		SqlRow row = Ebean.createSqlQuery("select id from safe where workspace = :workspace and id = :id")
 							.setParameter("id", id)
 							.setParameter("workspace", targetWS)
 						.findUnique();
@@ -253,7 +253,7 @@ abstract class BaseTransfer implements ITransfer {
 	Bank findBankInTargetWS(Integer id, int targetWS) {
 		if (id == null) return null;
 
-		SqlRow row = Ebean.createSqlQuery("select id from bank where workspace = :workspace and account_no = (select account_no from bank where id = :id )")
+		SqlRow row = Ebean.createSqlQuery("select id from bank where workspace = :workspace and id = :id")
 							.setParameter("id", id)
 							.setParameter("workspace", targetWS)
 						.findUnique();
@@ -269,7 +269,7 @@ abstract class BaseTransfer implements ITransfer {
 	Stock findStockInTargetWS(Integer id, int targetWS) {
 		if (id == null) return null;
 
-		SqlRow row = Ebean.createSqlQuery("select id from stock where workspace = :workspace and code = (select code from stock where id = :id )")
+		SqlRow row = Ebean.createSqlQuery("select id from stock where workspace = :workspace and id = :id")
 							.setParameter("id", id)
 							.setParameter("workspace", targetWS)
 						.findUnique();

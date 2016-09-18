@@ -288,7 +288,7 @@ GROUP BY s.name, t.trans_date, t.exc_code]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[($F{balance}.doubleValue() + $F{transfer}.doubleValue() > 0 ? "BB" : ($F{balance}.doubleValue() + $F{transfer}.doubleValue() < 0 ? "AB" : ""))]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{balance}.doubleValue() + $F{transfer}.doubleValue() > 0 ? $R{symbol.debit} : ($F{balance}.doubleValue() + $F{transfer}.doubleValue() < 0 ? $R{symbol.credit} : ""))]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 ;#,##0.00" isBlankWhenNull="true">
 				<reportElement key="textField-5" x="223" y="0" width="50" height="15" isPrintWhenDetailOverflows="true"/>
@@ -314,7 +314,7 @@ GROUP BY s.name, t.trans_date, t.exc_code]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[($F{transfer}.doubleValue() > 0 ? "BB" : ($F{transfer}.doubleValue() < 0 ? "AB" : ""))]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{transfer}.doubleValue() > 0 ? $R{symbol.debit} : ($F{transfer}.doubleValue() < 0 ? $R{symbol.credit} : ""))]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement key="textField-5" x="386" y="0" width="50" height="15" isPrintWhenDetailOverflows="true"/>
@@ -340,7 +340,7 @@ GROUP BY s.name, t.trans_date, t.exc_code]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[($F{balance}.doubleValue() > 0 ? "BB" : ($F{balance}.doubleValue() < 0 ? "AB" : ""))]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{balance}.doubleValue() > 0 ? $R{symbol.debit} : ($F{balance}.doubleValue() < 0 ? $R{symbol.credit} : ""))]]></textFieldExpression>
 			</textField>
 			<line direction="BottomUp">
 				<reportElement x="286" y="0" width="1" height="15"/>

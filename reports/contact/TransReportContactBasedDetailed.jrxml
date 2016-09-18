@@ -263,7 +263,7 @@ order by c.name, t.exc_code, t.trans_date, t.trans_dir, ts.name]]>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($F{transfer} != null && $F{transfer}.doubleValue() > 0d ? "BB" : ($F{transfer} != null && $F{transfer}.doubleValue() < 0d ? "AB" : ""))]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($F{transfer} != null && $F{transfer}.doubleValue() > 0d ? $R{symbol.debit} : ($F{transfer} != null && $F{transfer}.doubleValue() < 0d ? $R{symbol.credit} : ""))]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
 					<reportElement key="textField-2" x="423" y="15" width="21" height="14" uuid="6d7dd4f1-3ff7-4201-b636-91af37578c04"/>
@@ -351,8 +351,8 @@ order by c.name, t.exc_code, t.trans_date, t.trans_dir, ts.name]]>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_DEBT}.doubleValue() - $V{SUM_CREDIT}.doubleValue() + ($F{transfer} != null ? $F{transfer}.doubleValue() : 0d) > 0d ? "BB" :
-    ($V{SUM_DEBT}.doubleValue() - $V{SUM_CREDIT}.doubleValue() + ($F{transfer} != null ? $F{transfer}.doubleValue() : 0d) < 0d ? "AB" : ""))]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($V{SUM_DEBT}.doubleValue() - $V{SUM_CREDIT}.doubleValue() + ($F{transfer} != null ? $F{transfer}.doubleValue() : 0d) > 0d ? $R{symbol.debit} :
+    ($V{SUM_DEBT}.doubleValue() - $V{SUM_CREDIT}.doubleValue() + ($F{transfer} != null ? $F{transfer}.doubleValue() : 0d) < 0d ? $R{symbol.credit} : ""))]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
 					<reportElement key="textField-2" x="54" y="1" width="170" height="14" uuid="5ad0f356-93de-4cff-9931-a859d67da689"/>
@@ -579,8 +579,8 @@ order by c.name, t.exc_code, t.trans_date, t.trans_dir, ts.name]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{balance}.doubleValue() + ($F{transfer} != null ? $F{transfer}.doubleValue() : 0d) > 0d ? "BB" :
-$V{balance}.doubleValue() + ($F{transfer} != null ? $F{transfer}.doubleValue() : 0d) < 0d ? "AB" : ""
+				<textFieldExpression><![CDATA[$V{balance}.doubleValue() + ($F{transfer} != null ? $F{transfer}.doubleValue() : 0d) > 0d ? $R{symbol.debit} :
+$V{balance}.doubleValue() + ($F{transfer} != null ? $F{transfer}.doubleValue() : 0d) < 0d ? $R{symbol.credit} : ""
 ]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">

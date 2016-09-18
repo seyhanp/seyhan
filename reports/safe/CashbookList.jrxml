@@ -296,7 +296,7 @@ order by trans_type desc]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[($V{balance}.doubleValue() > 0 ? "BB" : ($V{balance}.doubleValue() < 0 ? "AB" : ""))]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[($V{balance}.doubleValue() > 0 ? $R{symbol.debit} : ($V{balance}.doubleValue() < 0 ? $R{symbol.credit} : ""))]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement key="textField-5" x="400" y="0" width="50" height="15" isPrintWhenDetailOverflows="true"/>
@@ -446,7 +446,7 @@ order by trans_type desc]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[($P{YESTERDAY_TRANSFER}.doubleValue() > 0 ? "BB" : ($P{YESTERDAY_TRANSFER}.doubleValue() < 0 ? "AB" : ""))]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{YESTERDAY_TRANSFER}.doubleValue() > 0 ? $R{symbol.debit} : ($P{YESTERDAY_TRANSFER}.doubleValue() < 0 ? $R{symbol.credit} : ""))]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement key="textField-2" x="501" y="10" width="12" height="14"/>
@@ -459,8 +459,8 @@ order by trans_type desc]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[($V{SUM_DEBT}.doubleValue() - $V{SUM_CREDIT}.doubleValue() > 0 ? "BB" :
-    ($V{SUM_DEBT}.doubleValue() - $V{SUM_CREDIT}.doubleValue() < 0 ? "AB" : ""))]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[($V{SUM_DEBT}.doubleValue() - $V{SUM_CREDIT}.doubleValue() > 0 ? $R{symbol.debit} :
+    ($V{SUM_DEBT}.doubleValue() - $V{SUM_CREDIT}.doubleValue() < 0 ? $R{symbol.credit} : ""))]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
 				<reportElement key="textField-5" x="302" y="38" width="148" height="14" isPrintWhenDetailOverflows="true"/>
@@ -486,8 +486,8 @@ order by trans_type desc]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[($V{SUM_DEBT}.doubleValue() + $P{YESTERDAY_TRANSFER}.doubleValue() - $V{SUM_CREDIT}.doubleValue() > 0 ? "BB"
- : ($V{SUM_DEBT}.doubleValue() + $P{YESTERDAY_TRANSFER}.doubleValue() - $V{SUM_CREDIT}.doubleValue() < 0 ? "AB" : ""))]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[($V{SUM_DEBT}.doubleValue() + $P{YESTERDAY_TRANSFER}.doubleValue() - $V{SUM_CREDIT}.doubleValue() > 0 ? $R{symbol.debit}
+ : ($V{SUM_DEBT}.doubleValue() + $P{YESTERDAY_TRANSFER}.doubleValue() - $V{SUM_CREDIT}.doubleValue() < 0 ? $R{symbol.credit} : ""))]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report" pattern="#,##0.00 ;#,##0.00" isBlankWhenNull="true">
 				<reportElement key="textField-5" x="450" y="38" width="50" height="14" isPrintWhenDetailOverflows="true"/>

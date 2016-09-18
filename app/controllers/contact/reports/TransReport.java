@@ -109,15 +109,6 @@ public class TransReport extends Controller {
 			return options;
 		}
 
-		public static Map<String, String> showTypes() {
-			LinkedHashMap<String, String> options = new LinkedHashMap<String, String>();
-
-			options.put("Summary", Messages.get("report.show.summary"));
-			options.put("Detailed", Messages.get("report.show.detail"));
-
-			return options;
-		}
-
 	}
 
 	private static String getQueryString(Parameter params) {
@@ -289,9 +280,7 @@ public class TransReport extends Controller {
 				repPar.paramMap.put("PRIVATE_CODE_SQL", "left join global_private_code pc on pc.id = t.private_code_id ");
 			}
 
-			String par1 = Parameter.reportTypes().get(params.reportType) + ", " + Parameter.showTypes().get(params.showType);
-			String par2 = "(" + DateUtils.formatDateStandart(params.startDate) + " - " + DateUtils.formatDateStandart(params.endDate) +")";
-			repPar.paramMap.put("REPORT_INFO", par1 + " - " + par2);
+			repPar.paramMap.put("REPORT_INFO", "(" + DateUtils.formatDateStandart(params.startDate) + " - " + DateUtils.formatDateStandart(params.endDate) +")");
 			
 			ReportResult repRes = ReportService.generateReport(repPar, response());
 			if (repRes.error != null) {

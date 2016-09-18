@@ -1,11 +1,11 @@
-@(form: Form[_], hasAddNewButton:Boolean = true)
+@(form: Form[_], hasAddNewButton:Boolean = true, name: String = "expense")
 
-@standart(form, BankExpense.options, enums.Right.BANK_MASRAF_TANITIMI, "expense", Messages("bank.expense"), hasAddNewButton=hasAddNewButton) {
+@standart(form, BankExpense.options, enums.Right.BANK_MASRAF_TANITIMI, name, Messages("bank.expense"), hasAddNewButton=hasAddNewButton) {
 
 	<script type="text/javascript">
 		function setSimpleControllerFor_expense() {
 			simple_combo_type = 0;
-			simple_selector = "#expense_id";
+			simple_selector = "#@(name)_id";
 			simple_controller = jsRoutes.controllers.bank.Expenses;
 		}
 	</script>

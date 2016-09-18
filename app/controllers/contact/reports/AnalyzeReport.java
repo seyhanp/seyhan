@@ -143,8 +143,9 @@ public class AnalyzeReport extends Controller {
 			repPar.paramMap.put("CONTACT_PHONE", contact.phone);
 			repPar.paramMap.put("CONTACT_MOBILE_PHONE", contact.mobilePhone);
 
-			Balance balance = QueryUtils.findBalance(Module.contact, params.contact.id, params.excCode);
+			Balance balance = QueryUtils.findBalance(params.startDate, Module.contact, params.contact.id, params.excCode);
 			repPar.paramMap.put("EXC_CODE", params.excCode);
+			repPar.paramMap.put("CONTACT_TRANSFER", balance.getTransfer());
 			repPar.paramMap.put("CONTACT_DEBT_SUM", balance.getDebt());
 			repPar.paramMap.put("CONTACT_CREDIT_SUM", balance.getCredit());
 			repPar.paramMap.put("CONTACT_BALANCE", balance.getBalance());

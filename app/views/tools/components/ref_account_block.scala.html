@@ -32,6 +32,18 @@
 	<div id="ra_bank">
 		@tools.dropdowns.bank_ref(form)
 		@tools.dropdowns.bank_ref_trans_source(form, direction)
+		<div class="row-fluid">
+			<div class="span4">
+				@tools.dropdowns.bank_expense(form, true, "bankExpense")
+			</div>
+			<div class="span2">
+				@helper.inputText(form("bankExpenseAmount"),
+					'_label -> Messages("expense.amount"),
+					'class -> "input-small currency",
+					'maxlength -> "10"
+				)
+			</div>
+		</div>
 	</div>
 	
 	<div id="ra_exchange">

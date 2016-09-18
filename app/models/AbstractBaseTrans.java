@@ -96,6 +96,9 @@ public abstract class AbstractBaseTrans extends BaseModel {
 	@Transient public Double refExcRate = 1d;
 	@Transient public Double refExcEquivalent;
 
+	@Transient public BankExpense bankExpense;
+	@Transient public Double bankExpenseAmount;
+
 	public AbstractBaseTrans() {
 		this.transPoint  = Profiles.chosen().gnel_transPoint;
 		this.excCode = Profiles.chosen().gnel_excCode;

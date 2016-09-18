@@ -387,13 +387,15 @@ public class Stocks extends Controller {
 		}
 
 		if (model.unit2 != null && ! model.unit2.isEmpty()) {
-			if (model.unit2Ratio == null || model.unit2Ratio.doubleValue() <= 0) {
+			if (model.unit2Ratio == null) model.unit2Ratio = 0d; 
+			if (model.unit2Ratio.doubleValue() <= 0) {
 				filledForm.reject("unit2Ratio", Messages.get("is.not.null", Messages.get("stock.unit_ratio", 1)));
 			}
 		}
 
 		if (model.unit3 != null && ! model.unit3.isEmpty()) {
-			if (model.unit3Ratio == null || model.unit3Ratio.doubleValue() <= 0) {
+			if (model.unit3Ratio == null) model.unit3Ratio = 0d; 
+			if (model.unit3Ratio.doubleValue() <= 0) {
 				filledForm.reject("unit3Ratio", Messages.get("is.not.null", Messages.get("stock.unit_ratio", 2)));
 			}
 		}

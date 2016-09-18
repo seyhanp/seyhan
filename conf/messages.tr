@@ -1158,6 +1158,9 @@ formats.date=dd/MM/yyyy
 formats.time=HH:mm:ss
 formats.balance=#,##0.00 BB;#,##0.00 AB
 
+symbol.debit=B
+symbol.credit=A
+
 LINE=Çizgi
 STATIC_TEXT=Etiket
 SYS_DATE=Sistem Tarihi

@@ -677,21 +677,6 @@ public class Transes extends Controller {
 			log.error("ref module : " + model.refModule + " safe : " + model.refSafe);
 		}
 
-		/*
-		switch (model.refModule) {
-			case safe: {
-				if (model.refSafe == null || model.refSafe.id == null) {
-					filledForm.reject("refSafe.id", Messages.get("is.not.null", Messages.get("ref.safe")));
-				}
-				break;
-			}
-			case bank: {
-				if (model.refBank == null || model.refBank.id == null) {
-					filledForm.reject("refBank.id", Messages.get("is.not.null", Messages.get("ref.bank")));
-				}
-				break;
-			}
-		}*/
 	}
 
 }

@@ -27,6 +27,7 @@ import models.AbstractBaseTrans;
 import models.AbstractDocTrans;
 import models.AbstractStockTrans;
 import models.Bank;
+import models.BankExpense;
 import models.BankTrans;
 import models.BankTransSource;
 import models.ChqbllPayroll;
@@ -131,18 +132,24 @@ public class RefModuleUtil {
 						newTrans = (oldSafeTrans != null ? oldSafeTrans : new SafeTrans((module.equals(source.refModule) ? Right.KASA_VIRMAN : source.right)));
 						((SafeTrans)newTrans).safe = source.refSafe;
 						((SafeTrans)newTrans).transSource = source.refSafeTransSource;
-
 						break;
 					}
 					case bank: {
 						newTrans = (oldBankTrans != null ? oldBankTrans : new BankTrans((module.equals(source.refModule) ? Right.BANK_VIRMAN : source.right)));
 						((BankTrans)newTrans).bank = source.refBank;
 						((BankTrans)newTrans).transSource = source.refBankTransSource;
-
+						((BankTrans)newTrans).expense = source.bankExpense;
+						((BankTrans)newTrans).expenseAmount = source.bankExpenseAmount;
 						break;
 					}
 
 				}
+
+				if (newTrans != null) {
+					newTrans.bankExpense = source.bankExpense;
+					newTrans.bankExpenseAmount = source.bankExpenseAmount;
+				}
+
 			}
 
 			if (source instanceof AbstractDocTrans) {
@@ -206,6 +213,9 @@ public class RefModuleUtil {
 				newTrans.transYear = source.transYear;
 				newTrans.transMonth = source.transMonth;
 				newTrans.description = source.description;
+				
+				log.info("newTrans.expense : " + newTrans.bankExpense + " ->  newTrans.expenseAmount : " + newTrans.bankExpenseAmount);
+				log.info("source.expense : " + source.bankExpense + " ->  source.expenseAmount : " + source.bankExpenseAmount);
 
 				if (newTrans.id == null) {
 					if (Profiles.chosen().gnel_docNoIncType.equals(DocNoIncType.Full_Automatic)) newTrans.transNo = DocNoUtils.findLastTransNo(newTrans.right);
@@ -322,46 +332,42 @@ public class RefModuleUtil {
 			}
 
 			/*
-			 * Sadece Banka modulu masraf bilgisi varsa ekstra bir hareket yansimasi yapabilir
+			 * Masraf bilgisi varsa ekstra bir hareket yansimasi daha yapilir
 			 */
-			if (source instanceof BankTrans) {
-				BankTrans asABankTrans = (BankTrans) source;
-				BankTrans expenseTrans = BankTrans.findByRefIdAndRight(source.id, Right.BANK_MASRAF);
+			BankTrans expenseTrans = BankTrans.findByRefIdAndRight(source.id, Right.BANK_MASRAF);
+			boolean hasExpense = (source.refModule != null && source.refModule.equals(Module.bank) && newTrans.bankExpenseAmount != null && newTrans.bankExpenseAmount.doubleValue() > 0);
 
-				boolean hasExpense = (asABankTrans.expenseAmount != null && asABankTrans.expenseAmount.doubleValue() > 0);
+			//Eski yansima var ve yeni yansima olmayacaksa eski yanisma silinir!
+			if (expenseTrans != null && ! hasExpense) {
+				expenseTrans.singleDelete();
+			// Yansima olacaksa; eski yanisma varsa update edilir, yoksa yeni bir tane olusturulur!
+			} else if (hasExpense) {
+				if (expenseTrans == null) expenseTrans = new BankTrans(Right.BANK_MASRAF);
 
-				//Eski yansima var ve yeni yansima olmayacaksa eski yanisma silinir!
-				if (expenseTrans != null && ! hasExpense) {
-					expenseTrans.singleDelete();
-				// Yansima olacaksa; eski yanisma varsa update edilir, yoksa yeni bir tane olusturulur!
-				} else if (hasExpense) {
-					if (expenseTrans == null) expenseTrans = new BankTrans(Right.BANK_MASRAF);
+				expenseTrans.workspace = source.workspace;
+				expenseTrans.bank = source.refBank;
+				expenseTrans.receiptNo = source.receiptNo;
+				expenseTrans.transType = TransType.Credit;
+				expenseTrans.amount = newTrans.bankExpenseAmount;
+				expenseTrans.debt = 0d;
+				expenseTrans.credit = expenseTrans.amount;
+				expenseTrans.excCode = source.excCode;
+				expenseTrans.excRate = source.excRate;
+				expenseTrans.excEquivalent = expenseTrans.amount;
+				expenseTrans.transDate = source.transDate;
+				expenseTrans.transNo = source.transNo;
+				expenseTrans.transDir = (expenseTrans.debt.doubleValue() > 0 ? 0 : 1);
+				expenseTrans.transYear = source.transYear;
+				expenseTrans.transMonth = source.transMonth;
+				expenseTrans.description = "MASRAF YOLUYLA YANSIYAN TUTAR (" + Messages.get("enum."+source.right.name()).toUpperCase() + ", FİŞ NO : " + source.receiptNo +")";
 
-					expenseTrans.workspace = source.workspace;
-					expenseTrans.bank = asABankTrans.bank;
-					expenseTrans.receiptNo = source.receiptNo;
-					expenseTrans.transType = TransType.Credit;
-					expenseTrans.amount = asABankTrans.expenseAmount;
-					expenseTrans.debt = 0d;
-					expenseTrans.credit = expenseTrans.amount;
-					expenseTrans.excCode = source.excCode;
-					expenseTrans.excRate = source.excRate;
-					expenseTrans.excEquivalent = expenseTrans.amount;
-					expenseTrans.transDate = source.transDate;
-					expenseTrans.transNo = source.transNo;
-					expenseTrans.transDir = (expenseTrans.debt.doubleValue() > 0 ? 0 : 1);
-					expenseTrans.transYear = source.transYear;
-					expenseTrans.transMonth = source.transMonth;
-					expenseTrans.description = "MASRAF YOLUYLA YANSIYAN TUTAR (FİŞ NO : " + asABankTrans.receiptNo +")";
+				expenseTrans.refId = source.id;
+				expenseTrans.refModule = Module.bank;
 
-					expenseTrans.refId = source.id;
-					expenseTrans.refModule = Module.bank;
-
-					if (expenseTrans.id == null) {
-						expenseTrans.singleSave();
-					} else {
-						expenseTrans.singleUpdate();
-					}
+				if (expenseTrans.id == null) {
+					expenseTrans.singleSave();
+				} else {
+					expenseTrans.singleUpdate();
 				}
 			}
 			
@@ -468,6 +474,9 @@ public class RefModuleUtil {
 		SafeTransSource refSafeTransSource = null;
 		BankTransSource refBankTransSource = null;
 
+		BankExpense expense = null;
+		Double expenseAmount = 0d;
+
 		if (trans.refModule == null) return;
 
 		switch (trans.refModule) {
@@ -493,6 +502,8 @@ public class RefModuleUtil {
 				if (refTrans != null) {
 					refBank = ((BankTrans) refTrans).bank;
 					refBankTransSource = ((BankTrans) refTrans).transSource;
+					expense = ((BankTrans) refTrans).expense;
+					expenseAmount = ((BankTrans) refTrans).expenseAmount;
 				}
 				break;
 			}
@@ -517,6 +528,9 @@ public class RefModuleUtil {
 		trans.refSafeTransSource = refSafeTransSource;
 		trans.refBankTransSource = refBankTransSource;
 
+		trans.bankExpense = expense;
+		trans.bankExpenseAmount = expenseAmount;
+		
 		if (refTrans != null) {
 			trans.refExcCode = refTrans.excCode;
 			trans.refExcRate = refTrans.excRate;

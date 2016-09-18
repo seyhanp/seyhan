@@ -224,8 +224,8 @@ order by $P!{GROUP_FIELD}, b.name, t.exc_code, t.trans_dir]]>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression class="java.lang.String"><![CDATA[($V{SUM_DEBT}.doubleValue() - $V{SUM_CREDIT}.doubleValue() > 0 ? "BB" :
-    ($V{SUM_DEBT}.doubleValue() - $V{SUM_CREDIT}.doubleValue() < 0 ? "AB" : ""))]]></textFieldExpression>
+					<textFieldExpression class="java.lang.String"><![CDATA[($V{SUM_DEBT}.doubleValue() - $V{SUM_CREDIT}.doubleValue() > 0 ? $R{symbol.debit} :
+    ($V{SUM_DEBT}.doubleValue() - $V{SUM_CREDIT}.doubleValue() < 0 ? $R{symbol.credit} : ""))]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
 					<reportElement key="textField-3" x="160" y="2" width="123" height="14"/>
@@ -410,7 +410,7 @@ order by $P!{GROUP_FIELD}, b.name, t.exc_code, t.trans_dir]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[($V{balance}.doubleValue() > 0 ? "BB" : ($V{balance}.doubleValue() < 0 ? "AB" : ""))]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[($V{balance}.doubleValue() > 0 ? $R{symbol.debit} : ($V{balance}.doubleValue() < 0 ? $R{symbol.credit} : ""))]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 ;#,##0.00" isBlankWhenNull="true">
 				<reportElement key="textField-5" x="449" y="0" width="50" height="15" isPrintWhenDetailOverflows="true"/>

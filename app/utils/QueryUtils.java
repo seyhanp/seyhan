@@ -73,7 +73,7 @@ public class QueryUtils {
 		return balance;
 	}
 	
-	public static Balance findBalance(Module module, Integer modelId, String excCode) {
+	public static Balance findBalance(Date start, Module module, Integer modelId, String excCode) {
 		String query = String.format("select sum(debt) as debt_sum, sum(credit) as credit_sum from %s_trans where workspace = %d and %s_id = %d and exc_code = '%s'", module.name(), CacheUtils.getWorkspaceId(), module.name(), modelId, excCode);
 		SqlRow row = Ebean.createSqlQuery(query).findUnique();
 		
@@ -82,6 +82,15 @@ public class QueryUtils {
 			balance.setExcCode(row.getString("exc_code"));
 			balance.setDebt(row.getDouble("debt_sum"));
 			balance.setCredit(row.getDouble("credit_sum"));
+		}
+
+		if (start != null) {
+			query = String.format("select sum(debt-credit) as transfer from %s_trans where workspace = %d and %s_id = %d and exc_code = '%s' and trans_date < %s", module.name(), CacheUtils.getWorkspaceId(), module.name(), modelId, excCode, DateUtils.formatDateForDB(start));
+			row = Ebean.createSqlQuery(query).findUnique();
+
+			if (row != null && ! row.isEmpty()) {
+				balance.setTransfer(row.getDouble("transfer"));
+			}
 		}
 		
 		return balance;
