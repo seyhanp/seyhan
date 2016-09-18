@@ -1,18 +1,18 @@
-#**Welcome to the seyhan project** 
+#**Welcome to seyhan project** 
 
-####seyhan is an erp (Enterprise Resource Planning or Accounting) project targeting small and middle sized businesses with the feature of multi user, database, browser and operating system independency.
+####seyhan is an erp (Enterprise Resource Planning or Accounting) project targeting small and middle sized businesses with the support of multi users, databases, browsers and operating systems.
 
-###- It has the following features
+###- seyhan has the following features
 * Open sourced
 * Multi tenant
 * has multi-user support 
 * has multi-language support (Turkish and English are supported for now)
-* Operating system independent (linux, windows, mac)
-* Database independent (h2, mysql, postgresql, ms-sqlserver)
-* Browser independent (firefox, ie, chrome, safari)
+* operating system independent (linux, windows, mac)
+* database independent (h2, mysql, postgresql, ms-sqlserver)
+* browser independent (firefox, ie, chrome, safari)
 * can work on both local computers and remote servers
 
-###- It has the following modules
+###- seyhan has the following modules
 * Contact (sellers, customers and employers)
 * Stock
 * Order
@@ -26,7 +26,7 @@
 * General
 * Admin
 
-###- The project stations
+###- seyhan's stations
 You may visit the following sites to get more information about the project
 * Main page : http://www.seyhanproject.com (in Turkish, can be changed into English if any request)
 * Discussion forums : [seyhanp] (https://groups.google.com/forum/#!forum/seyhanp)
@@ -35,7 +35,7 @@ You may visit the following sites to get more information about the project
 * The setup instructions for the last users : http://www.seyhanproject.com/docs/#/others/install
 * The setup instructions for developers and designers : http://www.seyhanproject.com/docs/#/devzone/install
 
-###- It uses the following tools
+###- seyhan uses the following tools
 | Tools             | Versions | Purpose                                        |
 |-------------------|:--------:|------------------------------------------------|
 | Java              |   1.6    | Backend development platform                   |
@@ -51,4 +51,4 @@ You may visit the following sites to get more information about the project
 | Eclipse           |  Kepler  | Integrated development platform for Java       |
 
 ###- Please note
-Even though seyhan has Turkish documentations (because it was firstly designed for Turkey's market), we can prepare and provide all the documents in English if any request or you can edit them directly by using git.
+Even though seyhan has Turkish documentations (because it was firstly designed for the market of Turkey), we can prepare and provide all the documents in English if any request or you can edit them directly by using git.
