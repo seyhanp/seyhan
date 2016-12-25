@@ -100,6 +100,7 @@ public class TransReport extends Controller {
 			options.put("Seller", Messages.get("report.type.seller_based"));
 			options.put("Category", Messages.get("report.type.category_based"));
 			options.put("City", Messages.get("report.type.city_based"));
+			options.put("Country", Messages.get("report.type.country_based"));
 
 			List<AdminExtraFields> extraFieldList = AdminExtraFields.listAll(Module.contact.name());
 			for (AdminExtraFields ef : extraFieldList) {
@@ -243,6 +244,10 @@ public class TransReport extends Controller {
 			if (params.reportType.equals("City")) {
 				field = "c.city";
 				label = Messages.get("city");
+			}
+			if (params.reportType.equals("Country")) {
+				field = "c.country";
+				label = Messages.get("country");
 			}
 			if (params.reportType.startsWith("ExtraFields")) {
 				Integer extraFieldsId = Integer.parseInt(""+params.reportType.charAt(params.reportType.length()-1));

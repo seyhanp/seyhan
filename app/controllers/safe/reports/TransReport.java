@@ -84,6 +84,7 @@ public class TransReport extends Controller {
 			LinkedHashMap<String, String> options = new LinkedHashMap<String, String>();
 
 			options.put("Safe", Messages.get("report.type.safe_based"));
+			options.put("Expense", Messages.get("report.type.expense_based"));
 			options.put("Monthly", Messages.get("report.type.month_based"));
 			options.put("Yearly", Messages.get("report.type.year_based"));
 			options.put("Daily", Messages.get("report.type.day_based"));
@@ -205,6 +206,10 @@ public class TransReport extends Controller {
 			if (params.reportType.equals("TransSource")) {
 				field = "ts.name";
 				label = Messages.get("trans.source");
+			}
+			if (params.reportType.equals("Expense")) {
+				field = "se.name";
+				label = Messages.get("safe.expense");
 			}
 			if (params.reportType.equals("Safe")) {
 				field = "s.name";

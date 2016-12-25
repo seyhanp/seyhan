@@ -37,6 +37,7 @@
 from safe_trans t
 inner join safe s on s.id = t.safe_id and s.is_active = $P!{TRU}
 left join safe_trans_source ts on ts.id = t.trans_source_id and ts.is_active = $P!{TRU}
+left join safe_expense se on se.id = t.expense_id and se.is_active = $P!{TRU}
 $P!{TRANS_POINT_SQL}
 $P!{PRIVATE_CODE_SQL}
 where 1=1

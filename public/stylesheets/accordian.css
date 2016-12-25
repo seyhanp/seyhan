@@ -2,7 +2,7 @@
 	top: 62px;
 	position: fixed;
 	margin-left: 0;
-	width: 300px;
+	width: 220px;
 	height: -moz-calc(100% - 60px); /* Firefox */
 	height: -webkit-calc(100% - 60px); /* Chrome, Safari */
 	height: calc(100% - 60px); /* IE9+ and future browsers */

@@ -83,6 +83,9 @@ public class Contact extends BaseContactExtraFieldsModel {
 	@Constraints.MaxLength(20)
 	public String city;
 
+	@Constraints.MaxLength(20)
+	public String country;
+
 	@Constraints.Email
 	@Constraints.MaxLength(100)
 	public String email;

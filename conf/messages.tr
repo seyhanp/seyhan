@@ -681,7 +681,7 @@ profiles=Profiler
 module=Modül
 
 enum.KULLANICI_TANITIMI=Kullanıcı Tanımları
-enum.KULLANICI_GURUPLARI=Kullanıcı Gurupları
+enum.KULLANICI_GURUPLARI=Kullanıcı Grupları
 enum.KULLANICI_ROLLERI=Kullanıcı Rolleri
 enum.KULLANICI_HAREKETLERI=Kullanıcı Hareketleri
 enum.GENEL_AYARLAR=Genel Ayarlar
@@ -997,6 +997,7 @@ report.type.receipt_type_based=Fiş Tipi Bazlı
 report.type.category_based=Kategori Bazlı
 report.type.seller_based=Satıcı Bazlı
 report.type.city_based=Şehir Bazlı
+report.type.country_based=Ülke Bazlı
 report.type.account_based=Hesap Bazlı
 report.type.safe_based=Kasa Bazlı
 report.type.status_based=Durum Bazlı
@@ -1006,6 +1007,7 @@ report.type.bank_based=Banka Bazlı
 report.type.bank_account_based=Banka Hesabı Bazlı
 report.type.type_based=Tip Bazlı
 report.type.exc_based=Para Birimi Bazlı
+report.type.expense_based=Gider Türü Bazlı
 report.type.x_based={0} Bazlı
 
 report.show=Gösterim Şekli
@@ -1072,7 +1074,7 @@ report_title.SellingReport=Satis_Raporu
 
 listing_type=Listeleme Şekli
 approval_type=Oluşum Tipi
-approval_type.contact=Fişler Cari Hesap bazında guruplansın
+approval_type.contact=Fişler Cari Hesap bazında gruplansın
 approval_type.receipt=Her bir Fiş olduğu gibi onaylansın
 
 helpers.stock.roundingDigits=Seçilmezse yuvarlama yapılmaz. 0 seçilirse sadece kuruşlar yuvarlanır.
@@ -1169,7 +1171,7 @@ SYS_DATE_FULL=Sistem Tarih ve Saati
 PAGE_NUMBER=Sayfa No
 PAGE_COUNT=Sayfa Sayısı
 
-stock.extra_field_0=Gurup
+stock.extra_field_0=Grup
 stock.extra_field_1=Marka
 stock.extra_field_2=Model
 stock.extra_field_3=Raf
@@ -1180,7 +1182,7 @@ stock.extra_field_7=ek_alan7
 stock.extra_field_8=ek_alan8
 stock.extra_field_9=ek_alan9
 
-contact.extra_field_0=Gurup
+contact.extra_field_0=Grup
 contact.extra_field_1=ek_alan1
 contact.extra_field_2=ek_alan2
 contact.extra_field_3=ek_alan3

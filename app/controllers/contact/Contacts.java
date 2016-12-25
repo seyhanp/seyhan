@@ -262,6 +262,7 @@ public class Contacts extends Controller {
 		properties.add(new Pair(Messages.get("address") + " 1", contact.address1));
 		properties.add(new Pair(Messages.get("address") + " 2", contact.address2));
 		properties.add(new Pair(Messages.get("city"), contact.city));
+		properties.add(new Pair(Messages.get("country"), contact.country));
 		properties.add(Pair.EMPTY);
 		properties.add(new Pair("TC Kimlik No", (contact.tcKimlik != null ? contact.tcKimlik.toString() : "")));
 		properties.add(new Pair(Messages.get("contact.tax.no"), contact.taxNumber));

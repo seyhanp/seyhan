@@ -533,7 +533,7 @@ function findTotalsForStocks() {
 	var withholdingAmount = 0;
 	if (typeof withholdingRate != 'undefined' && withholdingRate > 0) {
 		$('#withholdingRate').val(withholdingRate);
-		if (subtotal >= 1000) {
+		if (nettotal >= 1000) {
 			withholdingAmount = taxTotal * withholdingRate;
 			$('#withholdingAmount').val(formatMoney(withholdingAmount));
 		}
@@ -544,8 +544,10 @@ function findTotalsForStocks() {
 	$('#subtotal').val(formatMoney(netTotal));
 	$('#taxTotal').val(formatMoney(taxTotal));
 	$('#roundingDiscount').val(formatMoney(roundingDiscount));
-	$('#netTotal').val(formatMoney(total - withholdingAmount - roundingDiscount));
-	$('#amount').val(formatMoney(total - withholdingAmount - roundingDiscount));
+	
+	var netAmount = total - (withholdingAmount + roundingDiscount + discountTotal);
+	$('#netTotal').val(formatMoney(netAmount));
+	$('#amount').val(formatMoney(netAmount));
 
 	try {
 		findEquivalent();

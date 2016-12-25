@@ -997,6 +997,7 @@ report.type.receipt_type_based=Receipt Type Based
 report.type.category_based=Category Based
 report.type.seller_based=Seller Based
 report.type.city_based=City Based
+report.type.country_based=Country Based
 report.type.account_based=Account Based
 report.type.safe_based=Safe Based
 report.type.status_based=Status Based
@@ -1006,6 +1007,7 @@ report.type.bank_based=Bank Based
 report.type.bank_account_based=Bank Account Based
 report.type.type_based=Type Based
 report.type.exc_based=Exchange Code Based
+report.type.expense_based=Expense Based
 report.type.x_based={0} Based
 
 report.show=Views Form
