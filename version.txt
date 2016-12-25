@@ -1,4 +1,12 @@
-﻿sürüm 1.0.15 - 19/09/2016
+﻿sürüm 1.0.16 - 26/12/2016
+	- kasa hareket raporuna Gider Türü Bazında seçeneği eklendi
+	- cari kart tanımlanırken girilen Ülke bilgisi daha sonra gelmiyordu, düzeltildi
+	- cari analiz raporunda hizmet faturasına ait detaylar çıkmıyordu, düzeltildi
+	- ana menü biraz daraltıldı
+	- dil dosyasındaki bazı kelimeler düzeltildi
+	- stok ve fatura girişlerindeki dip iskonto genel toplama yansımıyordu, düzeltildi
+
+sürüm 1.0.15 - 19/09/2016
 	- raporlardaki BB ve AB ibareleri dil dosyalarından gelecek hale getirildi
 	- stok tanıtımında unit2ratio ve unit3ratio alanları null kaydedilebiliyordu, düzeltildi
 	- cari, kasa ve banka dekont girişlerinde, yansı hesap banka seçildiğinde masraf tutarı da girilebilir hale getirildi

@@ -2,7 +2,7 @@ import play.Project._
 
 name := "seyhan"
 
-version := "1.0.15"
+version := "1.0.16"
 
 libraryDependencies ++= Seq(
   jdbc,
