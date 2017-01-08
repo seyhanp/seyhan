@@ -89,7 +89,7 @@ public class AjaxServices extends Controller {
 			queryPart = " AND UPPER(c.code) like UPPER('%" + q + "%') ";
 		}
 
-		String sql = "SELECT c.id, c.code, c.name, c.tax_office, c.tax_number, c.address1, c.address2 "
+		String sql = "SELECT c.id, c.code, c.name, c.tax_office, c.tax_number, c.address1, c.address2, c.exc_code "
 				   + "FROM contact c " + categoryJoin
 				   + "WHERE c.workspace = " + CacheUtils.getWorkspaceId()
 				   + "  AND c.is_active = :active "

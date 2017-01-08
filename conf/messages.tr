@@ -7,6 +7,7 @@ pulled={0} başarıyla çekildi.
 rolled_back={0} başarıyla geri alındı.
 imported={0} dosyası başarıyla içe aktarıldı.
 exported={0} başarıyla dışa aktarıldı (dosya adı : {1}).
+imported.with.report={0} dosyası başarıyla içe aktarıldı. {1} adet eklendi ve {2} adet kayıt da güncellendi.
 printed.success=Belge başarıyla yazdırıldı.
 printed.fail=Belge yazdırılamadı.
 error.in.import=Aktarım esnasında bir hata oluştu : {0}
@@ -291,6 +292,7 @@ country=Ülke
 note=Not
 notes=Notlar
 field=Alan
+constraint=Kısıt
 piece=Adet
 headsup=Uyarı: 
 payment=Ödeme
@@ -644,6 +646,7 @@ designs=Belge Tasarımları
 design.for={0} için Belge Tasarımı
 target=Hedef
 targets=Hedefler
+exim=Export/Import
 
 factor=Faktör
 factors=Faktörler
@@ -692,6 +695,8 @@ enum.BELGE_HEDEFLERI=Belge Hedefleri
 
 enum.EKSTRA_STOK_ALANLARI=Stok Alanları
 enum.EKSTRA_CARI_ALANLARI=Cari Alanları
+enum.STOK_TANITIM_IMPORT=Stok Tanıtımlar İçe Aktarma
+enum.CARI_TANITIM_IMPORT=Cari Tanıtımlar İçe Aktarma
 
 enum.STOK=Stok
 enum.STOK_TANITIMI=Stok Kart Tanımları
@@ -1149,6 +1154,9 @@ dialogs.index.purposed.jquery=Temel Javascript kütüphanesi
 dialogs.index.purposed.bitbucket=Kod reposu (git) ve talep yönetimi
 dialogs.index.purposed.flyway=Versiyonlar arası veritabanı geçiş sistemi
 dialogs.index.purposed.ant=Betik tabanlı derleme sistemi
+
+dialogs.exim.desc.title={0} tanıtımlarını aktarma kısmı.
+dialogs.exim.desc.detail=Dosya yapısı CSV (Comma Separated Values) -Virgülle Ayrılmış Değerler- olmalıdır. Excel ya da Libre Office Calc programlarından farklı kaydet ile dosyanızı CSV olarak kaydedip aktarabilirsiniz. Aktarım yapılacak kayıtların sıralaması, olması gereken maksimum uzunlukları ve veri tipleri aşağıdaki tabloda verildiği gibi olmalıdır. Aktarım dosyasını doğruda bir metin editörü ile de oluşturabilirsiniz.
 
 formats.integer=###
 formats.currency=#,##0.00

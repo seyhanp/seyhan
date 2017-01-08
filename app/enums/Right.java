@@ -523,6 +523,12 @@ public enum Right {
 	@EnumValue("EKSTRA_CARI_ALANLARI")
 	EKSTRA_CARI_ALANLARI(Module.admin, false, true, true),
 
+	@EnumValue("STOK_TANITIM_IMPORT")
+	STOK_TANITIM_IMPORT(Module.admin, false, true, true),
+	
+	@EnumValue("CARI_TANITIM_IMPORT")
+	CARI_TANITIM_IMPORT(Module.admin, false, true, true),
+
 	@EnumValue("CALISMA_ALANI")
 	CALISMA_ALANI(Module.admin, false, true, true),
 

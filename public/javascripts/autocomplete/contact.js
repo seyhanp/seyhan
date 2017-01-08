@@ -31,7 +31,7 @@ function findBaseID(name) {
 }
 
 $(document).ready(function() {
-
+	
 	$('#contact_name,#refContact_name').on('dblclick', function(event){ 
 		var baseID = findBaseID(this.id);
 		var id = $(baseID + '_id').val();
@@ -80,6 +80,9 @@ $(document).ready(function() {
 	        $(baseID + '_data').val(item);
 	        $(baseID + '_inv').show();
 	        $(document).trigger('selectContactEvent', row);
+
+	        $('#excCode').val(row.excCode);
+	        setRate();
 	        
 	        if (isContinuouslyAddedForContact)
 	        	return '';

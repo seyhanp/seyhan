@@ -2,7 +2,7 @@
 
 <a id="showSearchButton" class="btn btn-mini pull-right" onclick="showHide(false)" style="margin-bottom:6px">@Messages("show.search_panel")</a>
 
-@helper.form(action = action, 'class-> "form-horizontal zell offset3", 'id -> "searchForm", 'style -> "width: 425px; display: none") {
+@helper.form(action = action, 'class-> "form-horizontal offset3", 'id -> "searchForm", 'style -> "width: 425px; display: none") {
 
 	<input type="hidden" class="pageIndex" name="pageIndex" id="pageIndex" value='@_form("pageIndex").value' />
 	<input type="hidden" name="showStatus" id="showStatus" value='@_form("showStatus").value' />

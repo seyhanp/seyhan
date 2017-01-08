@@ -12,7 +12,7 @@
 		hasRemoveButton = false
 	)
 
-	@helper.form(action = admin.routes.Settings.save, 'class-> "form-horizontal zell", 'id-> "mainFieldsForm") {
+	@helper.form(action = admin.routes.Settings.save, 'class-> "form-horizontal", 'id-> "mainFieldsForm") {
 
 		@tools.imports.base_hidden_fields(_form)
 		<input type="hidden" id="code" name="code" value='@_form("code").value' />

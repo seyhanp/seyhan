@@ -7,6 +7,7 @@ pulled={0} successfuly pulled.
 rolled_back={0} rolled back successfully.
 imported={0} has successfuly imported.
 exported={0} has successfuly exported (file name : {1}).
+imported.with.report={0} has successfuly imported. {1} have been inserted and {2} have been updated.
 printed.success=The document has successfuly printed.
 printed.fail=The document hasn't printed!
 error.in.import=An error trapped during importing : {0}
@@ -291,6 +292,7 @@ country=Country
 note=Note
 note=Notes
 field=Field
+constraint=Constraint
 piece=Piece
 headsup=Heads Up: 
 payment=Payment
@@ -644,6 +646,7 @@ designs=Document Designs
 design.for=Document Designing for the {0} module
 target=Target
 targets=Targets
+exim=Export/Import
 
 factor=Factor
 factors=Factors
@@ -692,6 +695,8 @@ enum.BELGE_HEDEFLERI=Document Targets
 
 enum.EKSTRA_STOK_ALANLARI=Stock Fields
 enum.EKSTRA_CARI_ALANLARI=Contact Fields
+enum.STOK_TANITIM_IMPORT=Stock Definition Import
+enum.CARI_TANITIM_IMPORT=Contact Definition Import
 
 enum.STOK=Stock
 enum.STOK_TANITIMI=Stock Cards
@@ -1149,6 +1154,9 @@ dialogs.index.purposed.jquery=Base Javascript framework
 dialogs.index.purposed.bitbucket=Source code repository and issue management system
 dialogs.index.purposed.flyway=Database migration system between versions
 dialogs.index.purposed.ant=The compiling system based on script
+
+dialogs.exim.desc.title=This is the section to import {0} definitions. 
+dialogs.exim.desc.detail=File format must be CSV (Comma Separated Values). You can save as your Excel or Libre Office Calc file as CSV format and transfer them. You can also create your import file using a simple text editor. Field ordering, maximum length and types of the imported data must be following table.
 
 formats.integer=###
 formats.currency=#,##0.00

@@ -35,7 +35,7 @@ width: calc(100% - 5px);
 		hasRemoveButton = (_form("isCompleted").value.equals("false"))
 	)
 
-	@helper.form(action = order.routes.Transes.save(rightBind),'class-> "form-horizontal zell", 'id -> "mainFieldsForm") {
+	@helper.form(action = order.routes.Transes.save(rightBind),'class-> "form-horizontal", 'id -> "mainFieldsForm") {
 
 		@tools.imports.base_hidden_fields(_form, rightBind.value)
 		<input type="hidden" id="excCode" name="excCode" value='@_form("excCode").value' />

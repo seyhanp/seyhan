@@ -398,11 +398,17 @@ function findTotalsForStocks() {
 		discountTotal += parseFloat($(stockBaseId + 'discountAmount').val());
 	}
 
+	var totalDiscountAmount = 0;
 	var totalDiscountRate = $('#totalDiscountRate').val();
-	if (isNumber(totalDiscountRate) && totalDiscountRate > 0 && totalDiscountRate < 100) {
-		discountTotal += (subtotal * totalDiscountRate) / 100;
+	if (isNumber(totalDiscountRate) && totalDiscountRate > 0) {
+		totalDiscountAmount = (subtotal * totalDiscountRate) / 100;
+		if (discountTotal + totalDiscountAmount > subtotal) {
+			discountTotal = subtotal;
+		} else {
+			discountTotal += totalDiscountAmount;
+		}
 	}
-
+	
 	for(var stockRowNo=0;stockRowNo<stockRowCount;stockRowNo++) {
 		var stockBaseId = '#details\\['+stockRowNo+'\\]\\_';
 		if ($(stockBaseId + 'stock_id').val().length <= 0) break;
@@ -469,10 +475,18 @@ function findTotalsForStocks() {
 		}
 
 		var basis = row.amount + factorEffect - row.discountAmount;
+		var rowTotalDiscountAmount = 0;
+		if (isNumber(totalDiscountRate) && totalDiscountRate > 0) {
+			var rowTotalDiscountAmount = (row.amount * totalDiscountRate) / 100;
+			basis -= rowTotalDiscountAmount;
+		} 
+
 		var taxTot1 = (row.taxRate  > 0 ? (basis * row.taxRate) / 100 : 0);
 		var taxTot2 = (row.taxRate2 > 0 ? (basis * row.taxRate2) / 100 : 0);
 		var taxTot3 = (row.taxRate3 > 0 ? (basis * row.taxRate3) / 100 : 0);
 		row.taxAmount = (taxTot1 + taxTot2 + taxTot3).roundup(pennyDigits);			
+		
+		row.amount -= rowTotalDiscountAmount;
 		
 		if ($("#isTaxInclude").val() === 'true') {
 			row.total = ((row.amount + factorEffect) + row.taxAmount - row.discountAmount).roundup(pennyDigits);
@@ -526,7 +540,6 @@ function findTotalsForStocks() {
 		$('#plusFactorTotal').val(formatMoney(plusFactorTotal));
 	}
 	/********************************************************************/
-
 	var netTotal = subtotal - discountTotal;
 	var total = total + plusFactorTotal - minusFactorTotal;
 
@@ -544,10 +557,9 @@ function findTotalsForStocks() {
 	$('#subtotal').val(formatMoney(netTotal));
 	$('#taxTotal').val(formatMoney(taxTotal));
 	$('#roundingDiscount').val(formatMoney(roundingDiscount));
-	
-	var netAmount = total - (withholdingAmount + roundingDiscount + discountTotal);
-	$('#netTotal').val(formatMoney(netAmount));
-	$('#amount').val(formatMoney(netAmount));
+
+	$('#netTotal').val(formatMoney(total - withholdingAmount - roundingDiscount));
+	$('#amount').val(formatMoney(total - withholdingAmount - roundingDiscount));
 
 	try {
 		findEquivalent();

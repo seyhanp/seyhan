@@ -4,7 +4,7 @@
 @implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
 
 @tools.templates.basic_form(ScriptBlock) {
-	@helper.form(action = waybill.routes.TransApprovals.submit, 'class-> "form-horizontal zell", 'id -> "waybillApprovalForm") {
+	@helper.form(action = waybill.routes.TransApprovals.submit, 'class-> "form-horizontal", 'id -> "waybillApprovalForm") {
 
 		<input type="hidden" id="formAction" name="formAction" />
 		<input type="hidden" id="redoTransId" name="redoTransId" />

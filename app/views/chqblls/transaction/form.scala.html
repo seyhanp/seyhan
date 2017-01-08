@@ -22,7 +22,7 @@ width:calc(100% - 5px)
 		hasRemoveButton = (_form("isClosed").value == "false")
 	)
 
-	@helper.form(action = utils.TemplateHelper.getSaveActionForChqbllTrans(sort, rightBind),'class-> "form-horizontal zell", 'id -> "mainFieldsForm") {
+	@helper.form(action = utils.TemplateHelper.getSaveActionForChqbllTrans(sort, rightBind),'class-> "form-horizontal", 'id -> "mainFieldsForm") {
 
 		@tools.imports.base_hidden_fields(_form, rightBind.value)
 		<input type="hidden" id="sort" name="sort" value='@sort' />

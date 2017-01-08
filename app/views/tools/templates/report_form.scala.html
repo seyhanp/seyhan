@@ -6,7 +6,7 @@
 		<legend>@Messages(right.key)</legend>
 	</div>
 
-	@helper.form(action = action, 'class-> "form-horizontal zell", 'id -> "reportForm", 'style -> "width: 430px") {
+	@helper.form(action = action, 'class-> "form-horizontal", 'id -> "reportForm", 'style -> "width: 430px") {
 
 		@if(flash.containsKey("warning")) {
 			<div id="formWarning">

@@ -12,7 +12,7 @@
 		labelKey = Messages("design.for", Messages(if(_form("header").value == null || _form("header").value.equals("")) {"enum.module." + _form("module").value} else {_form("header").value}))
 	)
 	
-	@helper.form(action = admin.routes.Documents.save, 'class-> "form-horizontal zell", 'id-> "mainFieldsForm") {
+	@helper.form(action = admin.routes.Documents.save, 'class-> "form-horizontal", 'id-> "mainFieldsForm") {
 
 		@tools.imports.base_hidden_fields(_form)
 		<input type="hidden" id="module" name="module" value='@_form("module").value' />

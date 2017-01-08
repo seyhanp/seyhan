@@ -31,6 +31,7 @@ public enum CacheKeys {
 
 	//Global keys
 	BY_ID(".id."),
+	BY_CODE(".code."),
 	BY_NAME(".name."),
 	BY_VALUE(".value."),
 	BY_KEY_VALUE(".keyvalue."),

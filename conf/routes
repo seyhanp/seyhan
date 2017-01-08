@@ -720,6 +720,13 @@ GET     /admins/document/createClone/:id                controllers.admin.Docume
 POST    /admins/document/ei/import                      controllers.admin.Documents.imbort()
 GET     /admins/document/ei/export                      controllers.admin.Documents.export()
 
+# Import
+GET     /admins/exim/contact                            controllers.admin.ImportContacts.index()
+POST    /admins/exim/contact/import                     controllers.admin.ImportContacts.imbort()
+
+GET     /admins/exim/stock                              controllers.admin.ImportStocks.index()
+POST    /admins/exim/stock/import                       controllers.admin.ImportStocks.imbort()
+
 # Document Target
 GET     /admins/document_target                         controllers.admin.DocumentTargets.index()
 GET     /admins/document_targets                        controllers.admin.DocumentTargets.list()

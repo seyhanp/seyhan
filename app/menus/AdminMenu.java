@@ -56,6 +56,13 @@ class AdminMenu extends AbstractMenu {
 		docMenu.add(new MenuItem(Messages.get(Right.BELGE_HEDEFLERI.key), controllers.admin.routes.DocumentTargets.index().url()));
 
 		/*
+		 * EXPORT IMPORT
+		 */
+		List<MenuItem> eximMenu = new ArrayList<MenuItem>();
+		eximMenu.add(new MenuItem(Messages.get(Right.CARI_TANITIM_IMPORT.key), controllers.admin.routes.ImportContacts.index().url()));
+		eximMenu.add(new MenuItem(Messages.get(Right.STOK_TANITIM_IMPORT.key), controllers.admin.routes.ImportStocks.index().url()));
+
+		/*
 		 * EKSTRA ALAN TANIMLARI
 		 */
 		List<MenuItem> extraFieldsMenu = new ArrayList<MenuItem>();
@@ -71,6 +78,7 @@ class AdminMenu extends AbstractMenu {
 		subMenu.add(new MenuItem(Messages.get("users"), "fa fa-user", userMenu));
 		subMenu.add(new MenuItem(Messages.get("workspaces"), "fa fa-building-o", wsMenu));
 		subMenu.add(new MenuItem(Messages.get("documents"), "fa fa-files-o", docMenu));
+		subMenu.add(new MenuItem(Messages.get("exim"), "fa fa-pencil-square-o", eximMenu));
 		subMenu.add(new MenuItem(MenuItemType.Divider));
 		subMenu.add(new MenuItem(Messages.get("extra_fields"), "fa fa-paperclip", extraFieldsMenu));
 		

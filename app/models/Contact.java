@@ -162,6 +162,10 @@ public class Contact extends BaseContactExtraFieldsModel {
 		return ModelHelper.getPage(RIGHT, expList, searchParam, false, "category");
 	}
 
+	public static Contact findByCode(String code) {
+		return ModelHelper.findByCode(RIGHT, code);
+	}
+
 	public static Contact findById(Integer id) {
 		return ModelHelper.findById(RIGHT, id);
 	}

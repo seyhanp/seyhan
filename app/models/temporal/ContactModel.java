@@ -36,5 +36,6 @@ public class ContactModel {
 	public String taxNumber;
 	public String address1;
 	public String address2;
+	public String excCode;
 
 }

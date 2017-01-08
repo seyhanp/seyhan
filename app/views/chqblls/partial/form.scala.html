@@ -22,7 +22,7 @@ width:calc(100% - 29px)
 
 	@helper.form(
 		action = utils.TemplateHelper.getSaveActionForChqbllPartial(sort, rightBind)
-		,'class-> "form-horizontal zell", 'id -> "mainFieldsForm") {
+		,'class-> "form-horizontal", 'id -> "mainFieldsForm") {
 
 		<input type="hidden" id="detailId" name="detailId" value="@_form("detailId").value" />
 		<input type="hidden" id="sort" name="sort" value="@_form("sort").value" />

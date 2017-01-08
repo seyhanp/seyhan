@@ -31,7 +31,7 @@ width:calc(100% - 5px)
 		stock.routes.Transes.remove(if(_form("id").value != null && ! _form("id").value.isEmpty()) _form("id").value.toInt else -1, rightBind)
 	)
 
-	@helper.form(action = stock.routes.Transes.save(rightBind),'class-> "form-horizontal zell", 'id -> "mainFieldsForm") {
+	@helper.form(action = stock.routes.Transes.save(rightBind),'class-> "form-horizontal", 'id -> "mainFieldsForm") {
 
 		@tools.imports.base_hidden_fields(_form, rightBind.value)
 		<input type="hidden" id="excCode" name="excCode" value='@_form("excCode").value' />

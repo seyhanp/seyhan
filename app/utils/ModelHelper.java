@@ -109,6 +109,10 @@ public class ModelHelper {
 		return (T) findById(false, name, finderByNameMap.get(name), id, fetchFieldNames);
 	}
 
+	public static <T extends BaseModel> T findByCode(Right right, String code) {
+		return (T) findByCode(right.name(), finderMap.get(right), code);
+	}
+
 	public static <T extends BaseModel> T findByName(Right right, String name) {
 		return (T) findByName(right.name(), finderMap.get(right), name);
 	}
@@ -147,6 +151,21 @@ public class ModelHelper {
 					.findUnique();
 			
 			CacheUtils.set(true, key + CacheKeys.BY_NAME.value + name, result);
+		}
+		
+		return result;
+	}
+
+	private static <T extends BaseModel> T findByCode(String key, Model.Finder<Integer, T> finder, String code) {
+		T result = CacheUtils.get(true, key + CacheKeys.BY_CODE.value + code);
+
+		if (result == null) {
+			result = finder.where()
+							.eq("workspace", CacheUtils.getWorkspaceId())
+							.eq("code", code)
+					.findUnique();
+			
+			CacheUtils.set(true, key + CacheKeys.BY_CODE.value + code, result);
 		}
 		
 		return result;

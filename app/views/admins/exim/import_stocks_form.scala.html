@@ -1,0 +1,30 @@
+@main() {
+
+	<div style="width:470px">
+		<legend>@Messages("enum.STOK_TANITIM_IMPORT")</legend>
+	</div>
+
+	@if(flash.containsKey("success")) {
+		<div id="successPanel">
+			<div class="alert alert-success">
+				<a class="close" data-dismiss="alert" onclick="$('#successPanel').html('')">x</a>
+				<strong>@Messages("info"): </strong> @flash.get("success")
+			</div>
+		</div>
+	}
+
+	@helper.form(action = admin.routes.ImportStocks.imbort, 'class-> "form-horizontal", 'enctype -> "multipart/form-data") {
+		@Messages("file") :
+		<input type="file" id="file" name="file" class="filestyle" data-buttonText="" data-classButton="btn btn-mini">
+	   	<a class="btn btn-mini" onclick="$('#file').filestyle('clear')" title="@Messages("remove")">
+			<i class="icon-remove" style="margin-top:1px"></i>
+		</a>
+		<p style="margin:5px 205px">
+		   	<button class="btn btn-small btn-primary">@Messages("ok")</button>
+		</p>
+	}
+
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/plugin/bootstrap-filestyle.min.js")"></script>
+
+}
+	
