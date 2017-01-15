@@ -93,14 +93,8 @@ public class ImportContacts extends Controller {
 					int inserted = 0;
 					int updated  = 0;
 					while ((line = br.readLine()) != null) {
-						String[] fields = line.split(",");
+						String[] fields = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
 					   
-						log.info(line);
-						log.info("3:"+fields[3]);
-						log.info("tc:"+fields[4]);
-						log.info("ilgili:"+fields[5]);
-						log.info("6:"+fields[6]);
-						
 						boolean exist = true;
 						Contact contact = Contact.findByCode(fields[0]);
 						if (contact == null) {
@@ -138,6 +132,9 @@ public class ImportContacts extends Controller {
 					ct = null;
 
 					Ebean.commitTransaction();
+				} catch (ArrayIndexOutOfBoundsException aoe) {
+					ct = "Alan sayısı hatası. Olması gereken alan sayısı 16 fakat dosyada bulunan (bir satırdaki virgüllerle ayrılmış) alanların sayısı : " + aoe.getMessage();
+					log.error("ERROR", aoe);
 				} catch (Exception e) {
 					Ebean.rollbackTransaction();
 					ct = e.getMessage();

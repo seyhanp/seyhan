@@ -168,6 +168,7 @@ info=Info
 defines=Simple Defines
 error=Error
 alert=Alert
+alerts=Alerts
 name=Name
 username=Username
 user.audit=User Actions
@@ -1155,8 +1156,15 @@ dialogs.index.purposed.bitbucket=Source code repository and issue management sys
 dialogs.index.purposed.flyway=Database migration system between versions
 dialogs.index.purposed.ant=The compiling system based on script
 
-dialogs.exim.desc.title=This is the section to import {0} definitions. 
-dialogs.exim.desc.detail=File format must be CSV (Comma Separated Values). You can save as your Excel or Libre Office Calc file as CSV format and transfer them. You can also create your import file using a simple text editor. Field ordering, maximum length and types of the imported data must be following table.
+dialogs.exim.desc.1=File format must be CSV (Comma Separated Values).
+dialogs.exim.desc.2=You can create the import file saving your Excel or Libre Office Calc file as CSV.
+dialogs.exim.desc.3=You can directly create the import file with the help of a text editor.
+dialogs.exim.desc.4=Fields ordering, their maximum length, and types must be like following table.
+dialogs.exim.desc.5=If you don't give any value for numeric fields, you can use zero like 0,0,0,0,0
+dialogs.exim.desc.6=You can skip text fields like ,,,,
+dialogs.exim.desc.7=Previously existing records are updated. And new ones are inserted. Checking is done via "code" field. 
+
+dialogs.exim.desc.8=An example line from the import file:
 
 formats.integer=###
 formats.currency=#,##0.00

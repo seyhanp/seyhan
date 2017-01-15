@@ -20,8 +20,10 @@ package controllers.admin;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.ArrayList;
 
-import models.Contact;
+import models.Stock;
+import models.StockBarcode;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +39,6 @@ import views.html.admins.exim.import_stocks_form;
 import com.avaje.ebean.Ebean;
 
 import controllers.Application;
-import enums.ContactStatus;
 
 /**
  * @author mdpinar
@@ -55,25 +56,26 @@ public class ImportStocks extends Controller {
 	}
 
 	/**
-	 * CSV formatiyla yuklenen cari hesap bilgilerini iceriye aktarir, format su sekilde olmali;
+	 * CSV formatiyla yuklenen stok bilgilerini iceriye aktarir, format su sekilde olmali;
 	 * 
 	 * 	 ! kolon ayrimi virgul ile olmalidir !
 	 * 
 	 *   code         (cari kodu)      en fazla 30 karakter metin ve bos olamaz,
 	 *   name         (adi)            en fazla 100 karakter metin ve bos olamaz,
-	 *   tax_office   (vergi dairesi)  en fazla 20 karakter metin,
-	 *   tax_number   (vergi numarasi) en fazla 15 karakter metin,
-	 *   tc_kimlik    (tc kimlik no)   en fazla 11 karakter metin,
-	 *   relevant     (ilgili)         en fazla 30 karakter metin,
-	 *   phone        (telefon)        en fazla 15 karakter metin,
-  	 *   fax          (fax)            en fazla 15 karakter metin,
-  	 *   mobile_phone (cep telefonu)   en fazla 15 karakter metin,
-  	 *   address1     (adres satiri 1) en fazla 100 karakter metin,
-  	 *   address2     (adres satiri 2) en fazla 100 karakter metin,
-  	 *   city         (sehir)          en fazla 20 karakter metin,
-  	 *   country      (ulke)           en fazla 20 karakter metin,
-  	 *   email        (e posta adresi) en fazla 100 karakter metin,
-  	 *   website      (web sitesi)     en fazla 100 karakter metin,
+	 *   barcode      (barkodu)        en fazla 50 karakter metin, bos olabilir,
+	 *   buy_price    (alis fiyati)    ondalikli sayi
+	 *   sell_price   (satis fiyati)   ondalikli sayi
+	 *   buy_tax      (alis kdv)       ondalikli sayi
+	 *   sell_tax     (satis kdv)      ondalikli sayi
+	 *   unit_1       (birim 1)        en fazla 6 karakter metin,
+	 *   unit_2       (birim 2)        en fazla 6 karakter metin,
+	 *   unit_3       (birim 3)        en fazla 6 karakter metin,
+	 *   unit2ratio   (2. birim icin katsayi - 1. birime gore-) Orn: 1 pakette 6 adet olur
+	 *   unit3ratio   (3. birim icin katsayi - 1. birime gore-) Orn: 1 kolide 24 adet olur
+	 *   prim_rate    (pirim orani)    ondalikli sayi
+	 *   min_limit    (en az bulundurma limit sayisi)
+	 *   max_limit    (en fazla bulundurma limit sayisi)
+	 *   provider_code(saglayici kodu) en fazla 30 karakter metin,
   	 *   note         (ekstra bilgi)   uzun metin,
 	 */
 	public static Result imbort() {
@@ -90,34 +92,63 @@ public class ImportStocks extends Controller {
 				try {
 					BufferedReader br = new BufferedReader(new FileReader(file.getFile()));
 					String line;
+					int inserted = 0;
+					int updated  = 0;
 					while ((line = br.readLine()) != null) {
-						String[] fields = line.split("\\,");
+						String[] fields = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
 					   
-						Contact contact = new Contact();
-						contact.code = fields[0];
-						contact.name = fields[1];
-						contact.taxOffice = fields[2];
-						contact.taxNumber = fields[3];
-						contact.tcKimlik = fields[4];
-						contact.relevant = fields[5];
-						contact.phone = fields[6];
-						contact.fax = fields[7];
-						contact.mobilePhone = fields[8];
-						contact.address1 = fields[9];
-						contact.address2 = fields[10];
-						contact.city = fields[11];
-						contact.country = fields[12];
-						contact.email = fields[13];
-						contact.website = fields[14];
-						contact.note = fields[15];
-						contact.status = ContactStatus.Normal;
-						contact.save();
+						boolean exist = true;
+						Stock stock = Stock.findByCode(fields[0]);
+						if (stock == null) {
+							stock = new Stock();
+							exist = false;
+						}
+						stock.code = fields[0];
+						stock.name = fields[1];
+						stock.buyPrice = Double.valueOf(fields[3]);
+						stock.sellPrice = Double.valueOf(fields[4]);
+						stock.buyTax = Double.valueOf(fields[5]);
+						stock.sellTax = Double.valueOf(fields[6]);
+						stock.unit1 = fields[7];
+						stock.unit2 = fields[8];
+						stock.unit3 = fields[9];
+						stock.unit2Ratio = Double.valueOf(fields[10]);
+						stock.unit3Ratio = Double.valueOf(fields[11]);
+						stock.primRate = Double.valueOf(fields[12]);
+						stock.minLimit = Double.valueOf(fields[13]);
+						stock.maxLimit = Double.valueOf(fields[14]);
+						stock.providerCode = fields[15];
+						stock.note = fields[16];
+
+						String barcode = fields[2];
+						if (barcode != null && ! barcode.trim().isEmpty()) {
+							StockBarcode sb = new StockBarcode(barcode);
+							if (exist && stock.barcodes.size() > 0) {
+								stock.barcodes.set(0, new StockBarcode(barcode));
+							} else {
+								stock.barcodes.add(sb);
+							}
+						} else if (exist) {
+							Ebean.createSqlUpdate("DELETE FROM stock_barcode WHERE stock_id = " + stock.id).execute();
+							stock.barcodes = new ArrayList<StockBarcode>();
+						}
+						
+						if (exist) {
+							stock.update();
+							updated++;
+						} else {
+							stock.save();
+							inserted++;
+						}
 					}
 					br.close();
-					flash("success", Messages.get("imported.with.report", file.getFilename()));
+					flash("success", Messages.get("imported.with.report", file.getFilename(), inserted, updated));
 					ct = null;
 
 					Ebean.commitTransaction();
+				} catch (ArrayIndexOutOfBoundsException aoe) {
+					ct = "Alan sayısı hatası. Olması gereken alan sayısı 17 fakat dosyada bulunan (bir satırdaki virgüllerle ayrılmış) alanların sayısı : " + aoe.getMessage();
+					log.error("ERROR", aoe);
 				} catch (Exception e) {
 					Ebean.rollbackTransaction();
 					ct = e.getMessage();

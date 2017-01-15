@@ -150,6 +150,10 @@ public class Stock extends BaseStockExtraFieldsModel {
 		return ModelHelper.getPage(RIGHT, expList, searchParam, false);
 	}
 
+	public static Stock findByCode(String code) {
+		return ModelHelper.findByCode(RIGHT, code);
+	}
+
 	public static Stock findById(Integer id) {
 		return ModelHelper.findById(RIGHT, id);
 	}

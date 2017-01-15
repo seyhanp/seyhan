@@ -168,6 +168,7 @@ info=Bilgi
 defines=Basit Tanıtımlar
 error=Hata
 alert=Uyarı
+alerts=Uyarı
 name=Adı
 username=Kullanıcı Adı
 user.audit=Kullanıcı Hareketleri
@@ -1155,8 +1156,15 @@ dialogs.index.purposed.bitbucket=Kod reposu (git) ve talep yönetimi
 dialogs.index.purposed.flyway=Versiyonlar arası veritabanı geçiş sistemi
 dialogs.index.purposed.ant=Betik tabanlı derleme sistemi
 
-dialogs.exim.desc.title={0} tanıtımlarını aktarma kısmı.
-dialogs.exim.desc.detail=Dosya yapısı CSV (Comma Separated Values) -Virgülle Ayrılmış Değerler- olmalıdır. Excel ya da Libre Office Calc programlarından farklı kaydet ile dosyanızı CSV olarak kaydedip aktarabilirsiniz. Aktarım yapılacak kayıtların sıralaması, olması gereken maksimum uzunlukları ve veri tipleri aşağıdaki tabloda verildiği gibi olmalıdır. Aktarım dosyasını doğruda bir metin editörü ile de oluşturabilirsiniz.
+dialogs.exim.desc.1=Dosya yapısı CSV (Comma Separated Values) -Virgülle Ayrılmış Değerler- olmalıdır.
+dialogs.exim.desc.2=Excel ya da Libre Office Calc programlarından farklı kaydet ile dosyanızı CSV olarak kaydedip aktarabilirsiniz.
+dialogs.exim.desc.3=Aktarım dosyasını doğrudan bir metin editörü ile de oluşturabilirsiniz.
+dialogs.exim.desc.4=Kayıtların sıralaması, olması gereken maksimum uzunlukları ve veri tipleri aşağıdaki tabloda verildiği gibi olmalıdır.
+dialogs.exim.desc.5=Sayısal alanlar için bir değer verilmeyecekse 0 verebilir. 0,0,0,0,0 gibi.
+dialogs.exim.desc.6=Metin alanları için hiçbir şey vermeyebilirsiniz. ,,,, gibi.
+dialogs.exim.desc.7=Kayıtlarınızın arasında olmayan kayıtlar eklenir. Önceden var olan kayıtlar da güncellenir. Varlık kontrolü "kod" alanından yapılır.
+
+dialogs.exim.desc.8=Dosya içinde olabilecek örnek bir satır:
 
 formats.integer=###
 formats.currency=#,##0.00

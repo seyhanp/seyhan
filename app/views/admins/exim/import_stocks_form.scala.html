@@ -1,28 +1,136 @@
 @main() {
 
-	<div style="width:470px">
-		<legend>@Messages("enum.STOK_TANITIM_IMPORT")</legend>
-	</div>
+	<div class="row-fluid">
+		<h4>@Messages("enum.STOK_TANITIM_IMPORT")</h4>
 
-	@if(flash.containsKey("success")) {
-		<div id="successPanel">
-			<div class="alert alert-success">
-				<a class="close" data-dismiss="alert" onclick="$('#successPanel').html('')">x</a>
-				<strong>@Messages("info"): </strong> @flash.get("success")
+		@if(flash.containsKey("success")) {
+			<div id="successPanel">
+				<div class="alert alert-success">
+					<a class="close" data-dismiss="alert" onclick="$('#successPanel').html('')">x</a>
+					<strong>@Messages("info"): </strong> @flash.get("success")
+				</div>
 			</div>
-		</div>
-	}
+		}
 
-	@helper.form(action = admin.routes.ImportStocks.imbort, 'class-> "form-horizontal", 'enctype -> "multipart/form-data") {
-		@Messages("file") :
-		<input type="file" id="file" name="file" class="filestyle" data-buttonText="" data-classButton="btn btn-mini">
-	   	<a class="btn btn-mini" onclick="$('#file').filestyle('clear')" title="@Messages("remove")">
-			<i class="icon-remove" style="margin-top:1px"></i>
-		</a>
-		<p style="margin:5px 205px">
-		   	<button class="btn btn-small btn-primary">@Messages("ok")</button>
+		@if(flash.containsKey("error")) {
+			<div id="errorPanel">
+				<div class="alert alert-error">
+					<a class="close" data-dismiss="alert" onclick="$('#errorPanel').html('')">x</a>
+					<strong>@Messages("error"): </strong> @flash.get("error")
+				</div>
+			</div>
+		}
+
+		<p>
+			<strong>@Messages("alerts")</strong>
+			<ul>
+				<li>@Messages("dialogs.exim.desc.1")</li>
+				<li>@Messages("dialogs.exim.desc.2")</li>
+				<li>@Messages("dialogs.exim.desc.3")</li>
+				<li>@Messages("dialogs.exim.desc.4")</li>
+				<li>@Messages("dialogs.exim.desc.5")</li>
+				<li>@Messages("dialogs.exim.desc.6")</li>
+				<li>@Messages("dialogs.exim.desc.7")</li>
+			</ul>
+
+			<strong>@Messages("dialogs.exim.desc.8")</strong>
+	    	<pre><code>750,SANDALYE,7865825464477,5.00,7.00,18,18,AD,,0,0,0,0,0,0,,</code></pre>
 		</p>
-	}
+
+		<div style="height:10px"></div>
+		
+		@helper.form(action = admin.routes.ImportStocks.imbort, 'class-> "offset2 form-horizontal", 'enctype -> "multipart/form-data") {
+			@Messages("file") :
+			<input type="file" id="file" name="file" class="filestyle" data-buttonText="" data-classButton="btn btn-mini">
+		   	<a class="btn btn-mini" onclick="$('#file').filestyle('clear')" title="@Messages("remove")">
+				<i class="icon-remove" style="margin-top:1px"></i>
+			</a>
+			<p style="margin:5px 205px">
+			   	<button class="btn btn-small btn-primary">@Messages("ok")</button>
+			</p>
+		}
+
+		<div style="height:15px"></div>
+
+		<table width="100%">
+			<thead>
+				<tr>
+					<th style="width:15%">@Messages("description")</th>
+					<th style="width:20%">@Messages("constraint")</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>kodu</td>
+					<td>en fazla 30 karakter metin ve boş olamaz</td>
+				</tr>
+				<tr>
+					<td>adı</td>
+					<td>en fazla 100 karakter metin ve boş olamaz</td>
+				</tr>
+				<tr>
+					<td>barkodu</td>
+					<td>en fazla 50 karakter metin, boş olabilir</td>
+				</tr>
+				<tr>
+					<td>alış fiyatı</td>
+					<td>ondalıklı sayı</td>
+				</tr>
+				<tr>
+					<td>satış fiyatı</td>
+					<td>ondalıklı sayı</td>
+				</tr>
+				<tr>
+					<td>alış kdv</td>
+					<td>ondalıklı sayı</td>
+				</tr>
+				<tr>
+					<td>satış kdv</td>
+					<td>ondalıklı sayı</td>
+				</tr>
+				<tr>
+					<td>1. birim</td>
+					<td>en fazla 6 karakter metin</td>
+				</tr>
+				<tr>
+					<td>2. birim</td>
+					<td>en fazla 6 karakter metin</td>
+				</tr>
+				<tr>
+					<td>3. birim</td>
+					<td>en fazla 6 karakter metin</td>
+				</tr>
+				<tr>
+					<td>2. birim için katsayı</td>
+					<td>1. birime göre verilen ondalıklı sayıdır. Örn: 1 pakette 6 adet olur</td>
+				</tr>
+				<tr>
+					<td>3. birim için katsayı</td>
+					<td>1. birime göre verilen ondalıklı sayıdır. Örn: 1 kolide 24 adet olur</td>
+				</tr>
+				<tr>
+					<td>pirim oranı</td>
+					<td>ondalıklı sayı</td>
+				</tr>
+				<tr>
+					<td>minimum bulundurma limiti</td>
+					<td>ondalıklı sayı</td>
+				</tr>
+				<tr>
+					<td>maximum bulundurma limiti</td>
+					<td>ondalıklı sayı</td>
+				</tr>
+				<tr>
+					<td>satıcının bu ürüne verdiği kod</td>
+					<td>en fazla 30 karakter metin</td>
+				</tr>
+				<tr>
+					<td>not</td>
+					<td>uzun metin girilebilir</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
 	<script type="text/javascript" src="@routes.Assets.at("javascripts/plugin/bootstrap-filestyle.min.js")"></script>
 
