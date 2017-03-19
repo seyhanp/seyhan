@@ -1,4 +1,11 @@
-﻿sürüm 1.0.17 - 16/01/2017
+﻿sürüm 1.0.18 - 20/03/2017
+	- çoğaltma yolu ile üretilen cari fişlerinde cari hesap seçiminde sorun oluyordu, düzeltidi
+	- sağ üst köşedeki kısayol menüsünden aktif olan kullanıcının bilgileri düzeltilemiyordu, çözüldü
+	- cari hareket raporunda "cari bazlı" seçeneğinin dışındakiler hata veriyordu, düzeltildi
+	- chrome browser da cari seçme sorunu vardı, düzeltildi
+	- profil tanımlarında aktif kasa seçme kısmı çalışmıyordu, düzeltildi
+
+sürüm 1.0.17 - 16/01/2017
 	- stok ve cari kartları için içe aktarım yapısı getirildi
 	- yazıcıdan dökülen faturada iskonto hatalı olarak genel toplama yansıyordu, düzeltildi
 ﻿	- cari tanıtımdaki para birimine girilen değerin hareketlerde seçili olarak getirilmesi sağlandı

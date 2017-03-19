@@ -27,12 +27,18 @@ function findEquivalent() {
 }
 
 function setRate() {
-	if (isBuying) {
-		$('#excRate').val(exchange_rates[$('#excCode').val()].buying.roundup(5));
-	} else {
-		$('#excRate').val(exchange_rates[$('#excCode').val()].selling.roundup(5));
+	var code = "";
+	if ($('#excCode')) {
+		code = $('#excCode').val();
 	}
-	findEquivalent();
+	if (code && code != "") {
+		if (isBuying) {
+			$('#excRate').val(exchange_rates[code].buying.roundup(5));
+		} else {
+			$('#excRate').val(exchange_rates[code].selling.roundup(5));
+		}
+		findEquivalent();
+	}
 }
 
 $('#excCode').keyup(function(event) {
@@ -67,12 +73,18 @@ function findRefEquivalent() {
 }
 
 function setRefRate() {
-	if(isBuying) {
-		$('#refExcRate').val(exchange_rates[$('#refExcCode').val()].buying.roundup(5));
-	} else {
-		$('#refExcRate').val(exchange_rates[$('#refExcCode').val()].selling.roundup(5));
+	var code = "";
+	if ($('#excCode')) {
+		code = $('#refExcCode').val();
 	}
-	findRefEquivalent();
+	if (code && code != "") {
+		if(isBuying) {
+			$('#refExcRate').val(exchange_rates[code].buying.roundup(5));
+		} else {
+			$('#refExcRate').val(exchange_rates[code].selling.roundup(5));
+		}
+		findRefEquivalent();
+	}
 }
 
 $('#excEquivalent').change(function(){

@@ -81,8 +81,10 @@ $(document).ready(function() {
 	        $(baseID + '_inv').show();
 	        $(document).trigger('selectContactEvent', row);
 
-	        $('#excCode').val(row.excCode);
-	        setRate();
+	        if (typeof setRate == 'function') { 
+		        $('#excCode').val(row.excCode);
+		        setRate();
+	        }
 	        
 	        if (isContinuouslyAddedForContact)
 	        	return '';

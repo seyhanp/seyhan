@@ -47,7 +47,7 @@ $P!{TRANS_POINT_SQL}
 $P!{PRIVATE_CODE_SQL}
 where 1=1
 $P!{QUERY_STRING}
-group by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code
+group by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code, t.trans_dir
 order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code, t.trans_dir]]>
 	</queryString>
 	<field name="group_field" class="java.lang.Object"/>
@@ -242,7 +242,7 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code, t.trans_
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{SUM_DEBT}.doubleValue() - $V{SUM_CREDIT}.doubleValue()]]></textFieldExpression>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{SUM_DEBT}.doubleValue() - $V{SUM_CREDIT}.doubleValue()]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
 					<reportElement key="textField-2" x="521" y="2" width="12" height="14" uuid="34140b3d-f42b-4e26-a726-b7402fe44c1e"/>
@@ -255,7 +255,7 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code, t.trans_
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_DEBT}.doubleValue() - $V{SUM_CREDIT}.doubleValue() > 0 ? $R{symbol.debit} :
+					<textFieldExpression class="java.lang.String"><![CDATA[($V{SUM_DEBT}.doubleValue() - $V{SUM_CREDIT}.doubleValue() > 0 ? $R{symbol.debit} :
     ($V{SUM_DEBT}.doubleValue() - $V{SUM_CREDIT}.doubleValue() < 0 ? $R{symbol.credit} : ""))]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
@@ -425,7 +425,7 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code, t.trans_
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{sumDebt}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{sumDebt}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement key="textField-5" x="390" y="0" width="59" height="15" isPrintWhenDetailOverflows="true" uuid="4839c61e-ecc9-41b8-b1cd-db8f680e896c"/>
@@ -438,7 +438,7 @@ order by $P!{GROUP_FIELD}, c.name, c.phone, c.mobile_phone, t.exc_code, t.trans_
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{sumCredit}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{sumCredit}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement key="textField-2" x="59" y="0" width="158" height="15" uuid="6cdb39a5-8204-44a2-b215-554be3c62e72"/>

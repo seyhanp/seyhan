@@ -130,6 +130,7 @@ public class Profiles extends Controller {
 		} else {
 
 			ProfileData modelData = filledForm.get();
+			modelData.gnel_safe = modelData.safe; 
 
 			GlobalProfile model = new GlobalProfile();
 			model.id = modelData.id;
@@ -194,6 +195,7 @@ public class Profiles extends Controller {
 				flash("error", Messages.get("not.found", Messages.get("profile")));
 			} else {
 				ProfileData modelData = StringUtils.fromJson(model.jsonData, ProfileData.class);
+				modelData.safe = modelData.gnel_safe;
 				modelData.id = model.id;
 				modelData.name = model.name;
 				modelData.description = model.description;

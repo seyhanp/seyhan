@@ -339,6 +339,8 @@ public class Users extends Controller {
 			model.passwordHash = AuthManager.md5Hash(resModel.password);
 
 			model.update();
+			
+			CacheUtils.setUser(model);
 
 			return ok(Messages.get("saved", model.username));
 		}
@@ -348,9 +350,10 @@ public class Users extends Controller {
 	public static Result editRestricted() {
 		if (! CacheUtils.isLoggedIn()) return Application.login();
 
+		AdminUser user = CacheUtils.getUser();
 		UserData data = new UserData();
-		data.title = CacheUtils.getUser().title;
-		data.email = data.email;
+		data.title = user.title;
+		data.email = user.email;
 
 		return ok(restricted_form.render(form(UserData.class).fill(data)));
 	}

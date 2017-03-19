@@ -110,6 +110,15 @@ public class TransReport extends Controller {
 			return options;
 		}
 
+		public static Map<String, String> showTypes() {
+			LinkedHashMap<String, String> options = new LinkedHashMap<String, String>();
+
+			options.put("Summary", Messages.get("report.show.summary"));
+			options.put("Detailed", Messages.get("report.show.detail"));
+
+			return options;
+		}
+
 	}
 
 	private static String getQueryString(Parameter params) {

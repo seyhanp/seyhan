@@ -129,6 +129,7 @@ public class ProfileData {
 	public Integer gnel_pageRowNumber;
 	public GlobalTransPoint gnel_transPoint;
 	public GlobalPrivateCode gnel_privateCode;
+	public Safe safe; //it is used for setting gnel_safe field
 	public Safe gnel_safe;
 	public TransListingType gnel_listingType;
 	public Boolean kasa_isSearchFormShowed;

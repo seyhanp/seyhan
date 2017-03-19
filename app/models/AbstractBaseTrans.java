@@ -85,7 +85,7 @@ public abstract class AbstractBaseTrans extends BaseModel {
 
 	@Transient public Module refOldModule;
 	@Transient public Contact refContact;
-	@Transient public Safe refSafe;
+	@Transient public Safe refSafe = Profiles.chosen().safe;
 	@Transient public Bank refBank;
 
 	@Transient public ContactTransSource refContactTransSource;
