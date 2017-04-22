@@ -41,12 +41,12 @@ case $1 in
 
         start)
 	pushd $SEYHAN_HOME
-	su -c "$DAEMON start"
+	su -c "$DAEMON start" $SEYHAN_USER
 	;;
 
         stop)
 	pushd $SEYHAN_HOME
-	su -c "$DAEMON stop"
+	su -c "$DAEMON stop" $SEYHAN_USER
 	;;
 
 	*)
