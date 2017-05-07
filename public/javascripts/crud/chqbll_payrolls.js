@@ -128,6 +128,15 @@ function findTotals() {
 	var baseDate = moment($("#transDate").val(), 'DD/MM/YYYY');
 	var rowCount = document.getElementById('chqbllTable').rows.length;
 
+	//checks whether base date is before any due dates. if so, base date is changed with the earliest due date.
+	for(var rowNo=0;rowNo<rowCount;rowNo++) {
+		var chqbllBaseId = '#details\\['+rowNo+'\\]\\_';
+		if (isDate($(chqbllBaseId + 'dueDate').val())) {
+			var dueDate = moment($(chqbllBaseId + 'dueDate').val(), 'DD/MM/YYYY');
+			if (dueDate.isBefore(baseDate)) baseDate = dueDate;
+		}
+	}
+
 	for(var rowNo=0;rowNo<rowCount;rowNo++) {
 		var chqbllBaseId = '#details\\['+rowNo+'\\]\\_';
 		

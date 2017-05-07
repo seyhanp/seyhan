@@ -1,6 +1,9 @@
 ﻿sürüm 1.0.19 - 08/06/2017
-	- tüm formlara kayıt ve onay butonları için kısayol tuşları tanımlandı.
+	- tüm formlara kayıt ve onay butonları için kısayol tuşları tanımlandı. 
+		örneğin kayıt butonu kısayolu: firefox alt+shift+k, diğer tüm tarayıcılar için alt+k
 	- debian dağıtımları için deamon ve server start script dosyaları eklendi.
+	- çek/senet bordro girişlerinde, baz (yani bordro) tarihi tablodaki çek/senet vade tarihlerinden daha ileride olduğunda kaydetmiyordu,
+		yeni düzenleme ile bu durumda en gerideki vade tarihi baz tarih olarak kullanılır hale getirildi. böylece adat hesabındaki eksi durum düzelmiş oldu.
 
 sürüm 1.0.18 - 20/03/2017
 	- çoğaltma yolu ile üretilen cari fişlerinde cari hesap seçiminde sorun oluyordu, düzeltidi
