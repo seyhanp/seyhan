@@ -33,6 +33,7 @@ import meta.GridHeader;
 import meta.PageExtend;
 import meta.RightBind;
 import meta.RowCombining;
+import models.Contact;
 import models.InvoiceTrans;
 import models.InvoiceTransCurrency;
 import models.InvoiceTransDetail;
@@ -195,6 +196,11 @@ public class Transes extends Controller {
 		model.transMonth = DateUtils.getYearMonth(model.transDate);
 		model.excEquivalent = model.netTotal;
 
+		if (model.contact.id == null) {
+			Contact contact = Contact.findById(model.contact.id);
+			if (contact != null) model.excCode = contact.excCode;
+		}
+
 		if (model.isCash) {
 			model.refModule = Module.safe;
 			if (model.refSafe == null || model.refSafe.id == null) model.refSafe = Safe.findById(1);
@@ -258,6 +264,10 @@ public class Transes extends Controller {
 			detail.retInTotal = 0d;
 			detail.retOutput = 0d;
 			detail.retOutTotal = 0d;
+			
+			if (detail.quantity == null) detail.quantity = 0d;
+			if (detail.unit2Ratio == null) detail.unit2Ratio = 0d;
+			if (detail.amount == null) detail.amount = 0d;
 
 			if (model.transType.equals(TransType.Input)) {
 				detail.input = detail.quantity.doubleValue() * detail.unitRatio.doubleValue();

@@ -33,6 +33,7 @@ import meta.GridHeader;
 import meta.PageExtend;
 import meta.RightBind;
 import meta.RowCombining;
+import models.Contact;
 import models.SaleSeller;
 import models.Stock;
 import models.StockTrans;
@@ -195,6 +196,11 @@ public class Transes extends Controller {
 		if (model.right.equals(Right.STOK_ACILIS_ISLEMI)) model.netTotal = model.total;
 		model.excEquivalent = model.netTotal;
 
+		if (model.contact.id == null) {
+			Contact contact = Contact.findById(model.contact.id);
+			if (contact != null) model.excCode = contact.excCode;
+		}
+
 		/*
 		 * Stok ayarlari
 		 */
@@ -254,6 +260,10 @@ public class Transes extends Controller {
 				detail.retInTotal = 0d;
 				detail.retOutput = 0d;
 				detail.retOutTotal = 0d;
+				
+				if (detail.quantity == null) detail.quantity = 0d;
+				if (detail.unit2Ratio == null) detail.unit2Ratio = 0d;
+				if (detail.amount == null) detail.amount = 0d;
 
 				if (model.transType.equals(TransType.Input)) {
 					detail.input = detail.quantity.doubleValue() * detail.unitRatio.doubleValue();

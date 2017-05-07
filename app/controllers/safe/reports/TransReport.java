@@ -226,6 +226,7 @@ public class TransReport extends Controller {
 			 * Parametrik degerlerin gecisi
 			 */
 			repPar.paramMap.put("TRANS_POINT_SQL", "");
+
 			if (params.transPoint != null && params.transPoint.id != null) {
 				repPar.paramMap.put("TRANS_POINT_SQL", InstantSQL.buildTransPointSQL(params.transPoint.id));
 			} else if (params.reportType.equals("TransPoint")) {

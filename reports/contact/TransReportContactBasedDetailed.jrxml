@@ -30,10 +30,10 @@
 	<queryString>
 		<![CDATA[select c.name, c.phone, c.mobile_phone, t.exc_code, t.trans_date, t.receipt_no, t.trans_no, t.debt, t._right, t.credit, (t.debt - t.credit) as balance, t._right, t.description, (select sum(st.debt - st.credit) from contact_trans st where st.contact_id = t.contact_id and st.trans_date < $P{FIRST_DATE} and st.exc_code = t.exc_code) as transfer
 from contact_trans t
-inner join contact c on c.id = t.contact_id and c.is_active = $P!{TRU}
-left join contact_category cc on cc.id = c.category_id and cc.is_active = $P!{TRU}
-left join contact_trans_source ts on ts.id = t.trans_source_id and ts.is_active = $P!{TRU}
-left join sale_seller s on s.id = c.seller_id and s.is_active = $P!{TRU}
+inner join contact c on c.id = t.contact_id and c.is_active = $P!{TRU} and c.workspace = t.workspace
+left join contact_category cc on cc.id = c.category_id and cc.is_active = $P!{TRU} and cc.workspace = t.workspace
+left join contact_trans_source ts on ts.id = t.trans_source_id and ts.is_active = $P!{TRU} and ts.workspace = t.workspace
+left join sale_seller s on s.id = c.seller_id and s.is_active = $P!{TRU} and s.workspace = t.workspace
 $P!{EXTRA_FIELDS_SQL}
 $P!{TRANS_POINT_SQL}
 $P!{PRIVATE_CODE_SQL}

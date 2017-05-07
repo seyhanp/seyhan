@@ -35,8 +35,8 @@
 	<queryString>
 		<![CDATA[select $P!{GROUP_FIELD} as group_field, b.name as bank_name, b.account_no, t.exc_code, sum(t.debt) as sumDebt, sum(t.credit) as sumCredit, sum(t.debt-t.credit) as balance
 from bank_trans t
-inner join bank b on b.id = t.bank_id and b.is_active = $P!{TRU}
-left join bank_trans_source ts on ts.id = t.trans_source_id and ts.is_active = $P!{TRU}
+inner join bank b on b.id = t.bank_id and b.is_active = $P!{TRU} and b.workspace = t.workspace
+left join bank_trans_source ts on ts.id = t.trans_source_id and ts.is_active = $P!{TRU} and ts.workspace = t.workspace
 $P!{TRANS_POINT_SQL}
 $P!{PRIVATE_CODE_SQL}
 where 1=1

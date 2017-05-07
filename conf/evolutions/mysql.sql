@@ -196,7 +196,7 @@ create unique index admin_workspace_ix1 on admin_workspace (name);
 
 create table bank (
   id                        int auto_increment not null,
-  account_no                varchar(15) not null,
+  account_no                varchar(26) not null,
   name                      varchar(50) not null,
   branch                    varchar(30),
   city                      varchar(20),

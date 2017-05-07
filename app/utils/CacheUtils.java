@@ -201,13 +201,13 @@ public class CacheUtils {
 	}
 
 	public static String getProfile() {
-		String profile = getUser().profile;
+		String profile = "default";
 
-		if (profile != null) {
-			return profile;
-		} else {
-			return "default";
+		AdminUser user = getUser();
+		if (user != null) {
+			if (getUser().profile != null) profile = getUser().profile;
 		}
+		return profile;
 	}
 
 	public static void setProfile(String profile) {
