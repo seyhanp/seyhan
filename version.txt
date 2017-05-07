@@ -4,6 +4,8 @@
 	- debian dağıtımları için deamon ve server start script dosyaları eklendi.
 	- çek/senet bordro girişlerinde, baz (yani bordro) tarihi tablodaki çek/senet vade tarihlerinden daha ileride olduğunda kaydetmiyordu,
 		yeni düzenleme ile bu durumda en gerideki vade tarihi baz tarih olarak kullanılır hale getirildi. böylece adat hesabındaki eksi durum düzelmiş oldu.
+	- stok ve fatura işlemlerinde daha önceden kaydedilmiş fişler için cari hesabın para birimi dikkate alınmıyordu, düzeltildi.
+	- cari, bank ve kasa hareket raporlarında çalışma alanı parametresi düzenlemeleri yapıldı.
 
 sürüm 1.0.18 - 20/03/2017
 	- çoğaltma yolu ile üretilen cari fişlerinde cari hesap seçiminde sorun oluyordu, düzeltidi
