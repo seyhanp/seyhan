@@ -4,7 +4,7 @@
 <a type="submit" class="btn btn-small btn-success" onclick="$('#uploadForm').toggle()">@Messages("import")</a>
 
 @if(totalRowCount > 0) {
-	<a type="submit" class="btn btn-small btn-default" onclick="$('#uploadForm').hide();location.reload();" href="@admin.routes.Documents.export">@Messages("export")</a>
+	<a type="submit" class="btn btn-small btn-default" onclick="$('#uploadForm').hide();location.reload();" href="@admin.routes.Documents.export" accesskey="u">@Messages("export")</a>
 }
 
 <p style="height:30px"></p>

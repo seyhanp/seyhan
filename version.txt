@@ -1,4 +1,8 @@
-﻿sürüm 1.0.18 - 20/03/2017
+﻿sürüm 1.0.19 - 08/06/2017
+	- tüm formlara kayıt ve onay butonları için kısayol tuşları tanımlandı.
+	- debian dağıtımları için deamon ve server start script dosyaları eklendi.
+
+sürüm 1.0.18 - 20/03/2017
 	- çoğaltma yolu ile üretilen cari fişlerinde cari hesap seçiminde sorun oluyordu, düzeltidi
 	- sağ üst köşedeki kısayol menüsünden aktif olan kullanıcının bilgileri düzeltilemiyordu, çözüldü
 	- cari hareket raporunda "cari bazlı" seçeneğinin dışındakiler hata veriyordu, düzeltildi

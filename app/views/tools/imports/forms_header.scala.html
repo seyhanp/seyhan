@@ -11,7 +11,7 @@
 		@if(hasRemoveButton && id != null && ! id.isEmpty()) {
 			@if(utils.AuthManager.hasPrivilege(right, enums.RightLevel.Delete)) {
 				@helper.form(link, 'id -> "deleteForm", 'style -> "margin-top:-55px") {
-					<input id="submitRemoveBtn" style="float:right; width:45px;" class="btn btn-danger" value="@Messages("remove")" />
+					<input id="submitRemoveBtn" style="float:right; width:45px;" class="btn btn-danger" value="@Messages("remove")" accesskey="d"/>
 				}
 
 				<script type="text/javascript">

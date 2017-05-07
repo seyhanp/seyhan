@@ -15,7 +15,7 @@
 	<div class="controls">
 		@if(utils.AuthManager.hasSavePrivilege(right, id)) {
 			@if(specialIf == null || specialIf) {
-				<input id="submitSaveBtn" type="submit" value="@Messages("save")" class="btn btn-primary">
+				<input id="submitSaveBtn" type="submit" value="@Messages("save")" class="btn btn-primary" accesskey="k">
 			}
 		}
 		@if(hasGoBackButton) {
