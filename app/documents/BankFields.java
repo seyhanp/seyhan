@@ -34,7 +34,7 @@ public class BankFields {
 	static {
 		fieldList = new ArrayList<Field>();
 
-		fieldList.add(new Field("bank.account_no", "account.no", 15));
+		fieldList.add(new Field("bank.account_no", "account.no", 26));
 		fieldList.add(new Field("bank.name", "bank.name", 100));
 		fieldList.add(new Field("bank.iban", "IBAN", 26));
 		fieldList.add(new Field("bank.branch", "branch", 30));

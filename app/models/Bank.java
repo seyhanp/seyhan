@@ -39,7 +39,7 @@ public class Bank extends BaseModel {
 
 	@Constraints.Required
 	@Constraints.MinLength(3)
-	@Constraints.MaxLength(15)
+	@Constraints.MaxLength(26)
 	public String accountNo;
 
 	@Constraints.Required

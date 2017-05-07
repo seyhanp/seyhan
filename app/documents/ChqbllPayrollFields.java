@@ -96,7 +96,7 @@ public class ChqbllPayrollFields {
 		if (ChqbllSort.Cheque.equals(sort)) {
 			detailList.add(new Field(DETAIL_NAME + ".bank_name", "bank.name", 50));
 			detailList.add(new Field(DETAIL_NAME + ".bank_branch", "branch", 30));
-			detailList.add(new Field(DETAIL_NAME + ".bank_account_no", "account.no", 15));
+			detailList.add(new Field(DETAIL_NAME + ".bank_account_no", "account.no", 26));
 			detailList.add(new Field(DETAIL_NAME + ".correspondent_branch", "correspondent_branch", 15));
 		} else {
 			detailList.add(new Field(DETAIL_NAME + ".surety", "surety", 100));

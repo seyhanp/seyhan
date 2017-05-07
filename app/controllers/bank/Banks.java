@@ -74,7 +74,7 @@ public class Banks extends Controller {
 	 */
 	private static List<GridHeader> getHeaderList() {
 		List<GridHeader> headerList = new ArrayList<GridHeader>();
-		headerList.add(new GridHeader(Messages.get("account.no"), "12%").sortable("accountNo"));
+		headerList.add(new GridHeader(Messages.get("account.no"), "15%").sortable("accountNo"));
 		headerList.add(new GridHeader(Messages.get("name"), true).sortable("name"));
 		headerList.add(new GridHeader(Messages.get("branch"), "15%"));
 		headerList.add(new GridHeader(Messages.get("city"), "12%"));
