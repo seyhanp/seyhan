@@ -208,7 +208,7 @@ create sequence admin_workspace_seq;
 
 create table bank (
   id                        serial not null,
-  account_no                varchar(15) not null,
+  account_no                varchar(26) not null,
   name                      varchar(50) not null,
   branch                    varchar(30),
   city                      varchar(20),

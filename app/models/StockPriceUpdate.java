@@ -187,9 +187,9 @@ public class StockPriceUpdate extends BaseStockExtraFieldsModel {
 			querySB.append("select " + this.id + ", id, buy_price, sell_price ");
 			querySB.append("from stock as s where s.is_active = :active");
 
-			if (this.providerCode != null && ! this.providerCode.isEmpty()) querySB.append(" and providerCode = '" + this.providerCode + "'");
+			if (this.providerCode != null && ! this.providerCode.isEmpty()) querySB.append(" and provider_code = '" + this.providerCode + "'");
 
-			if (this.providerCode != null && ! this.providerCode.isEmpty()) querySB.append(" and providerCode = '" + this.providerCode + "'");
+			if (this.providerCode != null && ! this.providerCode.isEmpty()) querySB.append(" and provider_code = '" + this.providerCode + "'");
 			if (this.extraField0 != null && this.extraField0.id != null) querySB.append(" and extra_field0_id = " + this.extraField0.id);
 			if (this.extraField1 != null && this.extraField1.id != null) querySB.append(" and extra_field1_id = " + this.extraField1.id);
 			if (this.extraField2 != null && this.extraField2.id != null) querySB.append(" and extra_field2_id = " + this.extraField2.id);
@@ -215,9 +215,9 @@ public class StockPriceUpdate extends BaseStockExtraFieldsModel {
 
 			querySB.append(" where workspace = " + CacheUtils.getWorkspaceId() + " and is_active = :active ");
 
-			if (this.providerCode != null && ! this.providerCode.isEmpty()) querySB.append(" and providerCode = '" + this.providerCode + "'");
+			if (this.providerCode != null && ! this.providerCode.isEmpty()) querySB.append(" and provider_code = '" + this.providerCode + "'");
 
-			if (this.providerCode != null && ! this.providerCode.isEmpty()) querySB.append(" and providerCode = '" + this.providerCode + "'");
+			if (this.providerCode != null && ! this.providerCode.isEmpty()) querySB.append(" and provider_code = '" + this.providerCode + "'");
 			if (this.extraField0 != null && this.extraField0.id != null) querySB.append(" and extra_field0_id = " + this.extraField0.id);
 			if (this.extraField1 != null && this.extraField1.id != null) querySB.append(" and extra_field1_id = " + this.extraField1.id);
 			if (this.extraField2 != null && this.extraField2.id != null) querySB.append(" and extra_field2_id = " + this.extraField2.id);

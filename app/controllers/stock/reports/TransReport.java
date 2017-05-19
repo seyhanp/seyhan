@@ -110,7 +110,7 @@ public class TransReport extends Controller {
 			options.put("TransPoint", Messages.get("report.type.trans_point_based"));
 			options.put("ReceiptType", Messages.get("report.type.receipt_type_based"));
 			options.put("TransSource", Messages.get("report.type.trans_source_based"));
-			options.put("Category", Messages.get("report.type.category_based"));
+			//options.put("Category", Messages.get("report.type.category_based"));
 			options.put("Depot", Messages.get("report.type.depot_based"));
 
 			List<AdminExtraFields> extraFieldList = AdminExtraFields.listAll(Module.stock.name());
@@ -234,10 +234,16 @@ public class TransReport extends Controller {
 					field = "sel.name";
 					label = Messages.get("seller");
 				}
+				/*
 				if (params.reportType.equals("Category")) {
-					field = "sc.name";
-					label = Messages.get("category");
+					field = "st.contact_name";
+					label = Messages.get("contact.name");
+					if (params.category != null && params.category.id != null) {
+						field = "sc.name";
+						label = Messages.get("category");
+					}
 				}
+				*/
 				if (params.reportType.equals("Depot")) {
 					field = "d.name";
 					label = Messages.get("depot");
