@@ -2,7 +2,7 @@ import play.Project._
 
 name := "seyhan"
 
-version := "1.0.19"
+version := "1.0.20"
 
 libraryDependencies ++= Seq(
   jdbc,
@@ -16,8 +16,9 @@ libraryDependencies ++= Seq(
   "com.lowagie" % "itext" % "2.1.7",
   "net.sourceforge.jexcelapi" % "jxl" % "2.6.10",
   "com.google.code.gson" % "gson" % "1.7.1",
-  "com.googlecode.flyway" % "flyway-core" % "2.2"
-)     
+  "com.googlecode.flyway" % "flyway-core" % "2.2",
+  "org.json" % "json" % "20080701"
+) 
 
 resolvers += "Extra" at "http://jaspersoft.artifactoryonline.com/jaspersoft/third-party-ce-artifacts/"
 

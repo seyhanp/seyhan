@@ -83,6 +83,11 @@ public class ExchangeRatesUpdateActor {
 						isSuccess = true;
 						break;
 					}
+					case NBP_Exchange: {
+						CurrencyRates.pullNBPExcange();
+						isSuccess = true;
+						break;
+					}
 				}
 			} catch (Exception e) {
 				log.error("ERROR", e);

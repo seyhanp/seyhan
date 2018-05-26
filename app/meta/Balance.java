@@ -1,5 +1,7 @@
 package meta;
 
+import utils.GlobalCons;
+
 public class Balance {
 	
 	private Double transfer;
@@ -13,7 +15,7 @@ public class Balance {
 		this.debt = 0d;
 		this.credit = 0d;
 		this.balance = 0d;
-		this.excCode = "TL";
+		this.excCode = GlobalCons.defaultExcCode;
 	}
 
 	public Balance(Double transfer, Double debt, Double credit, Double balance, String excCode) {

@@ -408,8 +408,9 @@ workspaces=Firmalar
 workspace.for={0} Firma
 
 pull=Çek
-pull.TCMB.exchange=TC Merkez Bankası döviz kurları
-pull.TCMB.effective=TC Merkez Bankası efektif kurları
+pull.TCMB_Exchange=TC Merkez Bankası döviz kurları
+pull.TCMB_Effective=TC Merkez Bankası efektif kurları
+pull.NBP_Exchange=Polonya Merkez Bankası döviz kurları
 
 exchange=Döviz
 exchange_rate=Döviz Kuru
@@ -943,6 +944,7 @@ exchange.rate.period.Every_3_Hours=Her üç saatte bir kez otomatik
 
 exchange.rate.source.TCMB_Exchange=TC Merkez Bankası Döviz kurları
 exchange.rate.source.TCMB_Effective=TC Merkez Bankası Efektif kurları
+exchange.rate.source.NBP_Exchange=Polonya Merkez Bankası Döviz kurları
 
 documents.column.title.type=Başlık Tipi
 documents.column.title.desc=Detay Kolon Başlığı için tip açıklamaları:

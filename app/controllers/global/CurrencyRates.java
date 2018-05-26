@@ -58,11 +58,13 @@ import com.avaje.ebean.Page;
 
 import controllers.Application;
 import controllers.admin.Settings;
+import enums.ExchangeRateSource;
 import enums.Right;
 import enums.RightLevel;
 import enums.TransType;
+import external.NBPExchanges;
 import external.TCMBExchanges;
-import external.model.TCMBRate;
+import external.model.ExchangeRate;
 
 /**
  * @author mdpinar
@@ -300,10 +302,10 @@ public class CurrencyRates extends Controller {
 					}
 				}
 				actualExchangeRatesMap.put("info", new GlobalCurrencyRateDetail("info", DateUtils.formatReverseDate(lastRate.date) + " - " + lastRate.source));
-				actualExchangeRatesMap.put(Profiles.chosen().gnel_excCode, new GlobalCurrencyRateDetail(Profiles.chosen().gnel_excCode, 1d, 1d));
 			} else {
 				actualExchangeRatesMap.put("info", new GlobalCurrencyRateDetail("info", Messages.get("not.found", Messages.get("actual_exchange_rates"))));
 			}
+			actualExchangeRatesMap.put(Profiles.chosen().gnel_excCode, new GlobalCurrencyRateDetail(Profiles.chosen().gnel_excCode, 1d, 1d));
 		}
 
 		return actualExchangeRatesMap;
@@ -327,12 +329,12 @@ public class CurrencyRates extends Controller {
 	}
 
 	public static Result pullTCMBExcange() {
-		String result = getExchangeRates(true);
+		String result = getExchangeRates(ExchangeRateSource.TCMB_Exchange);
 
 		if (Http.Context.current.get() != null) {
 			if (result == null) {
-				flash("success", Messages.get("pulled", Messages.get("pull.TCMB.exchange")));
-				log.info(Messages.get("pulled", Messages.get("pull.TCMB.exchange")));
+				flash("success", Messages.get("pulled", Messages.get("pull.TCMB_Exchange")));
+				log.info(Messages.get("pulled", Messages.get("pull.TCMB_Exchange")));
 			} else {
 				flash("error", result);
 				log.error(result);
@@ -343,13 +345,13 @@ public class CurrencyRates extends Controller {
 	}
 
 	public static Result pullTCMBEffective() {
-		String result = getExchangeRates(false);
+		String result = getExchangeRates(ExchangeRateSource.TCMB_Effective);
 
 		if (Http.Context.current.get() != null) {
 
 			if (result == null) {
-				flash("success", Messages.get("pulled", Messages.get("pull.TCMB.effective")));
-				log.info(Messages.get("pulled", Messages.get("pull.TCMB.effective")));
+				flash("success", Messages.get("pulled", Messages.get("pull.TCMB_Effective")));
+				log.info(Messages.get("pulled", Messages.get("pull.TCMB_Effective")));
 			} else {
 				flash("error", result);
 				log.error(result);
@@ -359,11 +361,33 @@ public class CurrencyRates extends Controller {
 		return GO_HOME;
 	}
 
-	private static String getExchangeRates(boolean isExchange) {
+	public static Result pullNBPExcange() {
+		String result = getExchangeRates(ExchangeRateSource.NBP_Exchange);
+
+		if (Http.Context.current.get() != null) {
+			if (result == null) {
+				flash("success", Messages.get("pulled", Messages.get("pull.NBP_Exchange")));
+				log.info(Messages.get("pulled", Messages.get("pull.NBP_Exchange")));
+			} else {
+				flash("error", result);
+				log.error(result);
+			}
+		}
+
+		return GO_HOME;
+	}
+
+	private static String getExchangeRates(ExchangeRateSource source) {
 		String error = null;
-		List<TCMBRate> rates = null;
+		List<ExchangeRate> rates = null;
 		try {
-			rates = TCMBExchanges.getRates();
+			switch (source) {
+				case NBP_Exchange:
+					rates = NBPExchanges.getRates();
+					break;
+				default:
+					rates = TCMBExchanges.getRates();
+			}
 		} catch (Exception e) {
 			error = e.getMessage();
 			log.error(error);
@@ -380,27 +404,28 @@ public class CurrencyRates extends Controller {
 				cr.date = rates.get(0).getDate();
 
 				if (Http.Context.current.get() != null) {
-					cr.source = "15:30:00 - " + Messages.get("pull.TCMB." + (isExchange ? "exchange" : "effective"));
+					cr.source = Messages.get("pull." + source.name());
 				} else {
-					cr.source = "15:30:00 - " + GlobalCons.getMessages().getString("pull.TCMB." + (isExchange ? "exchange" : "effective"));
+					cr.source = GlobalCons.getMessages().getString("pull." + source.name());
 				}
+				if (! source.equals(ExchangeRateSource.NBP_Exchange)) cr.source = "15:30:00 - " + cr.source;
 
 				cr.details = new ArrayList<GlobalCurrencyRateDetail>();
 
 				Map<String, GlobalCurrency> curMap = Currencies.getCurrencyMap();
 
 				for (int i = 0; i < rates.size(); i++) {
-					TCMBRate rate = rates.get(i);
+					ExchangeRate rate = rates.get(i);
 					GlobalCurrency cur = curMap.get(rate.getCode());
 					if (cur != null) {
 						GlobalCurrencyRateDetail crd = new GlobalCurrencyRateDetail(cur.code, cur.name);
 						crd.date = cr.date;
-						if (isExchange) {
-							crd.buying = new Double(rate.getExcBuying());
-							crd.selling = new Double(rate.getExcSelling());
-						} else {
+						if (source.equals(ExchangeRateSource.TCMB_Effective)) {
 							crd.buying = new Double(rate.getEffBuying());
 							crd.selling = new Double(rate.getEffSelling());
+						} else {
+							crd.buying = new Double(rate.getExcBuying());
+							crd.selling = new Double(rate.getExcSelling());
 						}
 
 						if (Settings.getGlobal().exchangeDiffRateForBuying != null && Settings.getGlobal().exchangeDiffRateForBuying.doubleValue() != 0) {

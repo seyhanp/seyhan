@@ -81,8 +81,9 @@ $(document).ready(function() {
 	        $(baseID + '_inv').show();
 	        $(document).trigger('selectContactEvent', row);
 
-	        if (typeof setRate == 'function') { 
-		        $('#excCode').val(row.excCode);
+	        if (typeof setRate == 'function') {
+	        	var tip = $('#right').val();
+		        if (row.excCode.trim() != '' && tip.substring(0,4) != 'FATR') $('#excCode').val(row.excCode);
 		        setRate();
 	        }
 	        

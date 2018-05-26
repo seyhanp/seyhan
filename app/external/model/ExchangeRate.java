@@ -23,7 +23,7 @@ import java.util.Date;
 /**
  * @author mdpinar
 */
-public class TCMBRate {
+public class ExchangeRate {
 
 	 private Date date;
 	 private String code;

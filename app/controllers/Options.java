@@ -61,6 +61,7 @@ public class Options extends Controller {
 		options = new LinkedHashMap<String, String>();
 		options.put(ExchangeRateSource.TCMB_Exchange.toString(), Messages.get("exchange.rate.source.TCMB_Exchange"));
 		options.put(ExchangeRateSource.TCMB_Effective.toString(), Messages.get("exchange.rate.source.TCMB_Effective"));
+		options.put(ExchangeRateSource.NBP_Exchange.toString(), Messages.get("exchange.rate.source.NBP_Exchange"));
 
 		Cache.set(cacheKey, options, CacheUtils.ONE_DAY);
 

@@ -408,8 +408,9 @@ workspaces=Workspaces
 workspace.for={0} Workspace
 
 pull=Pull
-pull.TCMB.exchange=TC Central Bank exchange rates
-pull.TCMB.effective=TC Central Bank effective rates
+pull.TCMB_Exchange=Central Bank of Turkey exchange rates
+pull.TCMB_Effective=Central Bank of Turkey effective rates
+pull.NBP_Exchange=Narodowy Bank Polski exchange rates
 
 exchange=Exch.
 exchange_rate=Exc.Rate
@@ -943,6 +944,7 @@ exchange.rate.period.Every_3_Hours=Every three hour automaticaly
 
 exchange.rate.source.TCMB_Exchange=TC Merkez Bankası Exchange rates
 exchange.rate.source.TCMB_Effective=TC Merkez Bankası Effective rates
+exchange.rate.source.NBP_Exchange=Narodowy Bank Polski Exchange rates
 
 documents.column.title.type=Title Type
 documents.column.title.desc=Type Descriptions for Column Title of Detail Band:

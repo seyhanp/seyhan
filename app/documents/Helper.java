@@ -407,7 +407,7 @@ public class Helper {
 		if (result.size() > 0) {
 			String leftPadding = StringUtils.fill(" ", doc.leftMargin);
 			for (int i = 0; i < result.size(); i++) {
-				result.set(i, leftPadding+StringUtils.trimRight(result.get(i)));
+				result.set(i, leftPadding+StringUtils.trimRight(StringUtils.removeDiacritic(result.get(i))));
 			}
 		}
 

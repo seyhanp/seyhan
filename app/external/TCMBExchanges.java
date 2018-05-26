@@ -36,17 +36,19 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import utils.DateUtils;
-import external.model.TCMBRate;
+import external.model.ExchangeRate;
 
 /**
+ * Central Bank of Turkey's Exchange Rates
+ * 
  * @author mdpinar
-*/
+ */
 public class TCMBExchanges {
 
 	private final static Logger log = LoggerFactory.getLogger(TCMBExchanges.class);
 
-	public static List<TCMBRate> getRates() {
-		List<TCMBRate> result = new ArrayList<TCMBRate>();
+	public static List<ExchangeRate> getRates() {
+		List<ExchangeRate> result = new ArrayList<ExchangeRate>();
 
 		try {
 			log.info("TC Merkez Bankası xml service connection is trying...");
@@ -75,7 +77,7 @@ public class TCMBExchanges {
 					|| getDouble(getElementValue(element, "BanknoteBuying")) == 0d
 					|| getDouble(getElementValue(element, "BanknoteSelling")) == 0d) continue;
 
-				TCMBRate rate = new TCMBRate();
+				ExchangeRate rate = new ExchangeRate();
 
 				if (i == 0) rate.setDate(firstDate);
 

@@ -1,4 +1,9 @@
-﻿sürüm 1.0.19 - 08/06/2017
+﻿sürüm 1.0.20 - 26/05/2018
+	- tüm belge basımlarındaki Türkçe karakterler İngilizceleri ile değiştirilerek basılacak hale getirildi   
+	- cari hesabın para birimi atanmamışsa fatura kaydederken faturanın para birimi hanesi bozuluyordu, düzeltildi
+	- döviz değerlerinin farklı merkez bankalarından çekilebilmesi için düzenleme yapıldı (son eklenen : Polonya Merkez Bankası)
+
+sürüm 1.0.19 - 08/06/2017
 	- tüm formlara kayıt ve onay butonları için kısayol tuşları tanımlandı. 
 		örneğin kayıt butonu kısayolu: firefox alt+shift+k, diğer tüm tarayıcılar için alt+k
 	- debian dağıtımları için deamon ve server start script dosyaları eklendi.

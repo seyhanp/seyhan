@@ -21,7 +21,8 @@ package enums;
 public enum ExchangeRateSource {
 
 	TCMB_Exchange,
-	TCMB_Effective;
+	TCMB_Effective,
+	NBP_Exchange;
 
 	public static ExchangeRateSource find(String source) {
 		ExchangeRateSource ers = TCMB_Exchange;

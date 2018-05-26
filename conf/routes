@@ -647,6 +647,7 @@ GET     /globals/currency_rate/:id                      controllers.global.Curre
 POST    /globals/currency_rate/:id/delete               controllers.global.CurrencyRates.remove(id:Integer)
 GET     /globals/currency_rate/pull/tcmb_exc            controllers.global.CurrencyRates.pullTCMBExcange()
 GET     /globals/currency_rate/pull/tcmb_eff            controllers.global.CurrencyRates.pullTCMBEffective()
+GET     /globals/currency_rate/pull/nbp_exc             controllers.global.CurrencyRates.pullNBPExcange()
 
 # Profile
 GET     /globals/profile                                controllers.global.Profiles.list()
