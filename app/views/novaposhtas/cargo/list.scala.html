@@ -1,0 +1,7 @@
+@(currentPage: meta.PageExtend[NovaposhtaCargo])
+
+@tools.templates.ajax_list(
+	currentPage = currentPage,
+	label = Messages("novaposhta.cargo.company"),
+	right = enums.Right.NOVAPOSHTA_KARGO_TANITIMI
+)

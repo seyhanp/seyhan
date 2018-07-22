@@ -854,6 +854,12 @@ enum.BANK_VIRMAN=Bankadan Yansıyan
 enum.BANK_MASRAF=Masrafla Yansıyan
 enum.CARI_ISLEM_KAPAMA=Cari İşlem Kapama
 
+enum.NOVAPOSHTA=Novaposhta
+enum.NOVAPOSHTA_KARGO_TANITIMI=Kargo Tanımları
+enum.NOVAPOSHTA_KARGO_HAREKETLERI=Para Haraketleri
+enum.NOVAPOSHTA_GUNLUK_ISLEM_LISTESI=Günlük İşlem Listesi
+enum.NOVAPOSHTA_AYLIK_OZET_RAPORU=Aylık Özet Raporu
+
 enum.Login=Giriş
 enum.Logout=Çıkış
 enum.Enable=Var
@@ -1210,3 +1216,25 @@ contact.extra_field_6=ek_alan6
 contact.extra_field_7=ek_alan7
 contact.extra_field_8=ek_alan8
 contact.extra_field_9=ek_alan9
+
+# --- Novaposhta messages
+
+novaposhta.cargo.company=Kargo Firması
+novaposhta.cargo.value=Kargo Değeri
+novaposhta.cargo.money=Gelen Para
+novaposhta.cargo.return=İade
+novaposhta.cargo.total=Toplam
+
+novaposhta.report.trans.title=Para Hareketleri
+novaposhta.report.summary=Aylık Özet
+novaposhta.report.start=Başlama
+novaposhta.report.finish=Bitiş
+novaposhta.report.money_in={0}' deki para
+
+novaposhta.report.total.money_in={0}' deki toplam
+novaposhta.report.total.sales=Toplam Satış
+novaposhta.report.total.received=Toplam Alınan Para
+novaposhta.report.total.returns=İadeler Toplam
+novaposhta.report.total.transfer=Geçen aydan devreden toplam
+
+novaposhta.reg_no=Kayıt No

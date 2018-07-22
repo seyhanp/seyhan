@@ -771,6 +771,24 @@ GET     /as/get_stock_category_tree                     controllers.AjaxServices
 GET     /as/pservice/check_user                         controllers.AjaxServices.checkUserForPService(username ?= "", password ?= "")
 
 # ------------------------------------------------------------------------------------------------------------------------
+# Novaposhta
+# ------------------------------------------------------------------------------------------------------------------------
+GET     /novaposhtas/cargo                              controllers.novaposhta.Cargos.index()
+GET     /novaposhtas/cargos                             controllers.novaposhta.Cargos.list()
+POST    /novaposhtas/cargo                              controllers.novaposhta.Cargos.save()
+GET     /novaposhtas/cargo/new                          controllers.novaposhta.Cargos.create()
+GET     /novaposhtas/cargo/:id                          controllers.novaposhta.Cargos.edit(id:Integer)
+POST    /novaposhtas/cargo/:id/delete                   controllers.novaposhta.Cargos.remove(id:Integer)
+GET     /novaposhtas/cargo/get/options                  controllers.novaposhta.Cargos.options(hasBlankOption:Boolean)
+
+# Transactions
+GET     /novaposhtas/cargo_trans                        controllers.novaposhta.Transes.list(rightBind:meta.RightBind)
+POST    /novaposhtas/cargo_trans                        controllers.novaposhta.Transes.save()
+GET     /novaposhtas/cargo_trans/new                    controllers.novaposhta.Transes.create()
+GET     /novaposhtas/cargo_trans/:id                    controllers.novaposhta.Transes.edit(id:Integer)
+POST    /novaposhtas/cargo_trans/:id/delete             controllers.novaposhta.Transes.remove(id:Integer)
+
+# ------------------------------------------------------------------------------------------------------------------------
 # Javascript routing
 # ------------------------------------------------------------------------------------------------------------------------
 GET     /assets/javascripts/routes                      controllers.JSRouter.jsRoutes()

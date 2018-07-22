@@ -1,0 +1,49 @@
+@(_form: Form[NovaposhtaCargo])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.imports.base_hidden_fields(_form)
+
+@inputText(_form("name"),
+	'_label -> Messages("name"),
+	'class -> "input-xlarge",
+	'maxlength -> "50"
+)
+
+@inputText(_form("responsible"),
+	'_label -> Messages("responsible"),
+	'class -> "input-xlarge",
+	'maxlength -> "30"
+)
+
+@inputText(_form("phone1"),
+	'_label -> Messages("phoneX", "1"),
+	'class -> "input-medium",
+	'maxlength -> "15"
+)
+
+@inputText(_form("phone2"),
+	'_label -> Messages("phoneX", "2"),
+	'class -> "input-medium",
+	'maxlength -> "15"
+)
+
+@inputText(_form("address1"),
+	'_label -> (Messages("address") + " 1"),
+	'class -> "input-xlarge",
+	'maxlength -> "150"
+)
+
+
+@inputText(_form("address2"),
+	'_label -> (Messages("address") + " 2"),
+	'class -> "input-xlarge",
+	'maxlength -> "150"
+)
+
+@select(_form("isActive"),
+	options(Options.yesno),
+	'class -> "input-small",
+	'_label -> Messages("is_active")
+)

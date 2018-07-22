@@ -1,0 +1,13 @@
+@(currentPage: meta.PageExtend[NovaposhtaCargoTrans], rightBind: meta.RightBind, _form: Form[models.search.NovaposhtaCargoTransSearchParam])
+
+@tools.templates.trans_list(
+	currentPage = currentPage,
+
+	filterForm = _form,
+	searchForm = search_form(_form, rightBind),
+
+	link = "/novaposhtas/cargo_trans/",
+
+	rightBind = rightBind
+	
+)

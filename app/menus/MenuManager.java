@@ -43,6 +43,10 @@ public class MenuManager {
 		List<MenuItem> menuItems = new ArrayList<MenuItem>();
 
 		if (CacheUtils.getWorkspaceId() != null) {
+			if (AuthManager.hasPrivilege(Right.NOVAPOSHTA_KARGO_TANITIMI, RightLevel.Enable)) {
+				menuItems.add(new MenuItem("Nova Poshta", "fa fa-book", new NovaposhtaMenu().getMenu()));
+			}
+	
 			if (AuthManager.hasPrivilege(Right.CARI_TANITIMI, RightLevel.Enable)) {
 				menuItems.add(new MenuItem(Messages.get("contact"), "fa fa-credit-card", new ContactMenu().getMenu()));
 			}
@@ -98,18 +102,6 @@ public class MenuManager {
 
 		return menuItems;
 	}
-
-	/**
-	 * USER MENU
-	 */
-//	private static List<MenuItem> addUserMenus() {
-//		List<MenuItem> subMenu = new ArrayList<MenuItem>();
-//		subMenu.add(new MenuItem(Messages.get("user.info"), "#", "userInfoEdit()"));
-//		subMenu.add(new MenuItem(MenuItemType.Divider));
-//		subMenu.add(new MenuItem(Messages.get("logout"), controllers.routes.Application.logout().url()));
-//
-//		return subMenu;
-//	}
 
 	/**
 	 * Daha sonra kullanilabilir, kalsin

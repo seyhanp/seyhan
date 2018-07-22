@@ -854,6 +854,12 @@ enum.BANK_VIRMAN=Ref. From Bank
 enum.BANK_MASRAF=Ref. via Expense
 enum.CARI_ISLEM_KAPAMA=Closing Trans of Contact
 
+enum.NOVAPOSHTA=Novaposhta
+enum.NOVAPOSHTA_KARGO_TANITIMI=Cargo Companies
+enum.NOVAPOSHTA_KARGO_HAREKETLERI=Money Transactions
+enum.NOVAPOSHTA_GUNLUK_ISLEM_LISTESI=Daily Trans List
+enum.NOVAPOSHTA_AYLIK_OZET_RAPORU=Monthly Summary Report
+
 enum.Login=Login
 enum.Logout=Logout
 enum.Enable=Enable
@@ -1210,3 +1216,25 @@ contact.extra_field_6=field6
 contact.extra_field_7=field7
 contact.extra_field_8=field8
 contact.extra_field_9=field9
+
+# --- Novaposhta messages
+
+novaposhta.cargo.company=Cargo Company
+novaposhta.cargo.value=Cargo Value
+novaposhta.cargo.money=Money
+novaposhta.cargo.return=Return
+novaposhta.cargo.total=Total
+
+novaposhta.report.trans.title=Money Transaction
+novaposhta.report.summary=Month Summary
+novaposhta.report.start=Start
+novaposhta.report.finish=Finish
+novaposhta.report.money_in=Money in {0}
+
+novaposhta.report.total.money_in=Total Money in {0}
+novaposhta.report.total.sales=Total Sales
+novaposhta.report.total.received=Total Received Money
+novaposhta.report.total.returns=Total Returns
+novaposhta.report.total.transfer=Transfer from last month
+
+novaposhta.reg_no=Reg. No

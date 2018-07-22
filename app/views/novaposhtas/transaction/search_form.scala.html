@@ -1,0 +1,20 @@
+@(_form: Form[models.search.NovaposhtaCargoTransSearchParam], rightBind: meta.RightBind)
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.search_form(_form, novaposhta.routes.Transes.list(rightBind), rightBind.value.name) {
+
+	<input type="hidden" name="rightBind" id="rightBind" value='@rightBind' />
+
+	@tools.components.date_range(_form)
+
+	@tools.dropdowns.novaposhta_cargo(_form, hasAddNewButton=false)
+
+	@inputText(_form("registrationNo"),
+		'_label -> Messages("novaposhta.reg_no"),
+		'class -> "input-medium",
+		'maxlength -> "30"
+	)
+
+}

@@ -43,6 +43,8 @@ import models.GlobalProfile;
 import models.InvoiceTrans;
 import models.InvoiceTransSource;
 import models.InvoiceTransStatus;
+import models.NovaposhtaCargo;
+import models.NovaposhtaCargoTrans;
 import models.OrderTrans;
 import models.OrderTransSource;
 import models.OrderTransStatus;
@@ -482,6 +484,10 @@ public class ModelHelper {
 		finderMap.put(Right.STOK_BIRIM_TANITIMI, new Model.Finder<Integer, StockUnit>(Integer.class, StockUnit.class));
 		finderMap.put(Right.STOK_FIYAT_LISTESI, new Model.Finder<Integer, StockPriceList>(Integer.class, StockPriceList.class));
 		finderForTransMap.put(Module.stock, new Model.Finder<Integer, StockTrans>(Integer.class, StockTrans.class));
+
+		finderMap.put(Right.NOVAPOSHTA_KARGO_TANITIMI, new Model.Finder<Integer, NovaposhtaCargo>(Integer.class, NovaposhtaCargo.class));
+		finderForTransMap.put(Module.novaposhta, new Model.Finder<Integer, NovaposhtaCargoTrans>(Integer.class, NovaposhtaCargoTrans.class));
+
 	}
 	
 }

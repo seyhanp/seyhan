@@ -270,8 +270,15 @@ public class JSRouter extends Controller {
 				controllers.stock.routes.javascript.Stocks.investigation(),
 				controllers.contact.routes.javascript.Contacts.investigation(),
 				controllers.safe.routes.javascript.Safes.investigation(),
-				controllers.bank.routes.javascript.Banks.investigation()
+				controllers.bank.routes.javascript.Banks.investigation(),
 
+				controllers.novaposhta.routes.javascript.Cargos.list(),
+				controllers.novaposhta.routes.javascript.Cargos.save(),
+				controllers.novaposhta.routes.javascript.Cargos.create(),
+				controllers.novaposhta.routes.javascript.Cargos.edit(),
+				controllers.novaposhta.routes.javascript.Cargos.remove(),
+				controllers.novaposhta.routes.javascript.Cargos.options()
+				
 			)
 		);
 	}

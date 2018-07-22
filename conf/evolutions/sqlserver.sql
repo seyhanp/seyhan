@@ -2063,4 +2063,48 @@ insert into admin_extra_fields (idno, distinction, name, is_required, is_active)
 insert into admin_extra_fields (idno, distinction, name, is_required, is_active) values (8, 'stock', 'ek_alan8', 0, 0);
 insert into admin_extra_fields (idno, distinction, name, is_required, is_active) values (9, 'stock', 'ek_alan9', 0, 0);
 
+
+-- db operations for novaposhta
+
+create table novaposhta_cargo (
+  id                        integer identity(1,1) primary key,
+  name                      varchar(100) not null,
+  responsible               varchar(30),
+  phone1                    varchar(15),
+  phone2                    varchar(15),
+  address1                  varchar(150),
+  address2                  varchar(150),
+  insert_by                 varchar(20),
+  insert_at                 datetime,
+  update_by                 varchar(20),
+  update_at                 datetime,
+  is_active                 bit default 1,
+  workspace                 integer not null,
+  version                   integer default 0,
+);
+create index novaposhta_cargo_ix1 on novaposhta_cargo_company (workspace, name);
+
+create table novaposhta_cargo_trans (
+  id                        integer identity(1,1) primary key,
+  registration_no           varchar(30) not null,
+  trans_date                date not null,
+  cargo_value               float default 0,
+  money                     float default 0,
+  _return                   float default 0,
+  total                     float default 0,
+  description               varchar(100),
+  cargo_id                  integer not null,
+  trans_year                smallint,
+  trans_month               varchar(7),
+  insert_by                 varchar(20),
+  insert_at                 datetime,
+  update_by                 varchar(20),
+  update_at                 datetime,
+  workspace                 integer not null,
+  version                   integer default 0,
+  primary key (id)
+) engine=innodb default charset=utf8;
+create index novaposhta_cargo_trans_ix1 on novaposhta_cargo_trans (workspace, cargo_id, trans_date);
+
+
 COMMIT TRANSACTION;

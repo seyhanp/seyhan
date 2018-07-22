@@ -66,7 +66,12 @@ public enum Module {
 	global,
 
 	@EnumValue("admin")
-	admin;
+	admin,
+	
+
+	@EnumValue("novaposhta")
+	novaposhta
+	;
 
 	public String key = "enum.module." + name();
 

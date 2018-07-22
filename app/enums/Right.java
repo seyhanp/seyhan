@@ -560,7 +560,27 @@ public enum Right {
 	BANK_MASRAF(Module.bank, true),
 
 	@EnumValue("ADMIN")
-	ADMIN(Module.admin, true);
+	ADMIN(Module.admin, true),
+
+	/*
+	 * NOVAPOSHTA MENUSU
+	 */
+	@EnumValue("NOVAPOSHTA")
+	NOVAPOSHTA(Module.novaposhta, true, false, false),
+
+	@EnumValue("NOVAPOSHTA_KARGO_TANITIMI")
+	NOVAPOSHTA_KARGO_TANITIMI(Module.novaposhta, false, true, false),
+
+	@EnumValue("NOVAPOSHTA_KARGO_HAREKETLERI")
+	NOVAPOSHTA_KARGO_HAREKETLERI(Module.novaposhta, false, true, false),
+
+	@EnumValue("NOVAPOSHTA_GUNLUK_ISLEM_LISTESI")
+	NOVAPOSHTA_GUNLUK_ISLEM_LISTESI(Module.novaposhta, false, false, false),
+
+	@EnumValue("NOVAPOSHTA_AYLIK_OZET_RAPORU")
+	NOVAPOSHTA_AYLIK_OZET_RAPORU(Module.novaposhta, false, false, false)
+	;
+
 
 	public String key = "enum." + name();
 	public TransType reverseTransType;

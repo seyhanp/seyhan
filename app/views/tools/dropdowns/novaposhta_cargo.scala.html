@@ -1,0 +1,14 @@
+@(form: Form[_], hasBlankOption: Boolean = true, hasAddNewButton:Boolean = true)
+
+@standart(form, NovaposhtaCargo.options, enums.Right.NOVAPOSHTA_KARGO_TANITIMI, "cargo", Messages("novaposhta.cargo.company"), hasBlankOption, hasAddNewButton=hasAddNewButton) {
+
+	<script type="text/javascript">
+		function setSimpleControllerFor_cargo() {
+			simple_combo_type = 1;
+			has_simple_blank_option = @hasBlankOption;
+			simple_selector = "#cargo_id";
+			simple_controller = jsRoutes.controllers.novaposhta.Cargos;
+		}
+	</script>
+
+}

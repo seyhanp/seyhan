@@ -2147,4 +2147,49 @@ insert into admin_extra_fields (id, idno, distinction, name, is_required, is_act
 insert into admin_extra_fields (id, idno, distinction, name, is_required, is_active) values (19, 8, 'stock', 'ek_alan8', false, false);
 insert into admin_extra_fields (id, idno, distinction, name, is_required, is_active) values (20, 9, 'stock', 'ek_alan9', false, false);
 
+
+-- db operations for novaposhta
+
+create table novaposhta_cargo (
+  id                        int auto_increment not null,
+  name                      varchar(100) not null,
+  responsible               varchar(30),
+  phone1                    varchar(15),
+  phone2                    varchar(15),
+  address1                  varchar(150),
+  address2                  varchar(150),
+  insert_by                 varchar(20),
+  insert_at                 datetime,
+  update_by                 varchar(20),
+  update_at                 datetime,
+  is_active                 tinyint(1) default 1,
+  workspace                 int not null,
+  version                   int default 0,
+  primary key (id)
+) engine=innodb default charset=utf8;
+create index novaposhta_cargo_ix1 on novaposhta_cargo_company (workspace, name);
+
+create table novaposhta_cargo_trans (
+  id                        int auto_increment not null,
+  registration_no           varchar(30) not null,
+  trans_date                date not null,
+  cargo_value               double default 0,
+  money                     double default 0,
+  _return                   double default 0,
+  total                     double default 0,
+  description               varchar(100),
+  cargo_id                  int not null,
+  trans_year                int(4),
+  trans_month               varchar(7),
+  insert_by                 varchar(20),
+  insert_at                 datetime,
+  update_by                 varchar(20),
+  update_at                 datetime,
+  workspace                 int not null,
+  version                   int default 0,
+  primary key (id)
+) engine=innodb default charset=utf8;
+create index novaposhta_cargo_trans_ix1 on novaposhta_cargo_trans (workspace, cargo_id, trans_date);
+
+
 COMMIT;
