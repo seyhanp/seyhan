@@ -2082,7 +2082,7 @@ create table novaposhta_cargo (
   workspace                 integer not null,
   version                   integer default 0,
 );
-create index novaposhta_cargo_ix1 on novaposhta_cargo_company (workspace, name);
+create index novaposhta_cargo_ix1 on novaposhta_cargo (workspace, name);
 
 create table novaposhta_cargo_trans (
   id                        integer identity(1,1) primary key,

@@ -2242,8 +2242,8 @@ create table novaposhta_cargo (
   version                   int default 0,
   primary key (id)
 );
-create index novaposhta_cargo_ix1 on novaposhta_cargo_company (workspace, name);
-create sequence novaposhta_cargo_company_seq;
+create index novaposhta_cargo_ix1 on novaposhta_cargo (workspace, name);
+create sequence novaposhta_cargo_seq;
 
 create table novaposhta_cargo_trans (
   id                        int auto_increment not null,

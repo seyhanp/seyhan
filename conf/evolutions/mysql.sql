@@ -2167,7 +2167,7 @@ create table novaposhta_cargo (
   version                   int default 0,
   primary key (id)
 ) engine=innodb default charset=utf8;
-create index novaposhta_cargo_ix1 on novaposhta_cargo_company (workspace, name);
+create index novaposhta_cargo_ix1 on novaposhta_cargo (workspace, name);
 
 create table novaposhta_cargo_trans (
   id                        int auto_increment not null,
