@@ -40,31 +40,28 @@ class NovaposhtaMenu extends AbstractMenu {
 
 		if (AuthManager.hasPrivilege(Right.NOVAPOSHTA_GUNLUK_ISLEM_LISTESI, RightLevel.Enable)) {
 			subReportMenu.add(new MenuItem(Messages.get(Right.NOVAPOSHTA_GUNLUK_ISLEM_LISTESI.key), 
-					controllers.novaposhta.routes.Cargos.list().url()));
+					controllers.novaposhta.reports.routes.DailyReport.index().url()));
 		}
-
+/*
 		if (AuthManager.hasPrivilege(Right.NOVAPOSHTA_AYLIK_OZET_RAPORU, RightLevel.Enable)) {
 			subReportMenu.add(new MenuItem(Messages.get(Right.NOVAPOSHTA_AYLIK_OZET_RAPORU.key), 
 					controllers.novaposhta.routes.Cargos.list().url()));
 		}
-
+*/
 		/*
 		 * TANITIMLAR
 		 */
 		List<MenuItem> subMenu = new ArrayList<MenuItem>();
 
-		subMenu.add(new MenuItem(Messages.get(Right.NOVAPOSHTA_KARGO_TANITIMI.key), controllers.novaposhta.routes.Cargos.index().url()));
-
-		isDividerAdded = false;
 		if (AuthManager.hasPrivilege(Right.NOVAPOSHTA_KARGO_HAREKETLERI, RightLevel.Enable)) {
-			isDividerAdded = addDivider(subMenu, isDividerAdded);
-			
 			RightBind rightBind = new RightBind(Right.NOVAPOSHTA_KARGO_HAREKETLERI);
 
 			subMenu.add(new MenuItem(Messages.get(Right.NOVAPOSHTA_KARGO_HAREKETLERI.key), 
 				controllers.novaposhta.routes.Transes.list(rightBind).url()));
 		}
-		
+
+		subMenu.add(new MenuItem(Messages.get(Right.NOVAPOSHTA_KARGO_TANITIMI.key), controllers.novaposhta.routes.Cargos.index().url()));
+
 		if (subReportMenu.size() > 0) subMenu.add(new MenuItem(Messages.get("reports"), "fa fa-file-text-o", subReportMenu));
 
 		return subMenu;

@@ -249,13 +249,10 @@ public class Cargos extends Controller {
 
 	public static double findBalance(Integer cargoId, Date date) {
 		StringBuilder querySB = new StringBuilder();
-		querySB.append("select sum(carg_value) as sumCargoValue, sum(money) as sumMoney, sum(_return) as sumReturn from novaposhta_cargo_trans ");
+		querySB.append("select sum(total) as sumTotal from novaposhta_cargo_trans ");
 		querySB.append("where workspace = :workspace ");
 		querySB.append("  and cargo_id = :cargo_id ");
-		if (date != null) {
-			querySB.append("  and trans_date < :trans_date");
-		}
-		querySB.append(" group by workspace ");
+		querySB.append("  and trans_date < :trans_date");
 
 		SqlQuery query = Ebean.createSqlQuery(querySB.toString());
 		query.setParameter("workspace", CacheUtils.getWorkspaceId());
@@ -263,14 +260,10 @@ public class Cargos extends Controller {
 		query.setParameter("trans_date", date);
 		SqlRow row = query.findUnique();
 
-		double result = 0;
-		if (row != null && row.size() > 0) {
-			if (row.getDouble("sumCargoValue") != null) result += row.getDouble("sumCargoValue").doubleValue();
-			if (row.getDouble("sumMoney") != null) result -= row.getDouble("sumMoney").doubleValue();
-			if (row.getDouble("sumReturn") != null) result -= row.getDouble("sumReturn").doubleValue();
-		}
-
-		return result;
+		if (row.getDouble("sumTotal") != null)
+			return row.getDouble("sumTotal");
+		else
+			return 0d;
 	}
 
 	/**

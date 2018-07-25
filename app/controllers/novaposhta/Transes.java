@@ -67,7 +67,7 @@ public class Transes extends Controller {
 	private static List<GridHeader> getHeaderList() {
 		List<GridHeader> headerList = new ArrayList<GridHeader>();
 		headerList.add(new GridHeader(Messages.get("date"), "8%", "center", null).sortable("transDate"));
-		headerList.add(new GridHeader(Messages.get("novaposhta.reg_no"), "15%", "right", null).sortable("registrationNo"));
+		headerList.add(new GridHeader(Messages.get("novaposhta.reg_no"), "15%").sortable("regNo"));
 		headerList.add(new GridHeader(Messages.get("novaposhta.cargo.value"), "10%", "right", "green"));
 		headerList.add(new GridHeader(Messages.get("novaposhta.cargo.money"), "10%", "right", "blue"));
 		headerList.add(new GridHeader(Messages.get("novaposhta.cargo.return"), "10%", "right", "red"));
@@ -93,7 +93,7 @@ public class Transes extends Controller {
 				int i = -1;
 				dataMap.put(i++, model.id.toString());
 				dataMap.put(i++, DateUtils.formatDateStandart(model.transDate));
-				dataMap.put(i++, model.registrationNo);
+				dataMap.put(i++, model.regNo);
 				dataMap.put(i++, Format.asMoney(model.cargoValue));
 				dataMap.put(i++, Format.asMoney(model.money));
 				dataMap.put(i++, Format.asMoney(model.return_));
@@ -151,6 +151,9 @@ public class Transes extends Controller {
 			if(filledForm.hasErrors()) {
 				return badRequest(form.render(filledForm));
 			}
+			
+			if (model.money == null || model.money.doubleValue() < 0) model.money = 0d;
+			if (model.return_ == null || model.return_.doubleValue() < 0) model.return_ = 0d;
 			
 			model.transYear = DateUtils.getYear(model.transDate);
 			model.transMonth = DateUtils.getYearMonth(model.transDate);
@@ -244,6 +247,14 @@ public class Transes extends Controller {
 
 		if (model.cargoValue == null || model.cargoValue.doubleValue() == 0) {
 			filledForm.reject("cargoValue", Messages.get("error.zero", Messages.get("novaposhta.cargo.value")));
+		}
+
+		if (NovaposhtaCargoTrans.isUsedForElse("transDate", model.transDate, model.id)) {
+			filledForm.reject("transDate", Messages.get("not.unique", model.transDate));
+		}
+
+		if (NovaposhtaCargoTrans.isUsedForElse("regNo", model.regNo, model.id)) {
+			filledForm.reject("regNo", Messages.get("not.unique", model.regNo));
 		}
 	}
 	

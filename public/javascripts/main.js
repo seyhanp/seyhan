@@ -9,8 +9,10 @@ function updateFormRegulators(selector) {
 		$((selector ? selector : "") + " .rate").autoNumeric({lZero: 'keep', aSep:'', vMin: '-99.99', vMax: '100', aPad: false});
 		$((selector ? selector : "") + " .amount").autoNumeric({lZero: 'keep', aSep:'', vMin: '0', mDec: '5', aPad: false});
 		$((selector ? selector : "") + " .number").autoNumeric({lZero: 'deny', aSep:'', mDec:'0'});
-		
+
+		$((selector ? selector : "") + " .month").inputmask("9999-99", {clearIncomplete: true, placeholder: ""});
 		$((selector ? selector : "") + " .date").inputmask("dd/mm/yyyy", {clearIncomplete: true, placeholder: "", yearrange: {minyear: 2000, maxyear: 2099}});
+		
 		$((selector ? selector : "") + " .date").each(function(){
 			$(this).datepicker({
 				dateFormat: 'dd/mm/yyyy', 

@@ -1,0 +1,27 @@
+@(form: Form[_], startMonthName: String = "startMonth", endMonthName: String = "endMonth")
+
+@***********************************************************************
+* Generate month range input according twitter bootsrap rules *
+***********************************************************************@
+
+<div class="control-group @if(form(startMonthName).hasErrors || form(endMonthName).hasErrors) {error}">
+<label class="control-label" for="@startMonthName">@Messages("month.range")</label>
+	<div class="controls inline">
+		<input id="@startMonthName" name="@startMonthName" class="input-small month" type="text" value="@form(startMonthName).value" />
+		<input id="@endMonthName" name="@endMonthName" class="input-small month" type="text" value="@form(endMonthName).value" />
+		@if(form(startMonthName).hasErrors) {
+			<span class="errors label label-warning">
+				@for(error <- form(startMonthName).errors) {
+					@utils.TemplateHelper.convertMessage(error)
+				}
+			</span>
+		}
+		@if(form(endMonthName).hasErrors) {
+			<span class="errors label label-warning">
+				@for(error <- form(endMonthName).errors) {
+					@utils.TemplateHelper.convertMessage(error)
+				}
+			</span>
+		}
+	</div>
+</div>

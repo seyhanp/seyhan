@@ -788,6 +788,10 @@ GET     /novaposhtas/cargo_trans/new                    controllers.novaposhta.T
 GET     /novaposhtas/cargo_trans/:id                    controllers.novaposhta.Transes.edit(id:Integer)
 POST    /novaposhtas/cargo_trans/:id/delete             controllers.novaposhta.Transes.remove(id:Integer)
 
+# Daily Report
+GET     /novaposhtas/report/daily_report                controllers.novaposhta.reports.DailyReport.index()
+POST    /novaposhtas/report/daily_report                controllers.novaposhta.reports.DailyReport.generate()
+
 # ------------------------------------------------------------------------------------------------------------------------
 # Javascript routing
 # ------------------------------------------------------------------------------------------------------------------------

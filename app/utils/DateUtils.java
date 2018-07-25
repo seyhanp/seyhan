@@ -104,6 +104,18 @@ public class DateUtils {
 		return now.getTime();
 	}
 
+	public static Date findLastDayOfMonth() {
+		DateTime dt = new DateTime();
+
+		return dt.dayOfMonth().withMaximumValue().toDate();
+	}
+
+	public static int getLastDayOfMonth() {
+		DateTime dt = new DateTime();
+
+		return dt.dayOfMonth().withMaximumValue().toDate().getDay();
+	}
+
 	public static Date getFirstDayOfYear() {
 		Calendar now = Calendar.getInstance();
 		now.set(Calendar.DAY_OF_MONTH, 1);
@@ -140,16 +152,29 @@ public class DateUtils {
 		return null;
 	}
 
-	public static Date findLastDay(String yyyymm) {
-		for (int i = 31; i > 27; i--) {
-			try {
-				return sdf.parse(yyyymm + "/" + i);
-			} catch (ParseException e) {
-				;
+	public static int findLastDayOfGivenDate(String yyyy_mm) {
+		int year = new Integer(yyyy_mm.substring(0,4));
+		int month = new Integer(yyyy_mm.substring(5,7));
+		
+		int day = 31;
+		
+		switch (month) {
+			case 2: {
+				day = 28;
+				if (year % 4 == 0) day = 29;
+				break;
 			}
+			case 4:
+			case 6:
+			case 9:
+			case 11: {
+				day = 30;
+				break;
+			}
+				
 		}
 
-		return null;
+		return day;
 	}
 
 	public static Date parse(String date, String format) {

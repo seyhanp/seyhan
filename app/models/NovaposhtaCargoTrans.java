@@ -27,6 +27,8 @@ import javax.persistence.ManyToOne;
 import models.search.NovaposhtaCargoTransSearchParam;
 import play.data.format.Formats.DateTime;
 import play.data.validation.Constraints;
+import play.db.ebean.Model;
+import utils.CacheUtils;
 import utils.DateUtils;
 import utils.ModelHelper;
 
@@ -47,7 +49,7 @@ public class NovaposhtaCargoTrans extends BaseModel {
 
 	@Constraints.Required
 	@Constraints.MaxLength(30)
-	public String registrationNo;
+	public String regNo;
 
 	@Constraints.Required
 	@DateTime(pattern = "dd/MM/yyyy")
@@ -69,17 +71,19 @@ public class NovaposhtaCargoTrans extends BaseModel {
 	public Integer transYear;
 	public String transMonth;
 
+	private static Model.Finder<Integer, NovaposhtaCargoTrans> find = new Model.Finder<Integer, NovaposhtaCargoTrans>(Integer.class, NovaposhtaCargoTrans.class);
+
 	public static Page<NovaposhtaCargoTrans> page(NovaposhtaCargoTransSearchParam searchParam) {
 		ExpressionList<NovaposhtaCargoTrans> expList = ModelHelper.getExpressionList(Right.NOVAPOSHTA_KARGO_HAREKETLERI.module);
 
 		if (searchParam.fullText != null && !searchParam.fullText.isEmpty()) {
 			Expr.or(
 					Expr.like("transDate", "%" + searchParam.fullText + "%"),
-					Expr.like("registrationNo", "%" + searchParam.fullText + "%")
+					Expr.like("regNo", "%" + searchParam.fullText + "%")
 			);
 		} else {
-			if (searchParam.registrationNo != null && !searchParam.registrationNo.isEmpty()) {
-				expList.eq("registrationNo", searchParam.registrationNo);
+			if (searchParam.regNo != null && ! searchParam.regNo.isEmpty()) {
+				expList.like("regNo", "%" + searchParam.regNo + "%");
 			}
 			if (searchParam.startDate != null) {
 				expList.ge("transDate", searchParam.startDate);
@@ -95,6 +99,16 @@ public class NovaposhtaCargoTrans extends BaseModel {
 		return ModelHelper.getPage(Right.NOVAPOSHTA_KARGO_HAREKETLERI, expList, searchParam);
 	}
 
+	public static boolean isUsedForElse(String field, Object value, Integer id) {
+		ExpressionList<NovaposhtaCargoTrans> el = 
+				find.where()
+						.eq("workspace", CacheUtils.getWorkspaceId())
+						.eq(field, value);
+		if (id != null) el.ne("id", id);
+
+		return el.findUnique() != null;
+	}
+
 	public static NovaposhtaCargoTrans findById(Integer id) {
 		return ModelHelper.findById(Module.novaposhta, id);
 	}
@@ -107,7 +121,7 @@ public class NovaposhtaCargoTrans extends BaseModel {
 	@Override
 	public String getAuditDescription() {
 		return DateUtils.formatDateForDB(this.transDate)
-				+ (this.registrationNo != null && !this.registrationNo.isEmpty() ? " - " + this.registrationNo : "");
+				+ (this.regNo != null && !this.regNo.isEmpty() ? " - " + this.regNo : "");
 	}
 
 }

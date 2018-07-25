@@ -1,0 +1,16 @@
+@(_form: Form[novaposhta.reports.DailyReport.Parameter])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@tools.templates.report_form(novaposhta.reports.routes.DailyReport.generate(), enums.Right.NOVAPOSHTA_GUNLUK_ISLEM_LISTESI) {
+
+	@tools.dropdowns.novaposhta_cargo(_form, hasBlankOption=false, hasAddNewButton=false)
+
+	@inputText(_form("month"),
+		'_label -> Messages("trans.month"),
+		'class -> "input-small month",
+		'maxlength -> "7"
+	)
+
+}

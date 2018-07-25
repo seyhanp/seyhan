@@ -18,6 +18,7 @@
 */
 package models.search;
 
+import utils.DateUtils;
 import models.NovaposhtaCargo;
 
 /**
@@ -26,6 +27,12 @@ import models.NovaposhtaCargo;
 public class NovaposhtaCargoTransSearchParam extends AbstractSearchParam {
 
 	public NovaposhtaCargo cargo;
-	public String registrationNo;
+	public String regNo;
+	
+	public NovaposhtaCargoTransSearchParam() {
+		super();
+		this.startDate = DateUtils.getFirstDayOfMonth();
+		this.endDate = DateUtils.findLastDayOfMonth();
+	}
 
 }

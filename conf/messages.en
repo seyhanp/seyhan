@@ -15,6 +15,7 @@ not.unique={0} already in use.
 id.is.null=Invalid id!
 not.found={0} not found!
 is.not.null={0} cannot be empty or undefined!
+must.be.in.format=Wrong data for {0}. It must be in {1} format!
 ref.accounts.same=Reflection accounts are same!
 depots.same=Transfer depots cannot be same to each other!
 workspaces.same=Transfer workspaces cannot be same to each other!
@@ -1226,15 +1227,18 @@ novaposhta.cargo.return=Return
 novaposhta.cargo.total=Total
 
 novaposhta.report.trans.title=Money Transaction
-novaposhta.report.summary=Month Summary
+novaposhta.report.summary=Month / Year Summary
 novaposhta.report.start=Start
 novaposhta.report.finish=Finish
 novaposhta.report.money_in=Money in {0}
 
-novaposhta.report.total.money_in=Total Money in {0}
+novaposhta.report.period=Period
+novaposhta.report.month.summary=Month Summary
+novaposhta.report.total.money_in=Money in Novaposhta
 novaposhta.report.total.sales=Total Sales
 novaposhta.report.total.received=Total Received Money
 novaposhta.report.total.returns=Total Returns
-novaposhta.report.total.transfer=Transfer from last month
+novaposhta.report.total.transfer=Transfer From Last Month
+novaposhta.report.transfer.to.next_month=Transfer To Next Month
 
 novaposhta.reg_no=Reg. No
