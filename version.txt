@@ -1,4 +1,9 @@
-﻿sürüm 1.0.20 - 26/05/2018
+﻿sürüm 1.0.21 - 29/07/2018
+	- sipariş girişlerinde 11. satırdan sonra solda çıkması gereken scroll bar çıkmıyordu, düzeltildi   
+	- cari analiz raporunda stok hareketleri kısmında başka cari hesaba ait hareketler de çıkıyordu, düzeltildi
+	- yeni tanımlanan döviz birimi ile stok tanımlanıp hareket girişi yapılmak istenince, yeni girilen hareket satırı boş olarak geliyordu, düzeltildi
+
+sürüm 1.0.20 - 26/05/2018
 	- tüm belge basımlarındaki Türkçe karakterler İngilizceleri ile değiştirilerek basılacak hale getirildi   
 	- cari hesabın para birimi atanmamışsa fatura kaydederken faturanın para birimi hanesi bozuluyordu, düzeltildi
 	- döviz değerlerinin farklı merkez bankalarından çekilebilmesi için düzenleme yapıldı (son eklenen : Polonya Merkez Bankası)
