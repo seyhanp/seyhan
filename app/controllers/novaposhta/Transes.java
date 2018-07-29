@@ -245,7 +245,15 @@ public class Transes extends Controller {
 			filledForm.reject("cargo.name", Messages.get("is.not.null", Messages.get("novaposhta.cargo.company")));
 		}
 
-		if (model.cargoValue == null || model.cargoValue.doubleValue() == 0) {
+		if (model.cargoValue == null) model.cargoValue = 0d;
+		if (model.money == null) model.money = 0d;
+		if (model.return_ == null) model.return_ = 0d;
+		
+		boolean isAllZero = model.cargoValue.doubleValue() == 0
+						 && model.money.doubleValue() == 0
+						 && model.return_.doubleValue() == 0;
+		
+		if (isAllZero) {
 			filledForm.reject("cargoValue", Messages.get("error.zero", Messages.get("novaposhta.cargo.value")));
 		}
 
@@ -253,9 +261,6 @@ public class Transes extends Controller {
 			filledForm.reject("transDate", Messages.get("not.unique", model.transDate));
 		}
 
-		if (NovaposhtaCargoTrans.isUsedForElse("regNo", model.regNo, model.id)) {
-			filledForm.reject("regNo", Messages.get("not.unique", model.regNo));
-		}
 	}
 	
 	private static Right right() {

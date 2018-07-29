@@ -7,10 +7,13 @@
 
 	@tools.dropdowns.novaposhta_cargo(_form, hasBlankOption=false, hasAddNewButton=false)
 
-	@inputText(_form("month"),
-		'_label -> Messages("trans.month"),
-		'class -> "input-small month",
-		'maxlength -> "7"
+	@tools.components.date_range(_form)
+
+	@select(_form("excCode"),
+		options(Options.currencies),
+		'class -> "input-small",
+		'_label -> Messages("currency"),
+		'_default -> Messages("choose")
 	)
 
 }

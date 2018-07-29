@@ -1220,6 +1220,7 @@ contact.extra_field_9=field9
 
 # --- Novaposhta messages
 
+novaposhta.reg_no=Reg. No
 novaposhta.cargo.company=Cargo Company
 novaposhta.cargo.value=Cargo Value
 novaposhta.cargo.money=Money
@@ -1238,7 +1239,7 @@ novaposhta.report.total.money_in=Money in Novaposhta
 novaposhta.report.total.sales=Total Sales
 novaposhta.report.total.received=Total Received Money
 novaposhta.report.total.returns=Total Returns
-novaposhta.report.total.transfer=Transfer From Last Month
-novaposhta.report.transfer.to.next_month=Transfer To Next Month
+novaposhta.report.total.transfer=Transfer From Last Period
+novaposhta.report.transfer.to.next_month=Transfer To Next Period
 
-novaposhta.reg_no=Reg. No
+novaposhta.all.is.null=You must enter at least one of Cargo Value, Money or Return Value!

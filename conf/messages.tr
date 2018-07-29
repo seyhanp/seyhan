@@ -1220,6 +1220,7 @@ contact.extra_field_9=ek_alan9
 
 # --- Novaposhta messages
 
+novaposhta.reg_no=Kayıt No
 novaposhta.cargo.company=Kargo Firması
 novaposhta.cargo.value=Kargo Değeri
 novaposhta.cargo.money=Gelen Para
@@ -1238,7 +1239,7 @@ novaposhta.report.total.money_in=Novaposhta Toplamı
 novaposhta.report.total.sales=Toplam Satış
 novaposhta.report.total.received=Toplam Alınan Para
 novaposhta.report.total.returns=Toplam İade
-novaposhta.report.total.transfer=Geçen Aydan Devir
-novaposhta.report.transfer.to.next_month=Gelecek Aya Devir
+novaposhta.report.total.transfer=Geçen Dönemden Devir
+novaposhta.report.transfer.to.next_month=Gelecek Döneme Devir
 
-novaposhta.reg_no=Kayıt No
+novaposhta.all.is.null=En az bir değer girilmeli: Kargo Değeri, Gelen Para ya da İade Bedeli!

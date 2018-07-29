@@ -47,6 +47,13 @@
 				'maxlength -> "10"
 			)
 
+			@select(_form("excCode"),
+				options(Options.currencies),
+				'class -> "input-small",
+				'_label -> Messages("currency"),
+				'_default -> Messages("choose")
+			)
+
 			@inputText(_form("description"),
 				'_label -> Messages("description"),
 				'class -> "input-xxlarge",

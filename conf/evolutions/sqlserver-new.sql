@@ -2086,12 +2086,13 @@ create index novaposhta_cargo_ix1 on novaposhta_cargo (workspace, name);
 
 create table novaposhta_cargo_trans (
   id                        integer identity(1,1) primary key,
-  reg_no                    varchar(30) not null,
   trans_date                date not null,
+  reg_no                    varchar(30),
   cargo_value               float default 0,
   money                     float default 0,
   _return                   float default 0,
   total                     float default 0,
+  exc_code                  varchar(3),
   description               varchar(100),
   cargo_id                  integer not null,
   trans_year                smallint,
@@ -2105,44 +2106,6 @@ create table novaposhta_cargo_trans (
   primary key (id)
 );
 create unique index novaposhta_cargo_trans_ix1 on novaposhta_cargo_trans (workspace, cargo_id, trans_date, reg_no);
-
-create table global_days_of_month (
-  int_day                   smallint,
-  str_day                   varchar(2),
-  primary key (int_day)
-);
-
-insert into global_days_of_month (int_day, str_day) values ( 1, '01');
-insert into global_days_of_month (int_day, str_day) values ( 2, '02');
-insert into global_days_of_month (int_day, str_day) values ( 3, '03');
-insert into global_days_of_month (int_day, str_day) values ( 4, '04');
-insert into global_days_of_month (int_day, str_day) values ( 5, '05');
-insert into global_days_of_month (int_day, str_day) values ( 6, '06');
-insert into global_days_of_month (int_day, str_day) values ( 7, '07');
-insert into global_days_of_month (int_day, str_day) values ( 8, '08');
-insert into global_days_of_month (int_day, str_day) values ( 9, '09');
-insert into global_days_of_month (int_day, str_day) values (10, '10');
-insert into global_days_of_month (int_day, str_day) values (11, '11');
-insert into global_days_of_month (int_day, str_day) values (12, '12');
-insert into global_days_of_month (int_day, str_day) values (13, '13');
-insert into global_days_of_month (int_day, str_day) values (14, '14');
-insert into global_days_of_month (int_day, str_day) values (15, '15');
-insert into global_days_of_month (int_day, str_day) values (16, '16');
-insert into global_days_of_month (int_day, str_day) values (17, '17');
-insert into global_days_of_month (int_day, str_day) values (18, '18');
-insert into global_days_of_month (int_day, str_day) values (19, '19');
-insert into global_days_of_month (int_day, str_day) values (20, '20');
-insert into global_days_of_month (int_day, str_day) values (21, '21');
-insert into global_days_of_month (int_day, str_day) values (22, '22');
-insert into global_days_of_month (int_day, str_day) values (23, '23');
-insert into global_days_of_month (int_day, str_day) values (24, '24');
-insert into global_days_of_month (int_day, str_day) values (25, '25');
-insert into global_days_of_month (int_day, str_day) values (26, '26');
-insert into global_days_of_month (int_day, str_day) values (27, '27');
-insert into global_days_of_month (int_day, str_day) values (28, '28');
-insert into global_days_of_month (int_day, str_day) values (29, '29');
-insert into global_days_of_month (int_day, str_day) values (30, '30');
-insert into global_days_of_month (int_day, str_day) values (31, '31');
 
 
 COMMIT TRANSACTION;

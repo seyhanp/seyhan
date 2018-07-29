@@ -24,6 +24,7 @@ import java.util.Date;
 
 import models.NovaposhtaCargo;
 import play.data.Form;
+import play.data.format.Formats.DateTime;
 import play.data.validation.Constraints.Required;
 import play.i18n.Messages;
 import play.mvc.Controller;
@@ -56,8 +57,15 @@ public class DailyReport extends Controller {
 
 		public NovaposhtaCargo cargo;
 
+		public String excCode;
+
 		@Required
-		public String month = DateUtils.formatDate(new Date(), "yyyy-MM");
+		@DateTime(pattern = "dd/MM/yyyy")
+		public Date startDate = new Date();
+
+		@Required
+		@DateTime(pattern = "dd/MM/yyyy")
+		public Date endDate = new Date();
 
 	}
 
@@ -71,9 +79,19 @@ public class DailyReport extends Controller {
 			queryBuilder.append(params.cargo.id);
 		}
 
-		if (params.month != null && ! params.month.trim().isEmpty()) {
-			queryBuilder.append(" and t.trans_month = '");
-			queryBuilder.append(params.month);
+		if (params.startDate != null) {
+			queryBuilder.append(" and t.trans_date >= ");
+			queryBuilder.append(DateUtils.formatDateForDB(params.startDate));
+		}
+
+		if (params.endDate != null) {
+			queryBuilder.append(" and t.trans_date <= ");
+			queryBuilder.append(DateUtils.formatDateForDB(params.endDate));
+		}
+
+		if (params.excCode != null && ! params.excCode.isEmpty()) {
+			queryBuilder.append(" and t.exc_code = '");
+			queryBuilder.append(params.excCode);
 			queryBuilder.append("'");
 		}
 
@@ -92,11 +110,6 @@ public class DailyReport extends Controller {
 			
 			Parameter params = filledForm.get();
 
-			if (params.month == null || params.month.length() < 7) {
-				filledForm.reject("month", Messages.get("must.be.in.format", Messages.get("trans.month"), "YYYY-MM"));
-				return badRequest(daily_report.render(filledForm));
-			}
-
 			if (params.cargo == null || params.cargo.id == null) {
 				filledForm.reject("cargo", Messages.get("is.not.null", Messages.get("novaposhta.cargo.company")));
 				return badRequest(daily_report.render(filledForm));
@@ -111,10 +124,9 @@ public class DailyReport extends Controller {
 			/*
 			 * Parametrik degerlerin gecisi
 			 */
-			repPar.paramMap.put("MAXIMUM_DAY", findTheMaximumDay(params.month));
-			repPar.paramMap.put("YEAR_MONTH", params.month);
-			repPar.paramMap.put("REPORT_INFO", params.month);
-			repPar.paramMap.put("TRANSFER", Cargos.findBalance(params.cargo.id, DateUtils.findFirstDay(params.month.replace("-", "/"))));
+			repPar.paramMap.put("EXC_CODE", params.excCode);
+			repPar.paramMap.put("REPORT_INFO", DateUtils.formatDateStandart(params.startDate) + " - " + DateUtils.formatDateStandart(params.endDate));
+			repPar.paramMap.put("TRANSFER", Cargos.findBalance(params.cargo.id, params.startDate));
 			
 			ReportResult repRes = ReportService.generateReport(repPar, response());
 			if (repRes.error != null) {
@@ -126,10 +138,6 @@ public class DailyReport extends Controller {
 			return ReportService.sendReport(repPar, repRes, daily_report.render(filledForm));
 		}
 
-	}
-	
-	private static int findTheMaximumDay(String yearMonth) {
-		return DateUtils.findLastDayOfGivenDate(yearMonth.replace("-", "/"));
 	}
 
 	public static Result index() {

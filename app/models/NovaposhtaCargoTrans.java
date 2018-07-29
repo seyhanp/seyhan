@@ -36,6 +36,7 @@ import com.avaje.ebean.Expr;
 import com.avaje.ebean.ExpressionList;
 import com.avaje.ebean.Page;
 
+import controllers.global.Profiles;
 import enums.Module;
 import enums.Right;
 
@@ -47,7 +48,6 @@ public class NovaposhtaCargoTrans extends BaseModel {
 
 	private static final long serialVersionUID = 1L;
 
-	@Constraints.Required
 	@Constraints.MaxLength(30)
 	public String regNo;
 
@@ -61,6 +61,7 @@ public class NovaposhtaCargoTrans extends BaseModel {
 	@Column(name = "_return")
 	public Double return_;
 	public Double total;
+	public String excCode;
 
 	@Constraints.MaxLength(100)
 	public String description;
@@ -72,6 +73,10 @@ public class NovaposhtaCargoTrans extends BaseModel {
 	public String transMonth;
 
 	private static Model.Finder<Integer, NovaposhtaCargoTrans> find = new Model.Finder<Integer, NovaposhtaCargoTrans>(Integer.class, NovaposhtaCargoTrans.class);
+
+	public NovaposhtaCargoTrans() {
+		this.excCode = Profiles.chosen().gnel_excCode;
+	}
 
 	public static Page<NovaposhtaCargoTrans> page(NovaposhtaCargoTransSearchParam searchParam) {
 		ExpressionList<NovaposhtaCargoTrans> expList = ModelHelper.getExpressionList(Right.NOVAPOSHTA_KARGO_HAREKETLERI.module);

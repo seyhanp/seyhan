@@ -3,33 +3,29 @@
 	<property name="ireport.scriptlethandling" value="0"/>
 	<property name="ireport.encoding" value="UTF-8"/>
 	<property name="ireport.zoom" value="2.42"/>
-	<property name="ireport.x" value="18"/>
-	<property name="ireport.y" value="16"/>
+	<property name="ireport.x" value="9"/>
+	<property name="ireport.y" value="0"/>
 	<import value="net.sf.jasperreports.engine.*"/>
 	<import value="java.util.*"/>
 	<import value="net.sf.jasperreports.engine.data.*"/>
 	<parameter name="QUERY_STRING" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
-	<parameter name="YEAR_MONTH" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="COMPANY" class="java.lang.String">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
 	<parameter name="REPORT_INFO" class="java.lang.String"/>
 	<parameter name="FOR_DOTMATRIX" class="java.lang.String"/>
 	<parameter name="TRU" class="java.lang.String"/>
-	<parameter name="MAXIMUM_DAY" class="java.lang.Integer"/>
 	<parameter name="TRANSFER" class="java.lang.Double">
 		<defaultValueExpression><![CDATA[0d]]></defaultValueExpression>
 	</parameter>
 	<parameter name="EXC_CODE" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select * from (
-select CONCAT($P{YEAR_MONTH}, '-', str_day) as trans_date, '' as reg_no, 0 as cargo_value, 0 as money, 0 as _return, 0 as total from
-global_days_of_month where int_day <= $P{MAXIMUM_DAY} and int_day not in (select DAY(t.trans_date) from novaposhta_cargo_trans t where t.trans_month = $P{YEAR_MONTH} $P!{QUERY_STRING})
-union all
-select trans_date, reg_no, cargo_value, money, _return, total from novaposhta_cargo_trans t where t.trans_month = $P{YEAR_MONTH} $P!{QUERY_STRING}) as derived
-order by derived.trans_date;]]>
+		<![CDATA[select trans_date, reg_no, cargo_value, money, _return, total from novaposhta_cargo_trans t
+where 1=1
+$P!{QUERY_STRING}
+order by trans_date;]]>
 	</queryString>
 	<field name="reg_no" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -42,7 +38,7 @@ order by derived.trans_date;]]>
 	<field name="_return" class="java.lang.Double"/>
 	<field name="total" class="java.lang.Double"/>
 	<variable name="CUMMULATIVE" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{total}.doubleValue() ]]></variableExpression>
+		<variableExpression><![CDATA[$F{total}.doubleValue()]]></variableExpression>
 		<initialValueExpression><![CDATA[]]></initialValueExpression>
 	</variable>
 	<variable name="SUM_CARGO_VALUE" class="java.lang.Double" calculation="Sum">
@@ -76,7 +72,7 @@ order by derived.trans_date;]]>
 				<textFieldExpression><![CDATA[$P{FOR_DOTMATRIX}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-2" x="12" y="0" width="275" height="21" uuid="e635bdef-0cc6-4f74-ba00-ddfa180fab04"/>
+				<reportElement key="textField-2" x="12" y="0" width="397" height="21" uuid="e635bdef-0cc6-4f74-ba00-ddfa180fab04"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -89,20 +85,7 @@ order by derived.trans_date;]]>
 				<textFieldExpression><![CDATA[$R{enum.NOVAPOSHTA} + " " + $R{enum.NOVAPOSHTA_GUNLUK_ISLEM_LISTESI}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-2" x="287" y="1" width="243" height="14" uuid="be3fb266-ffa6-45ae-937a-77c997848640"/>
-				<box>
-					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$R{reporter.company} + " : " + $P{COMPANY}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement key="textField-2" x="67" y="21" width="84" height="15" uuid="28582628-33bf-421e-9138-951c6ca5e28e"/>
+				<reportElement key="textField-2" x="67" y="21" width="153" height="15" uuid="28582628-33bf-421e-9138-951c6ca5e28e"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -127,10 +110,36 @@ order by derived.trans_date;]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$R{novaposhta.report.period}]]></textFieldExpression>
 			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField-3" x="422" y="6" width="65" height="15" uuid="976e1fc6-055c-4817-9a21-ff5460567587"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{reporter.page} + " : " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" isBlankWhenNull="true">
+				<reportElement key="textField-3" x="487" y="6" width="35" height="15" uuid="9e722570-9039-48d0-b46e-f88d1e2e3edb"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" / " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="40">
+		<band height="39">
 			<textField isBlankWhenNull="true">
 				<reportElement key="textField-2" x="67" y="0" width="129" height="14" uuid="ef92ba7c-2e76-4fc5-9866-a8ec6987cfcc"/>
 				<box>
@@ -145,7 +154,7 @@ order by derived.trans_date;]]>
 				<textFieldExpression><![CDATA[$R{novaposhta.reg_no}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement key="textField-5" x="270" y="0" width="53" height="14" isPrintWhenDetailOverflows="true" uuid="1005a8b5-e8ec-4df6-9659-facf46bbcf25"/>
+				<reportElement key="textField-5" x="256" y="0" width="53" height="14" isPrintWhenDetailOverflows="true" uuid="1005a8b5-e8ec-4df6-9659-facf46bbcf25"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -158,7 +167,7 @@ order by derived.trans_date;]]>
 				<textFieldExpression><![CDATA[$R{novaposhta.cargo.money}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement key="textField-5" x="323" y="0" width="53" height="14" isPrintWhenDetailOverflows="true" uuid="a02506d3-f80b-4428-b69d-51999c04b53e"/>
+				<reportElement key="textField-5" x="309" y="0" width="53" height="14" isPrintWhenDetailOverflows="true" uuid="a02506d3-f80b-4428-b69d-51999c04b53e"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -171,7 +180,7 @@ order by derived.trans_date;]]>
 				<textFieldExpression><![CDATA[$R{novaposhta.cargo.return}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement key="textField-5" x="196" y="0" width="71" height="14" isPrintWhenDetailOverflows="true" uuid="a3efe1ca-a029-4337-810f-686fad6e87e8"/>
+				<reportElement key="textField-5" x="196" y="0" width="60" height="14" isPrintWhenDetailOverflows="true" uuid="a3efe1ca-a029-4337-810f-686fad6e87e8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -184,7 +193,7 @@ order by derived.trans_date;]]>
 				<textFieldExpression><![CDATA[$R{novaposhta.cargo.value}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement key="textField-5" x="376" y="0" width="59" height="14" isPrintWhenDetailOverflows="true" uuid="cb05a2a6-7662-4ece-b9c9-82d13c7951e9"/>
+				<reportElement key="textField-5" x="362" y="0" width="59" height="14" isPrintWhenDetailOverflows="true" uuid="cb05a2a6-7662-4ece-b9c9-82d13c7951e9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -223,7 +232,7 @@ order by derived.trans_date;]]>
 				<textFieldExpression><![CDATA[$R{date}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-3" x="67" y="24" width="129" height="15" uuid="445714fa-69cd-4b22-9171-b61241ee9fa6"/>
+				<reportElement key="textField-3" x="196" y="24" width="156" height="15" uuid="445714fa-69cd-4b22-9171-b61241ee9fa6"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -231,25 +240,12 @@ order by derived.trans_date;]]>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
+					<font fontName="DejaVu Serif" size="8" isBold="true" isItalic="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$R{novaposhta.report.total.transfer}]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement key="textField-2" x="256" y="25" width="14" height="15" uuid="7356f4c5-983a-4b96-89f4-3fa4173f69b5"/>
-				<box>
-					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{EXC_CODE}]]></textFieldExpression>
-			</textField>
 			<textField pattern="#,##0" isBlankWhenNull="false">
-				<reportElement key="textField-5" x="196" y="25" width="60" height="15" isPrintWhenDetailOverflows="true" uuid="17a721fa-b2d0-42a8-91b2-375323a7fb06"/>
+				<reportElement key="textField-5" x="362" y="24" width="60" height="15" isPrintWhenDetailOverflows="true" uuid="0ad09219-bd46-4af2-9f6d-776af3c34a57"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -257,33 +253,7 @@ order by derived.trans_date;]]>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{TRANSFER}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement key="textField-2" x="508" y="25" width="14" height="15" uuid="641b1328-954b-47bc-85a9-5f9b0c64233b"/>
-				<box>
-					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{EXC_CODE}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0" isBlankWhenNull="false">
-				<reportElement key="textField-5" x="448" y="25" width="60" height="15" isPrintWhenDetailOverflows="true" uuid="0ad09219-bd46-4af2-9f6d-776af3c34a57"/>
-				<box>
-					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
+					<font fontName="DejaVu Serif" size="8" isBold="true" isItalic="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{TRANSFER}]]></textFieldExpression>
 			</textField>
@@ -305,7 +275,7 @@ order by derived.trans_date;]]>
 				<textFieldExpression><![CDATA[$F{reg_no}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0" isBlankWhenNull="true">
-				<reportElement key="textField-5" x="270" y="0" width="53" height="15" isPrintWhenDetailOverflows="true" uuid="4def88e9-810f-4bd3-8e6f-3f8feebb224b"/>
+				<reportElement key="textField-5" x="256" y="0" width="53" height="15" isPrintWhenDetailOverflows="true" uuid="4def88e9-810f-4bd3-8e6f-3f8feebb224b"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -318,7 +288,7 @@ order by derived.trans_date;]]>
 				<textFieldExpression><![CDATA[$F{money}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0" isBlankWhenNull="true">
-				<reportElement key="textField-5" x="323" y="0" width="53" height="15" isPrintWhenDetailOverflows="true" uuid="484624ca-b64c-41ce-8a91-b047367da8d6"/>
+				<reportElement key="textField-5" x="309" y="0" width="53" height="15" isPrintWhenDetailOverflows="true" uuid="484624ca-b64c-41ce-8a91-b047367da8d6"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -343,44 +313,7 @@ order by derived.trans_date;]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cargo_value}]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement key="textField-2" x="256" y="0" width="14" height="15" uuid="08af54c1-8462-4ab9-9245-1e74ae05d1b3"/>
-				<box>
-					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-				</textElement>
-			</textField>
-			<textField pattern="#,##0" isBlankWhenNull="true">
-				<reportElement key="textField-5" x="376" y="0" width="59" height="15" isPrintWhenDetailOverflows="true" uuid="1aa4b0a2-c123-4e72-b236-eff2efeac7f5"/>
-				<box>
-					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement key="textField-2" x="435" y="0" width="13" height="15" uuid="aaaf0ccc-bf6c-4ac9-9633-096b1fabc21b"/>
-				<box>
-					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-				</textElement>
-			</textField>
-			<textField pattern="" isBlankWhenNull="true">
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
 				<reportElement key="textField-3" x="5" y="0" width="62" height="15" uuid="e1bbf60f-db71-4869-8bf9-30418bae78d5"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -394,7 +327,7 @@ order by derived.trans_date;]]>
 				<textFieldExpression><![CDATA[$F{trans_date}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0" isBlankWhenNull="false">
-				<reportElement key="textField-5" x="448" y="0" width="60" height="15" isPrintWhenDetailOverflows="true" uuid="602463c9-769b-40a7-93f1-eecff6bfa8a3"/>
+				<reportElement key="textField-5" x="362" y="0" width="60" height="15" isPrintWhenDetailOverflows="true" uuid="602463c9-769b-40a7-93f1-eecff6bfa8a3"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -412,7 +345,7 @@ order by derived.trans_date;]]>
 		<band/>
 	</columnFooter>
 	<pageFooter>
-		<band height="127">
+		<band height="10">
 			<textField pattern="" isBlankWhenNull="true">
 				<reportElement key="textField-5" x="1" y="0" width="534" height="10" isPrintWhenDetailOverflows="true" uuid="50d98be1-4ad3-4b4b-9b14-25e15dd37b06"/>
 				<box>
@@ -426,60 +359,12 @@ order by derived.trans_date;]]>
 				</textElement>
 				<textFieldExpression><![CDATA["-----------------------------------------------------------------------------------------------------------------------------------------------------------------"]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement key="textField-2" x="229" y="13" width="38" height="15" uuid="bb7605c0-ed51-42c1-a655-d977c763a356"/>
-				<box>
-					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{YEAR_MONTH}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement key="textField-2" x="270" y="13" width="81" height="15" uuid="53be64f3-fa94-477a-aeec-62c4a7e8b11b"/>
-				<box>
-					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$R{novaposhta.report.month.summary}]]></textFieldExpression>
-			</textField>
-			<textField pattern="" isBlankWhenNull="true">
-				<reportElement key="textField-5" x="122" y="28" width="349" height="10" isPrintWhenDetailOverflows="true" uuid="b21c4167-7241-41e5-91c2-5af77a9da0fb"/>
-				<box>
-					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement verticalAlignment="Middle">
-					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA["-------------------------------------------------------------------------------------------------------"]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement key="textField-2" x="131" y="38" width="46" height="15" uuid="497242b2-4a46-4baf-816a-c8f4ac5397fd"/>
-				<box>
-					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$R{novaposhta.report.start}]]></textFieldExpression>
-			</textField>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="124">
 			<textField pattern="#,##0" isBlankWhenNull="false">
-				<reportElement key="textField-5" x="388" y="38" width="60" height="15" isPrintWhenDetailOverflows="true" uuid="6b5ea056-0c26-43f9-b162-02a10388bacd"/>
+				<reportElement key="textField-5" x="362" y="80" width="60" height="16" isPrintWhenDetailOverflows="true" uuid="faf34255-ff92-4b11-b0b5-b1dda2ab2bad"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -489,10 +374,10 @@ order by derived.trans_date;]]>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{TRANSFER}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{SUM_RETURNS}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-2" x="196" y="53" width="155" height="15" uuid="8decb93b-1f5e-4a36-8b6a-05bd9bb36758"/>
+				<reportElement key="textField-2" x="230" y="50" width="122" height="15" uuid="8decb93b-1f5e-4a36-8b6a-05bd9bb36758"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -504,8 +389,47 @@ order by derived.trans_date;]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$R{novaposhta.report.total.sales}]]></textFieldExpression>
 			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement key="textField-5" x="362" y="35" width="60" height="15" isPrintWhenDetailOverflows="true" uuid="6b5ea056-0c26-43f9-b162-02a10388bacd"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="8" isBold="true" isItalic="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TRANSFER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement key="textField-5" x="163" y="25" width="274" height="10" isPrintWhenDetailOverflows="true" uuid="b21c4167-7241-41e5-91c2-5af77a9da0fb"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["-------------------------------------------------------------------------------------------------------"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement key="textField-5" x="362" y="96" width="60" height="15" isPrintWhenDetailOverflows="true" uuid="14796046-e4c0-40a9-98e0-3ee72e702f40"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="8" isBold="true" isItalic="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{CUMMULATIVE}.doubleValue() + $P{TRANSFER}.doubleValue()]]></textFieldExpression>
+			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-2" x="196" y="68" width="155" height="15" uuid="9fa8870c-1d01-45a7-b002-d73a532d23d9"/>
+				<reportElement key="textField-2" x="230" y="65" width="122" height="15" uuid="9fa8870c-1d01-45a7-b002-d73a532d23d9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -517,99 +441,8 @@ order by derived.trans_date;]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$R{novaposhta.report.total.received}]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement key="textField-2" x="196" y="84" width="155" height="15" uuid="02a4af19-6818-4223-993a-6e4d8b98b403"/>
-				<box>
-					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$R{novaposhta.report.total.returns}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement key="textField-2" x="196" y="38" width="155" height="15" uuid="9454d62f-bf9b-44f3-9e45-d63a02b3be92"/>
-				<box>
-					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$R{novaposhta.report.total.money_in}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement key="textField-2" x="131" y="99" width="46" height="15" uuid="979a76fe-db4b-49aa-a01b-f829901b37c9"/>
-				<box>
-					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$R{novaposhta.report.finish}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement key="textField-2" x="196" y="99" width="155" height="15" uuid="c1d0245c-04cc-4269-b0ff-9a38321ff995"/>
-				<box>
-					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$R{novaposhta.report.total.money_in}]]></textFieldExpression>
-			</textField>
-			<textField pattern="" isBlankWhenNull="true">
-				<reportElement key="textField-5" x="0" y="114" width="534" height="10" isPrintWhenDetailOverflows="true" uuid="e98ae804-6e81-459b-abc0-64cea15b360d"/>
-				<box>
-					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement verticalAlignment="Middle">
-					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA["-----------------------------------------------------------------------------------------------------------------------------------------------------------------"]]></textFieldExpression>
-			</textField>
 			<textField pattern="#,##0" isBlankWhenNull="false">
-				<reportElement key="textField-5" x="388" y="96" width="60" height="13" isPrintWhenDetailOverflows="true" uuid="14796046-e4c0-40a9-98e0-3ee72e702f40"/>
-				<box>
-					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{CUMMULATIVE}.doubleValue() + $P{TRANSFER}.doubleValue()]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0" isBlankWhenNull="false">
-				<reportElement key="textField-5" x="388" y="53" width="60" height="15" isPrintWhenDetailOverflows="true" uuid="9194f49c-0c4b-4abe-abef-a007be0ed33a"/>
-				<box>
-					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{SUM_CARGO_VALUE}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0" isBlankWhenNull="false">
-				<reportElement key="textField-5" x="388" y="68" width="60" height="15" isPrintWhenDetailOverflows="true" uuid="53c48214-bbb6-4e16-987c-188fab1614a4"/>
+				<reportElement key="textField-5" x="362" y="65" width="60" height="15" isPrintWhenDetailOverflows="true" uuid="53c48214-bbb6-4e16-987c-188fab1614a4"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -622,7 +455,7 @@ order by derived.trans_date;]]>
 				<textFieldExpression><![CDATA[$V{SUM_MONEY}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0" isBlankWhenNull="false">
-				<reportElement key="textField-5" x="388" y="83" width="60" height="13" isPrintWhenDetailOverflows="true" uuid="faf34255-ff92-4b11-b0b5-b1dda2ab2bad"/>
+				<reportElement key="textField-5" x="362" y="50" width="60" height="15" isPrintWhenDetailOverflows="true" uuid="9194f49c-0c4b-4abe-abef-a007be0ed33a"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -632,10 +465,127 @@ order by derived.trans_date;]]>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{SUM_RETURNS}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{SUM_CARGO_VALUE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField-2" x="229" y="10" width="42" height="15" uuid="53be64f3-fa94-477a-aeec-62c4a7e8b11b"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{report.show.summary}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField-2" x="174" y="35" width="46" height="15" uuid="497242b2-4a46-4baf-816a-c8f4ac5397fd"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{novaposhta.report.start}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField-2" x="230" y="81" width="122" height="15" uuid="02a4af19-6818-4223-993a-6e4d8b98b403"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{novaposhta.report.total.returns}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField-2" x="230" y="35" width="122" height="15" uuid="9454d62f-bf9b-44f3-9e45-d63a02b3be92"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="8" isBold="true" isItalic="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{novaposhta.report.total.transfer}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField-2" x="230" y="96" width="122" height="15" uuid="c1d0245c-04cc-4269-b0ff-9a38321ff995"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="8" isBold="true" isItalic="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{novaposhta.report.transfer.to.next_month}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField-2" x="271" y="10" width="124" height="15" uuid="bb7605c0-ed51-42c1-a655-d977c763a356"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{REPORT_INFO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement key="textField-5" x="0" y="111" width="534" height="10" isPrintWhenDetailOverflows="true" uuid="e98ae804-6e81-459b-abc0-64cea15b360d"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["-----------------------------------------------------------------------------------------------------------------------------------------------------------------"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField-2" x="174" y="96" width="46" height="15" uuid="979a76fe-db4b-49aa-a01b-f829901b37c9"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="8" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{novaposhta.report.finish}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement key="textField-5" x="163" y="0" width="274" height="10" isPrintWhenDetailOverflows="true" uuid="a94708b1-3d68-4105-8b24-a51fd1076108"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="8" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1254" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["-------------------------------------------------------------------------------------------------------"]]></textFieldExpression>
 			</textField>
 		</band>
-	</pageFooter>
+	</lastPageFooter>
 	<summary>
 		<band>
 			<printWhenExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}.put("isLastPage", Boolean.TRUE)]]></printWhenExpression>

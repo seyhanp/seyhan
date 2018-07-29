@@ -2253,8 +2253,8 @@ create table novaposhta_cargo (
   update_by                 varchar(20),
   update_at                 timestamp,
   is_active                 boolean default true,
-  workspace                 int not null,
-  version                   int default 0,
+  workspace                 integer not null,
+  version                   integer default 0,
   primary key (id)
 );
 create index novaposhta_cargo_ix1 on novaposhta_cargo (workspace, name);
@@ -2262,65 +2262,27 @@ create sequence novaposhta_cargo_seq;
 
 create table novaposhta_cargo_trans (
   id                        serial not null,
-  reg_no                    varchar(30) not null,
   trans_date                timestamp not null,
-  cargo_value               double default 0,
-  money                     double default 0,
-  _return                   double default 0,
-  total                     double default 0,
+  reg_no                    varchar(30),
+  cargo_value               real default 0,
+  money                     real default 0,
+  _return                   real default 0,
+  total                     real default 0,
+  exc_code                  varchar(3),
   description               varchar(100),
-  cargo_id                  int not null,
-  trans_year                int(4),
+  cargo_id                  integer not null,
+  trans_year                numeric(4),
   trans_month               varchar(7),
   insert_by                 varchar(20),
-  insert_at                 datetime,
+  insert_at                 timestamp,
   update_by                 varchar(20),
-  update_at                 datetime,
-  workspace                 int not null,
-  version                   int default 0,
+  update_at                 timestamp,
+  workspace                 integer not null,
+  version                   integer default 0,
   primary key (id)
 );
 create unique index novaposhta_cargo_trans_ix1 on novaposhta_cargo_trans (workspace, cargo_id, trans_date, reg_no);
 create sequence novaposhta_cargo_trans_seq;
-
-
-create table global_days_of_month (
-  int_day                   numeric(2),
-  str_day                   varchar(2),
-  primary key (int_day)
-);
-
-insert into global_days_of_month (int_day, str_day) values ( 1, '01');
-insert into global_days_of_month (int_day, str_day) values ( 2, '02');
-insert into global_days_of_month (int_day, str_day) values ( 3, '03');
-insert into global_days_of_month (int_day, str_day) values ( 4, '04');
-insert into global_days_of_month (int_day, str_day) values ( 5, '05');
-insert into global_days_of_month (int_day, str_day) values ( 6, '06');
-insert into global_days_of_month (int_day, str_day) values ( 7, '07');
-insert into global_days_of_month (int_day, str_day) values ( 8, '08');
-insert into global_days_of_month (int_day, str_day) values ( 9, '09');
-insert into global_days_of_month (int_day, str_day) values (10, '10');
-insert into global_days_of_month (int_day, str_day) values (11, '11');
-insert into global_days_of_month (int_day, str_day) values (12, '12');
-insert into global_days_of_month (int_day, str_day) values (13, '13');
-insert into global_days_of_month (int_day, str_day) values (14, '14');
-insert into global_days_of_month (int_day, str_day) values (15, '15');
-insert into global_days_of_month (int_day, str_day) values (16, '16');
-insert into global_days_of_month (int_day, str_day) values (17, '17');
-insert into global_days_of_month (int_day, str_day) values (18, '18');
-insert into global_days_of_month (int_day, str_day) values (19, '19');
-insert into global_days_of_month (int_day, str_day) values (20, '20');
-insert into global_days_of_month (int_day, str_day) values (21, '21');
-insert into global_days_of_month (int_day, str_day) values (22, '22');
-insert into global_days_of_month (int_day, str_day) values (23, '23');
-insert into global_days_of_month (int_day, str_day) values (24, '24');
-insert into global_days_of_month (int_day, str_day) values (25, '25');
-insert into global_days_of_month (int_day, str_day) values (26, '26');
-insert into global_days_of_month (int_day, str_day) values (27, '27');
-insert into global_days_of_month (int_day, str_day) values (28, '28');
-insert into global_days_of_month (int_day, str_day) values (29, '29');
-insert into global_days_of_month (int_day, str_day) values (30, '30');
-insert into global_days_of_month (int_day, str_day) values (31, '31');
 
 
 COMMIT;
