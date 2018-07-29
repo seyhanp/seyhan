@@ -1,4 +1,8 @@
 ﻿sürüm 1.0.21 - 29/07/2018
+	- novaposhta menüsü eklendi   
+	- kargo tanıtım formu yapıldı
+	- kargo hareket girişleri yapıldı
+	- kargo hareket girişleri yapıldı
 	- sipariş girişlerinde 11. satırdan sonra solda çıkması gereken scroll bar çıkmıyordu, düzeltildi   
 	- cari analiz raporunda stok hareketleri kısmında başka cari hesaba ait hareketler de çıkıyordu, düzeltildi
 	- yeni tanımlanan döviz birimi ile stok tanımlanıp hareket girişi yapılmak istenince, yeni girilen hareket satırı boş olarak geliyordu, düzeltildi
