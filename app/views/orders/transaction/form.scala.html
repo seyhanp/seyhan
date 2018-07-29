@@ -41,6 +41,7 @@ width: calc(100% - 5px);
 		<input type="hidden" id="excCode" name="excCode" value='@_form("excCode").value' />
 		
 		<fieldset>
+
 			<div class="row-fluid">
 				<div class="span6">
 					@inputText(_form("receiptNo"),
@@ -96,7 +97,7 @@ width: calc(100% - 5px);
 				<li><a href="#other" data-toggle="tab">@Messages("other")</a></li>
 			</ul>
 
-			<div class="tab-content" style="height:430px;margin-top:-10px; margin-bottom: 20px; overflow: hidden;">
+			<div class="tab-content" style="height:430px; margin-top:-10px; overflow: hidden;">
 				@if(_form.hasErrors) {
 					@if(_form.errors.contains("stocks")) {
 						<div id="stocksErrors">
@@ -364,6 +365,13 @@ width: calc(100% - 5px);
 		var isNotOpeningTrans = @isNotOpeningTrans;
 		var isSelling = @isSelling;
 	</script>
+	
+	<style>
+		#stockTable-region4 {
+			width:860px !important;
+			height:355px !important;
+		}
+	</style>
 
 }
 

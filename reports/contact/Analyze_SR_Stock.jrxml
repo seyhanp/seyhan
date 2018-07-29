@@ -9,12 +9,12 @@
 	<queryString>
 		<![CDATA[select td.row_no, s.name, td.quantity, td.unit, td.price, td.amount, td.discount_amount, td.tax_amount, td.total
 from stock_trans_detail td
-inner join stock_trans t on $P!{QUERY_PART_FOR_SUBREPORT} and td.trans_id = t.id
+inner join stock_trans t on $P!{QUERY_PART_FOR_SUBREPORT} and td.trans_id = t.id and td.contact_id = t.contact_id
 inner join stock s on s.id = td.stock_id
-union
+union all
 select td.row_no, s.name, td.quantity, td.unit, td.price, td.amount, td.discount_amount, td.tax_amount, td.total
 from invoice_trans_detail td
-inner join invoice_trans t on $P!{QUERY_PART_FOR_SUBREPORT} and td.trans_id = t.id
+inner join invoice_trans t on $P!{QUERY_PART_FOR_SUBREPORT} and td.trans_id = t.id and td.contact_id = t.contact_id
 inner join stock s on s.id = td.stock_id
 order by row_no]]>
 	</queryString>
