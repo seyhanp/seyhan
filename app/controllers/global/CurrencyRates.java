@@ -295,7 +295,7 @@ public class CurrencyRates extends Controller {
 				actCurSet.add(cur.code);
 			}
 
-			if (lastRate != null) {
+			if (lastRate != null && lastRate.details.size() > 0) {
 				for (GlobalCurrencyRateDetail crd : lastRate.details) {
 					if (actCurSet.contains(crd.code)) {
 						actualExchangeRatesMap.put(crd.code, new GlobalCurrencyRateDetail(crd.code, crd.buying, crd.selling));
@@ -305,7 +305,14 @@ public class CurrencyRates extends Controller {
 			} else {
 				actualExchangeRatesMap.put("info", new GlobalCurrencyRateDetail("info", Messages.get("not.found", Messages.get("actual_exchange_rates"))));
 			}
+
 			actualExchangeRatesMap.put(Profiles.chosen().gnel_excCode, new GlobalCurrencyRateDetail(Profiles.chosen().gnel_excCode, 1d, 1d));
+			for (GlobalCurrency cur: actCurList) {
+				if (! actualExchangeRatesMap.containsKey(cur.code)) {
+					actualExchangeRatesMap.put(cur.code, new GlobalCurrencyRateDetail(cur.code, 1d, 1d));
+				}
+			}
+			
 		}
 
 		return actualExchangeRatesMap;
@@ -452,6 +459,10 @@ public class CurrencyRates extends Controller {
 		}
 
 		return null;
+	}
+	
+	public static void refreshCurrencies() {
+		actualExchangeRatesMap = null;
 	}
 
 }

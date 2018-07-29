@@ -159,6 +159,7 @@ public class Currencies extends Controller {
 			}
 
 			CacheUtils.remove(true, "exchanges");
+			CurrencyRates.refreshCurrencies();
 
 			flash("success", Messages.get("saved", model.name));
 			if (Profiles.chosen().gnel_continuouslyRecording)
@@ -227,6 +228,7 @@ public class Currencies extends Controller {
 				try {
 					model.delete();
 					CacheUtils.remove(true, "exchanges");
+					CurrencyRates.refreshCurrencies();
 
 					flash("success", Messages.get("deleted", model.name));
 					return ok();

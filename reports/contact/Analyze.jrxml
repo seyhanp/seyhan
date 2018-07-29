@@ -35,7 +35,7 @@
 	<parameter name="QUERY_PART_FOR_SUBREPORT" class="java.lang.String"/>
 	<parameter name="CONTACT_TRANSFER" class="java.lang.Double"/>
 	<queryString>
-		<![CDATA[select t.ref_id, t.ref_module, t.trans_date, t.receipt_no, t.trans_no, t.id, t._right, t.debt, t.credit, t.description
+		<![CDATA[select t.contact_id, t.ref_id, t.ref_module, t.trans_date, t.receipt_no, t.trans_no, t.id, t._right, t.debt, t.credit, t.description
 from contact_trans t
 $P!{TRANS_POINT_SQL}
 $P!{PRIVATE_CODE_SQL}
@@ -44,6 +44,9 @@ $P!{QUERY_STRING}
 order by t.trans_date]]>
 	</queryString>
 	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="contact_id" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="ref_id" class="java.lang.Integer">
@@ -555,7 +558,7 @@ order by t.trans_date]]>
 					<printWhenExpression><![CDATA[$F{ref_module}.equals("stock") || $F{ref_module}.equals("invoice")]]></printWhenExpression>
 				</reportElement>
 				<subreportParameter name="QUERY_PART_FOR_SUBREPORT">
-					<subreportParameterExpression><![CDATA[("t.id = '" + $F{ref_id} + "' and t._right = '" + $F{_right} + "'")]]></subreportParameterExpression>
+					<subreportParameterExpression><![CDATA[("t.contact_id = " + $F{contact_id} + " and t.id = '" + $F{ref_id} + "' and t._right = '" + $F{_right} + "'")]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="REPORT_RESOURCE_BUNDLE">
 					<subreportParameterExpression><![CDATA[$P{REPORT_RESOURCE_BUNDLE}]]></subreportParameterExpression>
