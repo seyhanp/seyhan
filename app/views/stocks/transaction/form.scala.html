@@ -63,22 +63,20 @@ width:calc(100% - 5px)
 				<div class="span6">
 					@tools.dropdowns.stock_depot(_form, false)
 
-					@inputText(_form("totalDiscountRate"),
-						'_label -> Messages("total_discount_rate"),
-						'class -> "input-mini rate",
-						'maxlength -> "5",
-						'onkeyup -> "calculateAllFieldsForStocks()"
+					@select(_form("isTaxInclude"),
+						options(Options.taxStatus),
+						'class -> "input-small",
+						'_label -> Messages("tax_status"),
+						'onchange -> "calculateAllFieldsForStocks()"
 					)
 
-					@if(isNotOpeningTrans) {
-						@if(isTransfer) {
-							@tools.dropdowns.stock_ref_depot(_form)
-						} else {
-							@tools.components.exchange_block("Input", "total")
-						}
-	
-						@tools.dropdowns.stock_trans_source(_form, rightBind)
-					}
+					@select(_form("roundingDigits"),
+						options("0"->"0", "1"->"1", "2"->"2"),
+						'class -> "input-small",
+						'_label -> Messages("rounding_digits"),
+						'onchange -> "findTotalsForStocks()",
+						'_default -> Messages("choose")
+					)
 
 					@inputText(_form("description"),
 						'_label -> Messages("description"),
@@ -331,23 +329,25 @@ width:calc(100% - 5px)
 							</div>
 
 							<div class="span4">
+
+								@inputText(_form("totalDiscountRate"),
+									'_label -> Messages("total_discount_rate"),
+									'class -> "input-mini rate",
+									'maxlength -> "5",
+									'onkeyup -> "calculateAllFieldsForStocks()"
+								)
+
 								@if(isNotOpeningTrans) {
-									@select(_form("isTaxInclude"),
-										options(Options.taxStatus),
-										'class -> "input-small",
-										'_label -> Messages("tax_status"),
-										'onchange -> "calculateAllFieldsForStocks()"
-									)
-			
-									@select(_form("roundingDigits"),
-										options("0"->"0", "1"->"1", "2"->"2"),
-										'class -> "input-small",
-										'_label -> Messages("rounding_digits"),
-										'onchange -> "findTotalsForStocks()",
-										'_default -> Messages("choose")
-									)
 									@tools.components.trans_point_select(_form)
 									@tools.components.private_code_select(_form)
+
+									@if(isTransfer) {
+										@tools.dropdowns.stock_ref_depot(_form)
+									} else {
+										@tools.components.exchange_block("Input", "total")
+									}
+				
+									@tools.dropdowns.stock_trans_source(_form, rightBind)
 								}
 	
 								@if(isSelling) {@tools.dropdowns.sale_seller(_form)}

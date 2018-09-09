@@ -198,16 +198,9 @@ function calculateFieldsForStocks(stockRowNo, datafield) {
 	}
 	
 	var basis = row.amount + factorEffect - row.discountAmount;
-	var taxTot1 = (row.taxRate  > 0 ? (basis * row.taxRate) / 100 : 0);
-	var taxTot2 = (row.taxRate2 > 0 ? (basis * row.taxRate2) / 100 : 0);
-	var taxTot3 = (row.taxRate3 > 0 ? (basis * row.taxRate3) / 100 : 0);
-	row.taxAmount = (taxTot1 + taxTot2 + taxTot3).roundup(pennyDigits);			
-
-	if ($("#isTaxInclude").val() === 'true') {
-		row.total = (basis + row.taxAmount).roundup(pennyDigits);
-	} else {
-		row.total = (basis).roundup(pennyDigits);
-	}
+	var taxing = findTaxAmount(row, basis);
+	row.taxAmount = taxing.taxAmount;			
+	row.total = taxing.total;
 
 	if (isNotOpeningTrans) {
 		if (datafield === 'excCode' || row.excRate <= 0 || row.excRate > 5) {
@@ -324,10 +317,8 @@ $(document).on("stock_select", function(event, data) {
 				row.discountAmount = (discount1 + discount2 + discount3).roundup(pennyDigits);
 			}
 			
-			var taxTot1 = (row.taxRate  > 0 ? (row.amount * row.taxRate) / 100 : 0);
-			var taxTot2 = (row.taxRate2 > 0 ? (row.amount * row.taxRate2) / 100 : 0);
-			var taxTot3 = (row.taxRate3 > 0 ? (row.amount * row.taxRate3) / 100 : 0);
-			row.taxAmount = (taxTot1 + taxTot2 + taxTot3).roundup(pennyDigits);			
+			var taxing = findTaxAmount(row, row.amount);
+			row.taxAmount = taxing.taxAmount;
 
 			var seller_id = $('#seller_id').val();
 			if (seller_id != undefined && seller_id.length > 0) {
@@ -378,6 +369,24 @@ $(document).on("stock_select", function(event, data) {
 });
 
 /**************************************************************************/
+
+function findTaxAmount(row, basis) {
+	if ($("#isTaxInclude").val() === 'false') {
+		var saltAmount = (row.taxRate  > 0 ? basis / ((row.taxRate / 100) + 1) : 0);
+		
+		var taxTot1 = basis - saltAmount;
+		var taxTot2 = (row.taxRate2 > 0 ? (saltAmount * row.taxRate2) / 100 : 0);
+		var taxTot3 = (row.taxRate3 > 0 ? (saltAmount * row.taxRate3) / 100 : 0);
+
+		return {"taxAmount": (taxTot1 + taxTot2 + taxTot3).roundup(pennyDigits), "total": (saltAmount).roundup(pennyDigits)};
+	} else {
+		var taxTot1 = (row.taxRate  > 0 ? (basis * row.taxRate) / 100 : 0);
+		var taxTot2 = (row.taxRate2 > 0 ? (basis * row.taxRate2) / 100 : 0);
+		var taxTot3 = (row.taxRate3 > 0 ? (basis * row.taxRate3) / 100 : 0);
+
+		return {"taxAmount": (taxTot1 + taxTot2 + taxTot3).roundup(pennyDigits), "total": (basis + row.taxAmount).roundup(pennyDigits)};
+	}
+}
 
 function findTotalsForStocks() {
 	var plusFactor = 0;
@@ -481,10 +490,8 @@ function findTotalsForStocks() {
 			basis -= rowTotalDiscountAmount;
 		} 
 
-		var taxTot1 = (row.taxRate  > 0 ? (basis * row.taxRate) / 100 : 0);
-		var taxTot2 = (row.taxRate2 > 0 ? (basis * row.taxRate2) / 100 : 0);
-		var taxTot3 = (row.taxRate3 > 0 ? (basis * row.taxRate3) / 100 : 0);
-		row.taxAmount = (taxTot1 + taxTot2 + taxTot3).roundup(pennyDigits);			
+		var taxing = findTaxAmount(row, basis);
+		row.taxAmount = taxing.taxAmount;			
 		
 		row.amount -= rowTotalDiscountAmount;
 		
@@ -541,12 +548,15 @@ function findTotalsForStocks() {
 	}
 	/********************************************************************/
 	var netTotal = subtotal - discountTotal;
+	if ($("#isTaxInclude").val() === 'false') {
+		netTotal -= taxTotal;
+	}
 	var total = total + plusFactorTotal - minusFactorTotal;
 
 	var withholdingAmount = 0;
 	if (typeof withholdingRate != 'undefined' && withholdingRate > 0) {
 		$('#withholdingRate').val(withholdingRate);
-		if (nettotal >= 1000) {
+		if (netTotal >= 1000) {
 			withholdingAmount = taxTotal * withholdingRate;
 			$('#withholdingAmount').val(formatMoney(withholdingAmount));
 		}

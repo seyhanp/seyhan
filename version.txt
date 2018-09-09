@@ -1,4 +1,7 @@
-﻿sürüm 1.0.21 - 29/07/2018
+﻿sürüm 1.0.22 - 09/09/2018
+	- stok ve fatura formlarında KDV Dahil seçildiğinde KDV değeri doğru hesaplanmıyordu, düzeltildi   
+
+sürüm 1.0.21 - 29/07/2018
 	- sipariş girişlerinde 11. satırdan sonra solda çıkması gereken scroll bar çıkmıyordu, düzeltildi   
 	- cari analiz raporunda stok hareketleri kısmında başka cari hesaba ait hareketler de çıkıyordu, düzeltildi
 	- yeni tanımlanan döviz birimi ile stok tanımlanıp hareket girişi yapılmak istenince, yeni girilen hareket satırı boş olarak geliyordu, düzeltildi

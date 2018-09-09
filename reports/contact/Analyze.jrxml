@@ -558,7 +558,7 @@ order by t.trans_date]]>
 					<printWhenExpression><![CDATA[$F{ref_module}.equals("stock") || $F{ref_module}.equals("invoice")]]></printWhenExpression>
 				</reportElement>
 				<subreportParameter name="QUERY_PART_FOR_SUBREPORT">
-					<subreportParameterExpression><![CDATA[("t.contact_id = " + $F{contact_id} + " and t.id = '" + $F{ref_id} + "' and t._right = '" + $F{_right} + "'")]]></subreportParameterExpression>
+					<subreportParameterExpression><![CDATA[("t.contact_id = " + $F{contact_id} + " and t.ref_id = " + $F{ref_id} + " and t._right = '" + $F{_right} + "'")]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="REPORT_RESOURCE_BUNDLE">
 					<subreportParameterExpression><![CDATA[$P{REPORT_RESOURCE_BUNDLE}]]></subreportParameterExpression>

@@ -52,24 +52,22 @@ width:calc(100% - 5px)
 				</div>
 
 				<div class="span6">
-					@select(_form("status.id"),
-						options(InvoiceTransStatus.options(if(_form("id").value == null || _form("id").value.isEmpty()) true else false)),
-						'class -> "input-medium",
-						'_label -> Messages("status"),
-						'_default -> Messages("choose"),
-						(if(_form("id").value != null && ! _form("id").value.isEmpty()) 'disabled -> "" else '_a -> "a")
-					)
 
-					@inputText(_form("realDate"),
-						'_label -> Messages("date.real"),
-						'class -> "input-medium"
-					)
+					@tools.dropdowns.stock_depot(_form, false)
 
-					@inputText(_form("totalDiscountRate"),
-						'_label -> Messages("total_discount_rate"),
-						'class -> "input-mini rate",
-						'maxlength -> "5",
-						'onkeyup -> "calculateAllFieldsForStocks()"
+					@select(_form("isTaxInclude"),
+						options(Options.taxStatus),
+						'class -> "input-small",
+						'_label -> Messages("tax_status"),
+						'onchange -> "calculateAllFieldsForStocks()"
+					)
+					
+					@select(_form("roundingDigits"),
+						options("0"->"0", "1"->"1", "2"->"2"),
+						'class -> "input-small",
+						'_label -> Messages("rounding_digits"),
+						'onchange -> "findTotalsForStocks()",
+						'_default -> Messages("choose")
 					)
 
 					@inputText(_form("description"),
@@ -322,23 +320,27 @@ width:calc(100% - 5px)
 							)
 						</div>
 						<div class="span4">
-							@tools.dropdowns.stock_depot(_form, false)
+
+							@select(_form("status.id"),
+								options(InvoiceTransStatus.options(if(_form("id").value == null || _form("id").value.isEmpty()) true else false)),
+								'class -> "input-medium",
+								'_label -> Messages("status"),
+								'_default -> Messages("choose"),
+								(if(_form("id").value != null && ! _form("id").value.isEmpty()) 'disabled -> "" else '_a -> "a")
+							)
+		
+							@inputText(_form("realDate"),
+								'_label -> Messages("date.real"),
+								'class -> "input-medium"
+							)
 
 							@tools.dropdowns.invoice_trans_source(_form, rightBind)
 
-							@select(_form("isTaxInclude"),
-								options(Options.taxStatus),
-								'class -> "input-small",
-								'_label -> Messages("tax_status"),
-								'onchange -> "calculateAllFieldsForStocks()"
-							)
-							
-							@select(_form("roundingDigits"),
-								options("0"->"0", "1"->"1", "2"->"2"),
-								'class -> "input-small",
-								'_label -> Messages("rounding_digits"),
-								'onchange -> "findTotalsForStocks()",
-								'_default -> Messages("choose")
+							@inputText(_form("totalDiscountRate"),
+								'_label -> Messages("total_discount_rate"),
+								'class -> "input-mini rate",
+								'maxlength -> "5",
+								'onkeyup -> "calculateAllFieldsForStocks()"
 							)
 
 							@if(isSelling) {@tools.dropdowns.sale_seller(_form)}
