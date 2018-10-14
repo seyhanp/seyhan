@@ -175,7 +175,7 @@ public class ProfileData {
 		this.gnel_excCode = GlobalCons.defaultExcCode;
 		this.gnel_hasExchangeSupport = Boolean.TRUE;
 
-		this.gnel_reportUnit = ReportUnit.Pdf;
+		this.gnel_reportUnit = ReportUnit.Html;
 		this.gnel_docNoIncType = DocNoIncType.Manual;
 		this.gnel_receiptNoRnwType = ReceiptNoRnwType.Free;
 		this.gnel_pennyDigitNumber = 2;

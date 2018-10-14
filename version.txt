@@ -1,4 +1,7 @@
-﻿sürüm 1.0.22 - 09/09/2018
+﻿sürüm 1.0.23 - 14/10/2018
+	- java jdk 8 e geçildi   
+
+sürüm 1.0.22 - 09/09/2018
 	- stok ve fatura formlarında KDV Dahil seçildiğinde KDV değeri doğru hesaplanmıyordu, düzeltildi   
 
 sürüm 1.0.21 - 29/07/2018

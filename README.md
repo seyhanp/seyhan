@@ -39,7 +39,7 @@ You may visit the following sites to get more information about the project
 
 | Tools             | Versions | Purpose                                        |
 |-------------------|:--------:|------------------------------------------------|
-| Java              |   1.6    | Backend development platform                   |
+| Java              |   1.8    | Backend development platform                   |
 | Scala             |   2.10   | Template preparing language                    |
 | Play Framework    |  2.2.4   | RestFUL WEB framework for Java and Scala       |
 | Linux             |   Mint   | Open source operating system                   |
