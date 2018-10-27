@@ -44,7 +44,7 @@ header.link-button a strong {
 }
 
 
-ul.downloads {
+ul.refer-to {
   list-style:none;
   height:40px;
   padding: 5px;
@@ -53,17 +53,17 @@ ul.downloads {
   width:200px;
 }
 
-.downloads li {
+.refer-to li {
   width:100%;
   float:left;
   height:40px;
 }
 
-.downloads li a {
+.refer-to li a {
   border-radius:5px;
 }
 
-.downloads a {
+.refer-to a {
   line-height:1;
   font-size:11px;
   color:#676767;
@@ -73,21 +73,21 @@ ul.downloads {
   height:34px;
 }
 
-.downloads a:hover, .downloads a:focus {
+.refer-to a:hover, .refer-to a:focus {
   color:#675C5C;
   font-weight:bold;
 }
 
-.downloads ul a:active {
+.refer-to ul a:active {
   background-color:#f0f0f0;
 }
 
-.downloads li + li + li {
+.refer-to li + li + li {
   border-right:none;
   width:89px;
 }
 
-.downloads a strong {
+.refer-to a strong {
   font-size:14px;
   display:block;
   color:#222;
