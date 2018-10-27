@@ -1,6 +1,7 @@
 title:
 description: A free and open source ERP project aiming to help middle-sized businesses to manage their operations
 logo : /assets/img/logo.png
+app_version: 1.0.23
 
 show_downloads: true
 

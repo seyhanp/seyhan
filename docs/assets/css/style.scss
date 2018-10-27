@@ -6,3 +6,36 @@
 header h1 {
 	display: none;
 }
+
+header .link-button {
+	list-style: none;
+	height: 40px;
+	padding: 3px;
+	background: #f4f4f4;
+	border-radius: 5px;
+	border: 1px solid #e0e0e0;
+	width: 810px;
+	float: left;
+	border: 1px solid #e0e0e0;
+	height: 40px;
+	border-radius:5px 0 0 5px;
+}
+
+header .link-button a {
+	line-height:1;
+	font-size:11px;
+	color:#676767;
+	display:block;
+	text-align:center;
+	padding-top:6px;
+	height:34px
+}
+
+header .link-button a:hover, header .link-button a:focus {
+	color:#675C5C;
+	font-weight:bold
+}
+
+header .link-button a:active {
+	background-color:#f0f0f0
+}
