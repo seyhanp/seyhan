@@ -7,7 +7,7 @@ header h1 {
 	display: none;
 }
 
-header .link-button {
+header.link-button {
 	list-style: none;
 	padding: 3px;
 	background: #f4f4f4;
@@ -18,7 +18,7 @@ header .link-button {
 	border-radius:5px;
 }
 
-header .link-button a {
+header.link-button a {
 	line-height:1;
 	font-size:11px;
 	color:#676767;
@@ -28,28 +28,67 @@ header .link-button a {
 	height:34px;
 }
 
-header .link-button a:hover, header .link-button a:focus {
+header.link-button a:hover, header.link-button a:focus {
 	color:#675C5C;
 	font-weight:bold
 }
 
-header .link-button a:active {
+header.link-button a:active {
 	background-color:#f0f0f0
 }
 
-header .link-button a strong {
+header.link-button a strong {
     font-size: 14px;
     display: block;
     color: #222;
 }
 
-small a {
-  font-size:11px;
-  color:#777;
-  margin-top:-0.3em;
-  display:block;
+
+ul.downloads {
+  list-style:none;
+  height:40px;
+  padding: 5px;
+  background: #f4f4f4;
+  border:1px solid #e0e0e0;
+  width:200px;
 }
 
-small a:hover {
-  color:#777;
+.downloads li {
+  width:100%;
+  float:left;
+  height:40px;
+}
+
+.downloads li a {
+  border-radius:5px;
+}
+
+.downloads a {
+  line-height:1;
+  font-size:11px;
+  color:#676767;
+  display:block;
+  padding-top:6px;
+  padding-left:16px;
+  height:34px;
+}
+
+.downloads a:hover, .downloads a:focus {
+  color:#675C5C;
+  font-weight:bold;
+}
+
+.downloads ul a:active {
+  background-color:#f0f0f0;
+}
+
+.downloads li + li + li {
+  border-right:none;
+  width:89px;
+}
+
+.downloads a strong {
+  font-size:14px;
+  display:block;
+  color:#222;
 }
