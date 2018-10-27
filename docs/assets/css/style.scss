@@ -43,7 +43,13 @@ header .link-button a strong {
     color: #222;
 }
 
-header .refer-to {
-	list-style: none;
-	padding-top: 50px;
+small a {
+  font-size:11px;
+  color:#777;
+  margin-top:-0.3em;
+  display:block;
+}
+
+small a:hover {
+  color:#777;
 }
