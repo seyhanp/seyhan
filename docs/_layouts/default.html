@@ -26,14 +26,6 @@
           <a href="downloads/seyhan-{{site.app_version}}.zip">Download <strong>seyhan-{{site.app_version}}.zip</strong></a>
         </p>
 
-      </header>
-      <section>
-
-      {{ content }}
-
-      </section>
-      <footer>
-
         {% if site.show_downloads %}
         <ul class="downloads">
           <li><a href="{{ site.github.zip_url }}">Download <strong>ZIP File</strong></a></li>
@@ -42,6 +34,21 @@
         </ul>
         {% endif %}
 
+        <p class="refer-to">
+          Please refer to
+          <ul>
+            <li><a href="">Wiki pages</a></li>
+            <li><a href="">Community group</a></li>
+          </ul>
+        </p>
+
+      </header>
+      <section>
+
+      {{ content }}
+
+      </section>
+      <footer>
         <p><small>Mustafa Dumlupinar &mdash; <a href="mailto:mdumlupinar@gmail.com">mdumlupinar@gmail.com</a></small></p>
       </footer>
     </div>
