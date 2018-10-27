@@ -57,19 +57,22 @@ footer .refer-to-title {
 	border: 1px solid #e0e0e0;
 	border-radius:5px 5px 0 0;
 	padding-left: 5px;
+	font-size: 11px;
 }
 
 footer .refer-to {
 	background: #f4f4f4;
-	width: 230px;
+	width: 245px;
 	border: 1px solid #e0e0e0;
 	border-radius:0 0 5px 5px;
 	list-style: none;
+	padding-left: 25px
 }
 
 footer .refer-to a {
 	line-height:1;
 	font-size:12px;
+	color: #222;
 }
 
 footer .refer-to a:hover, footer .refer-to a:focus {
