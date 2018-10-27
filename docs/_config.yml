@@ -5,6 +5,5 @@ logo : /public/img/seyhan_p_d.png
 show_downloads: true
 
 theme: jekyll-theme-cayman
-  plugins:
-  - jekyll-seo-tag
-  author: Mustafa Dumlupinar
+
+google_analytics: UA-57560424-1
