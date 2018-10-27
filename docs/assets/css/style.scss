@@ -9,16 +9,13 @@ header h1 {
 
 header .link-button {
 	list-style: none;
-	height: 40px;
 	padding: 3px;
 	background: #f4f4f4;
-	border-radius: 5px;
-	border: 1px solid #e0e0e0;
-	width: 810px;
+	width: 264px;
 	float: left;
 	border: 1px solid #e0e0e0;
 	height: 40px;
-	border-radius:5px 0 0 5px;
+	border-radius:5px;
 }
 
 header .link-button a {
@@ -28,7 +25,7 @@ header .link-button a {
 	display:block;
 	text-align:center;
 	padding-top:6px;
-	height:34px
+	height:34px;
 }
 
 header .link-button a:hover, header .link-button a:focus {
@@ -38,4 +35,10 @@ header .link-button a:hover, header .link-button a:focus {
 
 header .link-button a:active {
 	background-color:#f0f0f0
+}
+
+header .link-button a strong {
+    font-size: 14px;
+    display: block;
+    color: #222;
 }
