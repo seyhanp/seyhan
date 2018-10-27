@@ -1,85 +1,79 @@
 ## Welcome to seyhanproject pages
 
-seyhan is an open source Enterprise Reource Planning (ERP) project. With its features, the project is aiming to help small and middle sized companies in Turkey. seyhan is easy to install and use. It can be used under every operating system and it can work with different databases, browsers, printers... etc.
+seyhan is an open source Enterprise Reource Planning (ERP) project. The project is aiming to help small and middle sized companies intender to manage their money and product transactions. It is very easy to install and use seyhan, and can be used on all the popular operating systems. In addition to this, seyhan can work with different databases, browsers, printers... etc.
 
-You can download the project for free. seyhan has no time limitation or restriction for user number.
+You can download and use the project for free. There is no time limit or restriction on user number.
 
 ## Simple installation
 
-You should have first Java JDK 6 or any later versions on your operating system. If you don't have any and don't know how to, you can learn from here -> [Installation Steps](http://www.seyhanproject.com/docs/#/others/install)
+You need to have Java JDK 8 or any later versions on your operating system. If you don't have any and don't know how to, please refer to [Installation Steps](http://www.seyhanproject.com/docs/#/others/install)
 
-Please unzip seyhan.zip file you downloaded into any folder. In that folder, run start.bat (for Windows systems) or start.sh (for other Linux/Unix based systems). Copy and paste http://localhost:9000 in the address bar of your favorite browser and press enter. After that, you will see the login form of seyhan. In this form, please write `super` in username section and `1234` in password box. That's all, you are in the system.
+Please first unzip seyhan zip file in any folder you want. Then, please go in seyhan folder, and run start.bat (for Windows systems) or start.sh (for Mac/Linux/Unix systems). To see the login page, please copy and paste this link http://localhost:9000 into the address bar of your favorite browser and press enter. Lastly, you should see the login form of seyhan. In this form, please write `super` in username section and `1234` in password box. That's all, you can use the system.
 
-## Printer Server
+Please note that: Installation package is just a zip file and it isn't an exe file. if you are warned about viruses, please simply ignore warning messages. If you want to uninstall seyhan, the only thing you need to do is to delete the folder you have created for seyhan.
 
-seyhan has a developed printing system in it. You can print out your reports and documents even if your printer(s) is in different countries. You can refer [here](http://www.seyhanproject.com/docs/#/printing/pservice) for more detail. In addition to this, you can look at [documents](http://www.seyhanproject.com/docs) section for special install and more.
+## Printer Server - pserver
 
-Installation packege is just a zip file and it has no exe file in it. So, please ignore warning messages, if you are warned about viruses. If you want to uninstall seyhan, the only thing you need to do is that delete the folder you opened for seyhan.
+seyhan offers an advanced document printing system, pserver. With the help of pserver, you can easily print your reports and documents out even if your printer is in different network. You can refer [here](http://www.seyhanproject.com/docs/#/printing/pservice) to learn more. And also, you can refer to the [documents](http://www.seyhanproject.com/docs) section for the installation steps and more.
 
 ## You can reduce your expenses
 * Free to install
-* Free to use
-* There is no monthly or yeraly service charging
-* As you know, ERP and accounting projects are generally developed for windows systems. Thankfully, you can use seyhan on your windows, mac and linux systems.
-* Database licenses may costly for companies. You can reduce your license costs by using open source databases like MySQL and PostgreSQL.
-
-## Frequently asked questions
-* Why is seyhan a browser based program?
-* Will our data be open to internet since seyhan is a web based project?
-* Has/Will seyhan any limitation?
+* Free to use (no limitation for time and user number)
+* No monthly or yearly charge
+* Can be used on Windows, Mac and Linux systems.
+* Can work with several databases like MySQL, MS-SQL Server and PostgreSQL.
 
 ## Features
 
 ### Open source
-You can use the project for free of charge, even better you can have all the source code of seyhan.
+You can use seyhan for free, even better you can have all the source code of the project.
 
-### Operating system independent
-seyhan can work under every operating system in which Java JDK 1.6+ can perform. Briefly, linux, unix, mac, windows...
+### OS independent
+seyhan can work on every popular Operating System in which Java JDK 1.8+ can perform. Briefly, Mac, Windows, Linux and Unix...
 
 ### Database independent
-seyhan can work with all the popular relational databases such as mysql, postgresql, ms-sqlserver, h2...
+seyhan can work with all the popular relational databases such as MySQL, MS-SQL Server and PostgreSql...
 
 ### Browser independent
-seyhan is web based project and compatible with firefox, internet explorer, chrome...
+seyhan is a web based project and compatible with Firefox, IE and Chrome browsers
 
 ### No limitation
-seyhan has no any kind of limitation. It is completely free of charge.
+seyhan has no limitation. It is completely free to download and use.
 
 ### Support for different type of printers
-You can save your report and documents as pdf, excel or plain text file, or print out from dot matrix or laser printers.
+You can save your report and documents as pdf, excel or plain text file, or print out from dot matrix or laser printers. It doesn't matter that your printer is placed in a different network.
 
 ### Support for multi users
 Many users can use the program in parallel.
 
 ### Has multiple language
-You can use language options on user interfaces and reports. For now, Turkish and English are supported languages.
+You can specify the language for both UI and report tags. The language option can be extended for other languages but right now, Turkish and English are the supported languages.
 
 ### Easy to install and use
-You can use seyhan immediately if your computer has JDK 6+ on it. The only thing to do is that open the zip file in a folder and run start script. seyhan has user friendly interfaces with its theme and form design.
+You can use seyhan immediately if your computer has JDK 8+ on it. The only thing you need to do is to open the zip file in a folder and run start script. seyhan has user friendly interfaces with well designed theme and form designs.
 
 ## Modules
 
 ### Stock
-You can follow all your profit or loss stemming from the processes periodically incoming and outgoing goods which you buy and sell in your company.
+You can trace all your goods' transactions, and also the profit or loss stemming from these processes.
 
 ### Contact
-This is a module in which you can follow current accounts of your buyers and sellers. You can hold your contacts' debt and credit info in different currencies.
+With the help of this module, you can chronously follow the running accounts of your buyers and sellers. You can hold your contacts' debt and credit info in different currencies.
 
 ### Safe
-This is a module to follow cash transactions (inputs and outputs) in different currencies. Different currencies and valuable metal accounts can be followed in different safes.
+Safe module helps you to follow your cash transactions in different currencies. Different currencies and valuable metal accounts can also be managed in different safes.
 
 ### Bank
-This is a module to follow bank transactions (inputs and outputs) in different currencies.
+Like in Safe module, this module helps you to follow your bank transactions in different currencies. Again, different currencies and valuable metal accounts can also be managed in different bank accounts.
 
 ### Order
-This is a module to follow received and delivered orders. You can list all the received, delivered and waiting orders on customer basis.
+You can manage your receiving and delivering orders with the help of this module. In addition, you can list all the received, delivered and waiting orders on customer basis.
 
 ### Invoice
-This is a module to follow all your invoices. You need to first define all your contact and stock information before you start to use this module.
+Like in Order module, you can manage all your invoices; incoming, outgoing and waiting.
 
 ### General
-In this module, you can define currencies, exchange rates and special transaction codes which are being used throughout the program.
+In this module, you can define the currencies and exchange rates you want to use, and also specify the transaction codes which are being used to find some specific transactions throughout the program.
 
 ### Admin
 In this module, you can define your users, companies and special documents which are independent from users and other modules.
-
