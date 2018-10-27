@@ -1,2 +1,10 @@
-theme: jekyll-theme-cayman
+title: seyhan project
+description: a free and open source ERP project aiming to help to small and middle sized businesses to manage their operations
+logo : /public/img/seyhan_p_d.png
+
 show_downloads: true
+
+theme: jekyll-theme-cayman
+  plugins:
+  - jekyll-seo-tag
+  author: Mustafa Dumlupinar
