@@ -1,4 +1,4 @@
-## Welcome to seyhanproject pages
+## Welcome to seyhan project
 
 seyhan is an open source Enterprise Reource Planning (ERP) project. The project is aiming to help small and middle sized companies intender to manage their money and product transactions. It is very easy to install and use seyhan, and can be used on all the popular operating systems. In addition to this, seyhan can work with different databases, browsers, printers... etc.
 
@@ -55,7 +55,7 @@ You can use seyhan immediately if your computer has JDK 8+ on it. The only thing
 ## Modules
 
 ### Stock
-You can trace all your goods' transactions, and also the profit or loss stemming from these processes.
+You can trace all the transactions of your goods, and also the profit or loss stemming from your operations.
 
 ### Contact
 With the help of this module, you can chronously follow the running accounts of your buyers and sellers. You can hold your contacts' debt and credit info in different currencies.
