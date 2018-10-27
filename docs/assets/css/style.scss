@@ -46,3 +46,44 @@ header .link-button a strong {
     display: block;
     color: #222;
 }
+
+
+footer li {
+	width: 200px;
+}
+
+footer .refer-to {
+	list-style: none;
+	padding: 10px;
+	background: #f4f4f4;
+	width: 264px;
+	float: left;
+	border: 1px solid #e0e0e0;
+	height: 50px;
+	border-radius:2px;
+}
+
+footer .refer-to a {
+	line-height:1;
+	font-size:10px;
+	color:#676767;
+	display:block;
+	text-align:center;
+	padding-top:6px;
+	height:32px;
+}
+
+footer .refer-to a:hover, footer .refer-to a:focus {
+	color:#675C5C;
+	font-weight:bold
+}
+
+footer .refer-to a:active {
+	background-color:#f0f0f0
+}
+
+footer .refer-to a strong {
+    font-size: 14px;
+    display: block;
+    color: #222;
+}
