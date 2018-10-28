@@ -27,44 +27,35 @@ seyhan offers an advanced document printing system, pserver. With the help of ps
 
 #### Open source
 You can use seyhan for free, even better you can have all the source code of the project.
----
 
 #### OS independent
 seyhan can work on every popular Operating System in which Java JDK 1.8+ can perform. Briefly, Mac, Windows, Linux and Unix...
----
 
 #### Database independent
 seyhan can work with all the popular relational databases such as MySQL, MS-SQL Server and PostgreSql...
----
 
 #### Browser independent
 seyhan is a web based project and compatible with Firefox, IE and Chrome browsers
----
 
 #### No limitation
 seyhan has no limitation. It is completely free to download and use.
----
 
 #### Support for different type of printers
 You can save your report and documents as pdf, excel or plain text file, or print out from dot matrix or laser printers. It doesn't matter that your printer is placed in a different network.
----
 
 #### Support for multi users
 Many users can use the program in parallel.
----
 
 #### Has multiple language
 You can specify the language for both UI and report tags. The language option can be extended for other languages but right now, Turkish and English are the supported languages.
----
 
 #### Easy to install and use
 You can use seyhan immediately if your computer has JDK 8+ on it. The only thing you need to do is to open the zip file in a folder and run start script. seyhan has user friendly interfaces with well designed theme and form designs.
----
 
 ### Modules
 
-| Module  | Description |
-| ------- | ----------- |
+| | |
+|-|-|
 | _**Stock**_   | You can trace all the transactions of your goods, and also the profit or loss stemming from your operations. |
 | _**Contact**_ | With the help of this module, you can timely follow the running accounts of your buyers and sellers. You can hold your contacts' debt and credit info in different currencies. |
 | _**Safe**_    | Safe module helps you to follow your cash transactions in different currencies. Different currencies and valuable metal accounts can also be managed in different safes. |
