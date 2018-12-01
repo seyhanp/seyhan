@@ -27,6 +27,16 @@ import java.util.Map;
 
 import javax.persistence.PersistenceException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.avaje.ebean.Page;
+
+import controllers.Application;
+import controllers.global.Profiles;
+import enums.Module;
+import enums.Right;
+import enums.RightLevel;
 import meta.GridHeader;
 import meta.PageExtend;
 import meta.RightBind;
@@ -34,10 +44,6 @@ import models.SafeTrans;
 import models.search.SafeTransSearchParam;
 import models.temporal.Pair;
 import models.temporal.TransMultiplier;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import play.data.Form;
 import play.i18n.Messages;
 import play.mvc.Controller;
@@ -51,14 +57,6 @@ import utils.RefModuleUtil;
 import views.html.safes.transaction.form;
 import views.html.safes.transaction.list;
 import views.html.tools.components.trans_multiplier;
-
-import com.avaje.ebean.Page;
-
-import controllers.Application;
-import controllers.global.Profiles;
-import enums.Module;
-import enums.Right;
-import enums.RightLevel;
 
 /**
  * @author mdpinar
@@ -191,7 +189,7 @@ public class Transes extends Controller {
 				}
 			}
 
-			String res = RefModuleUtil.save(model, Module.safe);
+			String res = RefModuleUtil.save(false, model, Module.safe);
 			if (res != null) {
 				flash("error", Messages.get(res));
 				return badRequest(form.render(filledForm, rightBind));
@@ -310,7 +308,12 @@ public class Transes extends Controller {
 			clone.transYear = DateUtils.getYear(stm.transDate);
 			clone.transNo = stm.transNo;
 			clone.description = stm.description;
-			RefModuleUtil.save(clone, Module.safe);
+
+			clone.refExcCode = safeTrans.refExcCode;
+			clone.refExcRate = safeTrans.refExcRate;
+			clone.refExcEquivalent = safeTrans.refExcEquivalent;
+
+			RefModuleUtil.save(true, clone, Module.safe);
 
 			return ok(Messages.get("saved", Messages.get(clone.right.key)));
 		}

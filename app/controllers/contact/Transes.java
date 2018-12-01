@@ -193,7 +193,7 @@ public class Transes extends Controller {
 				}
 			}
 
-			String res = RefModuleUtil.save(model, Module.contact);
+			String res = RefModuleUtil.save(false, model, Module.contact);
 			if (res != null) {
 				flash("error", Messages.get(res));
 				return badRequest(form.render(filledForm, rightBind));
@@ -312,7 +312,12 @@ public class Transes extends Controller {
 			clone.transYear = DateUtils.getYear(stm.transDate);
 			clone.transNo = stm.transNo;
 			clone.description = stm.description;
-			RefModuleUtil.save(clone, Module.contact);
+
+			clone.refExcCode = contactTrans.refExcCode;
+			clone.refExcRate = contactTrans.refExcRate;
+			clone.refExcEquivalent = contactTrans.refExcEquivalent;
+
+			RefModuleUtil.save(true, clone, Module.contact);
 
 			return ok(Messages.get("saved", Messages.get(clone.right.key)));
 		}

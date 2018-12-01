@@ -23,6 +23,16 @@ import java.util.List;
 
 import javax.persistence.OptimisticLockException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.avaje.ebean.Ebean;
+
+import controllers.global.Profiles;
+import enums.DocNoIncType;
+import enums.Module;
+import enums.Right;
+import enums.TransType;
 import models.AbstractBaseTrans;
 import models.AbstractDocTrans;
 import models.AbstractStockTrans;
@@ -41,19 +51,7 @@ import models.SafeTrans;
 import models.SafeTransSource;
 import models.WaybillTrans;
 import models.temporal.Pair;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import play.i18n.Messages;
-
-import com.avaje.ebean.Ebean;
-
-import controllers.global.Profiles;
-import enums.DocNoIncType;
-import enums.Module;
-import enums.Right;
-import enums.TransType;
 
 /**
  * @author mdpinar
@@ -71,15 +69,15 @@ public class RefModuleUtil {
 		BASE_MODULE_LIST.add(Module.bank);
 	}
 
-	public static String save(AbstractBaseTrans source, Module module) {
-		return save(source, module, null, false);
+	public static String save(boolean isClone, AbstractBaseTrans source, Module module) {
+		return save(isClone, source, module, null, false);
 	}
 
-	public static String save(AbstractBaseTrans source, Module module, Contact extraContact) {
-		return save(source, module, extraContact, false);
+	public static String save(boolean isClone, AbstractBaseTrans source, Module module, Contact extraContact) {
+		return save(isClone, source, module, extraContact, false);
 	}
 
-	public static String save(AbstractBaseTrans source, Module module, Contact extraContact, boolean isTransactionNeeded) {
+	public static String save(boolean isClone, AbstractBaseTrans source, Module module, Contact extraContact, boolean isTransactionNeeded) {
 		ContactTrans oldContactTrans = null;
 		SafeTrans oldSafeTrans = null;
 		BankTrans oldBankTrans = null;
@@ -87,7 +85,7 @@ public class RefModuleUtil {
 		AbstractDocTrans newTrans = null;
 		Module orphanModule = null;
 		
-		if (source.refId != null && source.refOldModule != null) {
+		if (! isClone && source.refId != null && source.refOldModule != null) {
 			switch (source.refOldModule) {
 				case contact: {
 					oldContactTrans = ContactTrans.findById(source.refId);
@@ -189,23 +187,13 @@ public class RefModuleUtil {
 				newTrans.refModule = module;
 				newTrans.transType = (source.transType.equals(TransType.Debt) || source.transType.equals(TransType.Input) ? TransType.Credit : TransType.Debt);
 
-				if (Profiles.chosen().gnel_hasExchangeSupport) {
-					newTrans.amount = source.refExcEquivalent;
-					if (newTrans.transType.equals(TransType.Debt)) {
-						newTrans.debt = newTrans.amount;
-						newTrans.credit = 0d;
-					} else {
-						newTrans.debt = 0d;
-						newTrans.credit = newTrans.amount;
-					}
-					newTrans.excCode = source.refExcCode;
-					newTrans.excRate = source.refExcRate;
-					newTrans.excEquivalent = source.excEquivalent;
-				} else {
-					newTrans.amount = amount;
-					newTrans.credit = debt;
-					newTrans.debt = credit;
-				}
+				newTrans.amount = amount;
+				newTrans.credit = debt;
+				newTrans.debt = credit;
+
+				newTrans.excCode = source.refExcCode;
+				newTrans.excRate = source.refExcRate;
+				newTrans.excEquivalent = source.excEquivalent;
 
 				newTrans.transDate = source.transDate;
 				newTrans.transNo = source.transNo;
@@ -213,9 +201,6 @@ public class RefModuleUtil {
 				newTrans.transYear = source.transYear;
 				newTrans.transMonth = source.transMonth;
 				newTrans.description = source.description;
-				
-				log.info("newTrans.expense : " + newTrans.bankExpense + " ->  newTrans.expenseAmount : " + newTrans.bankExpenseAmount);
-				log.info("source.expense : " + source.bankExpense + " ->  source.expenseAmount : " + source.bankExpenseAmount);
 
 				if (newTrans.id == null) {
 					if (Profiles.chosen().gnel_docNoIncType.equals(DocNoIncType.Full_Automatic)) newTrans.transNo = DocNoUtils.findLastTransNo(newTrans.right);
@@ -480,7 +465,6 @@ public class RefModuleUtil {
 		if (trans.refModule == null) return;
 
 		switch (trans.refModule) {
-
 			case contact: {
 				refTrans = ContactTrans.findById(trans.refId);
 				if (refTrans != null) {
@@ -513,9 +497,8 @@ public class RefModuleUtil {
 		}
 		
 		if (refTrans == null) {
-			trans.refModule = null;
 			log.warn("Trans has a reflection link but there is no the same reflection at other side!");
-			log.warn("---> Right : " + trans.right + " Id : " + trans.id + " Reflection Module : " + trans.refModule);
+			log.warn("---> Ref Id : " + trans.refId + " Right : " + trans.right + " Id : " + trans.id + " Reflection Module : " + trans.refModule);
 			return;
 		}
 

@@ -353,7 +353,7 @@ public class Transes extends Controller {
 		
 		boolean isNew = (model.id == null);
 
-		String res = RefModuleUtil.save(model, Module.invoice, model.contact);
+		String res = RefModuleUtil.save(false, model, Module.invoice, model.contact);
 		if (res != null) {
 			flash("error", Messages.get(res));
 			return badRequest(form.render(filledForm, rightBind, InvoiceTransRows.build(model)));
@@ -570,7 +570,7 @@ public class Transes extends Controller {
 				clone.refModule = null;
 			}
 
-			String res = RefModuleUtil.save(clone, Module.invoice, clone.contact);
+			String res = RefModuleUtil.save(true, clone, Module.invoice, clone.contact);
 			if (res != null) {
 				flash("error", Messages.get(res));
 				return badRequest(trans_multiplier.render(filledForm, right));

@@ -421,7 +421,7 @@ public class TransApprovals extends Controller {
 						master.realDate = (trans.realDate != null ? trans.realDate : trans.transDate);
 					}
 
-					RefModuleUtil.save(master, Module.invoice, master.contact, false);
+					RefModuleUtil.save(true, master, Module.invoice, master.contact, false);
 
 					Ebean.createSqlUpdate("update waybill_trans set invoice_id = :invoice_id, is_completed = :is_completed where id in (:id)")
 							.setParameter("id", entry.getValue())
@@ -656,7 +656,7 @@ public class TransApprovals extends Controller {
 		master.factors = factors;
 		master.relations = relations;
 
-		RefModuleUtil.save(master, Module.invoice, master.contact, false);
+		RefModuleUtil.save(true, master, Module.invoice, master.contact, false);
 
 		Ebean.createSqlUpdate("update waybill_trans set invoice_id = :invoice_id, is_completed = :is_completed where id = :id")
 				.setParameter("id", sourceId)

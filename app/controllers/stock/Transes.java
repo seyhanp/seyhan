@@ -344,7 +344,7 @@ public class Transes extends Controller {
 
 		if (Profiles.chosen().stok_isRowCombining) doRowCombining(model);
 
-		String res = RefModuleUtil.save(model, Module.stock, model.contact);
+		String res = RefModuleUtil.save(false, model, Module.stock, model.contact);
 		if (res != null) {
 			flash("error", Messages.get(res));
 			return badRequest(form.render(filledForm, rightBind, StockTransRows.build(model)));
@@ -554,7 +554,7 @@ public class Transes extends Controller {
 				clone.refModule = null;
 			}
 
-			String res = RefModuleUtil.save(clone, Module.stock, clone.contact);
+			String res = RefModuleUtil.save(true, clone, Module.stock, clone.contact);
 			if (res != null) {
 				flash("error", Messages.get(res));
 				return badRequest(trans_multiplier.render(filledForm, right));

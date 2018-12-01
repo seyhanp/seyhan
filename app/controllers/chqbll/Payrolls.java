@@ -281,7 +281,7 @@ public class Payrolls extends Controller {
 		String res = null;
 		try {
 			if (isNormalPayroll(rightBind.value)) {
-				res = RefModuleUtil.save(model, rightBind.value.module, model.contact);
+				res = RefModuleUtil.save(false, model, rightBind.value.module, model.contact);
 			} else {
 				if (model.id == null) {
 					model.save();
