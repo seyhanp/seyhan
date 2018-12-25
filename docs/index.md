@@ -8,7 +8,7 @@ seyhan projesini ücretsiz olarak indirebilirsiniz. Herhangi bir süre veya kull
 
 Kurulum işlemi için öncelikle sisteminiz Java JDK 8 ya da sonrası bir sürümün kurulu olması gerekiyor. Kurulu değilse [Kurulum Adımları](http://www.seyhanproject.com/docs/#/others/install) nasıl kuracağınızı öğrenebilirsiniz.
 
-İndirdiğiniz seyhan.zip dosyasını bilgisayarınızın herhangi bir dizinine açın. Bu dizinde bulunan (windows için) start.bat | (diğer sistemler için) start.sh dosyasını çalıştırın. Tarayıcınızdan http://localhost:9000 yazdıktan sonra gelen login formunda kullanıcı : `super`, şifre : `1234` yazın, hepsi bu.
+İndirdiğiniz seyhan.zip dosyasını bilgisayarınızın herhangi bir dizinine açın. Bu dizinde bulunan (windows için) start.bat (diğer sistemler için) start.sh dosyasını çalıştırın. Tarayıcınızdan http://localhost:9000 yazdıktan sonra gelen login formunda kullanıcı : `super`, şifre : `1234` yazın, hepsi bu.
 
 seyhan-pserver projesi hakkında detaylı bilgi için [şuraya](http://seyhanproject.com/docs/#/printing/pservice) bakabilirsiniz. Ayrıca özel kurulum ve daha fazlası için de [belgeler](http://seyhanproject.com/docs) kısmına bakabilirsiniz.
 
@@ -20,7 +20,7 @@ Kurulum zip dosyasıdır ve içerisinde herhangi bir exe dosya bulunmamaktadır,
 * Genel olarak muhasebe projeleri Windows işletim sistemleri üzerine geliştiriliyor. seyhan ile artık bilgilerinizi Mac ve Linux işletim sistemlerinde de tutabilirsiniz.
 * Veritabanı lisansları işletmeler için ciddi maliyet kalemleri olabiliyor. MySQL ve Postgresql gibi açık kaynak ve güçlü veritabanlarını kullanarak maliyetlerinizi azaltabilirsiniz.
 
-### Sık Sorulan Sorular
+### Sıkça Sorulan Sorular
 
 * Neden masaüstü uygulaması değil?
 * Uygulama web tabanlı olduğu için verilerimiz İnternet'e mi açılacak?
