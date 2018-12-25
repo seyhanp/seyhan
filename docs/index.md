@@ -1,66 +1,96 @@
-## Welcome to seyhan project
+## seyhan projesine hoşgeldiniz
 
-seyhan is an open source Enterprise Resource Planning (ERP) project. The project is aiming to help small and middle sized companies which intend to manage their money and goods' transactions. It is very easy to install and use seyhan, and can be used on all the popular operating systems. In addition to this, seyhan can work with different databases, browsers, printers... etc.
+seyhan açık kaynak kodlu, kurulumu ve kullanımı kolay ücretsiz bir ön muhasebe programıdır. Birçok işletim sistemi, veritabanı, tarayıcı ve yazıcı ile sorunsuz bir şekilde çalışabilir.
 
-You can download and use the project for free. There is no time limit or restriction on user number.
+seyhan projesini ücretsiz olarak indirebilirsiniz. Herhangi bir süre veya kullanım sınırlaması yoktur.
 
-### Simple installation
+### Basit kurulum
 
-You need to have Java JDK 8 or any later versions on your operating system. If you don't have any and don't know how to, please refer to [Installation Steps](http://www.seyhanproject.com/docs/#/others/install)
+Kurulum işlemi için öncelikle sisteminiz Java JDK 8 ya da sonrası bir sürümün kurulu olması gerekiyor. Kurulu değilse [Kurulum Adımları](http://www.seyhanproject.com/docs/#/others/install) nasıl kuracağınızı öğrenebilirsiniz.
 
-Please first unzip seyhan zip file in any folder you want. Then, please go in seyhan folder, and run start.bat (for Windows systems) or start.sh (for Mac/Linux/Unix systems). To see the login page, please copy and paste this link http://localhost:9000 into the address bar of your favorite browser and press enter. Lastly, you should see the login form of seyhan. In this form, please write `super` in username section and `1234` in password box. That's all, you can use the system.
+İndirdiğiniz seyhan.zip dosyasını bilgisayarınızın herhangi bir dizinine açın. Bu dizinde bulunan (windows için) start.bat | (diğer sistemler için) start.sh dosyasını çalıştırın. Tarayıcınızdan http://localhost:9000 yazdıktan sonra gelen login formunda kullanıcı : `super`, şifre : `1234` yazın, hepsi bu.
 
-**_Please note that:_** Installation package is just a zip file and it isn't an exe file. if you are warned about viruses, please simply ignore warning messages. If you want to uninstall seyhan, the only thing you need to do is to delete the folder you have created for seyhan.
+seyhan-pserver projesi hakkında detaylı bilgi için [şuraya](http://seyhanproject.com/docs/#/printing/pservice) bakabilirsiniz. Ayrıca özel kurulum ve daha fazlası için de [belgeler](http://seyhanproject.com/docs) kısmına bakabilirsiniz.
 
-### Printer Server - pserver
+Kurulum zip dosyasıdır ve içerisinde herhangi bir exe dosya bulunmamaktadır, virüs uyarısı alırsanız dikkate almayınız. Ayrıca, programı kaldırmak için yapmanız gereken tek şey, açtığınız dizini silemektir. 
 
-seyhan offers an advanced document printing system, pserver. With the help of pserver, you can easily print your reports and documents out even if your printer is in different network. You can refer [here](http://www.seyhanproject.com/docs/#/printing/pservice) to learn more. And also, you can refer to the [documents](http://www.seyhanproject.com/docs) section for the installation steps and more.
+### Maliyetlerinizi düşürün
 
-### You can reduce your expenses
-* Free to install
-* Free to use (no limitation for time and user number)
-* No monthly or yearly charge
-* Can be used on Windows, Mac and Linux systems.
-* Can work with several databases like MySQL, MS-SQL Server and PostgreSQL.
+* Kullanım kısıtlaması olmadan ve herhangi bir kurulum, kullanım ve yeni yıl ücreti ödemeden seyhan'ı indirip kullanabilirsiniz.
+* Genel olarak muhasebe projeleri Windows işletim sistemleri üzerine geliştiriliyor. seyhan ile artık bilgilerinizi Mac ve Linux işletim sistemlerinde de tutabilirsiniz.
+* Veritabanı lisansları işletmeler için ciddi maliyet kalemleri olabiliyor. MySQL ve Postgresql gibi açık kaynak ve güçlü veritabanlarını kullanarak maliyetlerinizi azaltabilirsiniz.
 
-### Features
+### Sık Sorulan Sorular
 
-#### Open source
-You can use seyhan for free, even better you can have all the source code of the project.
+* Neden masaüstü uygulaması değil?
+* Uygulama web tabanlı olduğu için verilerimiz İnternet'e mi açılacak?
+* Herhangi bir kısıtlaması var mı, ilerde olabilir mi?
+* Ücretli servis desteği alınabilir mi?
 
-#### OS independent
-seyhan can work on every popular Operating System in which Java JDK 1.8+ can perform. Briefly, Mac, Windows, Linux and Unix...
+gibi sık sorulan sorulara [şuradan bakabilirsiniz](http://seyhanproject.com/#/faq).
 
-#### Database independent
-seyhan can work with all the popular relational databases such as MySQL, MS-SQL Server and PostgreSql...
+### Özellikleri
 
-#### Browser independent
-seyhan is a web based project and compatible with Firefox, IE and Chrome browsers
+#### Açık kaynak
+Ücretsiz olarak kullanabilirsiniz aynı zamanda projenin kaynak kodlarına da erişebilirsiniz.
 
-#### No limitation
-seyhan has no limitation. It is completely free to download and use.
+#### İşletim sistemi bağımsız
+Java JDK 1.8+ platformunun çalışabildiği tüm sistemlerde çalışır; linux, unix, mac, windows...
 
-#### Support for different type of printers
-You can save your report and documents as pdf, excel or plain text file, or print out from dot matrix or laser printers. It doesn't matter that your printer is placed in a different network.
+#### Veritabanı bağımsız
+Popüler ilişkisel veritabanları ile çalışır; mysql, postgresql, ms-sqlserver, h2...
 
-#### Support for multi users
-Many users can use the program in parallel.
+#### Tarayıcı bağımsız
+Web tabanlıdır ve popüler tarayıcılarla uyumludur; firefox, internet explorer, chrome...
 
-#### Has multiple language
-You can specify the language for both UI and report tags. The language option can be extended for other languages but right now, Turkish and English are the supported languages.
+#### Kısıtlama yok
+Herhangi bir kullanım kısıtlaması yoktur. Sınırlar, kullandığınız veritabanı, ağ ve bilgisayar kapasitesi kadardır.
 
-#### Easy to install and use
-You can use seyhan immediately if your computer has JDK 8+ on it. The only thing you need to do is to open the zip file in a folder and run start script. seyhan has user friendly interfaces with well designed theme and form designs.
+#### Farklı yazıcı desteği
+Rapor ve belgelerinizi pdf, excel ve metin dosyası olarak kaydedebilir ya da nokta vuruşlu, lazer... yazıcılardan çıktı alabilirsiniz.
 
-### Modules
+#### Çok kullanıcılı
+Programı aynı anda birden çok kullanıcı haklarına göre kullanabilirler.
+
+#### Çoklu dil desteği
+Arayüz ve raporlarınızda farklı dil seçneğini kullanabilirsiniz. Şuan için desteklenen diller Türkçe ve İngilizce'dir.
+
+#### Kolay kurulum ve kullanım
+Java JDK 8+ kurulu olan bir bilgisayarda sadece zip dosyasını herhangi bir dizine açıp hemen kullanmaya başlayabilirsiniz. Sahip olduğu tema ve form tasarımlarıyla kullanıcı dostu arayüzlere sahiptir.
+
+### Modülleri
 
 | | |
 |-|-|
-| _**Stock**_   | You can trace all the transactions of your goods, and also the profit or loss stemming from your operations. |
-| _**Contact**_ | With the help of this module, you can timely follow the running accounts of your buyers and sellers. You can hold your contacts' debt and credit info in different currencies. |
-| _**Safe**_    | Safe module helps you to follow your cash transactions in different currencies. Different currencies and valuable metal accounts can also be managed in different safes. |
-| _**Bank**_    | Like in Safe module, this module helps you to follow your bank transactions in different currencies. Again, different currencies and valuable metal accounts can also be managed in different bank accounts. |
-| _**Order**_   | You can manage your receiving and delivering orders with the help of this module. In addition, you can list all the received, delivered and waiting orders on customer basis. |
-| _**Invoice**_ | Like in Order module, you can manage all your invoices; incoming, outgoing and waiting. |
-| _**General**_ | In this module, you can define the currencies and exchange rates you want to use, and also specify the transaction codes which are being used to find some specific transactions throughout the program. |
-| _**Admin**_   | In this module, you can define your users, companies and special documents which are independent from users and other modules. |
+| _**Stok**_      | İşletmenizde alım-satımını yaptığınız ticari mallarınızın dönemsel olarak giriş, çıkış ve bakiyeleri ile bu işlemlerden doğan kar veya zararınızı bu modül yardımı ile izleyebilirsiniz. |
+| _**Cari**_      | Alıcı ve Satıcılara ait devam eden borç, alacak ve bakiyelerin para birimi bazında izlendiği modüldür. Diğer modüller için ana modül konumundadır. |
+| _**Kasa**_      | Nakit para giriş ve çıkışların para birimi bazında izlendiği modüldür. Farklı para birimleri ve kıymetli madenler farklı kasa tanımları altında tutulabilir. |
+| _**Banka**_     | Banka hesap hareketlerinin izlendiği modüldür. |
+| _**Çek/Senet**_ | Firma ve Müşterilere ait Çek ve Senet hareketlerinin izlendiği modüldür. Raporlarla çek ve senetlerinizin pozisyonu, vade yılı, ayı, günü, cari hesabı... bazında hareket ve dağılımlarını izleyebilirsiniz. |
+| _**Siparş**_    | Satış öncesi alınan ve verilen siparişlerin izlendiği modüldür. Alınan, Teslim Edilen ve Bekleyen siparişlerinizi Cari hesaplar bazında alabilirsiniz. |
+| _**İrsaliye**_  | Satışı kesinleşmiş olan ticari mallarınızın adrese teslimini yaparken zorunlu olan sevk irsaliyeleri bu modülde izlenir. Günü gelen irsaliyelerinizi otomatik olarak fauralaştırabilirsiniz. |
+| _**Fatura**_  | Alınan ve Kesilen faturaların izlendildiği modüldür. Kullanmadan önce Stok ve Cari modüllerine ait tanımların hazırlanmış olması gerekir. |
+| _**Genel**_     | Döviz tanımları ve kurları, profiller, özel ve işlem kodları gibi program genelinde kullanılan ortak tanımların yapıldığı modüldür. |
+| _**Admin**_     | Kullanıcı tanımları ve yetkileri, firma tanımları ve işlemleri, belge tasarımları... gibi kullanıcı ve modüllerden bağımsız işlemlerin yapıldığı modülüdür. |
+
+### Destekleyin
+
+seyhan' ın devamlılığı için desteğinize ihityacı var. Diğer tüm açık kaynak projelerde olduğu gibi seyhan da topluluk desteği ile ayakta duruyor. 
+
+#### Yazılımcıysanız
+Kodları geliştirerek, bug fix yaparak destek sağlayabilirsiniz.
+
+#### Teknoloji meraklısıysanız
+seyhan hakkında blog girdileri yapabilirsiniz. Sosyal medyada seyhan hakkında olumlu yorumlar yaparak tanıtımını ve daha çok insana ulaşmasını sağlayabilirsiniz.
+
+#### Kullanıcıysanız
+Tüm özelliklerini kullanarak tam anlamıyla test edilmesini sağlayabilirsiniz.
+
+#### Diğer
+ERP konusunda bilgiliyseniz tavsiyelerde bulunabilirsiniz. Forum kısmını kullanarak topluluğa destek olabilirsiniz. Belgelendirmeye yardımcı olabilirsiniz. Bağışta bulunabilirsiniz.
+
+### Ayrıca
+seyhan hakkında daha detaylı bilgi için [belgeler kısmına](http://seyhanproject.com/docs) bakabilirsiniz.
+
+Geliştiricilere (ve seyhan kullanıcılarına) doğrudan iletmek istediğiniz tüm soru, hata bildirimleri ve talepleriniz için [topluluk sayfalarını](https://groups.google.com/d/forum/seyhanp) kullanabilirsiniz.
+
