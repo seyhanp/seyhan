@@ -6,11 +6,11 @@ seyhan projesini ücretsiz olarak indirebilirsiniz. Herhangi bir süre veya kull
 
 ### Basit kurulum
 
-Kurulum işlemi için öncelikle sisteminiz Java JDK 8 ya da sonrası bir sürümün kurulu olması gerekiyor. Kurulu değilse [Kurulum Adımları](http://www.seyhanproject.com/docs/#/others/install) nasıl kuracağınızı öğrenebilirsiniz.
+Kurulum işlemi için öncelikle sisteminiz Java JDK 8 ya da sonrası bir sürümün kurulu olması gerekiyor. Kurulu değilse [Kurulum Adımları](https://github.com/seyhanp/seyhan/wiki/install) nasıl kuracağınızı öğrenebilirsiniz.
 
 İndirdiğiniz seyhan.zip dosyasını bilgisayarınızın herhangi bir dizinine açın. Bu dizinde bulunan (windows için) start.bat (diğer sistemler için) start.sh dosyasını çalıştırın. Tarayıcınızdan http://localhost:9000 yazdıktan sonra gelen login formunda kullanıcı : `super`, şifre : `1234` yazın, hepsi bu.
 
-seyhan-pserver projesi hakkında detaylı bilgi için [şuraya](http://seyhanproject.com/docs/#/printing/pservice) bakabilirsiniz. Ayrıca özel kurulum ve daha fazlası için de [belgeler](http://seyhanproject.com/docs) kısmına bakabilirsiniz.
+seyhan-pserver projesi hakkında detaylı bilgi için [şuraya](https://github.com/seyhanp/seyhan/wiki/printing) bakabilirsiniz. Ayrıca özel kurulum ve daha fazlası için de [belgeler](https://github.com/seyhanp/seyhan/wiki) kısmına bakabilirsiniz.
 
 Kurulum zip dosyasıdır ve içerisinde herhangi bir exe dosya bulunmamaktadır, virüs uyarısı alırsanız dikkate almayınız. Ayrıca, programı kaldırmak için yapmanız gereken tek şey, açtığınız dizini silemektir. 
 
@@ -27,7 +27,7 @@ Kurulum zip dosyasıdır ve içerisinde herhangi bir exe dosya bulunmamaktadır,
 * Herhangi bir kısıtlaması var mı, ilerde olabilir mi?
 * Ücretli servis desteği alınabilir mi?
 
-gibi sık sorulan sorulara [şuradan bakabilirsiniz](http://seyhanproject.com/#/faq).
+gibi sık sorulan sorulara [şuradan bakabilirsiniz](https://github.com/seyhanp/seyhan/wiki/faq).
 
 ### Özellikleri
 
@@ -90,7 +90,7 @@ Tüm özelliklerini kullanarak tam anlamıyla test edilmesini sağlayabilirsiniz
 ERP konusunda bilgiliyseniz tavsiyelerde bulunabilirsiniz. Forum kısmını kullanarak topluluğa destek olabilirsiniz. Belgelendirmeye yardımcı olabilirsiniz. Bağışta bulunabilirsiniz.
 
 ### Ayrıca
-seyhan hakkında daha detaylı bilgi için [belgeler kısmına](http://seyhanproject.com/docs) bakabilirsiniz.
+seyhan hakkında daha detaylı bilgi için [belgeler kısmına](https://github.com/seyhanp/seyhan/wiki) bakabilirsiniz.
 
 Geliştiricilere (ve seyhan kullanıcılarına) doğrudan iletmek istediğiniz tüm soru, hata bildirimleri ve talepleriniz için [topluluk sayfalarını](https://groups.google.com/d/forum/seyhanp) kullanabilirsiniz.
 
