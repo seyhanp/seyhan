@@ -1,3 +1,7 @@
+# Project discontinued
+
+We're sorry to say that seyhan stopped due to insufficient time and support.
+
 # Welcome to seyhan project
 
 #### seyhan is an erp (Enterprise Resource Planning or Accounting) project targeting small and middle sized businesses with the support of multi users, databases, browsers and operating systems.
