@@ -1,3 +1,7 @@
+# Projenin geliştirilmesi durduruldu
+
+Üzülerek belirtmek istiyoruz ki, seyhan projesinin geliştirilmesi zaman ve destek yetersizliği nedenleri ile durduruldu.
+
 ## seyhan projesine hoşgeldiniz
 
 seyhan açık kaynak kodlu, kurulumu ve kullanımı kolay ücretsiz bir ön muhasebe programıdır. Birçok işletim sistemi, veritabanı, tarayıcı ve yazıcı ile sorunsuz bir şekilde çalışabilir.
